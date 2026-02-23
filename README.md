@@ -1,1 +1,1 @@
-KOIN legal pages
+KOIN Website page
