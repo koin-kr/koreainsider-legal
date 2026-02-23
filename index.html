@@ -6,22 +6,27 @@
   <title>KOIN (Korea Insider)</title>
   <meta name="description" content="한국 방문/거주 외국인을 위한 한국 생활 길라잡이 플랫폼 - KOIN (Korea Insider)" />
 
+  <!-- Optional: favicon (logo) -->
+  <link rel="icon" href="/assets/koin-logo.png" />
+
   <style>
     :root{
-      --bg: #0b1020;
-      --panel: rgba(255,255,255,.08);
-      --panel2: rgba(255,255,255,.06);
+      --bg:#0b1020;
+      --surface: rgba(255,255,255,.06);
+      --surface2: rgba(255,255,255,.10);
       --border: rgba(255,255,255,.14);
       --text: rgba(255,255,255,.92);
       --muted: rgba(255,255,255,.72);
       --muted2: rgba(255,255,255,.58);
-      --accent: #7c3aed;   /* violet */
-      --accent2:#22c55e;   /* green */
-      --accent3:#38bdf8;   /* sky */
       --shadow: 0 18px 60px rgba(0,0,0,.45);
       --radius: 18px;
       --radius2: 24px;
       --max: 1120px;
+
+      /* Brand color (from your banner vibe) */
+      --brand: #5aa0ff;
+      --brand2:#2b6cff;
+      --brandGlow: rgba(90,160,255,.35);
     }
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
@@ -30,18 +35,17 @@
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       color:var(--text);
       background:
-        radial-gradient(1200px 600px at 20% -10%, rgba(124,58,237,.45), transparent 55%),
-        radial-gradient(900px 520px at 90% 10%, rgba(34,197,94,.25), transparent 55%),
-        radial-gradient(900px 520px at 60% 110%, rgba(56,189,248,.22), transparent 55%),
-        linear-gradient(180deg, #070a16 0%, #0b1020 35%, #070a16 100%);
+        radial-gradient(900px 520px at 15% -10%, var(--brandGlow), transparent 55%),
+        radial-gradient(900px 520px at 90% 10%, rgba(255,255,255,.10), transparent 55%),
+        linear-gradient(180deg, #070a16 0%, #0b1020 45%, #070a16 100%);
       overflow-x:hidden;
     }
     a{ color:inherit; }
-    .wrap{ max-width:var(--max); margin:0 auto; padding: 28px 18px 64px; }
+    .wrap{ max-width:var(--max); margin:0 auto; padding: 26px 18px 68px; }
 
-    /* Top nav */
+    /* Sticky top bar */
     .topbar{
-      position:sticky; top:0; z-index:20;
+      position: sticky; top: 0; z-index: 50;
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       background: rgba(7,10,22,.55);
@@ -50,18 +54,25 @@
     .topbar-inner{
       max-width:var(--max);
       margin:0 auto;
-      padding: 14px 18px;
+      padding: 12px 18px;
       display:flex; align-items:center; justify-content:space-between; gap:14px;
     }
-    .brand{ display:flex; align-items:center; gap:12px; text-decoration:none; }
-    .logo{
-      width:40px; height:40px; border-radius:14px;
-      background: linear-gradient(135deg, rgba(124,58,237,1) 0%, rgba(56,189,248,1) 55%, rgba(34,197,94,1) 100%);
-      box-shadow: 0 12px 30px rgba(0,0,0,.35);
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      text-decoration:none;
+      min-width: 220px;
     }
-    .brand-title{ display:flex; flex-direction:column; line-height:1.1; }
-    .brand-title strong{ font-size:14px; letter-spacing:.02em; }
-    .brand-title span{ font-size:12px; color:var(--muted2); }
+    .brand img{
+      width: 38px; height: 38px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      padding: 6px;
+      box-shadow: 0 10px 28px rgba(0,0,0,.35);
+      object-fit: contain;
+    }
+    .brand strong{ display:block; font-size: 14px; letter-spacing: -.01em; }
+    .brand span{ display:block; font-size: 12px; color: var(--muted2); margin-top:2px; }
 
     .nav{ display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
     .btn{
@@ -74,146 +85,121 @@
       text-decoration:none;
       font-size: 13px;
       transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      user-select:none;
+      white-space:nowrap;
     }
-    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.22); }
+    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.24); }
     .btn.primary{
-      border: 1px solid rgba(124,58,237,.35);
-      background: linear-gradient(135deg, rgba(124,58,237,.95), rgba(56,189,248,.75));
-      box-shadow: 0 14px 40px rgba(124,58,237,.18);
+      border: 1px solid rgba(90,160,255,.42);
+      background: linear-gradient(135deg, var(--brand2), var(--brand));
+      box-shadow: 0 18px 44px rgba(90,160,255,.20);
     }
-    .btn.ghost{
-      background: transparent;
-    }
+    .btn.ghost{ background: transparent; }
 
-    /* Hero */
+    /* Hero (Banner) */
     .hero{
-      margin-top: 26px;
-      border: 1px solid rgba(255,255,255,.10);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04)),
-        radial-gradient(800px 400px at 40% 0%, rgba(124,58,237,.25), transparent 60%);
+      margin-top: 22px;
       border-radius: var(--radius2);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.10);
       box-shadow: var(--shadow);
-      overflow:hidden;
+      background: rgba(255,255,255,.04);
       position:relative;
     }
     .hero::before{
       content:"";
       position:absolute; inset:-2px;
       background:
-        radial-gradient(600px 220px at 10% 20%, rgba(56,189,248,.18), transparent 60%),
-        radial-gradient(520px 260px at 85% 25%, rgba(34,197,94,.18), transparent 60%);
+        radial-gradient(600px 240px at 20% 20%, rgba(90,160,255,.22), transparent 60%),
+        radial-gradient(520px 260px at 85% 25%, rgba(255,255,255,.12), transparent 60%);
       pointer-events:none;
+      z-index: 1;
     }
-    .hero-inner{
-      position:relative;
-      padding: 28px;
-      display:grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap: 18px;
-      align-items:stretch;
+    .hero-banner{
+      position: relative;
+      z-index: 0;
+      width:100%;
+      aspect-ratio: 2.2 / 1; /* wide banner 느낌 */
+      min-height: 360px;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.06), rgba(0,0,0,.55)),
+        url("/assets/koin-banner.png") center/cover no-repeat;
     }
-    @media (max-width: 940px){
-      .hero-inner{ grid-template-columns: 1fr; }
+    @media (max-width: 720px){
+      .hero-banner{ min-height: 420px; aspect-ratio: 1.25 / 1; background-position: 70% center; }
     }
-    .kicker{
-      display:inline-flex; gap:10px; align-items:center;
-      padding: 8px 12px;
+
+    /* Overlay content on banner */
+    .hero-content{
+      position:absolute; inset:0;
+      z-index: 2;
+      display:flex;
+      align-items:flex-end;
+      padding: 22px;
+    }
+    .hero-card{
+      width: min(560px, 100%);
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(8,12,26,.55);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 18px 60px rgba(0,0,0,.45);
+      padding: 16px 16px 14px;
+    }
+    .hero-kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      padding: 7px 10px;
+      border-radius: 999px;
       border: 1px solid rgba(255,255,255,.14);
       background: rgba(255,255,255,.06);
-      border-radius: 999px;
       color: var(--muted);
-      font-size: 13px;
-      width: fit-content;
+      font-size: 12px;
     }
     .dot{
-      width:8px; height:8px; border-radius:999px; background: var(--accent2);
-      box-shadow: 0 0 0 6px rgba(34,197,94,.15);
+      width:8px; height:8px; border-radius:999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 6px rgba(34,197,94,.14);
     }
-    h1{
-      margin: 14px 0 10px;
-      font-size: 44px;
-      letter-spacing: -0.04em;
-      line-height: 1.05;
+    .hero-title{
+      margin: 12px 0 8px;
+      font-size: 26px;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
     }
-    @media (max-width:520px){
-      h1{ font-size: 36px; }
-    }
-    .lead{
+    .hero-desc{
       margin: 0;
       color: var(--muted);
-      font-size: 16px;
-      max-width: 56ch;
+      font-size: 14px;
+      line-height: 1.6;
     }
-    .hero-actions{ margin-top: 16px; display:flex; gap:10px; flex-wrap:wrap; }
-    .chips{ margin-top: 14px; display:flex; gap:8px; flex-wrap:wrap; }
-    .chip{
-      font-size: 12px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.05);
-      color: var(--muted2);
+    .hero-actions{
+      margin-top: 12px;
+      display:flex; gap:10px; flex-wrap:wrap;
     }
-
-    /* Right mock card */
-    .mock{
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 22px;
-      background: rgba(0,0,0,.25);
-      overflow:hidden;
-      box-shadow: 0 18px 60px rgba(0,0,0,.40);
+    .meta-row{
+      margin-top: 10px;
       display:flex;
-      flex-direction:column;
+      gap: 10px;
+      flex-wrap: wrap;
+      color: var(--muted2);
+      font-size: 12px;
     }
-    .mock-top{
-      padding: 14px 14px 10px;
-      display:flex; align-items:center; justify-content:space-between;
-      border-bottom: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.04);
-    }
-    .mock-top strong{ font-size: 13px; color: var(--text); }
     .pill{
-      font-size: 12px; color: var(--muted2);
       padding: 6px 10px;
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,.14);
       background: rgba(255,255,255,.05);
     }
-    .mock-img{
-      position:relative;
-      aspect-ratio: 16/10;
-      background:
-        linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.65)),
-        url("https://images.unsplash.com/photo-1526481280695-3c687fd643ed?auto=format&fit=crop&w=1600&q=80") center/cover no-repeat;
-    }
-    .mock-img::after{
-      content:"";
-      position:absolute; inset:0;
-      background: radial-gradient(600px 240px at 50% 20%, rgba(124,58,237,.18), transparent 60%);
-    }
-    .mock-body{
-      padding: 14px;
-      display:grid;
-      gap: 10px;
-    }
-    .stat-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
-    .stat{
-      border:1px solid rgba(255,255,255,.12);
-      border-radius: 16px;
-      padding: 12px;
-      background: rgba(255,255,255,.05);
-    }
-    .stat div:first-child{ font-size:12px; color: var(--muted2); }
-    .stat div:last-child{ margin-top:6px; font-weight:700; letter-spacing:-.02em; }
 
     /* Sections */
-    .section{ margin-top: 28px; }
+    .section{ margin-top: 26px; }
     .section h2{
       margin:0 0 12px;
       font-size: 22px;
       letter-spacing:-.02em;
     }
+
     .grid{
       display:grid;
       grid-template-columns: repeat(12, 1fr);
@@ -232,20 +218,8 @@
     .card .icon{ font-size: 20px; }
     .card h3{ margin: 10px 0 6px; font-size: 16px; }
     .card p{ margin: 0; color: var(--muted); font-size: 14px; }
-    @media (max-width: 980px){
-      .card{ grid-column: span 6; }
-    }
-    @media (max-width: 560px){
-      .card{ grid-column: span 12; }
-    }
-
-    .two{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      align-items:stretch;
-    }
-    @media (max-width: 900px){ .two{ grid-template-columns: 1fr; } }
+    @media (max-width: 980px){ .card{ grid-column: span 6; } }
+    @media (max-width: 560px){ .card{ grid-column: span 12; } }
 
     .panel{
       border: 1px solid rgba(255,255,255,.12);
@@ -254,41 +228,30 @@
       padding: 18px;
       box-shadow: 0 18px 60px rgba(0,0,0,.25);
     }
-    .panel p{ color: var(--muted); margin: 0; }
-    .panel ul{ margin: 10px 0 0; padding-left: 18px; color: var(--muted); }
-    .panel li{ margin: 6px 0; }
-
-    /* Gallery */
-    .gallery{
+    .two{
       display:grid;
-      grid-template-columns: 1.4fr 1fr;
+      grid-template-columns: 1fr 1fr;
       gap: 12px;
+      align-items:stretch;
     }
-    @media (max-width: 900px){ .gallery{ grid-template-columns: 1fr; } }
-    .shot{
-      border-radius: 22px;
-      border: 1px solid rgba(255,255,255,.12);
-      overflow:hidden;
-      background: rgba(255,255,255,.04);
-      min-height: 240px;
-      position:relative;
+    @media (max-width: 900px){ .two{ grid-template-columns: 1fr; } }
+
+    /* Download buttons area */
+    .store-row{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+      margin-top: 10px;
     }
-    .shot.big{ min-height: 340px; }
-    .shot img{
-      width:100%; height:100%; object-fit:cover; display:block;
-      filter: saturate(1.05) contrast(1.03);
-    }
-    .shot .cap{
-      position:absolute; left:12px; right:12px; bottom:12px;
+    .store-btn{
+      display:inline-flex; align-items:center; justify-content:center;
       padding: 10px 12px;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.40);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      text-decoration:none;
       font-size: 13px;
-      color: rgba(255,255,255,.86);
+      color: var(--text);
     }
+    .store-btn:hover{ background: rgba(255,255,255,.10); }
 
     /* FAQ */
     details{
@@ -305,7 +268,6 @@
     }
     details p{ margin: 8px 0 0; color: var(--muted); }
 
-    /* Footer */
     footer{
       margin-top: 34px;
       padding-top: 18px;
@@ -324,75 +286,61 @@
 </head>
 
 <body>
+  <!-- Topbar -->
   <div class="topbar">
     <div class="topbar-inner">
       <a class="brand" href="/">
-        <div class="logo" aria-hidden="true"></div>
-        <div class="brand-title">
+        <img src="/assets/koin-logo.png" alt="KOIN logo" />
+        <div>
           <strong>KOIN (Korea Insider)</strong>
           <span>For foreigners living/traveling in Korea</span>
         </div>
       </a>
 
-      <div class="nav">
+      <nav class="nav">
         <a class="btn ghost" href="#features">Features</a>
-        <a class="btn ghost" href="#showcase">Showcase</a>
+        <a class="btn ghost" href="#about">About</a>
         <a class="btn" href="/privacy/">Privacy</a>
         <a class="btn" href="/terms/">Terms</a>
-        <a class="btn primary" href="mailto:team@koreainsider.kr?subject=KOIN%20Partnership%20Inquiry">Contact</a>
-      </div>
+        <a class="btn primary" href="mailto:team@koreainsider.kr?subject=KOIN%20Inquiry">Contact</a>
+      </nav>
     </div>
   </div>
 
   <main class="wrap">
-    <!-- HERO -->
-    <section class="hero">
-      <div class="hero-inner">
-        <div>
-          <div class="kicker"><span class="dot" aria-hidden="true"></span> Live · Community · Curation · AI Camera</div>
-          <h1>외국인을 위한<br/>한국 생활의 “진짜 길라잡이”</h1>
-          <p class="lead">
-            KOIN은 <strong>커뮤니티</strong>와 <strong>큐레이션</strong>, <strong>AI 카메라</strong>를 통해
-            번역/정보/소통을 한 곳에서 해결하게 돕는 플랫폼입니다.
+    <!-- HERO with your banner -->
+    <section class="hero" aria-label="KOIN hero banner">
+      <div class="hero-banner"></div>
+
+      <div class="hero-content">
+        <div class="hero-card">
+          <div class="hero-kicker"><span class="dot" aria-hidden="true"></span> Community · Curation · AI Camera</div>
+          <div class="hero-title">Republic of Korea, in your hands — KOIN</div>
+          <p class="hero-desc">
+            한국 방문/거주 외국인을 위한 한국 생활 길라잡이 플랫폼.<br/>
+            커뮤니티와 큐레이션, AI 카메라로 번역/정보/소통을 한 곳에서 해결합니다.
           </p>
 
           <div class="hero-actions">
             <a class="btn primary" href="#features">Explore Features</a>
-            <a class="btn" href="#how">How it works</a>
-            <a class="btn" href="mailto:team@koreainsider.kr?subject=KOIN%20Inquiry">Send email</a>
+            <a class="btn" href="#about">How it works</a>
+            <a class="btn" href="mailto:team@koreainsider.kr?subject=KOIN%20Partnership%20Inquiry">Partnership</a>
           </div>
 
-          <div class="chips" aria-label="keywords">
-            <span class="chip">Kakao/Google/Email Login</span>
-            <span class="chip">Posts · Comments · Likes · Saves</span>
-            <span class="chip">AI Translation</span>
-            <span class="chip">Korea 생활 정보</span>
+          <div class="meta-row">
+            <span class="pill">Kakao/Google/Email Login</span>
+            <span class="pill">Posts · Comments · Likes · Saves</span>
+            <span class="pill">Privacy-first</span>
+          </div>
+
+          <!-- Store buttons (link later) -->
+          <div class="store-row">
+            <!-- 앱스토어/플레이스토어 링크 생기면 href만 교체 -->
+            <a class="store-btn" href="#" aria-label="App Store link"> App Store (coming)</a>
+            <a class="store-btn" href="#" aria-label="Google Play link">▶ Google Play (coming)</a>
+            <a class="store-btn" href="#" aria-label="Instagram link">@koin_instagram (coming)</a>
           </div>
         </div>
-
-        <aside class="mock" aria-label="preview card">
-          <div class="mock-top">
-            <strong>Preview</strong>
-            <span class="pill">Premium landing</span>
-          </div>
-          <div class="mock-img" role="img" aria-label="Seoul city image"></div>
-          <div class="mock-body">
-            <div class="stat-grid">
-              <div class="stat">
-                <div>Core</div>
-                <div>Community</div>
-              </div>
-              <div class="stat">
-                <div>Core</div>
-                <div>AI Camera</div>
-              </div>
-            </div>
-            <div class="stat" style="grid-column:1/-1;">
-              <div>Contact</div>
-              <div><a href="mailto:team@koreainsider.kr" style="text-decoration:none;">team@koreainsider.kr</a></div>
-            </div>
-          </div>
-        </aside>
       </div>
     </section>
 
@@ -403,12 +351,12 @@
         <div class="card">
           <div class="icon">💬</div>
           <h3>Community</h3>
-          <p>외국인끼리 질문/답변/후기 공유. 게시글, 댓글, 대댓글, 좋아요, 스크랩까지.</p>
+          <p>게시글/댓글/대댓글/좋아요/스크랩으로 외국인끼리 부담 없이 정보 공유.</p>
         </div>
         <div class="card">
           <div class="icon">🗺️</div>
           <h3>Curation</h3>
-          <p>테마별 가이드/카드뉴스로 “지금 필요한 정보”만 빠르게 탐색.</p>
+          <p>테마별 가이드/카드뉴스로 “지금 필요한 정보”를 빠르게 탐색.</p>
         </div>
         <div class="card">
           <div class="icon">📸</div>
@@ -423,54 +371,33 @@
       </div>
     </section>
 
-    <!-- HOW + VALUES -->
-    <section id="how" class="section">
+    <!-- ABOUT -->
+    <section id="about" class="section">
       <h2>How it works</h2>
       <div class="two">
         <div class="panel">
           <h3 style="margin:0 0 10px;">사용 흐름</h3>
-          <ul>
-            <li>로그인: Kakao / Google / Email</li>
-            <li>큐레이션으로 추천 가이드 확인</li>
-            <li>커뮤니티에서 질문/답변/후기 공유</li>
-            <li>AI 카메라로 즉시 번역/설명 확인</li>
+          <ul style="margin:0; padding-left:18px; color: var(--muted);">
+            <li style="margin:6px 0;">로그인: Kakao / Google / Email</li>
+            <li style="margin:6px 0;">큐레이션에서 추천 가이드 확인</li>
+            <li style="margin:6px 0;">커뮤니티에서 질문/답변/후기 공유</li>
+            <li style="margin:6px 0;">AI 카메라로 즉시 번역/설명 확인</li>
           </ul>
         </div>
         <div class="panel">
-          <h3 style="margin:0 0 10px;">핵심 가치</h3>
-          <ul>
-            <li><strong>Clarity:</strong> 복잡한 정보 → 한 번에 이해</li>
-            <li><strong>Speed:</strong> 필요한 답을 더 빨리</li>
-            <li><strong>Trust:</strong> 운영정책 기반 안전한 커뮤니티</li>
-            <li><strong>Global-ready:</strong> 외국인 사용 중심 설계</li>
-          </ul>
+          <h3 style="margin:0 0 10px;">Legal & Trust</h3>
+          <p style="margin:0; color: var(--muted);">
+            개인정보 처리 및 이용정책은 아래 문서에서 확인할 수 있습니다.
+          </p>
+          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top: 12px;">
+            <a class="btn" href="/privacy/">Privacy Policy →</a>
+            <a class="btn" href="/terms/">Terms of Service →</a>
+          </div>
+          <p style="margin:12px 0 0; color: var(--muted2); font-size: 12px;">
+            Contact: <a href="mailto:team@koreainsider.kr" style="text-decoration:none;">team@koreainsider.kr</a>
+          </p>
         </div>
       </div>
-    </section>
-
-    <!-- SHOWCASE / GALLERY -->
-    <section id="showcase" class="section">
-      <h2>Showcase</h2>
-      <div class="gallery">
-        <div class="shot big">
-          <img alt="Seoul street" src="https://images.unsplash.com/photo-1549693578-d683be217e58?auto=format&fit=crop&w=2000&q=80" />
-          <div class="cap">KOIN helps foreigners navigate Korea with community, guides, and AI camera.</div>
-        </div>
-        <div style="display:grid; gap:12px;">
-          <div class="shot">
-            <img alt="Korean food" src="https://images.unsplash.com/photo-1553163147-622ab57be1c7?auto=format&fit=crop&w=1400&q=80" />
-            <div class="cap">Menu translation & explanations (AI Camera)</div>
-          </div>
-          <div class="shot">
-            <img alt="Subway" src="https://images.unsplash.com/photo-1526481280695-3c687fd643ed?auto=format&fit=crop&w=1400&q=80" />
-            <div class="cap">Practical, everyday Korea tips (Curation)</div>
-          </div>
-        </div>
-      </div>
-
-      <p style="margin: 12px 0 0; color: var(--muted2); font-size: 13px;">
-        * 위 이미지는 데모용(Unsplash)입니다. 앱 스크린샷/브랜드 이미지로 교체하면 완성도가 더 올라갑니다.
-      </p>
     </section>
 
     <!-- FAQ -->
@@ -482,33 +409,18 @@
       </details>
       <details>
         <summary>개인정보는 어떻게 처리하나요?</summary>
-        <p>서비스 제공에 필요한 최소한의 정보만 수집하며, 자세한 내용은 <a href="/privacy/">Privacy Policy</a>를 참고해주세요.</p>
+        <p>자세한 내용은 <a href="/privacy/">Privacy Policy</a>에서 확인할 수 있습니다.</p>
       </details>
       <details>
-        <summary>이용약관/정책은 어디서 보나요?</summary>
-        <p><a href="/terms/">Terms of Service</a> 및 <a href="/privacy/">Privacy Policy</a>에서 확인할 수 있습니다.</p>
+        <summary>문의/제휴는 어디로 하나요?</summary>
+        <p><a href="mailto:team@koreainsider.kr">team@koreainsider.kr</a>로 메일 주시면 됩니다.</p>
       </details>
     </section>
 
-    <!-- CTA -->
-    <section class="section">
-      <div class="panel" style="display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;">
-        <div>
-          <h2 style="margin:0 0 6px; font-size: 20px;">Partnership / Inquiry</h2>
-          <p style="margin:0; color: var(--muted);">제휴, 캠퍼스 홍보, 협업 문의는 이메일로 연락 주세요.</p>
-        </div>
-        <div style="display:flex; gap:10px; flex-wrap:wrap;">
-          <a class="btn primary" href="mailto:team@koreainsider.kr?subject=KOIN%20Partnership%20Inquiry">Email us</a>
-          <a class="btn" href="/privacy/">Privacy</a>
-          <a class="btn" href="/terms/">Terms</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- FOOTER -->
+    <!-- Footer -->
     <footer>
       <div>
-        <div style="font-weight:700; color: var(--text);">KOIN / TEAM_KOIN</div>
+        <div style="font-weight:800; color: var(--text);">KOIN / TEAM_KOIN</div>
         <div>Contact: <a href="mailto:team@koreainsider.kr" style="text-decoration:none;">team@koreainsider.kr</a></div>
       </div>
       <div class="links">
