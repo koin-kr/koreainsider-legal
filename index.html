@@ -4,163 +4,520 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>KOIN (Korea Insider)</title>
-  <meta name="description" content="한국 방문/거주 외국인을 위한 한국 생활 길라잡이 플랫폼 KOIN (Korea Insider)" />
-</head>
-<body style="font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; max-width: 980px; margin: 40px auto; line-height: 1.6; padding: 0 16px;">
+  <meta name="description" content="한국 방문/거주 외국인을 위한 한국 생활 길라잡이 플랫폼 - KOIN (Korea Insider)" />
 
-  <!-- Top bar -->
-  <header style="display:flex; align-items:center; justify-content:space-between; gap:16px;">
-    <div style="display:flex; align-items:center; gap:12px;">
-      <div aria-hidden="true" style="width:44px; height:44px; border-radius:12px; background: linear-gradient(135deg, #111827 0%, #4f46e5 55%, #22c55e 100%); box-shadow: 0 10px 24px rgba(0,0,0,.12);"></div>
-      <div>
-        <h1 style="margin:0; font-size: 26px; letter-spacing: -0.02em;">KOIN <span style="color:#555; font-weight:600;">(Korea Insider)</span></h1>
-        <p style="margin:4px 0 0; color:#555;">한국 방문/거주 외국인을 위한 한국 생활 길라잡이 플랫폼</p>
+  <style>
+    :root{
+      --bg: #0b1020;
+      --panel: rgba(255,255,255,.08);
+      --panel2: rgba(255,255,255,.06);
+      --border: rgba(255,255,255,.14);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.72);
+      --muted2: rgba(255,255,255,.58);
+      --accent: #7c3aed;   /* violet */
+      --accent2:#22c55e;   /* green */
+      --accent3:#38bdf8;   /* sky */
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --radius: 18px;
+      --radius2: 24px;
+      --max: 1120px;
+    }
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 20% -10%, rgba(124,58,237,.45), transparent 55%),
+        radial-gradient(900px 520px at 90% 10%, rgba(34,197,94,.25), transparent 55%),
+        radial-gradient(900px 520px at 60% 110%, rgba(56,189,248,.22), transparent 55%),
+        linear-gradient(180deg, #070a16 0%, #0b1020 35%, #070a16 100%);
+      overflow-x:hidden;
+    }
+    a{ color:inherit; }
+    .wrap{ max-width:var(--max); margin:0 auto; padding: 28px 18px 64px; }
+
+    /* Top nav */
+    .topbar{
+      position:sticky; top:0; z-index:20;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      background: rgba(7,10,22,.55);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .topbar-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding: 14px 18px;
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
+    }
+    .brand{ display:flex; align-items:center; gap:12px; text-decoration:none; }
+    .logo{
+      width:40px; height:40px; border-radius:14px;
+      background: linear-gradient(135deg, rgba(124,58,237,1) 0%, rgba(56,189,248,1) 55%, rgba(34,197,94,1) 100%);
+      box-shadow: 0 12px 30px rgba(0,0,0,.35);
+    }
+    .brand-title{ display:flex; flex-direction:column; line-height:1.1; }
+    .brand-title strong{ font-size:14px; letter-spacing:.02em; }
+    .brand-title span{ font-size:12px; color:var(--muted2); }
+
+    .nav{ display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      text-decoration:none;
+      font-size: 13px;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.22); }
+    .btn.primary{
+      border: 1px solid rgba(124,58,237,.35);
+      background: linear-gradient(135deg, rgba(124,58,237,.95), rgba(56,189,248,.75));
+      box-shadow: 0 14px 40px rgba(124,58,237,.18);
+    }
+    .btn.ghost{
+      background: transparent;
+    }
+
+    /* Hero */
+    .hero{
+      margin-top: 26px;
+      border: 1px solid rgba(255,255,255,.10);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04)),
+        radial-gradient(800px 400px at 40% 0%, rgba(124,58,237,.25), transparent 60%);
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .hero::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(600px 220px at 10% 20%, rgba(56,189,248,.18), transparent 60%),
+        radial-gradient(520px 260px at 85% 25%, rgba(34,197,94,.18), transparent 60%);
+      pointer-events:none;
+    }
+    .hero-inner{
+      position:relative;
+      padding: 28px;
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 18px;
+      align-items:stretch;
+    }
+    @media (max-width: 940px){
+      .hero-inner{ grid-template-columns: 1fr; }
+    }
+    .kicker{
+      display:inline-flex; gap:10px; align-items:center;
+      padding: 8px 12px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 13px;
+      width: fit-content;
+    }
+    .dot{
+      width:8px; height:8px; border-radius:999px; background: var(--accent2);
+      box-shadow: 0 0 0 6px rgba(34,197,94,.15);
+    }
+    h1{
+      margin: 14px 0 10px;
+      font-size: 44px;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+    }
+    @media (max-width:520px){
+      h1{ font-size: 36px; }
+    }
+    .lead{
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 56ch;
+    }
+    .hero-actions{ margin-top: 16px; display:flex; gap:10px; flex-wrap:wrap; }
+    .chips{ margin-top: 14px; display:flex; gap:8px; flex-wrap:wrap; }
+    .chip{
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      color: var(--muted2);
+    }
+
+    /* Right mock card */
+    .mock{
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 22px;
+      background: rgba(0,0,0,.25);
+      overflow:hidden;
+      box-shadow: 0 18px 60px rgba(0,0,0,.40);
+      display:flex;
+      flex-direction:column;
+    }
+    .mock-top{
+      padding: 14px 14px 10px;
+      display:flex; align-items:center; justify-content:space-between;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+    }
+    .mock-top strong{ font-size: 13px; color: var(--text); }
+    .pill{
+      font-size: 12px; color: var(--muted2);
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+    }
+    .mock-img{
+      position:relative;
+      aspect-ratio: 16/10;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.65)),
+        url("https://images.unsplash.com/photo-1526481280695-3c687fd643ed?auto=format&fit=crop&w=1600&q=80") center/cover no-repeat;
+    }
+    .mock-img::after{
+      content:"";
+      position:absolute; inset:0;
+      background: radial-gradient(600px 240px at 50% 20%, rgba(124,58,237,.18), transparent 60%);
+    }
+    .mock-body{
+      padding: 14px;
+      display:grid;
+      gap: 10px;
+    }
+    .stat-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
+    .stat{
+      border:1px solid rgba(255,255,255,.12);
+      border-radius: 16px;
+      padding: 12px;
+      background: rgba(255,255,255,.05);
+    }
+    .stat div:first-child{ font-size:12px; color: var(--muted2); }
+    .stat div:last-child{ margin-top:6px; font-weight:700; letter-spacing:-.02em; }
+
+    /* Sections */
+    .section{ margin-top: 28px; }
+    .section h2{
+      margin:0 0 12px;
+      font-size: 22px;
+      letter-spacing:-.02em;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 12px;
+    }
+    .card{
+      grid-column: span 3;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.06);
+      padding: 16px;
+      box-shadow: 0 12px 30px rgba(0,0,0,.18);
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+    }
+    .card:hover{ transform: translateY(-2px); background: rgba(255,255,255,.085); border-color: rgba(255,255,255,.18); }
+    .card .icon{ font-size: 20px; }
+    .card h3{ margin: 10px 0 6px; font-size: 16px; }
+    .card p{ margin: 0; color: var(--muted); font-size: 14px; }
+    @media (max-width: 980px){
+      .card{ grid-column: span 6; }
+    }
+    @media (max-width: 560px){
+      .card{ grid-column: span 12; }
+    }
+
+    .two{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      align-items:stretch;
+    }
+    @media (max-width: 900px){ .two{ grid-template-columns: 1fr; } }
+
+    .panel{
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: var(--radius2);
+      background: rgba(255,255,255,.05);
+      padding: 18px;
+      box-shadow: 0 18px 60px rgba(0,0,0,.25);
+    }
+    .panel p{ color: var(--muted); margin: 0; }
+    .panel ul{ margin: 10px 0 0; padding-left: 18px; color: var(--muted); }
+    .panel li{ margin: 6px 0; }
+
+    /* Gallery */
+    .gallery{
+      display:grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 900px){ .gallery{ grid-template-columns: 1fr; } }
+    .shot{
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,.12);
+      overflow:hidden;
+      background: rgba(255,255,255,.04);
+      min-height: 240px;
+      position:relative;
+    }
+    .shot.big{ min-height: 340px; }
+    .shot img{
+      width:100%; height:100%; object-fit:cover; display:block;
+      filter: saturate(1.05) contrast(1.03);
+    }
+    .shot .cap{
+      position:absolute; left:12px; right:12px; bottom:12px;
+      padding: 10px 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.40);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      font-size: 13px;
+      color: rgba(255,255,255,.86);
+    }
+
+    /* FAQ */
+    details{
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 16px;
+      padding: 12px 14px;
+      background: rgba(255,255,255,.05);
+    }
+    details + details{ margin-top: 10px; }
+    summary{
+      cursor:pointer;
+      font-weight: 650;
+      letter-spacing:-.01em;
+    }
+    details p{ margin: 8px 0 0; color: var(--muted); }
+
+    /* Footer */
+    footer{
+      margin-top: 34px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255,255,255,.10);
+      color: var(--muted2);
+      font-size: 13px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 14px;
+      flex-wrap:wrap;
+    }
+    .links a{ color: var(--muted2); text-decoration:none; }
+    .links a:hover{ text-decoration:underline; }
+  </style>
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="/">
+        <div class="logo" aria-hidden="true"></div>
+        <div class="brand-title">
+          <strong>KOIN (Korea Insider)</strong>
+          <span>For foreigners living/traveling in Korea</span>
+        </div>
+      </a>
+
+      <div class="nav">
+        <a class="btn ghost" href="#features">Features</a>
+        <a class="btn ghost" href="#showcase">Showcase</a>
+        <a class="btn" href="/privacy/">Privacy</a>
+        <a class="btn" href="/terms/">Terms</a>
+        <a class="btn primary" href="mailto:team@koreainsider.kr?subject=KOIN%20Partnership%20Inquiry">Contact</a>
       </div>
     </div>
+  </div>
 
-    <nav style="display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;">
-      <a href="/privacy/" style="text-decoration:none; padding:8px 12px; border:1px solid #e5e5e5; border-radius:12px; color:#111; background:#fff;">
-        Privacy
-      </a>
-      <a href="/terms/" style="text-decoration:none; padding:8px 12px; border:1px solid #e5e5e5; border-radius:12px; color:#111; background:#fff;">
-        Terms
-      </a>
-      <a href="mailto:team@koreainsider.kr" style="text-decoration:none; padding:8px 12px; border:1px solid #111827; border-radius:12px; color:#fff; background:#111827;">
-        Contact
-      </a>
-    </nav>
-  </header>
+  <main class="wrap">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div>
+          <div class="kicker"><span class="dot" aria-hidden="true"></span> Live · Community · Curation · AI Camera</div>
+          <h1>외국인을 위한<br/>한국 생활의 “진짜 길라잡이”</h1>
+          <p class="lead">
+            KOIN은 <strong>커뮤니티</strong>와 <strong>큐레이션</strong>, <strong>AI 카메라</strong>를 통해
+            번역/정보/소통을 한 곳에서 해결하게 돕는 플랫폼입니다.
+          </p>
 
-  <hr style="border:0; border-top:1px solid #eee; margin: 22px 0;" />
+          <div class="hero-actions">
+            <a class="btn primary" href="#features">Explore Features</a>
+            <a class="btn" href="#how">How it works</a>
+            <a class="btn" href="mailto:team@koreainsider.kr?subject=KOIN%20Inquiry">Send email</a>
+          </div>
 
-  <!-- Hero -->
-  <section style="border:1px solid #eee; border-radius:18px; padding:22px; background: linear-gradient(180deg, #ffffff 0%, #f7f7ff 100%); box-shadow: 0 10px 30px rgba(0,0,0,.06);">
-    <div style="display:flex; gap:22px; flex-wrap:wrap; align-items:flex-start; justify-content:space-between;">
-      <div style="flex: 1 1 520px; min-width: 280px;">
-        <h2 style="margin:0 0 8px; font-size: 34px; letter-spacing: -0.03em; line-height:1.15;">
-          Korea 생활이 <span style="background:#111827; color:#fff; padding:2px 10px; border-radius:999px;">한 번에</span><br />
-          정리되는 플랫폼, KOIN
-        </h2>
-        <p style="margin: 0 0 14px; color:#444; font-size: 16px;">
-          커뮤니티 · 큐레이션 · AI 카메라로, 외국인이 한국에서 “정보 찾기/번역/소통”을 더 쉽고 빠르게 할 수 있도록 돕습니다.
-        </p>
-
-        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top: 14px;">
-          <a href="#features" style="text-decoration:none; padding:10px 14px; border-radius:12px; background:#4f46e5; color:#fff; border:1px solid #4f46e5;">
-            주요 기능 보기
-          </a>
-          <a href="#how" style="text-decoration:none; padding:10px 14px; border-radius:12px; background:#fff; color:#111; border:1px solid #e5e5e5;">
-            사용 흐름
-          </a>
-          <a href="mailto:team@koreainsider.kr?subject=KOIN%20Inquiry" style="text-decoration:none; padding:10px 14px; border-radius:12px; background:#111827; color:#fff; border:1px solid #111827;">
-            제휴/문의하기
-          </a>
+          <div class="chips" aria-label="keywords">
+            <span class="chip">Kakao/Google/Email Login</span>
+            <span class="chip">Posts · Comments · Likes · Saves</span>
+            <span class="chip">AI Translation</span>
+            <span class="chip">Korea 생활 정보</span>
+          </div>
         </div>
 
-        <p style="margin: 14px 0 0; color:#6b7280; font-size: 13px;">
-          Contact: <a href="mailto:team@koreainsider.kr" style="color:#4f46e5; text-decoration:none;">team@koreainsider.kr</a>
-        </p>
-      </div>
-
-      <!-- Right side card -->
-      <aside style="flex: 0 1 320px; min-width: 260px;">
-        <div style="border:1px solid #eee; border-radius:16px; padding:16px; background:#fff;">
-          <div style="display:flex; align-items:center; justify-content:space-between;">
-            <strong style="font-size: 14px;">Quick Links</strong>
-            <span style="font-size: 12px; color:#6b7280;">Docs</span>
+        <aside class="mock" aria-label="preview card">
+          <div class="mock-top">
+            <strong>Preview</strong>
+            <span class="pill">Premium landing</span>
           </div>
-          <ul style="margin: 10px 0 0; padding-left: 18px;">
-            <li style="margin: 6px 0;"><a href="/privacy/" style="color:#111; text-decoration:none;">Privacy Policy</a></li>
-            <li style="margin: 6px 0;"><a href="/terms/" style="color:#111; text-decoration:none;">Terms of Service</a></li>
-          </ul>
-
-          <div style="margin-top: 14px; padding: 12px; border-radius: 14px; background: #f8fafc; border:1px solid #eef2ff;">
-            <div style="font-size: 12px; color:#6b7280; margin-bottom: 6px;">Status</div>
-            <div style="display:flex; align-items:center; gap:8px;">
-              <span aria-hidden="true" style="width:10px; height:10px; border-radius:999px; background:#22c55e;"></span>
-              <span style="font-weight:600;">Online</span>
-              <span style="color:#6b7280; font-size:12px;">(Static site)</span>
+          <div class="mock-img" role="img" aria-label="Seoul city image"></div>
+          <div class="mock-body">
+            <div class="stat-grid">
+              <div class="stat">
+                <div>Core</div>
+                <div>Community</div>
+              </div>
+              <div class="stat">
+                <div>Core</div>
+                <div>AI Camera</div>
+              </div>
+            </div>
+            <div class="stat" style="grid-column:1/-1;">
+              <div>Contact</div>
+              <div><a href="mailto:team@koreainsider.kr" style="text-decoration:none;">team@koreainsider.kr</a></div>
             </div>
           </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features" class="section">
+      <h2>Features</h2>
+      <div class="grid">
+        <div class="card">
+          <div class="icon">💬</div>
+          <h3>Community</h3>
+          <p>외국인끼리 질문/답변/후기 공유. 게시글, 댓글, 대댓글, 좋아요, 스크랩까지.</p>
         </div>
-      </aside>
-    </div>
-  </section>
+        <div class="card">
+          <div class="icon">🗺️</div>
+          <h3>Curation</h3>
+          <p>테마별 가이드/카드뉴스로 “지금 필요한 정보”만 빠르게 탐색.</p>
+        </div>
+        <div class="card">
+          <div class="icon">📸</div>
+          <h3>AI Camera</h3>
+          <p>메뉴판/라벨/안내문을 찍으면 번역·설명·핵심 정보 제공(참고용).</p>
+        </div>
+        <div class="card">
+          <div class="icon">🛡️</div>
+          <h3>Trust & Safety</h3>
+          <p>신고/제재 운영정책 기반으로 커뮤니티 품질과 안전을 관리.</p>
+        </div>
+      </div>
+    </section>
 
-  <!-- Features -->
-  <section id="features" style="margin-top: 26px;">
-    <h2 style="margin:0 0 10px; font-size: 22px;">주요 기능</h2>
+    <!-- HOW + VALUES -->
+    <section id="how" class="section">
+      <h2>How it works</h2>
+      <div class="two">
+        <div class="panel">
+          <h3 style="margin:0 0 10px;">사용 흐름</h3>
+          <ul>
+            <li>로그인: Kakao / Google / Email</li>
+            <li>큐레이션으로 추천 가이드 확인</li>
+            <li>커뮤니티에서 질문/답변/후기 공유</li>
+            <li>AI 카메라로 즉시 번역/설명 확인</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3 style="margin:0 0 10px;">핵심 가치</h3>
+          <ul>
+            <li><strong>Clarity:</strong> 복잡한 정보 → 한 번에 이해</li>
+            <li><strong>Speed:</strong> 필요한 답을 더 빨리</li>
+            <li><strong>Trust:</strong> 운영정책 기반 안전한 커뮤니티</li>
+            <li><strong>Global-ready:</strong> 외국인 사용 중심 설계</li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
-    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;">
-      <div style="border:1px solid #eee; border-radius:16px; padding:16px; background:#fff;">
-        <div style="font-size: 20px;">💬</div>
-        <h3 style="margin:8px 0 6px; font-size: 16px;">Community</h3>
-        <p style="margin:0; color:#555;">게시글/댓글/대댓글/좋아요/스크랩으로 외국인끼리 부담 없이 정보 공유.</p>
+    <!-- SHOWCASE / GALLERY -->
+    <section id="showcase" class="section">
+      <h2>Showcase</h2>
+      <div class="gallery">
+        <div class="shot big">
+          <img alt="Seoul street" src="https://images.unsplash.com/photo-1549693578-d683be217e58?auto=format&fit=crop&w=2000&q=80" />
+          <div class="cap">KOIN helps foreigners navigate Korea with community, guides, and AI camera.</div>
+        </div>
+        <div style="display:grid; gap:12px;">
+          <div class="shot">
+            <img alt="Korean food" src="https://images.unsplash.com/photo-1553163147-622ab57be1c7?auto=format&fit=crop&w=1400&q=80" />
+            <div class="cap">Menu translation & explanations (AI Camera)</div>
+          </div>
+          <div class="shot">
+            <img alt="Subway" src="https://images.unsplash.com/photo-1526481280695-3c687fd643ed?auto=format&fit=crop&w=1400&q=80" />
+            <div class="cap">Practical, everyday Korea tips (Curation)</div>
+          </div>
+        </div>
       </div>
 
-      <div style="border:1px solid #eee; border-radius:16px; padding:16px; background:#fff;">
-        <div style="font-size: 20px;">🗺️</div>
-        <h3 style="margin:8px 0 6px; font-size: 16px;">Curation</h3>
-        <p style="margin:0; color:#555;">테마별 카드뉴스/가이드로 “지금 필요한 정보”를 빠르게 탐색.</p>
+      <p style="margin: 12px 0 0; color: var(--muted2); font-size: 13px;">
+        * 위 이미지는 데모용(Unsplash)입니다. 앱 스크린샷/브랜드 이미지로 교체하면 완성도가 더 올라갑니다.
+      </p>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section">
+      <h2>FAQ</h2>
+      <details>
+        <summary>AI 카메라 결과는 정확한가요?</summary>
+        <p>AI 결과는 참고용이며 정확성/완전성을 보장하지 않습니다. 알러지/의약품/법률/안전 관련은 별도 확인이 필요합니다.</p>
+      </details>
+      <details>
+        <summary>개인정보는 어떻게 처리하나요?</summary>
+        <p>서비스 제공에 필요한 최소한의 정보만 수집하며, 자세한 내용은 <a href="/privacy/">Privacy Policy</a>를 참고해주세요.</p>
+      </details>
+      <details>
+        <summary>이용약관/정책은 어디서 보나요?</summary>
+        <p><a href="/terms/">Terms of Service</a> 및 <a href="/privacy/">Privacy Policy</a>에서 확인할 수 있습니다.</p>
+      </details>
+    </section>
+
+    <!-- CTA -->
+    <section class="section">
+      <div class="panel" style="display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;">
+        <div>
+          <h2 style="margin:0 0 6px; font-size: 20px;">Partnership / Inquiry</h2>
+          <p style="margin:0; color: var(--muted);">제휴, 캠퍼스 홍보, 협업 문의는 이메일로 연락 주세요.</p>
+        </div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <a class="btn primary" href="mailto:team@koreainsider.kr?subject=KOIN%20Partnership%20Inquiry">Email us</a>
+          <a class="btn" href="/privacy/">Privacy</a>
+          <a class="btn" href="/terms/">Terms</a>
+        </div>
       </div>
+    </section>
 
-      <div style="border:1px solid #eee; border-radius:16px; padding:16px; background:#fff;">
-        <div style="font-size: 20px;">📸</div>
-        <h3 style="margin:8px 0 6px; font-size: 16px;">AI Camera</h3>
-        <p style="margin:0; color:#555;">메뉴판/라벨/안내문을 찍으면 번역·설명·핵심 정보를 바로 제공.</p>
-      </div>
-
-      <div style="border:1px solid #eee; border-radius:16px; padding:16px; background:#fff;">
-        <div style="font-size: 20px;">🛡️</div>
-        <h3 style="margin:8px 0 6px; font-size: 16px;">Safety & Trust</h3>
-        <p style="margin:0; color:#555;">신고/제재 운영정책 기반으로 커뮤니티 품질을 관리.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- How it works -->
-  <section id="how" style="margin-top: 26px;">
-    <h2 style="margin:0 0 10px; font-size: 22px;">사용 흐름</h2>
-    <div style="border:1px solid #eee; border-radius:16px; padding:16px; background:#fff;">
-      <ol style="margin: 0; padding-left: 18px;">
-        <li style="margin: 8px 0;">로그인 (Kakao/Google/Email)</li>
-        <li style="margin: 8px 0;">큐레이션에서 추천 가이드 확인</li>
-        <li style="margin: 8px 0;">커뮤니티에서 질문/답변/후기 공유</li>
-        <li style="margin: 8px 0;">AI 카메라로 즉시 번역/설명 확인</li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- Legal -->
-  <section style="margin-top: 26px;">
-    <h2 style="margin:0 0 10px; font-size: 22px;">Legal</h2>
-    <div style="display:flex; gap:12px; flex-wrap:wrap;">
-      <a href="/privacy/" style="text-decoration:none; padding:12px 14px; border-radius:14px; background:#fff; border:1px solid #e5e5e5; color:#111;">
-        Privacy Policy →
-      </a>
-      <a href="/terms/" style="text-decoration:none; padding:12px 14px; border-radius:14px; background:#fff; border:1px solid #e5e5e5; color:#111;">
-        Terms of Service →
-      </a>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer style="margin-top: 28px; padding-top: 18px; border-top: 1px solid #eee; color:#6b7280; font-size: 13px;">
-    <div style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+    <!-- FOOTER -->
+    <footer>
       <div>
-        <div><strong style="color:#111;">KOIN / TEAM_KOIN</strong></div>
-        <div>Contact: <a href="mailto:team@koreainsider.kr" style="color:#4f46e5; text-decoration:none;">team@koreainsider.kr</a></div>
+        <div style="font-weight:700; color: var(--text);">KOIN / TEAM_KOIN</div>
+        <div>Contact: <a href="mailto:team@koreainsider.kr" style="text-decoration:none;">team@koreainsider.kr</a></div>
       </div>
-      <div style="text-align:right;">
-        <div>© <span id="y"></span> KOIN. All rights reserved.</div>
-        <div style="margin-top:4px;">
-          <a href="/privacy/" style="color:#6b7280; text-decoration:none;">Privacy</a>
-          <span style="margin: 0 8px;">·</span>
-          <a href="/terms/" style="color:#6b7280; text-decoration:none;">Terms</a>
-        </div>
+      <div class="links">
+        <a href="/privacy/">Privacy Policy</a> ·
+        <a href="/terms/">Terms of Service</a>
+        <div style="margin-top:6px;">© <span id="y"></span> KOIN. All rights reserved.</div>
       </div>
-    </div>
-  </footer>
+    </footer>
+  </main>
 
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
