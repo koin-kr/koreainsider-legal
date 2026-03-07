@@ -1,276 +1,1669 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Terms of Service - KOIN</title>
-  <meta name="description" content="KOIN Terms of Service (Effective Date: 2026-02-23, Version v1.1)" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>KOIN — Korea Insider</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fonts-archive/GapyeongHanseokbong/subsets/GapyeongHanseokbong-dynamic-subset.css" type="text/css"/>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/static/pretendard.css" crossorigin />
+<style>
+
+:root {
+  --primary:    #3B82F6;
+  --primary-dk: #2563EB;
+  --secondary:  #DBEAFE;
+  --tertiary:   #ECF5C0;
+  --bg:         #FFFFFF;
+  --bg-2:       #F8FAFF;
+  --bg-3:       #EEF4FF;
+  --text:       #1A1E2A;
+  --sub:        #4B5580;
+  --muted:      #9AA3B5;
+  --border:     #E2EAFF;
+  --radius:     16px;
+  --radius-sm:  10px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-size: 1rem;
+  line-height: 1.65;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── TYPOGRAPHY ─── */
+.display {
+  font-family: 'Gapyeong Hanseokbong', 'Noto Serif KR', serif;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+
+/* ─── LANG SWITCHER ─── */
+#lang-switcher {
+  display: flex; align-items: center; gap: 2px;
+}
+.ls-btn {
+  background: none; border: none; cursor: pointer;
+  font-size: 1.25rem; line-height: 1;
+  padding: 4px 5px; border-radius: 8px;
+  opacity: 0.35;
+  transition: opacity 0.2s, transform 0.15s, background 0.2s;
+}
+.ls-btn:hover { opacity: 0.75; transform: scale(1.15); background: var(--bg-2); }
+.ls-btn.active { opacity: 1; transform: scale(1.1); }
+
+/* 모바일: nav-cta 숨을 때 switcher는 유지 */
+@media (max-width: 1024px) {
+  #lang-switcher { gap: 1px; }
+  .ls-btn { font-size: 1.1rem; padding: 3px 4px; }
+}
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: 68px; padding: 0 40px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 8px; text-decoration: none;
+}
+.nav-logo-img { width: 28px; height: 28px; object-fit: contain; }
+.nav-wordmark {
+  font-family: 'Gapyeong Hanseokbong', 'Noto Serif KR', serif;
+  font-size: 1.5rem; color: var(--primary); letter-spacing: 0.04em;
+  font-weight: 900; -webkit-text-stroke: 0.4px var(--primary);
+}
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a {
+  color: var(--sub); text-decoration: none; font-size: 0.9rem;
+  font-weight: 500; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--primary); }
+.nav-cta {
+  padding: 9px 22px; background: var(--primary); color: #fff;
+  font-size: 0.88rem; font-weight: 600; text-decoration: none;
+  border-radius: 100px; transition: background 0.2s, transform 0.15s;
+}
+.nav-cta:hover { background: var(--primary-dk); transform: translateY(-1px); }
+
+/* hamburger */
+.nav-hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 6px;
+}
+.nav-hamburger span {
+  display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all 0.3s;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.mobile-menu {
+  display: none; position: fixed; inset: 0; top: 68px; z-index: 90;
+  background: rgba(255,255,255,0.98); backdrop-filter: blur(16px);
+  flex-direction: column; align-items: center; justify-content: center;
+  gap: 12px; opacity: 0; pointer-events: none; transition: opacity 0.3s;
+}
+.mobile-menu.open { opacity: 1; pointer-events: all; }
+.mobile-links { list-style: none; text-align: center; }
+.mobile-links li { margin: 14px 0; }
+.mobile-links a {
+  font-size: 1.5rem; font-weight: 600; color: var(--text);
+  text-decoration: none; transition: color 0.2s;
+}
+.mobile-links a:hover { color: var(--primary); }
+.mobile-links .mobile-cta {
+  display: inline-block; margin-top: 8px;
+  background: var(--primary); color: #fff;
+  padding: 12px 36px; border-radius: 100px; font-size: 1rem; font-weight: 600;
+}
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 100vh; padding: 120px 40px 80px;
+  display: flex; align-items: center;
+  background: linear-gradient(160deg, #FFFFFF 0%, var(--bg-2) 50%, #EEF4FF 100%);
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; top: -180px; right: -120px;
+  width: 600px; height: 600px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(64,138,250,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute; bottom: -100px; left: -80px;
+  width: 400px; height: 400px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(236,245,192,0.6) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-inner {
+  max-width: 1200px; margin: 0 auto; width: 100%;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  position: relative; z-index: 1;
+}
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--secondary); color: var(--primary-dk);
+  font-size: 0.82rem; font-weight: 600; padding: 6px 14px; border-radius: 100px;
+  margin-bottom: 20px; letter-spacing: 0.02em;
+  opacity: 0; animation: fadeUp 0.7s 0.1s ease forwards;
+}
+.hero-tag::before { content: '🇰🇷'; }
+.hero-title {
+  font-size: clamp(2.8rem, 5vw, 4.4rem);
+  color: var(--text); font-weight: 900;
+  margin-bottom: 28px;
+  opacity: 0; animation: fadeUp 0.7s 0.25s ease forwards;
+}
+.hero-title .highlight { color: var(--primary); }
+.hero-kr {
+  font-size: 1.05rem; font-weight: 600; color: var(--text);
+  margin-bottom: 20px; letter-spacing: 0.01em;
+  opacity: 0; animation: fadeUp 0.7s 0.4s ease forwards;
+}
+.hero-desc {
+  font-size: 1rem; color: var(--sub); line-height: 1.9; max-width: 460px;
+  margin-bottom: 40px; word-break: keep-all;
+  padding: 16px 20px;
+  background: var(--bg-2);
+  border-left: 3px solid var(--primary);
+  border-radius: 0 10px 10px 0;
+  opacity: 0; animation: fadeUp 0.7s 0.5s ease forwards;
+}
+.hero-actions {
+  display: flex; gap: 14px; align-items: center; flex-wrap: wrap;
+  opacity: 0; animation: fadeUp 0.7s 0.65s ease forwards;
+}
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 28px; background: var(--primary); color: #fff;
+  font-size: 1rem; font-weight: 600; text-decoration: none;
+  border-radius: 100px; transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(64,138,250,0.35);
+}
+.btn-primary:hover { background: var(--primary-dk); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(64,138,250,0.4); }
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 24px; border: 1.5px solid var(--border);
+  color: var(--sub); font-size: 1rem; font-weight: 500; text-decoration: none;
+  border-radius: 100px; transition: border-color 0.2s, color 0.2s;
+}
+.btn-ghost:hover { border-color: var(--primary); color: var(--primary); }
+
+/* phone mockups */
+.hero-phones {
+  position: relative; height: 520px;
+  opacity: 0; animation: fadeUp 0.9s 0.4s ease forwards;
+}
+.phone-mock {
+  position: absolute; width: 200px; border-radius: 28px; overflow: hidden;
+  border: 1px solid rgba(64,138,250,0.2);
+  box-shadow: 0 32px 64px rgba(0,0,0,0.12), 0 0 0 1px rgba(255,255,255,0.8);
+}
+.phone-mock img { width: 100%; display: block; }
+.phone-mock-1 { left: 50%; transform: translateX(-50%); top: 0; width: 220px; z-index: 3; box-shadow: 0 40px 80px rgba(64,138,250,0.18), 0 0 0 1px rgba(255,255,255,0.8); }
+.phone-mock-2 { left: 0; top: 70px; z-index: 2; transform: rotate(-6deg); opacity: 0.9; }
+.phone-mock-3 { right: 0; top: 70px; z-index: 2; transform: rotate(6deg); opacity: 0.9; }
+.phone-glow {
+  position: absolute; bottom: -40px; left: 50%; transform: translateX(-50%);
+  width: 380px; height: 180px;
+  background: radial-gradient(ellipse, rgba(64,138,250,0.18) 0%, transparent 70%);
+  filter: blur(32px); pointer-events: none;
+}
+
+/* ─── BANNER ─── */
+.banner-section { padding: 0 40px 72px; max-width: 1280px; margin: 0 auto; }
+.banner-img-wrap { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); }
+.banner-img-wrap img { width: 100%; display: block; }
+
+/* ─── CHIPS STRIP ─── */
+.chips-strip {
+  background: var(--bg-2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 20px 40px;
+}
+.chips-inner {
+  max-width: 600px; margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.chip {
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+  font-size: 0.88rem; font-weight: 500; color: var(--sub);
+  padding: 9px 16px;
+  background: var(--bg); border: 1.5px solid var(--border);
+  border-radius: 100px;
+  white-space: nowrap;
+}
+.chip .chip-dot { width: 6px; height: 6px; background: var(--primary); border-radius: 50%; flex-shrink: 0; }
+.chip-divider { display: none; }
+
+@media (max-width: 560px) {
+  .chips-strip { padding: 16px 20px; }
+  .chips-inner { max-width: 100%; gap: 8px; grid-template-columns: 1fr; }
+  .chip { font-size: 0.85rem; padding: 10px 16px; white-space: normal; }
+}
+
+/* ─── SECTION COMMON ─── */
+.section-wrap { padding: 100px 40px; }
+.section-wrap.alt { background: var(--bg-2); }
+.section-center { text-align: center; max-width: 560px; margin: 0 auto 64px; }
+.section-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  color: var(--primary); font-size: 0.82rem; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 14px;
+}
+.section-badge::before { content: ''; display: inline-block; width: 20px; height: 2px; background: var(--primary); border-radius: 2px; }
+.section-title {
+  font-size: clamp(2rem, 3.5vw, 2.8rem); color: var(--text); margin-bottom: 16px;
+  font-family: 'Gapyeong Hanseokbong', 'Noto Serif KR', serif;
+}
+.section-desc { font-size: 1.05rem; color: var(--sub); line-height: 1.75; }
+
+/* ─── FEATURES GRID ─── */
+.features-grid {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+}
+.feature-card {
+  background: var(--bg); border: 1.5px solid var(--border); border-radius: var(--radius);
+  overflow: hidden; transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+}
+.feature-card:hover {
+  border-color: var(--primary); transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(64,138,250,0.12);
+}
+.feature-card-screen {
+  background: var(--bg-3); border-bottom: 1px solid var(--border);
+  height: 260px; overflow: hidden; display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.feature-card-screen img {
+  height: 100%; width: auto; object-fit: contain;
+  position: relative; z-index: 1;
+}
+.feature-card-screen-glow {
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 50% 100%, rgba(64,138,250,0.1) 0%, transparent 70%);
+}
+.feature-card-body { padding: 28px 28px 32px; }
+.feature-card-tag {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: var(--secondary); color: var(--primary-dk);
+  font-size: 0.78rem; font-weight: 700; padding: 5px 13px; border-radius: 100px;
+  margin-bottom: 14px; letter-spacing: 0.02em;
+}
+.feature-card-title {
+  font-size: 1.35rem; font-weight: 700; color: var(--text); margin-bottom: 10px; line-height: 1.3;
+  font-family: 'Gapyeong Hanseokbong', 'Noto Serif KR', serif;
+}
+.feature-card-desc {
+  font-size: 1rem; color: var(--sub); line-height: 1.7; margin-bottom: 20px;
+}
+.feature-kr { display: block; margin-top: 6px; font-size: 0.82rem; color: var(--muted); }
+.feature-card-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.pill {
+  background: var(--bg-2); border: 1px solid var(--border);
+  font-size: 0.82rem; color: var(--sub); padding: 5px 12px; border-radius: 100px; font-weight: 500;
+}
+
+/* ─── WHY KOIN ─── */
+.why-grid {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+}
+.why-card {
+  background: var(--bg); border: 1.5px solid var(--border);
+  border-radius: var(--radius); padding: 40px 36px;
+  position: relative; overflow: hidden;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+.why-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  transform: scaleX(0); transform-origin: left; transition: transform 0.35s ease;
+}
+.why-card:hover { border-color: var(--secondary); box-shadow: 0 12px 40px rgba(64,138,250,0.1); }
+.why-card:hover::before { transform: scaleX(1); }
+.why-icon { font-size: 2rem; margin-bottom: 18px; display: block; }
+.why-title { font-size: 1.25rem; font-weight: 700; color: var(--text); margin-bottom: 6px; font-family: 'Gapyeong Hanseokbong', 'Noto Serif KR', serif; }
+.why-title-kr { font-size: 0.82rem; color: var(--primary); font-weight: 600; margin-bottom: 14px; display: block; }
+.why-desc { font-size: 1rem; color: var(--sub); line-height: 1.7; }
+.why-desc-kr { font-size: 0.82rem; color: var(--muted); line-height: 1.6; margin-top: 8px; display: block; }
+
+/* ─── JOURNEY ─── */
+.journey-section {
+  padding: 100px 40px; max-width: 1200px; margin: 0 auto;
+}
+.journey-flow {
+  display: grid; grid-template-columns: 1fr 36px 1fr 36px 1fr; align-items: start;
+}
+.journey-step { text-align: center; }
+.journey-icon-wrap {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: var(--secondary); color: var(--primary-dk);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.6rem; margin: 0 auto 16px;
+}
+.journey-label { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 8px; font-family: 'Gapyeong Hanseokbong', 'Noto Serif KR', serif; }
+.journey-desc { font-size: 0.95rem; color: var(--sub); line-height: 1.65; }
+.journey-arrow {
+  display: flex; align-items: center; justify-content: center;
+  padding-top: 22px; color: var(--muted); font-size: 1.3rem;
+}
+
+/* ─── FAQ ─── */
+.faq-wrap {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 280px 1fr; gap: 80px;
+}
+.faq-side { }
+.faq-side-title { font-size: 1.7rem; color: var(--text); margin-bottom: 16px; font-family: 'Gapyeong Hanseokbong', 'Noto Serif KR', serif; }
+.faq-side-desc { font-size: 1rem; color: var(--sub); line-height: 1.7; margin-bottom: 20px; }
+.faq-side-email { color: var(--primary); font-weight: 600; text-decoration: none; font-size: 0.95rem; }
+.faq-side-email:hover { text-decoration: underline; }
+.faq-list { }
+.faq-item { border-top: 1.5px solid var(--border); }
+.faq-item:last-child { border-bottom: 1.5px solid var(--border); }
+.faq-q {
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  padding: 22px 0; cursor: pointer;
+  font-size: 1.05rem; font-weight: 600; color: var(--text); line-height: 1.5;
+  transition: color 0.2s;
+}
+.faq-q:hover { color: var(--primary); }
+.faq-q::after {
+  content: '+'; color: var(--primary); font-size: 1.4rem; font-weight: 300;
+  flex-shrink: 0; transition: transform 0.3s; line-height: 1;
+}
+.faq-item.open .faq-q::after { transform: rotate(45deg); }
+.faq-a {
+  font-size: 1rem; color: var(--sub); line-height: 1.75;
+  max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s;
+}
+.faq-item.open .faq-a { max-height: 220px; padding-bottom: 22px; }
+
+/* ─── DOWNLOAD CTA ─── */
+.cta-section {
+  padding: 120px 40px; text-align: center;
+  background: linear-gradient(160deg, var(--bg-2) 0%, #E8F0FF 50%, var(--bg-2) 100%);
+  position: relative; overflow: hidden;
+}
+.cta-section::before {
+  content: '';
+  position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
+  width: 700px; height: 700px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(64,138,250,0.1) 0%, transparent 65%);
+  pointer-events: none;
+}
+.cta-inner { position: relative; z-index: 1; }
+.cta-title { font-size: clamp(2.2rem, 4vw, 3.6rem); color: var(--text); margin-bottom: 18px; font-family: 'Gapyeong Hanseokbong', 'Noto Serif KR', serif; }
+.cta-desc { font-size: 1.1rem; color: var(--sub); max-width: 480px; margin: 0 auto 48px; line-height: 1.75; }
+.cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+.app-btn {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 14px 26px; border: 1.5px solid var(--border);
+  background: var(--bg); color: var(--text); text-decoration: none;
+  border-radius: 14px; font-size: 0.9rem; transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.app-btn:hover { border-color: var(--primary); box-shadow: 0 4px 20px rgba(64,138,250,0.15); transform: translateY(-2px); }
+.app-btn-icon { font-size: 1.5rem; flex-shrink: 0; }
+.app-btn-sub { font-size: 0.68rem; color: var(--muted); display: block; font-weight: 500; letter-spacing: 0.04em; }
+.app-btn-label { font-size: 1rem; font-weight: 700; color: var(--text); }
+.cta-contact { margin-top: 24px; font-size: 0.95rem; color: var(--muted); }
+.cta-contact a { color: var(--primary); font-weight: 600; text-decoration: none; }
+.cta-contact a:hover { text-decoration: underline; }
+
+/* ─── FOOTER ─── */
+footer {
+  border-top: 1px solid var(--border); padding: 56px 40px;
+  max-width: 1280px; margin: 0 auto;
+}
+.footer-inner {
+  display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 60px; margin-bottom: 48px;
+}
+.footer-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.footer-brand-img { width: 30px; height: 30px; object-fit: contain; }
+.footer-brand-name {
+  font-family: 'Gapyeong Hanseokbong', 'Noto Serif KR', serif;
+  font-size: 1.4rem; color: var(--primary); letter-spacing: 0.04em;
+}
+.footer-brand-desc { font-size: 0.9rem; color: var(--sub); line-height: 1.75; max-width: 260px; word-break: keep-all; }
+.footer-col-title { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text); margin-bottom: 16px; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-links a { font-size: 0.92rem; color: var(--sub); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--primary); }
+.footer-contact-line { font-size: 0.92rem; color: var(--sub); margin-bottom: 6px; }
+.footer-contact-line a { color: var(--primary); text-decoration: none; }
+.footer-contact-line a:hover { text-decoration: underline; }
+.footer-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-top: 28px; border-top: 1px solid var(--border);
+}
+.footer-copy { font-size: 0.82rem; color: var(--muted); }
+.footer-legal { display: flex; gap: 20px; }
+.footer-legal a { font-size: 0.82rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.footer-legal a:hover { color: var(--primary); }
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+.reveal { opacity: 1; transform: translateY(0); transition: opacity 0.65s ease, transform 0.65s ease; }
+body.js-ready .reveal { opacity: 0; transform: translateY(20px); }
+body.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
+
+
+/* ─── GAPYEONG HANSEOKBONG 전체 적용 ─── */
+.cta-title, .why-card-title, .journey-step-title,
+.footer-brand-name, h1, h2, h3 {
+  font-family: 'Gapyeong Hanseokbong', 'Noto Serif KR', serif;
+}
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--secondary); border-radius: 4px; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1024px) {
+  nav { padding: 0 24px; }
+  .nav-links { display: none; }
+  .nav-cta { display: none; }
+  .nav-hamburger { display: flex; }
+  .mobile-menu { display: flex; }
+  .hero { padding: 100px 24px 72px; }
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-phones { display: none; }
+  .banner-section, .section-wrap, .journey-section, footer { padding-left: 24px; padding-right: 24px; }
+  .features-grid { grid-template-columns: 1fr; }
+  .why-grid { grid-template-columns: 1fr; }
+@media (max-width: 1024px) {
+  .journey-flow { grid-template-columns: 1fr; gap: 0; }
+  .journey-arrow { display: none; }
+  .journey-step {
+    padding: 40px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .journey-step:last-child { border-bottom: none; }
+}
+  .faq-wrap { grid-template-columns: 1fr; gap: 40px; }
+  .footer-inner { grid-template-columns: 1fr; gap: 36px; }
+  .cta-section { padding: 80px 24px; }
+}
+@media (min-width: 640px) and (max-width: 1024px) {
+  .features-grid { grid-template-columns: repeat(2, 1fr); }
+  .why-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+}
+</style>
 </head>
-<body style="font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; max-width: 820px; margin: 40px auto; line-height: 1.6; padding: 0 16px;">
-  <header>
-    <h1 style="margin-bottom: 8px;">Terms of Service</h1>
-    <p style="margin-top: 0; color: #555;">
-      Effective Date: <strong>2026-02-23</strong> · Version: <strong>v1.1</strong>
-    </p>
-  </header>
+<body>
 
-  <hr style="border: 0; border-top: 1px solid #e5e5e5; margin: 24px 0;" />
+<!-- NAV -->
+<nav id="main-nav">
+  <a href="#" class="nav-logo">
+    <img src="assets/logo.png" alt="KOIN" class="nav-logo-img" style="width:28px;height:28px;object-fit:contain;" />
+    <span class="nav-wordmark">Koin</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#features" data-i18n="nav.features">Features</a></li>
+    <li><a href="#why" data-i18n="nav.why">Why KOIN</a></li>
+    <li><a href="#faq" data-i18n="nav.faq">FAQ</a></li>
+    <li><a href="mailto:team@koreainsider.kr" data-i18n="nav.contact">Contact</a></li>
+  </ul>
+  <div id="lang-switcher">
+    <button class="ls-btn active" onclick="switchLang('ko')" title="한국어">🇰🇷</button>
+    <button class="ls-btn" onclick="switchLang('en')" title="English">🇺🇸</button>
+    <button class="ls-btn" onclick="switchLang('zh')" title="中文">🇨🇳</button>
+    <button class="ls-btn" onclick="switchLang('ja')" title="日本語">🇯🇵</button>
+    <button class="ls-btn" onclick="switchLang('vi')" title="Tiếng Việt">🇻🇳</button>
+  </div>
+  <a href="#download" class="nav-cta" data-i18n="nav.cta">Get the App</a>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="메뉴 열기">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
 
-  <section>
-    <h2>Article 1 (Purpose)</h2>
-    <p>
-      These Terms aim to define the rights and obligations of the Company and Members, responsibilities,
-      and other necessary matters related to the use of the Service.
-    </p>
-  </section>
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <ul class="mobile-links">
+    <li><a href="#features" onclick="closeMobileMenu()" data-i18n="nav.features">Features</a></li>
+    <li><a href="#why" onclick="closeMobileMenu()" data-i18n="nav.why">Why KOIN</a></li>
+    <li><a href="#faq" onclick="closeMobileMenu()" data-i18n="nav.faq">FAQ</a></li>
+    <li><a href="mailto:team@koreainsider.kr" onclick="closeMobileMenu()" data-i18n="nav.contact">Contact</a></li>
+    <li><a href="#download" class="mobile-cta" onclick="closeMobileMenu()" data-i18n="nav.cta">Get the App</a></li>
+  </ul>
+</div>
 
-  <section>
-    <h2>Article 2 (Definitions)</h2>
-    <ol>
-      <li><strong>“Service”</strong> means the KOIN application and related services provided by the Company.</li>
-      <li><strong>“Member”</strong> means a person who agrees to these Terms and the Privacy Policy, registers for the Service, and uses the Service.</li>
-      <li><strong>“Account”</strong> means identifying information (email address or social login identifier via Kakao/Google) used to identify a Member and enable use of the Service.</li>
-      <li><strong>“Content”</strong> means any information or materials posted or uploaded by a Member within the Service, including posts, comments, replies, photos/images, links, likes, saves (scraps), comment likes, and other related activity.</li>
-      <li><strong>“Operational Policy”</strong> means community guidelines, reporting/sanction standards, and detailed operating rules announced within the Service or provided as separate documents.</li>
-      <li><strong>“AI Camera”</strong> means a feature that provides results such as translation, explanations, and information based on images or text uploaded/entered by Members.</li>
-    </ol>
-  </section>
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-tag" data-i18n="hero.tag">Korea Insider</div>
+      <h1 class="hero-title display" data-i18n="hero.title">Korea,<br />in your <span class="highlight">hands.</span></h1>
+      <p class="hero-kr" data-i18n="hero.subtitle">한국 방문/거주 외국인을 위한 필수 앱</p>
+      <p class="hero-desc">
+        <span data-i18n="hero.desc">AI-curated guides, a foreigner community, and real-time AI camera — everything you need in Korea, in one app.</span>
+      </p>
+      <div class="hero-actions">
+        <a href="#download" class="btn-primary" data-i18n="hero.btn1">Download App ↓</a>
+        <a href="#features" class="btn-ghost" data-i18n="hero.btn2">Explore Features →</a>
+      </div>
+    </div>
+    <div class="hero-phones">
+      <div class="phone-mock phone-mock-2">
+        <img src="assets/community.png" alt="Community" />
+      </div>
+      <div class="phone-mock phone-mock-1">
+        <img src="assets/kuration.png" alt="Kuration" />
+      </div>
+      <div class="phone-mock phone-mock-3">
+        <img src="assets/camera.png" alt="AI Camera" />
+      </div>
+      <div class="phone-glow"></div>
+    </div>
+  </div>
+</div>
 
-  <section>
-    <h2>Article 3 (Posting and Amendment of the Terms)</h2>
-    <ol>
-      <li>The Company will make these Terms available so that Members can easily review them through the Service and/or the official website.</li>
-      <li>The Company may amend these Terms to the extent permitted by applicable laws.</li>
-      <li>
-        If the Company amends these Terms, it will notify Members of the effective date and the changes at least
-        <strong>7 days</strong> prior to the effective date. If the amendment is material or unfavorable to Members,
-        the Company may provide notice at least <strong>30 days</strong> in advance.
-      </li>
-      <li>
-        If a Member does not agree to the amended Terms, the Member may terminate the use agreement (withdraw).
-        If the Member does not explicitly express refusal, the Member will be deemed to have agreed to the amended Terms.
-      </li>
-    </ol>
-  </section>
+<!-- BANNER -->
+<div class="banner-section reveal">
+  <div class="banner-img-wrap">
+    <img src="koin-banner.png" alt="KOIN — Republic of Korea in your hands" />
+  </div>
+</div>
 
-  <section>
-    <h2>Article 4 (Formation and Restriction of the Use Agreement)</h2>
-    <ol>
-      <li>The use agreement is formed when a Member agrees to these Terms and the Privacy Policy and completes the registration process set by the Company (including Kakao/Google/Email login).</li>
-      <li>
-        The Company may refuse registration or terminate the use agreement after registration if any of the following apply:
-        <ul>
-          <li>Using another person’s information (name, account, etc.) without authorization</li>
-          <li>Providing false information</li>
-          <li>Substantially interfering with the operation of the Service or posing a risk of such interference</li>
-          <li>Any other case where the Company reasonably determines it is necessary</li>
-        </ul>
-      </li>
-    </ol>
-  </section>
+<!-- CHIPS STRIP -->
+<div class="chips-strip">
+  <div class="chips-inner">
+    <div class="chip" data-i18n="chip1"><span class="chip-dot"></span>🗺️ AI Picks Just for You</div>
+    <div class="chip-divider"></div>
+    <div class="chip" data-i18n="chip2"><span class="chip-dot"></span>💬 Ask the Locals</div>
+    <div class="chip-divider"></div>
+    <div class="chip" data-i18n="chip3"><span class="chip-dot"></span>📸 Korea-Specialized AI Kamera</div>
+    <div class="chip-divider"></div>
+    <div class="chip" data-i18n="chip4"><span class="chip-dot"></span>🌐 Zero Language Barrier</div>
+  </div>
+</div>
 
-  <section>
-    <h2>Article 5 (Account Management)</h2>
-    <ol>
-      <li>Members are responsible for securely managing their Account information and must promptly notify the Company if unauthorized use is suspected.</li>
-      <li>Members may not transfer, lend, or share their Account with any third party.</li>
-    </ol>
-  </section>
+<!-- FEATURES -->
+<div id="features" class="section-wrap">
+  <div class="section-center reveal">
+    <div class="section-badge" data-i18n="features.badge">Core Features · 핵심 기능</div>
+    <h2 class="section-title display" data-i18n="features.title">One app for<br />everything Korea.</h2>
+    <p class="section-desc" data-i18n="features.desc">From trip planning to daily life — three features for every moment of your Korea journey.</p>
+  </div>
+  <div class="features-grid">
 
-  <section>
-    <h2>Article 6 (Provision and Modification of the Service)</h2>
-    <ol>
-      <li>The Company provides services including Community, Curation, and AI Camera features.</li>
-      <li>The Company may change all or part of the Service as needed for operational or technical reasons, and will provide prior notice for material changes.</li>
-    </ol>
-  </section>
+    <!-- KURATION -->
+    <div class="feature-card reveal">
+      <div class="feature-card-screen" style="height:320px; background:#fff; padding:0; overflow:hidden; display:block;">
+        <!-- Kuration mockup -->
+        <div style="padding:14px 14px 0; font-family:Pretendard,sans-serif;">
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:12px;">
+            <img src="assets/logo.png" style="width:16px;height:16px;object-fit:contain;" />
+            <span style="font-size:0.85rem;font-weight:700;color:#408AFA;">Koin</span>
+          </div>
+          <!-- Hero banner -->
+          <div style="border-radius:12px;overflow:hidden;margin-bottom:10px;position:relative;height:96px;background:linear-gradient(135deg,#2c1a0e,#5c3d1e);">
+            <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.6) 0%,transparent 50%);"></div>
+            <div style="position:absolute;bottom:8px;left:10px;">
+              <div style="font-size:0.6rem;color:rgba(255,255,255,0.75);margin-bottom:2px;">Seoul my soul</div>
+              <div style="font-size:0.85rem;font-weight:700;color:#fff;">Seoul Café Tour</div>
+              <div style="font-size:0.65rem;color:#408AFA;margin-top:2px;">Read →</div>
+            </div>
+          </div>
+          <!-- Category tabs -->
+          <div style="display:flex;gap:8px;margin-bottom:10px;overflow:hidden;">
+            <span style="font-size:0.65rem;color:#888;padding:2px 0;">All</span>
+            <span style="font-size:0.65rem;color:#408AFA;font-weight:700;border-bottom:2px solid #408AFA;padding:2px 0;">Food</span>
+            <span style="font-size:0.65rem;color:#888;padding:2px 0;">Tips</span>
+            <span style="font-size:0.65rem;color:#888;padding:2px 0;">Life</span>
+            <span style="font-size:0.65rem;color:#888;padding:2px 0;">Place</span>
+            <span style="font-size:0.65rem;color:#888;padding:2px 0;">Fest</span>
+          </div>
+          <!-- 2x2 photo grid -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;">
+            <div style="border-radius:8px;height:64px;background:linear-gradient(135deg,#c8860a,#e8a020);position:relative;overflow:hidden;">
+              <div style="position:absolute;inset:0;background:rgba(0,0,0,0.25)"></div>
+              <div style="position:absolute;bottom:6px;left:8px;font-size:0.65rem;font-weight:700;color:#fff;">Beer Spot 5</div>
+            </div>
+            <div style="border-radius:8px;height:64px;background:linear-gradient(135deg,#3a2a1a,#6b4c2a);position:relative;overflow:hidden;">
+              <div style="position:absolute;inset:0;background:rgba(0,0,0,0.3)"></div>
+              <div style="position:absolute;bottom:6px;left:8px;font-size:0.65rem;font-weight:700;color:#fff;">Busan Cafés</div>
+            </div>
+            <div style="border-radius:8px;height:64px;background:linear-gradient(135deg,#e8e0d8,#c0b8a8);position:relative;overflow:hidden;">
+              <div style="position:absolute;inset:0;background:rgba(0,0,0,0.2)"></div>
+              <div style="position:absolute;bottom:6px;left:8px;font-size:0.65rem;font-weight:700;color:#fff;">Europe in Seoul</div>
+            </div>
+            <div style="border-radius:8px;height:64px;background:linear-gradient(135deg,#8b4513,#c8762a);position:relative;overflow:hidden;">
+              <div style="position:absolute;inset:0;background:rgba(0,0,0,0.28)"></div>
+              <div style="position:absolute;bottom:6px;left:8px;font-size:0.65rem;font-weight:700;color:#fff;">Jeonju Course</div>
+            </div>
+          </div>
+        </div>
+        <!-- bottom nav -->
+        <div style="position:absolute;bottom:0;left:0;right:0;height:32px;background:#fff;border-top:1px solid #eee;display:flex;align-items:center;justify-content:space-around;padding:0 4px;">
+          <div style="text-align:center;"><div style="font-size:0.45rem;color:#bbb;">Koin</div></div>
+          <div style="text-align:center;"><div style="font-size:0.45rem;color:#408AFA;font-weight:700;">Kuration</div></div>
+          <div style="text-align:center;"><div style="font-size:0.45rem;color:#bbb;">Kommunity</div></div>
+          <div style="text-align:center;"><div style="font-size:0.45rem;color:#bbb;">Kamera</div></div>
+          <div style="text-align:center;"><div style="font-size:0.45rem;color:#bbb;">My</div></div>
+        </div>
+      </div>
+      <div class="feature-card-body">
+        <div class="feature-card-tag" data-i18n="kuration.tag">🗺️ Kuration</div>
+        <div class="feature-card-title" data-i18n="kuration.title">Your personal<br />Korea guide, by AI</div>
+        <p class="feature-card-desc">
+          No more scattered blogs. Get AI-curated guides tailored to your interests and itinerary — all in one place.
+          <span class="feature-kr">AI가 골라주는 나만의 한국 가이드</span>
+        </p>
+        <div class="feature-card-pills">
+          <span class="pill">Personalised by AI</span>
+          <span class="pill">Card-news style</span>
+          <span class="pill">Food · Place · Tips</span>
+        </div>
+      </div>
+    </div>
 
-  <section>
-    <h2>Article 7 (Member Obligations)</h2>
-    <ol>
-      <li>Members must comply with applicable laws, these Terms, the Operational Policy, and notices.</li>
-      <li>Members must not infringe upon the rights of others (including copyrights, portrait rights, trademarks, personal information, etc.) while using the Service.</li>
-      <li>Members must take care not to include their own or others’ personal information in posts.</li>
-    </ol>
-  </section>
+    <!-- KOMMUNITY -->
+    <div class="feature-card reveal" style="transition-delay:0.1s">
+      <div class="feature-card-screen" style="height:320px; background:#fff; padding:0; overflow:hidden; display:block; position:relative;">
+        <div style="padding:14px 14px 0; font-family:Pretendard,sans-serif;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+            <div style="display:flex;align-items:center;gap:6px;">
+              <img src="assets/logo.png" style="width:16px;height:16px;object-fit:contain;" />
+              <span style="font-size:0.85rem;font-weight:700;color:#408AFA;">Koin</span>
+            </div>
+            <div style="display:flex;gap:10px;align-items:center;">
+              <div style="width:14px;height:14px;border-radius:50%;background:#eee;"></div>
+              <div style="position:relative;"><div style="width:14px;height:14px;border-radius:50%;background:#eee;"></div><div style="position:absolute;top:-2px;right:-2px;width:5px;height:5px;background:#e53e3e;border-radius:50%;"></div></div>
+            </div>
+          </div>
+          <!-- Favorite Board -->
+          <div style="font-size:0.78rem;font-weight:700;color:#1A1E2A;margin-bottom:8px;">Favorite Board</div>
+          <div style="background:#f5f8ff;border-radius:10px;padding:8px 10px;margin-bottom:12px;">
+            <div style="display:flex;gap:6px;align-items:center;padding:4px 0;border-bottom:1px solid #eef;"><span style="font-size:0.6rem;">📌</span><span style="font-size:0.65rem;font-weight:700;color:#1A1E2A;">Food</span><span style="font-size:0.6rem;color:#9AA3B5;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">The best restaurant in Nowon-gu...</span></div>
+            <div style="display:flex;gap:6px;align-items:center;padding:4px 0;border-bottom:1px solid #eef;"><span style="font-size:0.6rem;">📌</span><span style="font-size:0.65rem;font-weight:700;color:#1A1E2A;">Life</span><span style="font-size:0.6rem;color:#9AA3B5;">Changes from August (law) 🌿</span></div>
+            <div style="display:flex;gap:6px;align-items:center;padding:4px 0;border-bottom:1px solid #eef;"><span style="font-size:0.6rem;">📌</span><span style="font-size:0.65rem;font-weight:700;color:#1A1E2A;">Travel</span><span style="font-size:0.6rem;color:#9AA3B5;">The exchange rate is crazy.</span></div>
+            <div style="display:flex;gap:6px;align-items:center;padding:4px 0;"><span style="font-size:0.6rem;">📌</span><span style="font-size:0.65rem;font-weight:700;color:#1A1E2A;">Events</span><span style="font-size:0.6rem;color:#9AA3B5;">Looking for a board game (2/5)</span></div>
+          </div>
+          <!-- Popular Posts -->
+          <div style="font-size:0.78rem;font-weight:700;color:#1A1E2A;margin-bottom:8px;">Real-time Popular Posts</div>
+          <div style="background:#EEF4FF;border-radius:10px;padding:10px 12px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+              <div style="display:flex;align-items:center;gap:6px;"><div style="width:18px;height:18px;border-radius:50%;background:#ddd;"></div><span style="font-size:0.62rem;font-weight:600;color:#1A1E2A;">Koiny</span><div style="width:5px;height:5px;background:#e53e3e;border-radius:50%;"></div></div>
+              <span style="font-size:0.58rem;color:#9AA3B5;">08/06 20:25</span>
+            </div>
+            <div style="font-size:0.68rem;font-weight:700;color:#1A1E2A;margin-bottom:3px;">Tips for living in Korea</div>
+            <div style="font-size:0.62rem;color:#5A6278;margin-bottom:6px;">If there's someone you want to become...</div>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span style="font-size:0.58rem;color:#9AA3B5;">Abroad Student</span>
+              <div style="display:flex;gap:8px;">
+                <span style="font-size:0.6rem;color:#e53e3e;">♥ 211</span>
+                <span style="font-size:0.6rem;color:#9AA3B5;">💬 32</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- bottom nav -->
+        <div style="position:absolute;bottom:0;left:0;right:0;height:32px;background:#fff;border-top:1px solid #eee;display:flex;align-items:center;justify-content:space-around;">
+          <div style="font-size:0.45rem;color:#bbb;">Koin</div>
+          <div style="font-size:0.45rem;color:#bbb;">Kuration</div>
+          <div style="font-size:0.45rem;color:#408AFA;font-weight:700;">Kommunity</div>
+          <div style="font-size:0.45rem;color:#bbb;">Kamera</div>
+          <div style="font-size:0.45rem;color:#bbb;">My</div>
+        </div>
+      </div>
+      <div class="feature-card-body">
+        <div class="feature-card-tag" data-i18n="kommunity.tag">💬 Kommunity</div>
+        <div class="feature-card-title" data-i18n="kommunity.title">Real advice from<br />real people</div>
+        <p class="feature-card-desc">
+          A community of long-term expats and travellers. Language doesn't matter — auto-translation bridges the gap.
+          <span class="feature-kr">한국 내부자들과 자유롭게 소통할 수 있는 다국어 커뮤니티</span>
+        </p>
+        <div class="feature-card-pills">
+          <span class="pill">Auto-translation</span>
+          <span class="pill">Live boards</span>
+          <span class="pill">Foreigner network</span>
+        </div>
+      </div>
+    </div>
 
-  <section>
-    <h2>Article 8 (Prohibited Activities)</h2>
-    <p>
-      Members must not engage in the following activities. Depending on the severity of the violation, the Company may take necessary measures such as
-      deleting/hiding Content, issuing warnings, suspending accounts, permanently banning accounts, or taking legal action.
-    </p>
+    <!-- AI CAMERA -->
+    <div class="feature-card reveal" style="transition-delay:0.2s">
+      <div class="feature-card-screen" style="height:320px; background:#fff; padding:0; overflow:hidden; display:block; position:relative;">
+        <div style="padding:14px 14px 0; font-family:Pretendard,sans-serif;">
+          <div style="margin-bottom:14px;">
+            <div style="font-size:0.85rem;font-weight:700;color:#1A1E2A;line-height:1.4;margin-bottom:2px;">Choose <span style="color:#408AFA;">a category,</span></div>
+            <div style="font-size:0.85rem;font-weight:700;color:#1A1E2A;">and start taking <span style="color:#408AFA;">a photo</span></div>
+          </div>
+          <!-- 2x2 category grid -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+            <!-- Food -->
+            <div style="border-radius:12px;height:96px;background:linear-gradient(135deg,#8b4513 0%,#d4691a 60%,#e8a020 100%);position:relative;overflow:hidden;">
+              <div style="position:absolute;inset:0;background:rgba(0,0,0,0.22)"></div>
+              <div style="position:absolute;bottom:10px;left:10px;">
+                <div style="font-size:0.8rem;font-weight:800;color:#fff;">Food</div>
+                <div style="font-size:0.55rem;color:rgba(255,255,255,0.85);">Menu translation</div>
+                <div style="font-size:0.55rem;color:rgba(255,255,255,0.85);">Safe to eat</div>
+              </div>
+            </div>
+            <!-- Stuff -->
+            <div style="border-radius:12px;height:96px;background:linear-gradient(160deg,#1a2a4a 0%,#2d4a7a 50%,#4a6a9a 100%);position:relative;overflow:hidden;">
+              <div style="position:absolute;inset:0;background:rgba(0,0,0,0.18)"></div>
+              <div style="position:absolute;bottom:10px;left:10px;">
+                <div style="font-size:0.8rem;font-weight:800;color:#fff;">Stuff</div>
+                <div style="font-size:0.55rem;color:rgba(255,255,255,0.85);">What is this?</div>
+                <div style="font-size:0.55rem;color:rgba(255,255,255,0.85);">How to use?</div>
+              </div>
+            </div>
+            <!-- Document -->
+            <div style="border-radius:12px;height:96px;background:linear-gradient(135deg,#e8e8e0 0%,#d0c8b8 100%);position:relative;overflow:hidden;">
+              <div style="position:absolute;inset:0;background:rgba(0,0,0,0.35)"></div>
+              <!-- fake doc lines -->
+              <div style="position:absolute;top:8px;left:8px;right:8px;">
+                <div style="height:3px;background:rgba(255,255,255,0.4);border-radius:2px;margin-bottom:3px;"></div>
+                <div style="height:2px;background:rgba(255,255,255,0.25);border-radius:2px;margin-bottom:2px;"></div>
+                <div style="height:2px;background:rgba(255,255,255,0.25);border-radius:2px;margin-bottom:2px;width:70%;"></div>
+                <div style="height:2px;background:rgba(255,255,255,0.2);border-radius:2px;margin-bottom:2px;"></div>
+              </div>
+              <div style="position:absolute;bottom:10px;left:10px;">
+                <div style="font-size:0.8rem;font-weight:800;color:#fff;">Document</div>
+                <div style="font-size:0.55rem;color:rgba(255,255,255,0.85);">Summary</div>
+                <div style="font-size:0.55rem;color:rgba(255,255,255,0.85);">What to write</div>
+              </div>
+            </div>
+            <!-- General -->
+            <div style="border-radius:12px;height:96px;background:linear-gradient(160deg,#1a1a2e 0%,#2d3a4a 40%,#4a5a6a 80%,#6a7a8a 100%);position:relative;overflow:hidden;">
+              <!-- mountain silhouette -->
+              <svg style="position:absolute;bottom:28px;left:0;right:0;width:100%;" height="40" viewBox="0 0 120 40" preserveAspectRatio="none">
+                <polygon points="0,40 30,10 60,30 90,5 120,40" fill="rgba(20,30,50,0.7)"/>
+              </svg>
+              <div style="position:absolute;bottom:10px;left:10px;">
+                <div style="font-size:0.8rem;font-weight:800;color:#fff;">General</div>
+                <div style="font-size:0.55rem;color:rgba(255,255,255,0.85);">Auto-detect</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- bottom nav -->
+        <div style="position:absolute;bottom:0;left:0;right:0;height:32px;background:#fff;border-top:1px solid #eee;display:flex;align-items:center;justify-content:space-around;">
+          <div style="font-size:0.45rem;color:#bbb;">Koin</div>
+          <div style="font-size:0.45rem;color:#bbb;">Kuration</div>
+          <div style="font-size:0.45rem;color:#bbb;">Kommunity</div>
+          <div style="font-size:0.45rem;color:#408AFA;font-weight:700;">Kamera</div>
+          <div style="font-size:0.45rem;color:#bbb;">My</div>
+        </div>
+      </div>
+      <div class="feature-card-body">
+        <div class="feature-card-tag" data-i18n="kamera.tag">📸 AI Kamera</div>
+        <div class="feature-card-title" data-i18n="kamera.title">Point, shoot,<br />problem solved</div>
+        <p class="feature-card-desc">
+          Not sure what something is? Just take a photo — your AI Korea friend explains everything instantly.
+          <span class="feature-kr">일단 한번 찍어보세요, AI가 전부 알려줄겁니다.</span>
+        </p>
+        <div class="feature-card-pills">
+          <span class="pill">Food & menus</span>
+          <span class="pill">Documents</span>
+          <span class="pill">Daily life</span>
+        </div>
+      </div>
+    </div>
 
-    <h3>(1) Illegal Activities / Rights Infringement</h3>
-    <ol>
-      <li>Posting, selling, distributing, or brokering information/items that violate applicable laws (illegal goods, illegal drugs/medicines, counterfeit products, illegal recordings, etc.)</li>
-      <li>Infringing intellectual property rights of others (copyright, trademark, patent, trade secrets, etc.), including unauthorized copying, reposting, or sharing illegal links</li>
-      <li>Infringing portrait/publicity rights (e.g., posting someone’s face or unauthorized recordings without permission)</li>
-    </ol>
+  </div>
+</div>
 
-    <h3>(2) Personal Information / Privacy Infringement</h3>
-    <ol>
-      <li>Posting or distributing personal information of oneself or others, including real names, addresses, phone numbers, emails, bank account numbers, resident registration numbers, passport numbers, student/staff IDs, location data, or images of ID documents containing faces</li>
-      <li>Unauthorized disclosure of private life information (dating, health, family matters, etc.) or private conversations/DMs/emails</li>
-      <li>Doxxing or inducing identification by combining identifying information (e.g., nickname + school/company + photo)</li>
-      <li>Surveys, link誘导, or external form collection intended to gather personal information (including phishing)</li>
-    </ol>
+<!-- WHY KOIN -->
+<div id="why" class="section-wrap alt">
+  <div class="section-center reveal">
+    <div class="section-badge" data-i18n="why.badge">Why KOIN · 왜 KOIN인가</div>
+    <h2 class="section-title display" data-i18n="why.title">Built for foreigners,<br />by people who get it.</h2>
+    <p class="section-desc" data-i18n="why.desc">Three reasons KOIN is different from any other travel app.</p>
+  </div>
+  <div class="why-grid">
+    <div class="why-card reveal">
+      <span class="why-icon">🌐</span>
+      <div class="why-title" data-i18n="why1.title">Multilingual First</div>
+      <span class="why-title-kr" data-i18n="why1.kr">다국어 자동 번역</span>
+      <p class="why-desc" data-i18n="why1.desc">Write in any language, everyone reads in theirs. No language barrier — in guides, community, or AI results.<br><span class="why-desc-kr">어떤 언어로든 작성하면 모두가 자신의 언어로 읽어요. 가이드, 커뮤니티, AI 결과 모두 언어 장벽 없이.</span></p>
+    </div>
+    <div class="why-card reveal" style="transition-delay:0.1s">
+      <span class="why-icon">⚡</span>
+      <div class="why-title" data-i18n="why2.title">Real-Time Solutions</div>
+      <span class="why-title-kr" data-i18n="why2.kr">실시간 문제 해결</span>
+      <p class="why-desc" data-i18n="why2.desc">No Googling, no waiting. Point your camera and get answers the instant you need them.<br><span class="why-desc-kr">구글링도, 기다림도 없이. 카메라를 들이대는 순간 AI가 바로 답을 드려요.</span></p>
+    </div>
+    <div class="why-card reveal" style="transition-delay:0.2s">
+      <span class="why-icon">✨</span>
+      <div class="why-title" data-i18n="why3.title">Personalised Just for You</div>
+      <span class="why-title-kr" data-i18n="why3.kr">개인 맞춤형 콘텐츠</span>
+      <p class="why-desc" data-i18n="why3.desc">AI analyses your interests and reactions to deliver the most relevant curation and content — your Korea guide that gets smarter every day.<br><span class="why-desc-kr">AI가 관심사와 반응을 분석해 최적의 큐레이션을 제공해요. 쓸수록 더 똑똑해지는 나만의 한국 가이드.</span></p>
+    </div>
+  </div>
+</div>
 
-    <h3>(3) Defamation / Insults / Harassment / Hate &amp; Discrimination</h3>
-    <ol>
-      <li>Insulting or defaming individuals/groups, spreading false information, or harming reputations</li>
-      <li>Hate, discrimination, or incitement to violence (including based on race, nationality, gender, disability, religion, etc.)</li>
-      <li>Stalking, threats, sustained harassment, or encouraging group bullying</li>
-      <li>Content that encourages or glamorizes suicide/self-harm (except for sharing information to seek help)</li>
-    </ol>
+<!-- JOURNEY -->
+<div class="journey-section">
+  <div class="section-center reveal" style="max-width:700px">
+    <div class="section-badge" data-i18n="journey.badge">The KOIN Journey</div>
+    <h2 class="section-title display" data-i18n="journey.title">From planning to living —<br />KOIN is always there.</h2>
+  </div>
+  <div class="journey-flow reveal">
+    <div class="journey-step">
+      <div class="journey-icon-wrap">🗺️</div>
+      <div class="journey-label" data-i18n="journey1.label">Plan with Kuration</div>
+      <p class="journey-desc" data-i18n="journey1.desc">Browse AI-curated guides before your trip. Spots, food, and itineraries — all in one place.</p>
+    </div>
+    <div class="journey-arrow">→</div>
+    <div class="journey-step">
+      <div class="journey-icon-wrap">💬</div>
+      <div class="journey-label" data-i18n="journey2.label">Connect via Kommunity</div>
+      <p class="journey-desc" data-i18n="journey2.desc">Get real answers from people who've actually been there — tips, reviews, lived experience.</p>
+    </div>
+    <div class="journey-arrow">→</div>
+    <div class="journey-step">
+      <div class="journey-icon-wrap">📸</div>
+      <div class="journey-label" data-i18n="journey3.label">Solve with Kamera</div>
+      <p class="journey-desc" data-i18n="journey3.desc">When problems come up, just point your camera. Menus, signs, contracts — solved instantly.</p>
+    </div>
+  </div>
+</div>
 
-    <h3>(4) Obscene / Sexual / Harmful Content</h3>
-    <ol>
-      <li>Pornography, sexual exploitation materials, sexual content involving minors, or explicit depictions of sexual acts</li>
-      <li>Sexual harassment/sexual objectification or unwanted sexual remarks/requests</li>
-      <li>Excessively provocative images/text that may cause discomfort (subject to the Operational Policy)</li>
-    </ol>
+<!-- FAQ -->
+<div id="faq" class="section-wrap alt">
+  <div class="faq-wrap reveal">
+    <div class="faq-side">
+      <div class="section-badge" data-i18n="faq.badge">FAQ</div>
+      <h2 class="faq-side-title display">Common<br />questions.</h2>
+      <p class="faq-side-desc">Still have questions? We'd love to hear from you.</p>
+      <a href="mailto:team@koreainsider.kr" class="faq-side-email" data-i18n="faq.email">team@koreainsider.kr →</a>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item open">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')" data-i18n="faq.q1">What can the AI Camera actually do?</div>
+        <div class="faq-a" data-i18n="faq.a1">Four categories: Food (menu translation, vegan/halal/allergy info), Documents (labour contracts, visa forms), Life (Ttareungi bikes, T-money cards, signs), and General (auto-detect anything). Always verify safety-critical info independently.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')" data-i18n="faq.q2">How does multilingual translation work in the community?</div>
+        <div class="faq-a" data-i18n="faq.a2">Posts are automatically translated — write in your language, others read in theirs. No manual translation needed.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')" data-i18n="faq.q3">How is Kuration content personalised?</div>
+        <div class="faq-a" data-i18n="faq.a3">Our AI learns your preferences — food interests, travel style, destination — and surfaces the most relevant guides. The more you use KOIN, the better it gets.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')" data-i18n="faq.q4">How is my personal data handled?</div>
+        <div class="faq-a" data-i18n="faq.a4">Privacy-first by design. We collect only what's necessary, never sell your data, and comply strictly with Korean privacy regulations.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')" data-i18n="faq.q5">Which login methods are supported?</div>
+        <div class="faq-a" data-i18n="faq.a5">Kakao, Google, or Email — whichever is most convenient for you.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')" data-i18n="faq.q6">How can I contact or partner with KOIN?</div>
+        <div class="faq-a" data-i18n="faq.a6">For press, partnerships, or general enquiries, reach us at <a href="mailto:team@koreainsider.kr">team@koreainsider.kr</a>.</div>
+      </div>
+    </div>
+  </div>
+</div>
 
-    <h3>(5) Fraud / Deception / Spam / Advertising</h3>
-    <ol>
-      <li>Fraud, deceptive conduct exploiting rewards/events, inducing fake reviews or manipulated ratings</li>
-      <li>Repetitive spam, meaningless posts, or mass posting/comments using automation tools</li>
-      <li>Excessive promotion/ads unrelated to the Service, or recruitment for MLM/pyramid/investment scams</li>
-      <li>Indiscriminate redirection to external links (including phishing/malware) or hiding intent via shortened URLs</li>
-    </ol>
+<!-- DOWNLOAD CTA -->
+<div id="download" class="cta-section">
+  <div class="cta-inner reveal">
+    <div class="section-badge" style="justify-content:center;margin-bottom:14px" data-i18n="cta.badge">Download KOIN</div>
+    <h2 class="cta-title display" data-i18n="cta.title">Your Korea journey<br />starts here.</h2>
+    <p class="cta-desc" data-i18n="cta.desc">Coming soon on iOS & Android. The only app you need in Korea.</p>
+    <div class="cta-actions">
+      <a href="#" class="app-btn">
+        <span class="app-btn-icon">
+          <svg width="24" height="24" viewBox="0 0 814 1000" fill="currentColor"><path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76.5 0-103.7 40.8-165.9 40.8s-105-37.5-155.5-127.4C46 790.7 0 663 0 541.8c0-207.5 135.4-317.3 268.9-317.3 70.1 0 128.4 46.4 172.5 46.4 42.8 0 109.1-49 188.5-49 30.5 0 110.7 5.2 167.1 73.4zm-217.5-156.6c31.1-36.9 53.1-88.1 53.1-139.3 0-7.1-.6-14.3-1.9-20.1-50.6 1.9-110.8 33.7-147.1 75.8-28.5 32.4-55.1 83.6-55.1 135.5 0 7.8 1.3 15.6 1.9 18.1 3.2.6 8.4 1.3 13.6 1.3 45.4 0 102.5-30.4 135.5-71.3z"/></svg>
+        </span>
+        <div><span class="app-btn-sub" data-i18n="cta.soon">Coming Soon</span><span class="app-btn-label">App Store</span></div>
+      </a>
+      <a href="#" class="app-btn">
+        <span class="app-btn-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.64.24.99.2L15.9 12 12.06 8.16 3.18 23.76zM20.49 10.64l-2.94-1.7-3.96 3.96 3.96 3.96 2.97-1.72c.85-.49.85-1.99-.03-2.5zM3.03.28C2.73.46 2.55.8 2.55 1.22v21.56c0 .42.18.76.48.94l.09.05 12.09-12.09v-.28L3.12.23l-.09.05z"/></svg>
+        </span>
+        <div><span class="app-btn-sub" data-i18n="cta.soon">Coming Soon</span><span class="app-btn-label">Google Play</span></div>
+      </a>
+      <a href="mailto:team@koreainsider.kr" class="btn-primary" data-i18n="cta.contact">Contact Us</a>
+    </div>
+    <p class="cta-contact">Press & partnerships: <a href="mailto:team@koreainsider.kr">team@koreainsider.kr</a></p>
+  </div>
+</div>
 
-    <h3>(6) Service Stability / Security Violations</h3>
-    <ol>
-      <li>Hacking attempts, exploiting vulnerabilities, generating abnormal traffic, or overloading the Service via crawling/scraping</li>
-      <li>Reverse engineering, attempting to analyze source code/security systems, or bypassing authentication</li>
-      <li>Unauthorized access (or attempts) to another person’s account</li>
-    </ol>
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">
+        <img src="assets/logo.png" alt="KOIN" class="footer-brand-img" />
+        <span class="footer-brand-name">Koin</span>
+      </div>
+      <p class="footer-brand-desc" data-i18n="footer.desc">Korea Insider — Your essential guide to living &amp; travelling in Korea</p>
+    </div>
+    <div>
+      <div class="footer-col-title" data-i18n="footer.features">Features</div>
+      <ul class="footer-links">
+        <li><a href="#features">🗺️ Kuration</a></li>
+        <li><a href="#features">💬 Kommunity</a></li>
+        <li><a href="#features">📸 AI Kamera</a></li>
+        <li><a href="#why" data-i18n="nav.why">Why KOIN</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Contact & Legal</div>
+      <p class="footer-contact-line"><span data-i18n="footer.general">General &amp; Partnership</span><br /><a href="mailto:team@koreainsider.kr">team@koreainsider.kr</a></p>
+      <br />
+      <p class="footer-contact-line">
+        <a href="/privacy/">Privacy Policy</a> &nbsp;·&nbsp;
+        <a href="/terms/">Terms of Service</a>
+      </p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy" data-i18n="footer.copy">© KOIN / TEAM_KOIN. All rights reserved.</span>
+    <div class="footer-legal">
+      <a href="/privacy/">Privacy Policy</a>
+      <a href="/terms/">Terms of Service</a>
+    </div>
+  </div>
+</footer>
 
-    <h3>(7) Other Disruptive / Inappropriate Activities</h3>
-    <ol>
-      <li>Impersonating the Company, administrators, or others</li>
-      <li>Abusing the reporting feature (false reports, encouraging mass reporting)</li>
-      <li>Any act that violates laws/public order and morals, or that the Company reasonably deems inappropriate</li>
-    </ol>
-  </section>
 
-  <section>
-    <h2>Article 9 (Posting, Management, and Reporting of Content)</h2>
-    <ol>
-      <li>Members are responsible for the Content they post.</li>
-      <li>
-        The Company may delete/hide/restrict access to Content without prior notice if it reasonably determines that:
-        <ul>
-          <li>The Content violates applicable laws, these Terms, or the Operational Policy</li>
-          <li>The Content infringes the rights of others (copyright, portrait rights, personal information, etc.)</li>
-          <li>A report is received and urgent action is required</li>
-        </ul>
-      </li>
-      <li>Members may report inappropriate Content through the in-service reporting feature.</li>
-      <li>During the review process, the Company may review relevant materials within the necessary scope.</li>
-    </ol>
-  </section>
+<!-- LANGUAGE SELECTOR -->
+<div id="lang-selector">
+  <div id="lang-inner">
+    <div id="lang-brand">
+      <span id="lang-wordmark">KOIN</span>
+      <span id="lang-sub">Korea Insider</span>
+    </div>
+    <p id="lang-prompt">Choose your language</p>
+    <div id="lang-grid">
+      <button class="lang-btn" onclick="selectLang('ko')">
+        <span class="lang-flag">🇰🇷</span>
+        <span class="lang-name">한국어</span>
+      </button>
+      <button class="lang-btn" onclick="selectLang('en')">
+        <span class="lang-flag">🇺🇸</span>
+        <span class="lang-name">English</span>
+      </button>
+      <button class="lang-btn" onclick="selectLang('zh')">
+        <span class="lang-flag">🇨🇳</span>
+        <span class="lang-name">中文</span>
+      </button>
+      <button class="lang-btn" onclick="selectLang('ja')">
+        <span class="lang-flag">🇯🇵</span>
+        <span class="lang-name">日本語</span>
+      </button>
+      <button class="lang-btn" onclick="selectLang('vi')">
+        <span class="lang-flag">🇻🇳</span>
+        <span class="lang-name">Tiếng Việt</span>
+      </button>
+    </div>
+  </div>
+</div>
 
-  <section>
-    <h2>Article 10 (Restrictions and Sanctions)</h2>
-    <ol>
-      <li>
-        If a Member violates these Terms or the Operational Policy, the Company may take the following actions depending on severity:
-        <ul>
-          <li>Delete/hide Content or request modification</li>
-          <li>Warning</li>
-          <li>Temporary suspension</li>
-          <li>Permanent suspension (account restriction)</li>
-        </ul>
-      </li>
-      <li>In cases of repeated or serious violations (illegal content, personal information leaks, sexual exploitation, hacking, etc.), the Company may impose strong measures such as immediate permanent suspension.</li>
-    </ol>
-  </section>
+<style>
+#lang-selector {
+  position: fixed; inset: 0; z-index: 99999;
+  background: #fff;
+  display: flex; align-items: center; justify-content: center;
+  transition: opacity 0.5s ease;
+}
+#lang-selector.hide { opacity: 0; pointer-events: none; }
+#lang-inner {
+  text-align: center;
+  padding: 40px 24px;
+  display: flex; flex-direction: column; align-items: center; gap: 32px;
+}
+#lang-brand { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+#lang-wordmark {
+  font-family: 'Gapyeong Hanseokbong', 'Noto Serif KR', serif;
+  font-size: clamp(2.8rem, 10vw, 5rem);
+  font-weight: 900;
+  color: var(--primary);
+  letter-spacing: 0.08em;
+  -webkit-text-stroke: 0.5px var(--primary);
+}
+#lang-sub {
+  font-size: 0.78rem; font-weight: 400;
+  color: var(--muted); letter-spacing: 0.3em; text-transform: uppercase;
+}
+#lang-prompt {
+  font-size: 0.9rem; color: var(--sub);
+  font-weight: 500; letter-spacing: 0.05em;
+  margin: 0;
+}
+#lang-grid {
+  display: flex; flex-wrap: wrap;
+  gap: 12px; justify-content: center;
+  max-width: 480px;
+}
+.lang-btn {
+  display: flex; align-items: center; gap: 10px;
+  padding: 14px 22px;
+  background: var(--bg-2);
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: border-color 0.2s, background 0.2s, transform 0.15s, box-shadow 0.2s;
+  min-width: 140px;
+}
+.lang-btn:hover {
+  border-color: var(--primary);
+  background: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(59,130,246,0.15);
+}
+.lang-btn:active { transform: translateY(0); }
+.lang-flag { font-size: 1.5rem; }
+.lang-name {
+  font-size: 1rem; font-weight: 600; color: var(--text);
+}
+@media (max-width: 400px) {
+  #lang-grid { gap: 10px; }
+  .lang-btn { min-width: 120px; padding: 12px 16px; }
+  .lang-name { font-size: 0.9rem; }
+}
+</style>
 
-  <section>
-    <h2>Article 11 (Withdrawal and Data Handling: Anonymization Retention Policy)</h2>
-    <ol>
-      <li>Members may withdraw at any time through in-service features.</li>
-      <li>Upon withdrawal, the Company will delete or anonymize the Member’s personal information in accordance with the Privacy Policy.</li>
-      <li>
-        However, to preserve community continuity and records, activity records such as posts, comments, replies, likes, saves (scraps), and comment likes may not be deleted.
-        In such cases, the author display will be anonymized and shown as <strong>“Deleted User”</strong> or similar.
-      </li>
-      <li>Information required to be retained under applicable laws will be stored for the period prescribed by such laws.</li>
-    </ol>
-  </section>
+<!-- INTRO ANIMATION OVERLAY -->
+<div id="intro-overlay">
+  <div id="intro-bg"></div>
+  <div id="intro-text">
+    <span class="intro-word" id="intro-korea">
+      <span class="keep">K</span><span class="keep">O</span><span class="fade-out">R</span><span class="fade-out">E</span><span class="fade-out">A</span>
+    </span>
+    <span class="intro-space">&nbsp;</span>
+    <span class="intro-word" id="intro-insider">
+      <span class="keep">I</span><span class="keep">N</span><span class="fade-out">S</span><span class="fade-out">I</span><span class="fade-out">D</span><span class="fade-out">E</span><span class="fade-out">R</span>
+    </span>
+  </div>
+  <div id="intro-tagline">Korea Insider</div>
+</div>
+<!-- 날아가는 KOIN 클론 (JS가 동적으로 사용) -->
+<div id="koin-flyer" style="display:none;position:fixed;z-index:10000;pointer-events:none;
+  font-family:'Gapyeong Hanseokbong','Noto Serif KR',serif;
+  font-weight:900;color:var(--primary);white-space:nowrap;
+  -webkit-text-stroke:0.4px var(--primary);
+  letter-spacing:0.04em;
+  transform-origin:left center;">KOIN</div>
 
-  <section>
-    <h2>Article 12 (Rights to Content and License Grant)</h2>
-    <ol>
-      <li>In principle, copyrights to Content posted by Members remain with the Member.</li>
-      <li>
-        Members grant the Company a free, non-exclusive, non-transferable, worldwide license to use the Content to the extent necessary to provide, operate, and improve the Service and to display Content within the Service, including:
-        <ul>
-          <li>Storing, reproducing, transmitting, displaying, and distributing</li>
-          <li>Technical processing (format conversion, capacity optimization, thumbnail generation, etc.)</li>
-        </ul>
-      </li>
-      <li>This license may remain valid within the scope of Article 11 even after the Member deletes the Content or withdraws from the Service.</li>
-      <li>The Company will not use “individual Content for external advertising/marketing” beyond in-service display without the Member’s explicit consent (except where Content posted with public visibility is shown within Service screens).</li>
-    </ol>
-  </section>
+<style>
+#intro-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 9999;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 16px;
+  pointer-events: none;
+}
+#intro-bg {
+  position: absolute; inset: 0;
+  background: #fff;
+  z-index: 0;
+  transition: opacity 0.6s ease;
+}
+#intro-bg.fade { opacity: 0; }
 
-  <section>
-    <h2>Article 13 (AI Camera Notice and Disclaimer)</h2>
-    <ol>
-      <li>AI Camera results (translations, explanations, recommendations, etc.) are for reference only, and the Company does not guarantee accuracy, completeness, or timeliness.</li>
-      <li>For matters requiring important judgment (allergies, medicines, medical, legal, safety, etc.), Members must verify separately, and the Company limits its liability to the extent permitted by law.</li>
-      <li>Members must ensure that images/text uploaded to the AI Camera do not include personal information or elements that infringe third-party rights.</li>
-    </ol>
-  </section>
+#intro-text {
+  font-family: 'Gapyeong Hanseokbong', 'Noto Serif KR', serif;
+  font-size: clamp(1.1rem, 6.5vw, 7rem);
+  font-weight: 900;
+  color: var(--primary);
+  letter-spacing: clamp(0.06em, 1.5vw, 0.14em);
+  display: flex; align-items: center;
+  white-space: nowrap;
+  max-width: 92vw;
+  padding: 0 8px;
+  box-sizing: border-box;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1),
+              transform 0.9s cubic-bezier(0.16,1,0.3,1);
+  position: relative; z-index: 1;
+}
+#intro-text.visible  { opacity: 1; transform: translateY(0); }
 
-  <section>
-    <h2>Article 14 (Restriction and Suspension of the Service)</h2>
-    <p>The Company may temporarily suspend the Service in any of the following cases:</p>
-    <ul>
-      <li>Facility inspection/replacement/failure, communication outages, or other technical reasons</li>
-      <li>Force majeure events such as natural disasters or national emergencies</li>
-      <li>Any other case where the Company reasonably determines suspension is necessary</li>
-    </ul>
-    <p>Where possible, the Company will provide prior notice.</p>
-  </section>
+#intro-tagline {
+  font-family: 'Pretendard', sans-serif;
+  font-size: clamp(0.65rem, 3vw, 1rem);
+  font-weight: 400; color: var(--muted);
+  letter-spacing: 0.3em; text-transform: uppercase;
+  opacity: 0; transition: opacity 0.8s ease;
+  position: relative; z-index: 1;
+}
+#intro-tagline.visible { opacity: 1; }
 
-  <section>
-    <h2>Article 15 (Damages and Limitation of Liability)</h2>
-    <ol>
-      <li>If damages are caused to a Member due to the Company’s intent or gross negligence, the Company will be liable in accordance with applicable laws.</li>
-      <li>The Company does not intervene in disputes between Members or between a Member and a third party and is not liable for resulting damages (except where the Company is at fault).</li>
-      <li>For services provided free of charge, the Company may limit liability to the extent permitted by applicable laws.</li>
-    </ol>
-  </section>
+.intro-word { display: inline-flex; }
+.intro-space {
+  display: inline-block; width: 0.6em; overflow: hidden;
+  transition: width 1.1s cubic-bezier(0.76,0,0.24,1);
+}
+.fade-out {
+  display: inline-block; opacity: 1; max-width: 1em;
+  transition: opacity 0.8s cubic-bezier(0.76,0,0.24,1),
+              max-width 1.0s 0.3s cubic-bezier(0.76,0,0.24,1);
+}
+#intro-text.step-collapse .fade-out  { opacity: 0; max-width: 0; }
+#intro-text.step-collapse .intro-space {
+  width: 0;
+  transition: width 1.0s 0.6s cubic-bezier(0.76,0,0.24,1);
+}
+#intro-tagline.step-collapse { opacity: 0; transition: opacity 0.5s ease; }
 
-  <section>
-    <h2>Article 16 (Governing Law and Jurisdiction)</h2>
-    <ol>
-      <li>These Terms are governed by the laws of the Republic of Korea.</li>
-      <li>In the event of disputes related to the Service, the court having jurisdiction over the location of the Company’s head office shall have exclusive jurisdiction as the court of first instance.</li>
-    </ol>
-  </section>
+/* 날아가는 클론 */
+#koin-flyer {
+  transition: transform 0.7s cubic-bezier(0.76,0,0.24,1),
+              font-size 0.7s cubic-bezier(0.76,0,0.24,1),
+              opacity 0.15s 0.65s ease;
+}
+#koin-flyer.fly { }
+#koin-flyer.landed { opacity: 0; }
+</style>
 
-  <section>
-    <h2>Addendum</h2>
-    <p>These Terms take effect on <strong>2026-02-23</strong>.</p>
-  </section>
 
-  <section>
-    <h2>Company Information</h2>
-    <ul>
-      <li><strong>Service Name / Operator:</strong> KOIN / TEAM_KOIN</li>
-      <li><strong>Contact Email:</strong> <a href="mailto:team@koreainsider.kr">team@koreainsider.kr</a></li>
-    </ul>
-  </section>
+<script>
+// ── 5개국어 번역 데이터 ──────────────────────────
+const I18N = {
+  ko: {
+    'nav.features':'기능', 'nav.why':'Why KOIN', 'nav.faq':'FAQ',
+    'nav.contact':'문의', 'nav.cta':'앱 다운로드',
+    'hero.tag':'Korea Insider',
+    'hero.title':'한국 내부자가<br />알려주는<br /><span class="highlight">&#39;진짜 대한민국&#39;</span>',
+    'hero.subtitle':'한국 방문 또는 거주 외국인을 위한 한국 생활 올인원 플랫폼',
+    'hero.desc':'실시간 AI 카메라, 자동 번역 커뮤니티, 개인별 맞춤 큐레이션까지 —&nbsp;한국 생활의 모든 것을 하나의 플랫폼에.',
+    'hero.btn1':'앱 다운로드 ↓', 'hero.btn2':'기능 살펴보기 →',
+    'chip1':'<span class="chip-dot"></span>🗺️ AI 기반 개인 맞춤형 큐레이션',
+    'chip2':'<span class="chip-dot"></span>💬 로컬 현지인의 생생한 리뷰',
+    'chip3':'<span class="chip-dot"></span>📸 실시간 답변 AI 카메라',
+    'chip4':'<span class="chip-dot"></span>🌐 언어 장벽 없는 자동 번역',
+    'features.badge':'핵심 기능',
+    'features.title':'한국의 모든 것,<br />하나의 앱으로.',
+    'features.desc':'한국 여행 계획부터 현지 생활까지 — 당신의 모든 순간을 함께하는 세 가지 기능.',
+    'kuration.tag':'🗺️ Kuration',
+    'kuration.title':'관심사 기반<br />개인 맞춤 큐레이션',
+    'kommunity.tag':'💬 Kommunity',
+    'kommunity.title':'직접 경험한 사람들의<br />진짜 이야기',
+    'kamera.tag':'📸 AI Kamera',
+    'kamera.title':'24시간 함께하는,<br />나만의 AI 한국 친구',
+    'why.badge':'왜 KOIN 앱이어야 하는가',
+    'why.title':'한국에서 필요한 모든 것,<br />KOIN 하나면 충분합니다.',
+    'why.desc':'여행자부터 장기 거주자까지, KOIN이 필요한 세 가지 이유.',
+    'why1.title':'파편화된 정보<br />→ 핵심만 정리', 'why1.kr':'올인원 한국 정보 플랫폼',
+    'why1.desc':'Instagram, Google, Facebook, Reddit ··· 많은 정보들 속, 필요한 핵심 내용만 정리!<br><span class="why-desc-kr">No more scattered tabs. Everything about Korea, in one place.</span>',
+    'why2.title':'나에게 필요한 커뮤니티', 'why2.kr':'관심사별 세부 커뮤니티',
+    'why2.desc':'K-Pop, 중고거래, 맛집, 행사, 행정 정보까지 — 관심사별 게시판 선택🔥<br><span class="why-desc-kr">From K-Pop to second-hand deals — find your community.</span>',
+    'why3.title':'방문/단기/체류<br />누구든 환영', 'why3.kr':'관광객부터 장기 거주자까지',
+    'why3.desc':'여행자도, 교환학생/유학생, 외국인 근로자도 — 한국에 있는 외국인이라면 누구든 OK<br><span class="why-desc-kr">Tourists, exchange students, long-term expats — KOIN is for everyone.</span>',
+    'journey.badge':'KOIN과 함께하는 여정',
+    'journey.title':'계획부터 생활까지 —<br />KOIN은 항상 함께.',
+    'journey1.label':'Kuration으로 계획하기',
+    'journey1.desc':'여행 전 AI 큐레이션 가이드를 둘러보세요. 명소, 맛집, 일정 — 모두 한 곳에.',
+    'journey2.label':'Kommunity로 연결하기',
+    'journey2.desc':'직접 경험한 사람들의 실제 답변. 팁, 후기, 생생한 경험담.',
+    'journey3.label':'Kamera로 해결하기',
+    'journey3.desc':'문제가 생기면 카메라를 켜세요. 메뉴판, 간판, 계약서 — 즉시 해결.',
+    'faq.badge':'자주 묻는 질문', 'faq.email':'team@koreainsider.kr →',
+    'faq.q1':'AI 카메라가 실제로 무엇을 할 수 있나요?',
+    'faq.a1':'네 가지 카테고리: 음식(메뉴 번역, 비건/할랄/알레르기 정보), 서류(노동계약서, 비자 양식), 생활(따릉이, 티머니 카드, 간판), 일반(무엇이든 자동 인식). 안전 관련 정보는 별도로 확인하세요.',
+    'faq.q2':'커뮤니티 다국어 번역은 어떻게 작동하나요?',
+    'faq.a2':'게시물이 자동으로 번역됩니다. 본인 언어로 작성하면 다른 사람은 자신의 언어로 읽어요. 수동 번역 필요 없어요.',
+    'faq.q3':'Kuration 콘텐츠는 어떻게 개인화되나요?',
+    'faq.a3':'AI가 관심사, 여행 스타일, 목적지를 학습해 가장 관련성 높은 가이드를 추천해요. KOIN을 많이 쓸수록 더 정확해져요.',
+    'faq.q4':'개인정보는 어떻게 처리되나요?',
+    'faq.a4':'프라이버시 최우선 설계. 필요한 최소한의 정보만 수집하고, 데이터를 절대 판매하지 않으며, 한국 개인정보보호법을 엄격히 준수해요.',
+    'faq.q5':'어떤 로그인 방식을 지원하나요?',
+    'faq.a5':'카카오, 구글, 이메일 — 가장 편한 방법으로 로그인하세요.',
+    'faq.q6':'KOIN에 연락하거나 파트너십을 맺으려면?',
+    'faq.a6':'보도, 제휴, 일반 문의는 <a href="mailto:team@koreainsider.kr">team@koreainsider.kr</a>로 연락해 주세요.',
+    'cta.badge':'KOIN 다운로드',
+    'cta.title':'당신의 한국 여정이<br />여기서 시작됩니다.',
+    'cta.desc':'iOS & Android 출시 예정. 한국에서 필요한 단 하나의 앱.',
+    'cta.soon':'출시 예정', 'cta.contact':'문의하기',
+    'cta.press':'보도 &amp; 제휴:',
+    'footer.desc':'Korea Insider — 한국 생활 &amp; 여행을 위한 필수 가이드',
+    'footer.features':'기능', 'footer.contact_legal':'연락처 &amp; 법적 고지',
+    'footer.general':'일반 &amp; 파트너십',
+    'footer.copy':'© KOIN / TEAM_KOIN. All rights reserved.',
+  },
+  en: {
+    'nav.features':'Features', 'nav.why':'Why KOIN', 'nav.faq':'FAQ',
+    'nav.contact':'Contact', 'nav.cta':'Get the App',
+    'hero.tag':'Korea Insider',
+    'hero.title':'Korea Insider<br />reveals the<br /><span class="highlight">Real Korea</span>',
+    'hero.subtitle':'The all-in-one Korea life platform for foreigners visiting or living in Korea',
+    'hero.desc':'Real-time AI camera, auto-translation community, personalised curation — everything you need in Korea, on one platform.',
+    'hero.btn1':'Download App ↓', 'hero.btn2':'Explore Features →',
+    'chip1':'<span class="chip-dot"></span>🗺️ AI-Powered Personal Curation',
+    'chip2':'<span class="chip-dot"></span>💬 Real Reviews from Locals',
+    'chip3':'<span class="chip-dot"></span>📸 Real-Time AI Camera',
+    'chip4':'<span class="chip-dot"></span>🌐 Auto-Translation, No Barriers',
+    'features.badge':'Core Features',
+    'features.title':'One app for<br />everything Korea.',
+    'features.desc':'From planning your Korea trip to living here — three features for every moment of your journey.',
+    'kuration.tag':'🗺️ Kuration',
+    'kuration.title':'Interest-based<br />personalised curation',
+    'kommunity.tag':'💬 Kommunity',
+    'kommunity.title':'Real advice from<br />real people',
+    'kamera.tag':'📸 AI Kamera',
+    'kamera.title':'Your 24/7<br />AI Korea companion',
+    'why.badge':'Why KOIN?',
+    'why.title':'Everything you need in Korea,<br />KOIN has it all.',
+    'why.desc':'From travellers to long-term residents — three reasons you need KOIN.',
+    'why1.title':'Scattered info<br />→ just the essentials', 'why1.kr':'All-in-one Korea info platform',
+    'why1.desc':'Instagram, Google, Facebook, Reddit ··· too much noise. KOIN cuts through and gives you only what matters.',
+    'why2.title':'Your community, your interests', 'why2.kr':'Interest-based communities',
+    'why2.desc':'K-Pop, secondhand deals, food, events, admin info — pick your board and connect with the right people 🔥',
+    'why3.title':'Tourist, student, worker<br />— all welcome', 'why3.kr':'From tourists to long-term expats',
+    'why3.desc':'Travellers, exchange students, foreign workers — if you are a foreigner in Korea, KOIN is for you.',
+    'journey.badge':'The KOIN Journey',
+    'journey.title':'From planning to living —<br />KOIN is always there.',
+    'journey1.label':'Plan with Kuration',
+    'journey1.desc':'Browse AI-curated guides before your trip. Spots, food, and itineraries — all in one place.',
+    'journey2.label':'Connect via Kommunity',
+    'journey2.desc':'Get real answers from people who\'ve actually been there — tips, reviews, lived experience.',
+    'journey3.label':'Solve with Kamera',
+    'journey3.desc':'When problems come up, just point your camera. Menus, signs, contracts — solved instantly.',
+    'faq.badge':'FAQ', 'faq.email':'team@koreainsider.kr →',
+    'faq.q1':'What can the AI Camera actually do?',
+    'faq.a1':'Four categories: Food (menu translation, vegan/halal/allergy info), Documents (labour contracts, visa forms), Life (Ttareungi bikes, T-money cards, signs), and General (auto-detect anything). Always verify safety-critical info independently.',
+    'faq.q2':'How does multilingual translation work in the community?',
+    'faq.a2':'Posts are automatically translated — write in your language, others read in theirs. No manual translation needed.',
+    'faq.q3':'How is Kuration content personalised?',
+    'faq.a3':'Our AI learns your preferences — food interests, travel style, destination — and surfaces the most relevant guides. The more you use KOIN, the better it gets.',
+    'faq.q4':'How is my personal data handled?',
+    'faq.a4':'Privacy-first by design. We collect only what\'s necessary, never sell your data, and comply strictly with Korean privacy regulations.',
+    'faq.q5':'Which login methods are supported?',
+    'faq.a5':'Kakao, Google, or Email — whichever is most convenient for you.',
+    'faq.q6':'How can I contact or partner with KOIN?',
+    'faq.a6':'For press, partnerships, or general enquiries, reach us at <a href="mailto:team@koreainsider.kr">team@koreainsider.kr</a>.',
+    'cta.badge':'Download KOIN',
+    'cta.title':'Your Korea journey<br />starts here.',
+    'cta.desc':'Coming soon on iOS &amp; Android. The only app you need in Korea.',
+    'cta.soon':'Coming Soon', 'cta.contact':'Contact Us',
+    'cta.press':'Press &amp; partnerships:',
+    'footer.desc':'Korea Insider — Your essential guide to living &amp; travelling in Korea',
+    'footer.features':'Features', 'footer.contact_legal':'Contact &amp; Legal',
+    'footer.general':'General &amp; Partnership',
+    'footer.copy':'© KOIN / TEAM_KOIN. All rights reserved.',
+  },
+  zh: {
+    'nav.features':'功能', 'nav.why':'为何 KOIN', 'nav.faq':'常见问题',
+    'nav.contact':'联系我们', 'nav.cta':'下载应用',
+    'hero.tag':'Korea Insider',
+    'hero.title':'韩国内部人士<br />为你揭秘<br /><span class="highlight">「真实韩国」</span>',
+    'hero.subtitle':'面向访韩或在韩居住外国人的一站式韩国生活平台',
+    'hero.desc':'实时 AI 相机、自动翻译社区、个性化精选内容 — 韩国生活所需的一切，尽在一个平台。',
+    'hero.btn1':'立即下载 ↓', 'hero.btn2':'探索功能 →',
+    'chip1':'<span class="chip-dot"></span>🗺️ AI 驱动个性化推荐',
+    'chip2':'<span class="chip-dot"></span>💬 本地人的真实评价',
+    'chip3':'<span class="chip-dot"></span>📸 实时解答 AI 相机',
+    'chip4':'<span class="chip-dot"></span>🌐 自动翻译，无语言壁垒',
+    'features.badge':'核心功能',
+    'features.title':'关于韩国的一切，<br />尽在一个应用。',
+    'features.desc':'从韩国旅行规划到日常生活 — 三大功能，陪伴您旅程中的每一个时刻。',
+    'kuration.tag':'🗺️ Kuration',
+    'kuration.title':'基于兴趣<br />个性化精选推荐',
+    'kommunity.tag':'💬 Kommunity',
+    'kommunity.title':'来自真实经历者的<br />真实建议',
+    'kamera.tag':'📸 AI Kamera',
+    'kamera.title':'24小时陪伴<br />您的 AI 韩国好友',
+    'why.badge':'为什么选择 KOIN？',
+    'why.title':'韩国所需的一切，<br />KOIN 一个就够。',
+    'why.desc':'从旅行者到长期居民 — 三个你需要 KOIN 的理由。',
+    'why1.title':'信息碎片化<br />→ 只留精华', 'why1.kr':'一站式韩国信息平台',
+    'why1.desc':'Instagram、Google、Facebook、Reddit ··· 信息太多太乱。KOIN 为你过滤噪音，只留核心内容。',
+    'why2.title':'找到属于你的社区', 'why2.kr':'按兴趣划分的细分社区',
+    'why2.desc':'K-Pop、二手交易、美食、活动、行政信息 — 选择你感兴趣的板块，连接志同道合的人 🔥',
+    'why3.title':'游客、学生、工作者<br />— 都欢迎', 'why3.kr':'从游客到长期居民',
+    'why3.desc':'旅行者、交换生/留学生、外籍工作者 — 只要是在韩外国人，KOIN 就是为你而生。',
+    'journey.badge':'KOIN 旅程',
+    'journey.title':'从规划到生活 —<br />KOIN 始终陪伴。',
+    'journey1.label':'用 Kuration 规划',
+    'journey1.desc':'出发前浏览 AI 精选指南。景点、美食、行程 — 一站搞定。',
+    'journey2.label':'通过 Kommunity 连接',
+    'journey2.desc':'获取亲身经历者的真实解答 — 小贴士、评价、生活体验。',
+    'journey3.label':'用 Kamera 解决问题',
+    'journey3.desc':'遇到问题时，只需拿起相机。菜单、标牌、合同 — 即时解决。',
+    'faq.badge':'常见问题', 'faq.email':'team@koreainsider.kr →',
+    'faq.q1':'AI 相机实际上能做什么？',
+    'faq.a1':'四大类别：美食（菜单翻译、素食/清真/过敏信息）、文件（劳动合同、签证表格）、生活（共享单车、T-money 卡、标牌）、通用（自动识别任何内容）。安全相关信息请务必独立核实。',
+    'faq.q2':'社区多语言翻译如何运作？',
+    'faq.a2':'帖子会自动翻译 — 用您的语言发帖，其他人用自己的语言阅读。无需手动翻译。',
+    'faq.q3':'Kuration 内容如何个性化？',
+    'faq.a3':'AI 学习您的偏好 — 饮食兴趣、旅行风格、目的地 — 并推送最相关的指南。使用 KOIN 越多，推荐越精准。',
+    'faq.q4':'我的个人数据如何处理？',
+    'faq.a4':'隐私优先设计。我们只收集必要信息，绝不出售您的数据，并严格遵守韩国隐私法规。',
+    'faq.q5':'支持哪些登录方式？',
+    'faq.a5':'Kakao、Google 或邮箱 — 选择最方便的方式登录。',
+    'faq.q6':'如何联系 KOIN 或寻求合作？',
+    'faq.a6':'媒体、合作或一般咨询，请联系 <a href="mailto:team@koreainsider.kr">team@koreainsider.kr</a>。',
+    'cta.badge':'下载 KOIN',
+    'cta.title':'您的韩国之旅，<br />从这里开始。',
+    'cta.desc':'即将上线 iOS &amp; Android。您在韩国唯一需要的应用。',
+    'cta.soon':'即将上线', 'cta.contact':'联系我们',
+    'cta.press':'媒体 &amp; 合作：',
+    'footer.desc':'Korea Insider — 生活与旅行韩国的必备指南',
+    'footer.features':'功能', 'footer.contact_legal':'联系 &amp; 法律',
+    'footer.general':'一般 &amp; 合作',
+    'footer.copy':'© KOIN / TEAM_KOIN. 保留所有权利。',
+  },
+  ja: {
+    'nav.features':'機能', 'nav.why':'なぜ KOIN', 'nav.faq':'よくある質問',
+    'nav.contact':'お問い合わせ', 'nav.cta':'アプリを入手',
+    'hero.tag':'Korea Insider',
+    'hero.title':'韓国インサイダーが教える<br />本当の<br /><span class="highlight">「韓国」</span>',
+    'hero.subtitle':'訪韓・在韓外国人のための韓国生活オールインワンプラットフォーム',
+    'hero.desc':'リアルタイムAIカメラ、自動翻訳コミュニティ、個別カスタムキュレーション — 韓国生活のすべてを一つのプラットフォームで。',
+    'hero.btn1':'ダウンロード ↓', 'hero.btn2':'機能を見る →',
+    'chip1':'<span class="chip-dot"></span>🗺️ AI によるパーソナル キュレーション',
+    'chip2':'<span class="chip-dot"></span>💬 地元民のリアルなレビュー',
+    'chip3':'<span class="chip-dot"></span>📸 リアルタイム AI カメラ',
+    'chip4':'<span class="chip-dot"></span>🌐 自動翻訳、言語の壁なし',
+    'features.badge':'主要機能',
+    'features.title':'韓国のすべてを、<br />一つのアプリで。',
+    'features.desc':'韓国旅行の計画から現地生活まで — あなたのすべての瞬間に寄り添う3つの機能。',
+    'kuration.tag':'🗺️ Kuration',
+    'kuration.title':'興味関心ベースの<br />パーソナルキュレーション',
+    'kommunity.tag':'💬 Kommunity',
+    'kommunity.title':'実際に経験した人たちの<br />リアルな声',
+    'kamera.tag':'📸 AI Kamera',
+    'kamera.title':'24時間そばにいる<br />AIの韓国友達',
+    'why.badge':'なぜ KOIN なのか？',
+    'why.title':'韓国で必要なすべてが、<br />KOINひとつで揃う。',
+    'why.desc':'旅行者から長期居住者まで — KOINが必要な3つの理由。',
+    'why1.title':'バラバラな情報<br />→ 要点だけ整理', 'why1.kr':'オールインワン韓国情報プラットフォーム',
+    'why1.desc':'Instagram、Google、Facebook、Reddit ··· 情報が多すぎて迷子に。KOINが必要な情報だけをすっきり整理。',
+    'why2.title':'自分に合ったコミュニティ', 'why2.kr':'興味別の細分化コミュニティ',
+    'why2.desc':'K-Pop、中古取引、グルメ、イベント、行政情報まで — 興味別の掲示板で同志とつながろう 🔥',
+    'why3.title':'観光・短期・長期<br />— 誰でも歓迎', 'why3.kr':'観光客から長期居住者まで',
+    'why3.desc':'旅行者も、交換留学生も、外国人労働者も — 韓国にいる外国人なら誰でもOK。',
+    'journey.badge':'KOINと共に歩む旅',
+    'journey.title':'計画から生活まで —<br />KOINはいつもそこに。',
+    'journey1.label':'Kurationで計画する',
+    'journey1.desc':'旅行前にAIキュレーションガイドを閲覧。スポット、グルメ、日程 — すべて一か所で。',
+    'journey2.label':'Kommunityでつながる',
+    'journey2.desc':'実際に行ったことのある人たちからリアルな答えを。ヒント、レビュー、体験談。',
+    'journey3.label':'Kameraで解決する',
+    'journey3.desc':'困ったときはカメラを向けるだけ。メニュー、看板、契約書 — 即座に解決。',
+    'faq.badge':'よくある質問', 'faq.email':'team@koreainsider.kr →',
+    'faq.q1':'AIカメラは実際に何ができますか？',
+    'faq.a1':'4つのカテゴリ：食べ物（メニュー翻訳、ビーガン/ハラール/アレルギー情報）、書類（労働契約書、ビザ書類）、生活（自転車シェア、T-moneyカード、看板）、一般（何でも自動認識）。安全関連情報は必ず別途確認してください。',
+    'faq.q2':'コミュニティの多言語翻訳はどのように機能しますか？',
+    'faq.a2':'投稿は自動翻訳されます。自分の言語で書けば、他の人は自分の言語で読めます。手動翻訳は不要です。',
+    'faq.q3':'Kurationコンテンツはどのようにパーソナライズされますか？',
+    'faq.a3':'AIがあなたの好み、旅行スタイル、目的地を学習し、最も関連性の高いガイドを提案します。KOINを使えば使うほど精度が上がります。',
+    'faq.q4':'個人情報はどのように扱われますか？',
+    'faq.a4':'プライバシーファースト設計。必要最小限の情報のみ収集し、データを販売せず、韓国の個人情報保護法を厳守します。',
+    'faq.q5':'どのログイン方法に対応していますか？',
+    'faq.a5':'Kakao、Google、またはメール — ご自分に最も便利な方法でどうぞ。',
+    'faq.q6':'KOINへの連絡やパートナーシップは？',
+    'faq.a6':'プレス、パートナーシップ、一般のお問い合わせは <a href="mailto:team@koreainsider.kr">team@koreainsider.kr</a> までどうぞ。',
+    'cta.badge':'KOINをダウンロード',
+    'cta.title':'あなたの韓国旅が、<br />ここから始まる。',
+    'cta.desc':'iOS &amp; Android で近日公開。韓国に必要なただ一つのアプリ。',
+    'cta.soon':'近日公開', 'cta.contact':'お問い合わせ',
+    'cta.press':'プレス &amp; パートナーシップ：',
+    'footer.desc':'Korea Insider — 韓国での生活・旅行のための必携ガイド',
+    'footer.features':'機能', 'footer.contact_legal':'連絡先 &amp; 法的事項',
+    'footer.general':'一般 &amp; パートナーシップ',
+    'footer.copy':'© KOIN / TEAM_KOIN. All rights reserved.',
+  },
+  vi: {
+    'nav.features':'Tính năng', 'nav.why':'Tại sao KOIN', 'nav.faq':'Câu hỏi',
+    'nav.contact':'Liên hệ', 'nav.cta':'Tải ứng dụng',
+    'hero.tag':'Korea Insider',
+    'hero.title':'Người trong cuộc<br />tiết lộ<br /><span class="highlight">Hàn Quốc thật sự</span>',
+    'hero.subtitle':'Nền tảng all-in-one cho người nước ngoài ghé thăm hoặc sinh sống tại Hàn Quốc',
+    'hero.desc':'Camera AI thời gian thực, cộng đồng tự dịch thuật, nội dung cá nhân hóa — tất cả những gì bạn cần ở Hàn Quốc, trên một nền tảng.',
+    'hero.btn1':'Tải ngay ↓', 'hero.btn2':'Khám phá tính năng →',
+    'chip1':'<span class="chip-dot"></span>🗺️ Curation cá nhân hóa bởi AI',
+    'chip2':'<span class="chip-dot"></span>💬 Review thật từ người địa phương',
+    'chip3':'<span class="chip-dot"></span>📸 Camera AI trả lời tức thì',
+    'chip4':'<span class="chip-dot"></span>🌐 Tự động dịch, không rào cản',
+    'features.badge':'Tính năng cốt lõi',
+    'features.title':'Một ứng dụng cho<br />tất cả về Hàn Quốc.',
+    'features.desc':'Từ lập kế hoạch du lịch Hàn Quốc đến cuộc sống hàng ngày — ba tính năng đồng hành mọi khoảnh khắc của bạn.',
+    'kuration.tag':'🗺️ Kuration',
+    'kuration.title':'Curation cá nhân hóa<br />theo sở thích của bạn',
+    'kommunity.tag':'💬 Kommunity',
+    'kommunity.title':'Lời khuyên thực tế<br />từ người thực tế',
+    'kamera.tag':'📸 AI Kamera',
+    'kamera.title':'Người bạn AI Hàn Quốc<br />luôn bên bạn 24/7',
+    'why.badge':'Tại sao phải là KOIN?',
+    'why.title':'Mọi thứ bạn cần ở Hàn Quốc,<br />KOIN là đủ.',
+    'why.desc':'Từ khách du lịch đến người định cư lâu dài — ba lý do bạn cần KOIN.',
+    'why1.title':'Thông tin rời rạc<br />→ chỉ giữ tinh hoa', 'why1.kr':'Nền tảng thông tin Hàn Quốc tất cả trong một',
+    'why1.desc':'Instagram, Google, Facebook, Reddit ··· quá nhiều thông tin nhiễu. KOIN lọc và chỉ giữ lại những gì bạn thực sự cần.',
+    'why2.title':'Cộng đồng dành cho bạn', 'why2.kr':'Cộng đồng theo từng sở thích',
+    'why2.desc':'K-Pop, mua bán đồ cũ, ẩm thực, sự kiện, thông tin hành chính — chọn bảng tin theo sở thích và kết nối đúng người 🔥',
+    'why3.title':'Du lịch, ngắn hạn, dài hạn<br />— tất cả đều chào đón', 'why3.kr':'Từ khách du lịch đến người định cư lâu dài',
+    'why3.desc':'Du khách, du học sinh, người lao động nước ngoài — chỉ cần là người nước ngoài ở Hàn Quốc, KOIN là dành cho bạn.',
+    'journey.badge':'Hành trình cùng KOIN',
+    'journey.title':'Từ lập kế hoạch đến cuộc sống —<br />KOIN luôn ở đây.',
+    'journey1.label':'Lập kế hoạch với Kuration',
+    'journey1.desc':'Duyệt hướng dẫn do AI tuyển chọn trước chuyến đi. Địa điểm, ẩm thực, lịch trình — tất cả ở một nơi.',
+    'journey2.label':'Kết nối qua Kommunity',
+    'journey2.desc':'Nhận câu trả lời thực tế từ những người đã từng ở đó — mẹo, đánh giá, kinh nghiệm sống.',
+    'journey3.label':'Giải quyết với Kamera',
+    'journey3.desc':'Khi có vấn đề, chỉ cần hướng camera. Thực đơn, biển hiệu, hợp đồng — giải quyết ngay.',
+    'faq.badge':'Câu hỏi thường gặp', 'faq.email':'team@koreainsider.kr →',
+    'faq.q1':'Camera AI thực sự có thể làm được gì?',
+    'faq.a1':'Bốn danh mục: Thức ăn (dịch thực đơn, thông tin chay/halal/dị ứng), Tài liệu (hợp đồng lao động, mẫu thị thực), Cuộc sống (xe đạp chia sẻ, thẻ T-money, biển hiệu), và Tổng hợp (tự động nhận diện bất cứ thứ gì). Luôn xác minh độc lập các thông tin liên quan đến an toàn.',
+    'faq.q2':'Bản dịch đa ngôn ngữ trong cộng đồng hoạt động như thế nào?',
+    'faq.a2':'Bài đăng được dịch tự động — viết bằng ngôn ngữ của bạn, người khác đọc bằng ngôn ngữ của họ. Không cần dịch thủ công.',
+    'faq.q3':'Nội dung Kuration được cá nhân hóa như thế nào?',
+    'faq.a3':'AI học sở thích của bạn — thú ẩm thực, phong cách du lịch, điểm đến — và đề xuất các hướng dẫn phù hợp nhất. Dùng KOIN càng nhiều, càng chính xác.',
+    'faq.q4':'Dữ liệu cá nhân của tôi được xử lý như thế nào?',
+    'faq.a4':'Thiết kế ưu tiên quyền riêng tư. Chúng tôi chỉ thu thập những gì cần thiết, không bao giờ bán dữ liệu của bạn và tuân thủ nghiêm ngặt các quy định bảo mật của Hàn Quốc.',
+    'faq.q5':'Những phương thức đăng nhập nào được hỗ trợ?',
+    'faq.a5':'Kakao, Google hoặc Email — chọn cách nào thuận tiện nhất cho bạn.',
+    'faq.q6':'Làm thế nào để liên hệ hoặc hợp tác với KOIN?',
+    'faq.a6':'Để liên hệ báo chí, hợp tác hoặc tư vấn chung, hãy liên hệ <a href="mailto:team@koreainsider.kr">team@koreainsider.kr</a>.',
+    'cta.badge':'Tải KOIN',
+    'cta.title':'Hành trình Hàn Quốc<br />của bạn bắt đầu từ đây.',
+    'cta.desc':'Sắp ra mắt trên iOS &amp; Android. Ứng dụng duy nhất bạn cần ở Hàn Quốc.',
+    'cta.soon':'Sắp ra mắt', 'cta.contact':'Liên hệ',
+    'cta.press':'Báo chí &amp; Hợp tác:',
+    'footer.desc':'Korea Insider — Hướng dẫn thiết yếu cho cuộc sống &amp; du lịch tại Hàn Quốc',
+    'footer.features':'Tính năng', 'footer.contact_legal':'Liên hệ &amp; Pháp lý',
+    'footer.general':'Chung &amp; Hợp tác',
+    'footer.copy':'© KOIN / TEAM_KOIN. Bảo lưu mọi quyền.',
+  }
+};
 
-  <hr style="border: 0; border-top: 1px solid #e5e5e5; margin: 24px 0;" />
+// ── 언어 적용 함수 ─────────────────────────────
+function applyLang(code) {
+  const t = I18N[code];
+  if (!t) return;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+  document.documentElement.lang = code === 'ko' ? 'ko' : code === 'zh' ? 'zh' : code === 'ja' ? 'ja' : code === 'vi' ? 'vi' : 'en';
+}
 
-  <p style="margin-bottom: 24px;">
-    <a href="/" style="text-decoration: none;">← Back to Home</a>
-  </p>
+
+// ── nav 국기 switcher ──────────────────────────
+function switchLang(code) {
+  applyLang(code);
+  sessionStorage.setItem('koin_lang', code);
+  document.querySelectorAll('.ls-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('onclick') === "switchLang('" + code + "')");
+  });
+}
+
+// ── 언어 선택 → 인트로 시작 ────────────────────
+function selectLang(code) {
+  // 번역 적용
+  applyLang(code);
+  sessionStorage.setItem('koin_lang', code);
+  document.querySelectorAll('.ls-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('onclick') === "switchLang('" + code + "')");
+  });
+
+  // lang-selector 페이드아웃
+  const sel = document.getElementById('lang-selector');
+  sel.classList.add('hide');
+
+  // 인트로 시작 (숨겨져 있던 것 표시)
+  setTimeout(() => {
+    sel.remove();
+    startIntro();
+  }, 500);
+}
+
+// ── 인트로 애니메이션 (selectLang에서 호출) ────
+function startIntro() {
+  const overlay  = document.getElementById('intro-overlay');
+  const introBg  = document.getElementById('intro-bg');
+  const introTxt = document.getElementById('intro-text');
+  const introTag = document.getElementById('intro-tagline');
+  const navWord  = document.querySelector('.nav-wordmark');
+  const flyer    = document.getElementById('koin-flyer');
+
+  let scrollY = 0;
+  const lockScroll   = () => { scrollY = window.scrollY; document.body.style.cssText = 'overflow:hidden;position:fixed;width:100%;top:-'+scrollY+'px'; };
+  const unlockScroll = () => { document.body.style.cssText = ''; window.scrollTo(0, scrollY); };
+
+  document.body.classList.add('js-ready');
+  lockScroll();
+  if (navWord) navWord.style.opacity = '0';
+
+  const safety = setTimeout(emergencyExit, 12000);
+  function emergencyExit() {
+    clearTimeout(safety);
+    if (navWord) navWord.style.opacity = '1';
+    if (introBg) introBg.classList.add('fade');
+    unlockScroll();
+    setTimeout(() => { overlay && overlay.remove(); flyer && flyer.remove(); }, 700);
+  }
+
+  setTimeout(() => introTxt.classList.add('visible'), 150);
+  setTimeout(() => introTag.classList.add('visible'), 1000);
+  setTimeout(() => {
+    introTxt.classList.add('step-collapse');
+    introTag.classList.add('step-collapse');
+  }, 3000);
+
+  setTimeout(() => {
+    clearTimeout(safety);
+    if (!navWord || !flyer) { emergencyExit(); return; }
+    // nav wordmark가 실제로 보이는지 확인 (display:none 이면 width=0)
+    const navRect = navWord.getBoundingClientRect();
+    if (navRect.width === 0) { emergencyExit(); return; }
+
+    const tr = introTxt.getBoundingClientRect();
+    const fromSize = parseFloat(getComputedStyle(introTxt).fontSize);
+    const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim() || '#3B82F6';
+
+    flyer.style.cssText = [
+      'display:block','position:fixed',
+      "font-family:'Gapyeong Hanseokbong','Noto Serif KR',serif",
+      'font-weight:900',`color:${primaryColor}`,
+      `-webkit-text-stroke:0.4px ${primaryColor}`,
+      'letter-spacing:0.04em','white-space:nowrap',
+      `font-size:${fromSize}px`,
+      `left:${tr.left + tr.width/2}px`,
+      `top:${tr.top + tr.height/2}px`,
+      'transform:translate(-50%,-50%)','transition:none','opacity:1',
+      'z-index:10000','pointer-events:none'
+    ].join(';');
+
+    introTxt.style.opacity = '0';
+    introTag.style.opacity = '0';
+    introBg.classList.add('fade');
+    unlockScroll();
+
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      const fr = flyer.getBoundingClientRect();
+      const nr = navWord.getBoundingClientRect();
+      const toSize = parseFloat(getComputedStyle(navWord).fontSize);
+      const sc = toSize / fromSize;
+      const tx = (nr.left + nr.width/2) - (fr.left + fr.width/2);
+      const ty = (nr.top  + nr.height/2) - (fr.top  + fr.height/2);
+
+      flyer.style.transition = 'transform 0.72s cubic-bezier(0.76,0,0.24,1), opacity 0.12s 0.66s ease';
+      flyer.style.transform  = `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) scale(${sc})`;
+      flyer.style.opacity    = '0';
+
+      setTimeout(() => {
+        navWord.style.transition = 'opacity 0.12s ease';
+        navWord.style.opacity    = '1';
+        setTimeout(() => { overlay && overlay.remove(); flyer && flyer.remove(); }, 150);
+      }, 730);
+    }));
+  }, 4800);
+}
+
+// ── 저장된 언어 자동 적용 or 선택화면 표시 ──────
+(function() {
+  // 이전에 선택한 언어가 있으면 바로 적용하고 인트로로
+  // 없으면 언어 선택 화면 표시 (기본값)
+  // 국기 switcher active 동기화 함수
+  function syncFlags(code) {
+    document.querySelectorAll('.ls-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('onclick') === "switchLang('" + code + "')");
+    });
+  }
+  const saved = sessionStorage.getItem('koin_lang');
+  if (saved && I18N[saved]) {
+    applyLang(saved);
+    syncFlags(saved);
+    const sel = document.getElementById('lang-selector');
+    if (sel) sel.style.display = 'none';
+    startIntro();
+  }
+  // else: 언어 선택 화면이 그대로 표시됨
+
+  // 햄버거 메뉴
+  const hamburger  = document.getElementById('nav-hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  if (hamburger) {
+    hamburger.addEventListener('click', () => {
+      const open = hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+  }
+  window.closeMobileMenu = function() {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  };
+
+  // 스크롤 reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+})();
+</script>
+
 </body>
 </html>
-```
