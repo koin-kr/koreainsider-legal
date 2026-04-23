@@ -61,7 +61,6 @@ body {
   letter-spacing: -0.01em;
 }
 
-
 /* ─── LANG SWITCHER ─── */
 #lang-switcher {
   display: flex; align-items: center; gap: 2px;
@@ -76,7 +75,6 @@ body {
 .ls-btn:hover { opacity: 0.75; transform: scale(1.15); background: var(--bg-2); }
 .ls-btn.active { opacity: 1; transform: scale(1.1); }
 
-/* 모바일: nav-cta 숨을 때 switcher는 유지 */
 @media (max-width: 1024px) {
   #lang-switcher { gap: 1px; }
   .ls-btn { font-size: 1.1rem; padding: 3px 4px; }
@@ -205,6 +203,26 @@ nav {
   display: flex; gap: 14px; align-items: center; flex-wrap: wrap;
   opacity: 0; animation: fadeUp 0.7s 0.65s ease forwards;
 }
+
+/* ─── HERO STORE BUTTONS ─── */
+.hero-store-btns {
+  display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px;
+  opacity: 0; animation: fadeUp 0.7s 0.8s ease forwards;
+}
+.hero-store-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 10px 20px;
+  background: var(--text); color: #fff;
+  border-radius: 12px; text-decoration: none;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 4px 16px rgba(26,30,42,0.2);
+}
+.hero-store-btn:hover { background: #2d3246; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(26,30,42,0.28); }
+.hero-store-btn svg { flex-shrink: 0; }
+.hero-store-btn-texts { display: flex; flex-direction: column; }
+.hero-store-btn-sub { font-size: 0.65rem; color: rgba(255,255,255,0.7); font-weight: 400; letter-spacing: 0.04em; }
+.hero-store-btn-label { font-size: 0.95rem; font-weight: 700; color: #fff; line-height: 1.2; }
+
 .btn-primary {
   display: inline-flex; align-items: center; gap: 8px;
   padding: 14px 28px; background: var(--primary); color: #fff;
@@ -315,10 +333,6 @@ nav {
   width: 100%; height: auto; display: block;
   object-fit: cover;
 }
-.feature-card-screen-glow {
-  position: absolute; inset: 0;
-  background: radial-gradient(circle at 50% 100%, rgba(64,138,250,0.1) 0%, transparent 70%);
-}
 .feature-card-body { padding: 28px 28px 32px; }
 .feature-card-tag {
   display: inline-flex; align-items: center; gap: 7px;
@@ -391,12 +405,10 @@ nav {
   max-width: 1200px; margin: 0 auto;
   display: grid; grid-template-columns: 280px 1fr; gap: 80px;
 }
-.faq-side { }
 .faq-side-title { font-size: 1.7rem; color: var(--text); margin-bottom: 16px; font-family: 'Gapyeong Hanseokbong', 'Noto Serif KR', serif; }
 .faq-side-desc { font-size: 1rem; color: var(--sub); line-height: 1.7; margin-bottom: 20px; }
 .faq-side-email { color: var(--primary); font-weight: 600; text-decoration: none; font-size: 0.95rem; }
 .faq-side-email:hover { text-decoration: underline; }
-.faq-list { }
 .faq-item { border-top: 1.5px solid var(--border); }
 .faq-item:last-child { border-bottom: 1.5px solid var(--border); }
 .faq-q {
@@ -487,8 +499,6 @@ footer {
 body.js-ready .reveal { opacity: 0; transform: translateY(20px); }
 body.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
 
-
-/* ─── GAPYEONG HANSEOKBONG 전체 적용 ─── */
 .cta-title, .why-card-title, .journey-step-title,
 .footer-brand-name, h1, h2, h3 {
   font-family: 'Gapyeong Hanseokbong', 'Noto Serif KR', serif;
@@ -511,15 +521,10 @@ body.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
   .banner-section, .section-wrap, .journey-section, footer { padding-left: 24px; padding-right: 24px; }
   .features-grid { grid-template-columns: 1fr; }
   .why-grid { grid-template-columns: 1fr; }
-@media (max-width: 1024px) {
   .journey-flow { grid-template-columns: 1fr; gap: 0; }
   .journey-arrow { display: none; }
-  .journey-step {
-    padding: 40px 0;
-    border-bottom: 1px solid var(--border);
-  }
+  .journey-step { padding: 40px 0; border-bottom: 1px solid var(--border); }
   .journey-step:last-child { border-bottom: none; }
-}
   .faq-wrap { grid-template-columns: 1fr; gap: 40px; }
   .footer-inner { grid-template-columns: 1fr; gap: 36px; }
   .cta-section { padding: 80px 24px; }
@@ -536,7 +541,7 @@ body.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
 <!-- NAV -->
 <nav id="main-nav">
   <a href="#" class="nav-logo">
-    <img src="assets/koin-logo.png" alt="KOIN" class="nav-logo-img" style="width:28px;height:28px;object-fit:contain;" />
+    <img src="assets/koin-logo.png" alt="KOIN" class="nav-logo-img" />
     <span class="nav-wordmark">Koin</span>
   </a>
   <ul class="nav-links">
@@ -552,7 +557,7 @@ body.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
     <button class="ls-btn" onclick="switchLang('ja')" title="日本語">🇯🇵</button>
     <button class="ls-btn" onclick="switchLang('vi')" title="Tiếng Việt">🇻🇳</button>
   </div>
-  <a href="#download" class="nav-cta" data-i18n="nav.cta">Get the App</a>
+  <a href="#download" class="nav-cta" data-i18n="nav.cta">다운로드</a>
   <button class="nav-hamburger" id="nav-hamburger" aria-label="메뉴 열기">
     <span></span><span></span><span></span>
   </button>
@@ -565,7 +570,7 @@ body.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
     <li><a href="#why" onclick="closeMobileMenu()" data-i18n="nav.why">Why KOIN</a></li>
     <li><a href="#faq" onclick="closeMobileMenu()" data-i18n="nav.faq">FAQ</a></li>
     <li><a href="mailto:team@koreainsider.kr" onclick="closeMobileMenu()" data-i18n="nav.contact">Contact</a></li>
-    <li><a href="#download" class="mobile-cta" onclick="closeMobileMenu()" data-i18n="nav.cta">Get the App</a></li>
+    <li><a href="#download" class="mobile-cta" onclick="closeMobileMenu()" data-i18n="nav.cta">다운로드</a></li>
   </ul>
 </div>
 
@@ -580,8 +585,24 @@ body.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
         <span data-i18n="hero.desc">AI-curated guides, a foreigner community, and real-time AI camera — everything you need in Korea, in one app.</span>
       </p>
       <div class="hero-actions">
-        <a href="#download" class="btn-primary" data-i18n="hero.btn1">Download App ↓</a>
-        <a href="#features" class="btn-ghost" data-i18n="hero.btn2">Explore Features →</a>
+        <a href="#features" class="btn-ghost" data-i18n="hero.btn2">기능 살펴보기 →</a>
+      </div>
+      <!-- 히어로 앱스토어/플레이스토어 버튼 -->
+      <div class="hero-store-btns">
+        <a href="https://apps.apple.com/kr/app/koin/id6760605411" target="_blank" rel="noopener noreferrer" class="hero-store-btn">
+          <svg width="22" height="22" viewBox="0 0 814 1000" fill="#fff"><path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76.5 0-103.7 40.8-165.9 40.8s-105-37.5-155.5-127.4C46 790.7 0 663 0 541.8c0-207.5 135.4-317.3 268.9-317.3 70.1 0 128.4 46.4 172.5 46.4 42.8 0 109.1-49 188.5-49 30.5 0 110.7 5.2 167.1 73.4zm-217.5-156.6c31.1-36.9 53.1-88.1 53.1-139.3 0-7.1-.6-14.3-1.9-20.1-50.6 1.9-110.8 33.7-147.1 75.8-28.5 32.4-55.1 83.6-55.1 135.5 0 7.8 1.3 15.6 1.9 18.1 3.2.6 8.4 1.3 13.6 1.3 45.4 0 102.5-30.4 135.5-71.3z"/></svg>
+          <div class="hero-store-btn-texts">
+            <span class="hero-store-btn-sub" data-i18n="hero.store.apple.sub">Download on the</span>
+            <span class="hero-store-btn-label">App Store</span>
+          </div>
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=kr.koreainsider.koin&hl=ko" target="_blank" rel="noopener noreferrer" class="hero-store-btn">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M3.18 23.76c.3.17.64.24.99.2L15.9 12 12.06 8.16 3.18 23.76zM20.49 10.64l-2.94-1.7-3.96 3.96 3.96 3.96 2.97-1.72c.85-.49.85-1.99-.03-2.5zM3.03.28C2.73.46 2.55.8 2.55 1.22v21.56c0 .42.18.76.48.94l.09.05 12.09-12.09v-.28L3.12.23l-.09.05z"/></svg>
+          <div class="hero-store-btn-texts">
+            <span class="hero-store-btn-sub" data-i18n="hero.store.google.sub">GET IT ON</span>
+            <span class="hero-store-btn-label">Google Play</span>
+          </div>
+        </a>
       </div>
     </div>
     <div class="hero-phones">
@@ -627,8 +648,6 @@ body.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
     <p class="section-desc" data-i18n="features.desc">From trip planning to daily life — three features for every moment of your Korea journey.</p>
   </div>
   <div class="features-grid">
-
-    <!-- KURATION -->
     <div class="feature-card reveal">
       <div class="feature-card-screen" style="background:#000; padding:0;">
         <img src="assets/kuration.png" alt="Kuration" style="width:100%;height:100%;object-fit:cover;object-position:top;" />
@@ -647,8 +666,6 @@ body.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
         </div>
       </div>
     </div>
-
-    <!-- KOMMUNITY -->
     <div class="feature-card reveal" style="transition-delay:0.1s">
       <div class="feature-card-screen" style="background:#000; padding:0;">
         <img src="assets/community.png" alt="Kommunity" style="width:100%;height:100%;object-fit:cover;object-position:top;" />
@@ -667,8 +684,6 @@ body.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
         </div>
       </div>
     </div>
-
-    <!-- AI CAMERA -->
     <div class="feature-card reveal" style="transition-delay:0.2s">
       <div class="feature-card-screen" style="background:#000; padding:0;">
         <img src="assets/camera.png" alt="Kamera" style="width:100%;height:100%;object-fit:cover;object-position:top;" />
@@ -687,7 +702,6 @@ body.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
         </div>
       </div>
     </div>
-
   </div>
 </div>
 
@@ -703,7 +717,7 @@ body.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
       <span class="why-icon">🌐</span>
       <div class="why-title" data-i18n="why1.title">Multilingual First</div>
       <span class="why-title-kr" data-i18n="why1.kr">다국어 자동 번역</span>
-      <p class="why-desc" data-i18n="why1.desc">Write in any language, everyone reads in theirs. No language barrier — in guides, community, or AI results.<br><span class="why-desc-kr">어떤 언어로든 작성하면 모두가 자신의 언어로 읽어요. 가이드, 커뮤니티, AI 결과 모두 언어 장벽 없이.</span></p>
+      <p class="why-desc" data-i18n="why1.desc">Write in any language, everyone reads in theirs. No language barrier — in guides, community, or AI results.<br><span class="why-desc-kr">어떤 언어로든 작성하면 모두가 자신의 언어로 읽어요.</span></p>
     </div>
     <div class="why-card reveal" style="transition-delay:0.1s">
       <span class="why-icon">⚡</span>
@@ -715,7 +729,7 @@ body.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
       <span class="why-icon">✨</span>
       <div class="why-title" data-i18n="why3.title">Personalised Just for You</div>
       <span class="why-title-kr" data-i18n="why3.kr">개인 맞춤형 콘텐츠</span>
-      <p class="why-desc" data-i18n="why3.desc">AI analyses your interests and reactions to deliver the most relevant curation and content — your Korea guide that gets smarter every day.<br><span class="why-desc-kr">AI가 관심사와 반응을 분석해 최적의 큐레이션을 제공해요. 쓸수록 더 똑똑해지는 나만의 한국 가이드.</span></p>
+      <p class="why-desc" data-i18n="why3.desc">AI analyses your interests and reactions to deliver the most relevant curation — your Korea guide that gets smarter every day.<br><span class="why-desc-kr">AI가 관심사와 반응을 분석해 최적의 큐레이션을 제공해요.</span></p>
     </div>
   </div>
 </div>
@@ -790,19 +804,19 @@ body.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
   <div class="cta-inner reveal">
     <div class="section-badge" style="justify-content:center;margin-bottom:14px" data-i18n="cta.badge">Download KOIN</div>
     <h2 class="cta-title display" data-i18n="cta.title">Your Korea journey<br />starts here.</h2>
-    <p class="cta-desc" data-i18n="cta.desc">Coming soon on iOS & Android. The only app you need in Korea.</p>
+    <p class="cta-desc" data-i18n="cta.desc">iOS & Android에서 지금 바로 다운로드. 한국에서 필요한 단 하나의 앱.</p>
     <div class="cta-actions">
-      <a href="#" class="app-btn">
+      <a href="https://apps.apple.com/kr/app/koin/id6760605411" target="_blank" rel="noopener noreferrer" class="app-btn">
         <span class="app-btn-icon">
           <svg width="24" height="24" viewBox="0 0 814 1000" fill="currentColor"><path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76.5 0-103.7 40.8-165.9 40.8s-105-37.5-155.5-127.4C46 790.7 0 663 0 541.8c0-207.5 135.4-317.3 268.9-317.3 70.1 0 128.4 46.4 172.5 46.4 42.8 0 109.1-49 188.5-49 30.5 0 110.7 5.2 167.1 73.4zm-217.5-156.6c31.1-36.9 53.1-88.1 53.1-139.3 0-7.1-.6-14.3-1.9-20.1-50.6 1.9-110.8 33.7-147.1 75.8-28.5 32.4-55.1 83.6-55.1 135.5 0 7.8 1.3 15.6 1.9 18.1 3.2.6 8.4 1.3 13.6 1.3 45.4 0 102.5-30.4 135.5-71.3z"/></svg>
         </span>
-        <div><span class="app-btn-sub" data-i18n="cta.soon">Coming Soon</span><span class="app-btn-label">App Store</span></div>
+        <div><span class="app-btn-sub" data-i18n="cta.apple.sub">Download on the</span><span class="app-btn-label">App Store</span></div>
       </a>
-      <a href="#" class="app-btn">
+      <a href="https://play.google.com/store/apps/details?id=kr.koreainsider.koin&hl=ko" target="_blank" rel="noopener noreferrer" class="app-btn">
         <span class="app-btn-icon">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.64.24.99.2L15.9 12 12.06 8.16 3.18 23.76zM20.49 10.64l-2.94-1.7-3.96 3.96 3.96 3.96 2.97-1.72c.85-.49.85-1.99-.03-2.5zM3.03.28C2.73.46 2.55.8 2.55 1.22v21.56c0 .42.18.76.48.94l.09.05 12.09-12.09v-.28L3.12.23l-.09.05z"/></svg>
         </span>
-        <div><span class="app-btn-sub" data-i18n="cta.soon">Coming Soon</span><span class="app-btn-label">Google Play</span></div>
+        <div><span class="app-btn-sub" data-i18n="cta.google.sub">GET IT ON</span><span class="app-btn-label">Google Play</span></div>
       </a>
       <a href="mailto:team@koreainsider.kr" class="btn-primary" data-i18n="cta.contact">Contact Us</a>
     </div>
@@ -848,7 +862,6 @@ body.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
   </div>
 </footer>
 
-
 <!-- LANGUAGE SELECTOR -->
 <div id="lang-selector">
   <div id="lang-inner">
@@ -891,58 +904,28 @@ body.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
 }
 #lang-selector.hide { opacity: 0; pointer-events: none; }
 #lang-inner {
-  text-align: center;
-  padding: 40px 24px;
+  text-align: center; padding: 40px 24px;
   display: flex; flex-direction: column; align-items: center; gap: 32px;
 }
 #lang-brand { display: flex; flex-direction: column; align-items: center; gap: 6px; }
 #lang-wordmark {
   font-family: 'Gapyeong Hanseokbong', 'Noto Serif KR', serif;
-  font-size: clamp(2.8rem, 10vw, 5rem);
-  font-weight: 900;
-  color: var(--primary);
-  letter-spacing: 0.08em;
-  -webkit-text-stroke: 0.5px var(--primary);
+  font-size: clamp(2.8rem, 10vw, 5rem); font-weight: 900;
+  color: var(--primary); letter-spacing: 0.08em; -webkit-text-stroke: 0.5px var(--primary);
 }
-#lang-sub {
-  font-size: 0.78rem; font-weight: 400;
-  color: var(--muted); letter-spacing: 0.3em; text-transform: uppercase;
-}
-#lang-prompt {
-  font-size: 0.9rem; color: var(--sub);
-  font-weight: 500; letter-spacing: 0.05em;
-  margin: 0;
-}
-#lang-grid {
-  display: flex; flex-direction: column;
-  gap: 10px; align-items: stretch;
-  width: 100%; max-width: 320px;
-}
+#lang-sub { font-size: 0.78rem; font-weight: 400; color: var(--muted); letter-spacing: 0.3em; text-transform: uppercase; }
+#lang-prompt { font-size: 0.9rem; color: var(--sub); font-weight: 500; letter-spacing: 0.05em; margin: 0; }
+#lang-grid { display: flex; flex-direction: column; gap: 10px; align-items: stretch; width: 100%; max-width: 320px; }
 .lang-btn {
-  display: flex; flex-direction: row;
-  align-items: center;
-  gap: 14px;
-  padding: 14px 20px;
-  background: var(--bg-2);
-  border: 1.5px solid var(--border);
-  border-radius: 14px;
-  cursor: pointer;
-  font-family: inherit;
-  width: 100%;
+  display: flex; flex-direction: row; align-items: center; gap: 14px;
+  padding: 14px 20px; background: var(--bg-2); border: 1.5px solid var(--border);
+  border-radius: 14px; cursor: pointer; font-family: inherit; width: 100%;
   transition: border-color 0.2s, background 0.2s, transform 0.12s, box-shadow 0.2s;
 }
-.lang-btn:hover {
-  border-color: var(--primary);
-  background: #fff;
-  transform: translateX(4px);
-  box-shadow: 0 4px 16px rgba(59,130,246,0.12);
-}
+.lang-btn:hover { border-color: var(--primary); background: #fff; transform: translateX(4px); box-shadow: 0 4px 16px rgba(59,130,246,0.12); }
 .lang-btn:active { transform: translateX(0); }
 .lang-flag { width: 36px; height: auto; border-radius: 4px; flex-shrink: 0; }
-.lang-name {
-  font-size: 1rem; font-weight: 600; color: var(--text);
-  text-align: left;
-}
+.lang-name { font-size: 1rem; font-weight: 600; color: var(--text); text-align: left; }
 </style>
 
 <!-- INTRO ANIMATION OVERLAY -->
@@ -959,100 +942,62 @@ body.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
   </div>
   <div id="intro-tagline">Korea Insider</div>
 </div>
-<!-- 날아가는 KOIN 클론 (JS가 동적으로 사용) -->
 <div id="koin-flyer" style="display:none;position:fixed;z-index:10000;pointer-events:none;
   font-family:'Gapyeong Hanseokbong','Noto Serif KR',serif;
   font-weight:900;color:var(--primary);white-space:nowrap;
-  -webkit-text-stroke:0.4px var(--primary);
-  letter-spacing:0.04em;
-  transform-origin:left center;">KOIN</div>
+  -webkit-text-stroke:0.4px var(--primary);letter-spacing:0.04em;transform-origin:left center;">KOIN</div>
 
 <style>
 #intro-overlay {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  z-index: 9999;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  gap: 16px;
-  pointer-events: none;
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 9999;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 16px; pointer-events: none;
 }
-#intro-bg {
-  position: absolute; inset: 0;
-  background: #fff;
-  z-index: 0;
-  transition: opacity 0.6s ease;
-}
+#intro-bg { position: absolute; inset: 0; background: #fff; z-index: 0; transition: opacity 0.6s ease; }
 #intro-bg.fade { opacity: 0; }
-
 #intro-text {
   font-family: 'Gapyeong Hanseokbong', 'Noto Serif KR', serif;
-  font-size: clamp(1.1rem, 6.5vw, 7rem);
-  font-weight: 900;
-  color: var(--primary);
+  font-size: clamp(1.1rem, 6.5vw, 7rem); font-weight: 900; color: var(--primary);
   letter-spacing: clamp(0.06em, 1.5vw, 0.14em);
-  display: flex; align-items: center;
-  white-space: nowrap;
-  max-width: 92vw;
-  padding: 0 8px;
-  box-sizing: border-box;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1),
-              transform 0.9s cubic-bezier(0.16,1,0.3,1);
+  display: flex; align-items: center; white-space: nowrap;
+  max-width: 92vw; padding: 0 8px; box-sizing: border-box;
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);
   position: relative; z-index: 1;
 }
-#intro-text.visible  { opacity: 1; transform: translateY(0); }
-
+#intro-text.visible { opacity: 1; transform: translateY(0); }
 #intro-tagline {
   font-family: 'Pretendard', sans-serif;
-  font-size: clamp(0.65rem, 3vw, 1rem);
-  font-weight: 400; color: var(--muted);
+  font-size: clamp(0.65rem, 3vw, 1rem); font-weight: 400; color: var(--muted);
   letter-spacing: 0.3em; text-transform: uppercase;
-  opacity: 0; transition: opacity 0.8s ease;
-  position: relative; z-index: 1;
+  opacity: 0; transition: opacity 0.8s ease; position: relative; z-index: 1;
 }
 #intro-tagline.visible { opacity: 1; }
-
 .intro-word { display: inline-flex; }
-.intro-space {
-  display: inline-block; width: 0.6em; overflow: hidden;
-  transition: width 1.1s cubic-bezier(0.76,0,0.24,1);
-}
+.intro-space { display: inline-block; width: 0.6em; overflow: hidden; transition: width 1.1s cubic-bezier(0.76,0,0.24,1); }
 .fade-out {
   display: inline-block; opacity: 1; max-width: 1em;
-  transition: opacity 0.8s cubic-bezier(0.76,0,0.24,1),
-              max-width 1.0s 0.3s cubic-bezier(0.76,0,0.24,1);
+  transition: opacity 0.8s cubic-bezier(0.76,0,0.24,1), max-width 1.0s 0.3s cubic-bezier(0.76,0,0.24,1);
 }
-#intro-text.step-collapse .fade-out  { opacity: 0; max-width: 0; }
-#intro-text.step-collapse .intro-space {
-  width: 0;
-  transition: width 1.0s 0.6s cubic-bezier(0.76,0,0.24,1);
-}
+#intro-text.step-collapse .fade-out { opacity: 0; max-width: 0; }
+#intro-text.step-collapse .intro-space { width: 0; transition: width 1.0s 0.6s cubic-bezier(0.76,0,0.24,1); }
 #intro-tagline.step-collapse { opacity: 0; transition: opacity 0.5s ease; }
-
-/* 날아가는 클론 */
-#koin-flyer {
-  transition: transform 0.7s cubic-bezier(0.76,0,0.24,1),
-              font-size 0.7s cubic-bezier(0.76,0,0.24,1),
-              opacity 0.15s 0.65s ease;
-}
-#koin-flyer.fly { }
-#koin-flyer.landed { opacity: 0; }
+#koin-flyer { transition: transform 0.7s cubic-bezier(0.76,0,0.24,1), font-size 0.7s cubic-bezier(0.76,0,0.24,1), opacity 0.15s 0.65s ease; }
 </style>
-
 
 <script>
 // ── 5개국어 번역 데이터 ──────────────────────────
 const I18N = {
   ko: {
     'nav.features':'기능', 'nav.why':'Why KOIN', 'nav.faq':'FAQ',
-    'nav.contact':'문의', 'nav.cta':'앱 다운로드',
+    'nav.contact':'문의', 'nav.cta':'다운로드',
     'hero.tag':'Korea Insider',
     'hero.title':'한국 내부자가<br />알려주는<br /><span class="highlight">&#39;진짜 대한민국&#39;</span>',
     'hero.subtitle':'한국 방문 또는 거주 외국인을 위한 한국 생활 올인원 플랫폼',
     'hero.desc':'실시간 AI 카메라, 자동 번역 커뮤니티, 개인별 맞춤 큐레이션까지 —&nbsp;한국 생활의 모든 것을 하나의 플랫폼에.',
-    'hero.btn1':'앱 다운로드 ↓', 'hero.btn2':'기능 살펴보기 →',
+    'hero.btn2':'기능 살펴보기 →',
+    'hero.store.apple.sub':'Download on the',
+    'hero.store.google.sub':'GET IT ON',
     'chip1':'<span class="chip-dot"></span>🗺️ AI 기반 개인 맞춤형 큐레이션',
     'chip2':'<span class="chip-dot"></span>💬 로컬 현지인의 생생한 리뷰',
     'chip3':'<span class="chip-dot"></span>📸 실시간 답변 AI 카메라',
@@ -1098,22 +1043,23 @@ const I18N = {
     'faq.a6':'보도, 제휴, 일반 문의는 <a href="mailto:team@koreainsider.kr">team@koreainsider.kr</a>로 연락해 주세요.',
     'cta.badge':'KOIN 다운로드',
     'cta.title':'당신의 한국 여정이<br />여기서 시작됩니다.',
-    'cta.desc':'iOS & Android 출시 예정. 한국에서 필요한 단 하나의 앱.',
-    'cta.soon':'출시 예정', 'cta.contact':'문의하기',
-    'cta.press':'보도 &amp; 제휴:',
+    'cta.desc':'iOS & Android에서 지금 바로 다운로드. 한국에서 필요한 단 하나의 앱.',
+    'cta.apple.sub':'Download on the', 'cta.google.sub':'GET IT ON',
+    'cta.contact':'문의하기',
     'footer.desc':'Korea Insider — 한국 생활 &amp; 여행을 위한 필수 가이드',
-    'footer.features':'기능', 'footer.contact_legal':'연락처 &amp; 법적 고지',
-    'footer.general':'일반 &amp; 파트너십',
+    'footer.features':'기능', 'footer.general':'일반 &amp; 파트너십',
     'footer.copy':'© KOIN / TEAM_KOIN. All rights reserved.',
   },
   en: {
     'nav.features':'Features', 'nav.why':'Why KOIN', 'nav.faq':'FAQ',
-    'nav.contact':'Contact', 'nav.cta':'Get the App',
+    'nav.contact':'Contact', 'nav.cta':'Download',
     'hero.tag':'Korea Insider',
     'hero.title':'Korea Insider<br />reveals the<br /><span class="highlight">Real Korea</span>',
     'hero.subtitle':'The all-in-one Korea life platform for foreigners visiting or living in Korea',
     'hero.desc':'Real-time AI camera, auto-translation community, personalised curation — everything you need in Korea, on one platform.',
-    'hero.btn1':'Download App ↓', 'hero.btn2':'Explore Features →',
+    'hero.btn2':'Explore Features →',
+    'hero.store.apple.sub':'Download on the',
+    'hero.store.google.sub':'GET IT ON',
     'chip1':'<span class="chip-dot"></span>🗺️ AI-Powered Personal Curation',
     'chip2':'<span class="chip-dot"></span>💬 Real Reviews from Locals',
     'chip3':'<span class="chip-dot"></span>📸 Real-Time AI Camera',
@@ -1132,7 +1078,7 @@ const I18N = {
     'why.desc':'From travellers to long-term residents — three reasons you need KOIN.',
     'why1.title':'Scattered info<br />→ just the essentials', 'why1.kr':'All-in-one Korea info platform',
     'why1.desc':'Instagram, Google, Facebook, Reddit ··· too much noise. KOIN cuts through and gives you only what matters.',
-    'why2.title':'Your community <br />— your interests', 'why2.kr':'Interest-based communities',
+    'why2.title':'Your community<br />— your interests', 'why2.kr':'Interest-based communities',
     'why2.desc':'K-Pop, secondhand deals, food, events, admin info — pick your board and connect with the right people 🔥',
     'why3.title':'Tourist, student, worker<br />— all welcome', 'why3.kr':'From tourists to long-term expats',
     'why3.desc':'Travellers, exchange students, foreign workers — if you are a foreigner in Korea, KOIN is for you.',
@@ -1159,22 +1105,23 @@ const I18N = {
     'faq.a6':'For press, partnerships, or general enquiries, reach us at <a href="mailto:team@koreainsider.kr">team@koreainsider.kr</a>.',
     'cta.badge':'Download KOIN',
     'cta.title':'Your Korea journey<br />starts here.',
-    'cta.desc':'Coming soon on iOS &amp; Android. The only app you need in Korea.',
-    'cta.soon':'Coming Soon', 'cta.contact':'Contact Us',
-    'cta.press':'Press &amp; partnerships:',
+    'cta.desc':'Available now on iOS &amp; Android. The only app you need in Korea.',
+    'cta.apple.sub':'Download on the', 'cta.google.sub':'GET IT ON',
+    'cta.contact':'Contact Us',
     'footer.desc':'Korea Insider — Your essential guide to living &amp; travelling in Korea',
-    'footer.features':'Features', 'footer.contact_legal':'Contact &amp; Legal',
-    'footer.general':'General &amp; Partnership',
+    'footer.features':'Features', 'footer.general':'General &amp; Partnership',
     'footer.copy':'© KOIN / TEAM_KOIN. All rights reserved.',
   },
   zh: {
     'nav.features':'功能', 'nav.why':'为何 KOIN', 'nav.faq':'常见问题',
-    'nav.contact':'联系我们', 'nav.cta':'下载应用',
+    'nav.contact':'联系我们', 'nav.cta':'立即下载',
     'hero.tag':'Korea Insider',
     'hero.title':'韩国内部人士<br />为你揭秘<br /><span class="highlight">「真实韩国」</span>',
     'hero.subtitle':'面向访韩或在韩居住外国人的一站式韩国生活平台',
     'hero.desc':'实时 AI 相机、自动翻译社区、个性化精选内容 — 韩国生活所需的一切，尽在一个平台。',
-    'hero.btn1':'立即下载 ↓', 'hero.btn2':'探索功能 →',
+    'hero.btn2':'探索功能 →',
+    'hero.store.apple.sub':'下载于',
+    'hero.store.google.sub':'立即获取',
     'chip1':'<span class="chip-dot"></span>🗺️ AI 驱动个性化推荐',
     'chip2':'<span class="chip-dot"></span>💬 本地人的真实评价',
     'chip3':'<span class="chip-dot"></span>📸 实时解答 AI 相机',
@@ -1220,23 +1167,24 @@ const I18N = {
     'faq.a6':'媒体、合作或一般咨询，请联系 <a href="mailto:team@koreainsider.kr">team@koreainsider.kr</a>。',
     'cta.badge':'下载 KOIN',
     'cta.title':'您的韩国之旅，<br />从这里开始。',
-    'cta.desc':'即将上线 iOS &amp; Android。您在韩国唯一需要的应用。',
-    'cta.soon':'即将上线', 'cta.contact':'联系我们',
-    'cta.press':'媒体 &amp; 合作：',
+    'cta.desc':'iOS &amp; Android 现已上线。您在韩国唯一需要的应用。',
+    'cta.apple.sub':'下载于', 'cta.google.sub':'立即获取',
+    'cta.contact':'联系我们',
     'footer.desc':'Korea Insider — 生活与旅行韩国的必备指南',
-    'footer.features':'功能', 'footer.contact_legal':'联系 &amp; 法律',
-    'footer.general':'一般 &amp; 合作',
+    'footer.features':'功能', 'footer.general':'一般 &amp; 合作',
     'footer.copy':'© KOIN / TEAM_KOIN. 保留所有权利。',
   },
   ja: {
     'nav.features':'機能', 'nav.why':'なぜ KOIN', 'nav.faq':'よくある質問',
-    'nav.contact':'お問い合わせ', 'nav.cta':'アプリを入手',
+    'nav.contact':'お問い合わせ', 'nav.cta':'ダウンロード',
     'hero.tag':'Korea Insider',
     'hero.title':'韓国インサイダーが教える<br />本当の<br /><span class="highlight">「韓国」</span>',
     'hero.subtitle':'訪韓・在韓外国人のための韓国生活オールインワンプラットフォーム',
     'hero.desc':'リアルタイムAIカメラ、自動翻訳コミュニティ、個別カスタムキュレーション — 韓国生活のすべてを一つのプラットフォームで。',
-    'hero.btn1':'ダウンロード ↓', 'hero.btn2':'機能を見る →',
-    'chip1':'<span class="chip-dot"></span>🗺️ AI によるパーソナル キュレーション',
+    'hero.btn2':'機能を見る →',
+    'hero.store.apple.sub':'ダウンロード',
+    'hero.store.google.sub':'今すぐ入手',
+    'chip1':'<span class="chip-dot"></span>🗺️ AI によるパーソナルキュレーション',
     'chip2':'<span class="chip-dot"></span>💬 地元民のリアルなレビュー',
     'chip3':'<span class="chip-dot"></span>📸 リアルタイム AI カメラ',
     'chip4':'<span class="chip-dot"></span>🌐 自動翻訳、言語の壁なし',
@@ -1281,22 +1229,23 @@ const I18N = {
     'faq.a6':'プレス、パートナーシップ、一般のお問い合わせは <a href="mailto:team@koreainsider.kr">team@koreainsider.kr</a> までどうぞ。',
     'cta.badge':'KOINをダウンロード',
     'cta.title':'あなたの韓国旅が、<br />ここから始まる。',
-    'cta.desc':'iOS &amp; Android で近日公開。韓国に必要なただ一つのアプリ。',
-    'cta.soon':'近日公開', 'cta.contact':'お問い合わせ',
-    'cta.press':'プレス &amp; パートナーシップ：',
+    'cta.desc':'iOS &amp; Android で今すぐダウンロード。韓国に必要なただ一つのアプリ。',
+    'cta.apple.sub':'ダウンロード', 'cta.google.sub':'今すぐ入手',
+    'cta.contact':'お問い合わせ',
     'footer.desc':'Korea Insider — 韓国での生活・旅行のための必携ガイド',
-    'footer.features':'機能', 'footer.contact_legal':'連絡先 &amp; 法的事項',
-    'footer.general':'一般 &amp; パートナーシップ',
+    'footer.features':'機能', 'footer.general':'一般 &amp; パートナーシップ',
     'footer.copy':'© KOIN / TEAM_KOIN. All rights reserved.',
   },
   vi: {
     'nav.features':'Tính năng', 'nav.why':'Tại sao KOIN', 'nav.faq':'Câu hỏi',
-    'nav.contact':'Liên hệ', 'nav.cta':'Tải ứng dụng',
+    'nav.contact':'Liên hệ', 'nav.cta':'Tải ngay',
     'hero.tag':'Korea Insider',
     'hero.title':'Người trong cuộc<br />tiết lộ<br /><span class="highlight">Hàn Quốc thật sự</span>',
     'hero.subtitle':'Nền tảng all-in-one cho người nước ngoài ghé thăm hoặc sinh sống tại Hàn Quốc',
     'hero.desc':'Camera AI thời gian thực, cộng đồng tự dịch thuật, nội dung cá nhân hóa — tất cả những gì bạn cần ở Hàn Quốc, trên một nền tảng.',
-    'hero.btn1':'Tải ngay ↓', 'hero.btn2':'Khám phá tính năng →',
+    'hero.btn2':'Khám phá tính năng →',
+    'hero.store.apple.sub':'Tải trên',
+    'hero.store.google.sub':'Tải ngay trên',
     'chip1':'<span class="chip-dot"></span>🗺️ Curation cá nhân hóa bởi AI',
     'chip2':'<span class="chip-dot"></span>💬 Review thật từ người địa phương',
     'chip3':'<span class="chip-dot"></span>📸 Camera AI trả lời tức thì',
@@ -1342,17 +1291,15 @@ const I18N = {
     'faq.a6':'Để liên hệ báo chí, hợp tác hoặc tư vấn chung, hãy liên hệ <a href="mailto:team@koreainsider.kr">team@koreainsider.kr</a>.',
     'cta.badge':'Tải KOIN',
     'cta.title':'Hành trình Hàn Quốc<br />của bạn bắt đầu từ đây.',
-    'cta.desc':'Sắp ra mắt trên iOS &amp; Android. Ứng dụng duy nhất bạn cần ở Hàn Quốc.',
-    'cta.soon':'Sắp ra mắt', 'cta.contact':'Liên hệ',
-    'cta.press':'Báo chí &amp; Hợp tác:',
+    'cta.desc':'Đã có mặt trên iOS &amp; Android. Ứng dụng duy nhất bạn cần ở Hàn Quốc.',
+    'cta.apple.sub':'Tải trên', 'cta.google.sub':'Tải ngay trên',
+    'cta.contact':'Liên hệ',
     'footer.desc':'Korea Insider — Hướng dẫn thiết yếu cho cuộc sống &amp; du lịch tại Hàn Quốc',
-    'footer.features':'Tính năng', 'footer.contact_legal':'Liên hệ &amp; Pháp lý',
-    'footer.general':'Chung &amp; Hợp tác',
+    'footer.features':'Tính năng', 'footer.general':'Chung &amp; Hợp tác',
     'footer.copy':'© KOIN / TEAM_KOIN. Bảo lưu mọi quyền.',
   }
 };
 
-// ── 언어 적용 함수 ─────────────────────────────
 function applyLang(code) {
   const t = I18N[code];
   if (!t) return;
@@ -1363,8 +1310,6 @@ function applyLang(code) {
   document.documentElement.lang = code === 'ko' ? 'ko' : code === 'zh' ? 'zh' : code === 'ja' ? 'ja' : code === 'vi' ? 'vi' : 'en';
 }
 
-
-// ── nav 국기 switcher ──────────────────────────
 function switchLang(code) {
   applyLang(code);
   sessionStorage.setItem('koin_lang', code);
@@ -1373,27 +1318,17 @@ function switchLang(code) {
   });
 }
 
-// ── 언어 선택 → 인트로 시작 ────────────────────
 function selectLang(code) {
-  // 번역 적용
   applyLang(code);
   sessionStorage.setItem('koin_lang', code);
   document.querySelectorAll('.ls-btn').forEach(btn => {
     btn.classList.toggle('active', btn.getAttribute('onclick') === "switchLang('" + code + "')");
   });
-
-  // lang-selector 페이드아웃
   const sel = document.getElementById('lang-selector');
   sel.classList.add('hide');
-
-  // 인트로 시작 (숨겨져 있던 것 표시)
-  setTimeout(() => {
-    sel.remove();
-    startIntro();
-  }, 500);
+  setTimeout(() => { sel.remove(); startIntro(); }, 500);
 }
 
-// ── 인트로 애니메이션 (selectLang에서 호출) ────
 function startIntro() {
   const overlay  = document.getElementById('intro-overlay');
   const introBg  = document.getElementById('intro-bg');
@@ -1429,7 +1364,6 @@ function startIntro() {
   setTimeout(() => {
     clearTimeout(safety);
     if (!navWord || !flyer) { emergencyExit(); return; }
-    // nav wordmark가 실제로 보이는지 확인 (display:none 이면 width=0)
     const navRect = navWord.getBoundingClientRect();
     if (navRect.width === 0) { emergencyExit(); return; }
 
@@ -1476,11 +1410,7 @@ function startIntro() {
   }, 4800);
 }
 
-// ── 저장된 언어 자동 적용 or 선택화면 표시 ──────
 (function() {
-  // 이전에 선택한 언어가 있으면 바로 적용하고 인트로로
-  // 없으면 언어 선택 화면 표시 (기본값)
-  // 국기 switcher active 동기화 함수
   function syncFlags(code) {
     document.querySelectorAll('.ls-btn').forEach(btn => {
       btn.classList.toggle('active', btn.getAttribute('onclick') === "switchLang('" + code + "')");
@@ -1494,9 +1424,7 @@ function startIntro() {
     if (sel) sel.style.display = 'none';
     startIntro();
   }
-  // else: 언어 선택 화면이 그대로 표시됨
 
-  // 햄버거 메뉴
   const hamburger  = document.getElementById('nav-hamburger');
   const mobileMenu = document.getElementById('mobile-menu');
   if (hamburger) {
@@ -1512,7 +1440,6 @@ function startIntro() {
     document.body.style.overflow = '';
   };
 
-  // 스크롤 reveal
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
