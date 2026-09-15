@@ -152,9 +152,9 @@ nav{
 @media(max-width:760px){.compare{grid-template-columns:1fr}}
 .compare-arrow{font-size:28px;color:var(--primary);text-align:center}
 @media(max-width:760px){.compare-arrow{transform:rotate(90deg)}}
-.compare-card{border-radius:var(--radius);padding:32px;border:1.5px solid var(--border)}
-.compare-before{background:var(--bg-2)}
-.compare-after{background:var(--bg-3);border-color:var(--primary)}
+.compare-card{padding:32px;border:1.5px solid var(--border)}
+.compare-before{background:var(--bg-2);border-radius:12px}
+.compare-after{background:var(--bg-3);border-color:var(--primary);border-radius:24px;box-shadow:0 12px 32px rgba(59,130,246,.14)}
 .compare-card h3{font-family:var(--sans);font-size:15px;font-weight:700;color:var(--sub);margin-bottom:20px}
 .compare-after h3{color:var(--primary-dk)}
 .app-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);font-size:15px}
@@ -167,7 +167,7 @@ nav{
 
 .reasons-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 @media(max-width:760px){.reasons-strip{grid-template-columns:1fr}}
-.reason{padding:24px;border-radius:var(--radius-sm);background:var(--bg-2)}
+.reason{padding:20px 24px;border-radius:0 var(--radius-sm) var(--radius-sm) 0;background:var(--bg-2);border-left:4px solid var(--primary)}
 .reason .r-ico{color:var(--primary);margin-bottom:10px}
 .reason .r-ico .icon-lg{width:26px;height:26px}
 .reason h4{font-size:15px;font-weight:700;margin-bottom:6px}
@@ -227,7 +227,7 @@ nav{
 
 .reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 @media(max-width:860px){.reviews-grid{grid-template-columns:1fr}}
-.review-card{background:var(--bg-2);border-radius:var(--radius);padding:24px;transition:transform .2s ease,box-shadow .2s ease}
+.review-card{background:var(--bg-2);border-radius:20px;padding:24px;box-shadow:0 2px 10px rgba(26,30,42,.05);transition:transform .2s ease,box-shadow .2s ease}
 .review-card:hover{transform:translateY(-4px);box-shadow:0 16px 32px rgba(26,30,42,.1)}
 .rating-badge{display:inline-flex;align-items:center;gap:10px;padding:10px 18px;border-radius:100px;background:var(--bg-2);border:1px solid var(--border);font-size:14px;margin-bottom:20px}
 .rating-badge b{font-family:var(--serif);font-size:17px;color:var(--primary-dk)}
@@ -339,7 +339,7 @@ footer{padding:64px 0 40px;font-size:14px;color:var(--sub)}
   <div class="nav-inner">
     <a class="logo" href="#"><img src="assets/koin-logo.png" alt="KOIN">Koin</a>
     <div class="nav-links">
-      <a href="#problem" data-i18n="nav.problem">왜 코인</a>
+      <a href="#problem" data-i18n="nav.problem">why KOIN</a>
       <a href="#features" data-i18n="nav.features">기능</a>
       <a href="#proof" data-i18n="nav.proof">이용 현황</a>
       <a href="#faq" data-i18n="nav.faq">FAQ</a>
@@ -363,7 +363,7 @@ footer{padding:64px 0 40px;font-size:14px;color:var(--sub)}
     <a class="logo" href="#"><img src="assets/koin-logo.png" alt="KOIN">Koin</a>
     <button id="menu-close" aria-label="close"><svg class="icon-lg"><use href="#i-x"/></svg></button>
   </div>
-  <a href="#problem" data-i18n="nav.problem">왜 코인</a>
+  <a href="#problem" data-i18n="nav.problem">why KOIN</a>
   <a href="#features" data-i18n="nav.features">기능</a>
   <a href="#proof" data-i18n="nav.proof">이용 현황</a>
   <a href="#faq" data-i18n="nav.faq">FAQ</a>
@@ -666,7 +666,7 @@ footer{padding:64px 0 40px;font-size:14px;color:var(--sub)}
    실제 배포 전에 zh/ja/vi 텍스트를 채워 넣어야 합니다. (아래 주석 TODO 참고) */
 const translations = {
   ko: {
-    "nav.problem":"왜 코인","nav.features":"기능","nav.proof":"이용 현황","nav.faq":"FAQ","nav.cta":"다운로드",
+    "nav.problem":"why KOIN","nav.features":"기능","nav.proof":"이용 현황","nav.faq":"FAQ","nav.cta":"다운로드",
     "hero.title":"당신 손 안의,<br>진짜 한국.","hero.sub":"AI 큐레이션, 다국어 커뮤니티, 실시간 AI 카메라까지. 한국 생활에 필요한 모든 것을 앱 하나로.",
     "hero.ctaPrimary":"왜 필요한지 보기 →","hero.qr":"스캔해서<br>바로 다운로드",
     "problem.title":"지도, 번역, 예약, 커뮤니티...<br>앱 5개 깔지 마세요.",
@@ -712,7 +712,7 @@ const translations = {
     "sticky.text":"한국 생활, 코인 하나면 끝.","sticky.cta":"다운로드"
   },
   en: {
-    "nav.problem":"Why KOIN","nav.features":"Features","nav.proof":"Community","nav.faq":"FAQ","nav.cta":"Download",
+    "nav.problem":"why KOIN","nav.features":"Features","nav.proof":"Community","nav.faq":"FAQ","nav.cta":"Download",
     "hero.title":"Korea,<br>in your hands.","hero.sub":"AI curation, a multilingual community, and real-time AI camera — everything you need in Korea, in one app.",
     "hero.ctaPrimary":"See why you need it →","hero.qr":"Scan to<br>download instantly",
     "problem.title":"Maps, translation, reservations,<br>community... stop downloading 5 apps.",
