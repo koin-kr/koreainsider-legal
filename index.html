@@ -162,7 +162,7 @@ nav{
 .app-row .ico{width:34px;height:34px;border-radius:10px;background:#fff;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--sub)}
 .app-row .x{margin-left:auto;color:#D64545}
 .compare-after .app-row{border-bottom:none;padding:16px 0;font-size:16px;font-weight:600}
-.compare-after .ico{background:var(--primary);color:#fff;overflow:hidden}
+.compare-after .ico{overflow:hidden}
 .compare-after .check{margin-left:auto;color:var(--primary-dk)}
 
 .reasons-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
@@ -193,6 +193,18 @@ nav{
 .kamera-tag{position:absolute;background:#fff;color:var(--text);font-size:12px;font-weight:600;padding:6px 10px;border-radius:8px;box-shadow:0 6px 16px rgba(0,0,0,.2)}
 .kamera-tag.t1{top:38%;left:36px}
 .kamera-tag.t2{bottom:22%;right:36px}
+
+/* K-amera 3-step sequence */
+.kamera-visual.kamera-seq{display:flex;align-items:center;gap:6px;max-width:520px;padding:20px 14px}
+.kamera-step{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:8px}
+.kamera-step-media{position:relative;width:100%}
+.kamera-step-num{position:absolute;top:8px;left:8px;width:20px;height:20px;border-radius:50%;background:var(--tertiary);color:var(--text);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;z-index:1}
+.kamera-step-caption{font-size:12px;color:#B8C0D8;text-align:center;font-weight:600;line-height:1.3}
+.kamera-arrow{flex-shrink:0;color:var(--tertiary);font-size:16px;opacity:.8}
+@media(max-width:520px){
+  .kamera-visual.kamera-seq{flex-direction:column;max-width:240px}
+  .kamera-arrow{transform:rotate(90deg)}
+}
 
 /* K-uration gallery */
 .gallery-grid{display:grid;grid-template-columns:1.3fr 1fr;grid-template-rows:1fr 1fr;gap:10px;height:340px;max-width:380px}
@@ -246,11 +258,13 @@ nav{
 .chevron{width:26px;height:26px;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:var(--tertiary);color:var(--text);transition:transform .2s}
 
 /* ===== DOWNLOAD CTA ===== */
-.download-cta{background:var(--text);color:#fff;border-radius:28px;padding:64px 40px;text-align:center;margin:0 24px}
+.download-cta{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dk) 100%);color:#fff;border-radius:28px;padding:64px 40px;text-align:center;margin:0 24px;position:relative;overflow:hidden}
 @media(min-width:1120px){.download-cta{margin:0 auto;max-width:var(--maxw)}}
-.download-cta h2{color:#fff}
-.download-cta p{color:#B8C0D8;margin-bottom:28px}
-.download-cta .hero-store-row{justify-content:center}
+.download-cta::before{content:'';position:absolute;top:-70px;right:-70px;width:240px;height:240px;border-radius:50%;background:var(--tertiary);opacity:.16}
+.download-cta::after{content:'';position:absolute;bottom:-80px;left:-40px;width:180px;height:180px;border-radius:50%;background:var(--tertiary);opacity:.1}
+.download-cta h2{color:#fff;position:relative}
+.download-cta p{color:rgba(255,255,255,.85);margin-bottom:28px;position:relative}
+.download-cta .hero-store-row{justify-content:center;position:relative}
 
 /* ===== FOOTER ===== */
 footer{padding:64px 0 40px;font-size:14px;color:var(--sub)}
@@ -425,7 +439,7 @@ footer{padding:64px 0 40px;font-size:14px;color:var(--sub)}
       <div class="compare-arrow">→</div>
       <div class="compare-card compare-after">
         <h3 data-i18n="problem.afterLabel">이제는</h3>
-        <div class="app-row"><span class="ico" style="background:var(--primary)"><img src="assets/koin-logo.png" alt="" style="width:20px;height:20px;object-fit:contain"></span><span data-i18n="problem.appAfter">코인 하나로 전부 해결</span><span class="check"><svg class="icon"><use href="#i-check"/></svg></span></div>
+        <div class="app-row"><span class="ico" style="background:#fff"><img src="assets/koin-logo.png" alt="" style="width:20px;height:20px;object-fit:contain"></span><span data-i18n="problem.appAfter">코인 하나로 전부 해결</span><span class="check"><svg class="icon"><use href="#i-check"/></svg></span></div>
       </div>
     </div>
 
@@ -467,9 +481,24 @@ footer{padding:64px 0 40px;font-size:14px;color:var(--sub)}
           <span class="pill" data-i18n="features.kameraPill3">생활 표지판</span>
         </div>
       </div>
-      <div class="kamera-visual">
+      <div class="kamera-visual kamera-seq">
+        <div class="kamera-step">
+          <div class="kamera-step-media"><span class="kamera-step-num">1</span><img src="assets/kamera-1-photo.jpg" alt="원본 사진" loading="lazy"></div>
+          <p class="kamera-step-caption" data-i18n="features.kameraStep1">찍기만 하면</p>
+        </div>
+        <span class="kamera-arrow" aria-hidden="true">→</span>
+        <div class="kamera-step">
+          <div class="kamera-step-media"><span class="kamera-step-num">2</span><img src="assets/kamera-2-question.jpg" alt="질문 선택 화면" loading="lazy"></div>
+          <p class="kamera-step-caption" data-i18n="features.kameraStep2">궁금한 걸 골라요</p>
+        </div>
+        <span class="kamera-arrow" aria-hidden="true">→</span>
+        <div class="kamera-step">
+          <div class="kamera-step-media"><span class="kamera-step-num">3</span><img src="assets/kamera-3-result.jpg" alt="결과 확인 화면" loading="lazy"></div>
+          <p class="kamera-step-caption" data-i18n="features.kameraStep3">바로 답이 와요</p>
+        </div>
+        <!-- 실제 데모 영상이 생기면 이 시퀀스 위/아래에 보조 자료로 추가:
         <video autoplay muted loop playsinline poster="assets/camera.png" src="assets/videos/kamera-demo.mp4"></video>
-        <!-- assets/videos/kamera-demo.mp4 없으면 poster 이미지(camera.png)만 정적으로 보여요. 화면 녹화 파일 생기면 그 경로에 넣기만 하면 자동 재생됩니다. -->
+        -->
       </div>
     </div>
 
@@ -682,6 +711,7 @@ const translations = {
     "features.kameraH":"일단 찍으면,<br>AI가 다 알려줘요","features.kameraP":"메뉴판이든 표지판이든 계약서든, 카메라를 갖다 대는 순간 번역과 설명이 함께 떠요. 뭔지 몰라 당황할 일이 없어요.",
     "features.kameraPill1":"메뉴 번역","features.kameraPill2":"서류·계약서","features.kameraPill3":"생활 표지판",
     "features.kameraTag1":"된장찌개 · Fermented soybean stew","features.kameraTag2":"알레르기: 대두 함유",
+    "features.kameraStep1":"찍기만 하면","features.kameraStep2":"궁금한 걸 골라요","features.kameraStep3":"바로 답이 와요",
     "features.kurationH":"취향 저격 코스,<br>AI가 짜드려요","features.kurationP":"흩어진 블로그 대신, 관심사와 일정에 맞춘 카드뉴스형 가이드. 쓸수록 내 취향을 더 잘 아는 큐레이션이에요.",
     "features.kurationPill1":"개인 맞춤 추천","features.kurationPill2":"카드뉴스 형식","features.kurationPill3":"맛집·명소·팁",
     "features.gTile1":"📍 오늘 갈 만한 곳","features.gTile2":"🍜 내 취향 맛집",
@@ -728,6 +758,7 @@ const translations = {
     "features.kameraH":"Point, shoot,<br>AI explains everything","features.kameraP":"Menus, signs, contracts — point your camera and get instant translation and explanation. Never be confused again.",
     "features.kameraPill1":"Menu translation","features.kameraPill2":"Documents & contracts","features.kameraPill3":"Everyday signs",
     "features.kameraTag1":"Doenjang Jjigae · Fermented soybean stew","features.kameraTag2":"Allergen: contains soy",
+    "features.kameraStep1":"Just snap a photo","features.kameraStep2":"Pick what you're curious about","features.kameraStep3":"Get your answer instantly",
     "features.kurationH":"A course tailored to you,<br>planned by AI","features.kurationP":"No more scattered blogs — card-news style guides matched to your interests and itinerary. It gets sharper the more you use it.",
     "features.kurationPill1":"Personalised picks","features.kurationPill2":"Card-news format","features.kurationPill3":"Food · Places · Tips",
     "features.gTile1":"📍 Worth visiting today","features.gTile2":"🍜 Matched to your taste",
