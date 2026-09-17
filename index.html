@@ -10,6 +10,11 @@
 <meta property="og:image" content="https://koreainsider.kr/assets/og-image.png">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://koreainsider.kr">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="zh_CN">
+<meta property="og:locale:alternate" content="ja_JP">
+<meta property="og:locale:alternate" content="vi_VN">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fonts-archive/GapyeongHanseokbong/subsets/GapyeongHanseokbong-dynamic-subset.css" type="text/css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -149,24 +154,23 @@ nav{
 .kr-visual:has(.kr-chip.is-active) .kr-dim{opacity:1}
 
 .kr-chip{
-  position:absolute;display:flex;align-items:center;gap:8px;
-  background:#fff;border-radius:14px;padding:6px 12px 6px 6px;
-  box-shadow:0 14px 30px rgba(26,30,42,.16);
+  position:absolute;display:flex;align-items:center;gap:10px;
   z-index:3;opacity:0;animation:kr-pop .5s ease forwards;animation-delay:var(--d,0s);
   scale:.72;
-  transition:scale .35s cubic-bezier(.34,1.56,.64,1),translate .3s ease,box-shadow .3s ease;
+  transition:scale .35s cubic-bezier(.34,1.56,.64,1),translate .3s ease;
 }
-.kr-chip:hover,.kr-chip:focus-visible,.kr-chip.is-active{scale:1.8;box-shadow:0 30px 60px rgba(10,14,26,.4);z-index:5}
-.kr-chip img{width:38px;height:50px;object-fit:cover;object-position:top center;border-radius:9px;background:var(--bg-3);transition:width .3s ease,height .3s ease}
-.kr-chip span{font-size:12px;font-weight:700;white-space:nowrap}
+.kr-chip:hover,.kr-chip:focus-visible,.kr-chip.is-active{scale:1.2;z-index:5}
+.kr-chip img{width:192px;height:auto;object-fit:cover;object-position:top center;border-radius:14px;background:var(--bg-3);box-shadow:0 14px 30px rgba(26,30,42,.22);transition:width .3s ease,height .3s ease,box-shadow .3s ease}
+.kr-chip:hover img,.kr-chip:focus-visible img,.kr-chip.is-active img{box-shadow:0 20px 40px rgba(10,14,26,.32)}
+.kr-chip span{font-size:13px;font-weight:700;color:var(--text);white-space:nowrap}
 @keyframes kr-pop{from{opacity:0;translate:0 8px}to{opacity:1;translate:0 0}}
 
-.kr-chip-1{top:6px;left:0;transform-origin:right center}
+.kr-chip-1{top:-100px;left:-150px;transform-origin:right center}
 .kr-chip-1 span{transform:translateY(-1px)}
 .kr-chip-1:hover,.kr-chip-1.is-active{translate:-6px 0}
-.kr-chip-2{top:26px;right:0;transform-origin:left center}
+.kr-chip-2{top:-50px;right:-150px;transform-origin:left center}
 .kr-chip-2:hover,.kr-chip-2.is-active{translate:6px 0}
-.kr-chip-3{bottom:10px;left:44%;transform:translateX(-50%);transform-origin:top center}
+.kr-chip-3{bottom:-250px;left:44%;transform:translateX(-50%);transform-origin:top center}
 .kr-chip-3:hover,.kr-chip-3.is-active{translate:0 6px}
 
 @media(max-width:900px){
@@ -175,9 +179,8 @@ nav{
   .kr-arrows{display:none}
   .kr-dim{display:none}
   .kr-chip{position:static;transform:none!important;scale:1!important;width:100%;max-width:280px;animation-delay:0s!important}
-  .kr-chip:hover,.kr-chip:active{translate:0 -4px!important;box-shadow:0 20px 40px rgba(26,30,42,.2)}
-  .kr-chip.is-active{box-shadow:0 20px 44px rgba(26,30,42,.24);background:var(--bg-3)}
-  .kr-chip.is-active img{width:72px;height:96px}
+  .kr-chip:hover,.kr-chip:active{translate:0 -4px!important}
+  .kr-chip.is-active img{width:96px;height:auto}
 }
 
 /* ===== PROBLEM → SOLUTION ===== */
@@ -243,11 +246,12 @@ nav{
 }
 .kamera-phone:hover{transform:translateY(-6px)}
 .kamera-phone::before{content:'';position:absolute;top:28px;left:50%;transform:translateX(-50%);width:64px;height:6px;border-radius:100px;background:#1c2030;z-index:2}
-.kamera-phone-screen{position:relative;border-radius:24px;overflow:hidden;aspect-ratio:9/17.5;background:#111}
-.kamera-phone-screen img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;opacity:0;animation:kp-cross 6s linear infinite}
-.kamera-phone-screen img:nth-child(1){animation-delay:0s;object-fit:contain;object-position:center}
-.kamera-phone-screen img:nth-child(2){animation-delay:2s}
-.kamera-phone-screen img:nth-child(3){animation-delay:4s}
+.kamera-phone-screen{position:relative;border-radius:24px;overflow:hidden;aspect-ratio:9/15;background:#111}
+.kamera-slide{position:absolute;inset:0;opacity:0;animation:kp-cross 6s linear infinite}
+.kamera-slide:nth-child(1){animation-delay:0s}
+.kamera-slide:nth-child(2){animation-delay:2s}
+.kamera-slide:nth-child(3){animation-delay:4s}
+.kamera-slide img{position:relative;width:100%;height:100%;object-fit:cover;object-position:top center}
 @keyframes kp-cross{0%{opacity:0}3%{opacity:1}30%{opacity:1}36%{opacity:0}100%{opacity:0}}
 .kamera-caption-row{position:relative;height:22px;margin-bottom:10px}
 .kamera-caption{position:absolute;left:0;right:0;top:0;color:var(--text);font-size:15px;font-weight:700;text-align:center;opacity:0;animation:kp-caption 6s linear infinite}
@@ -353,7 +357,6 @@ footer{padding:64px 0 40px;font-size:14px;color:var(--sub)}
 .icon-lg{width:22px;height:22px}
 
 /* ===== 사진/스크린샷 컨테이너 정리 (비율 고정으로 왜곡 방지) ===== */
-.kr-chip img{aspect-ratio:9/12;object-fit:cover;object-position:top center;background:var(--bg-3)}
 .kamera-visual img,.kamera-visual video{width:100%;aspect-ratio:9/16;object-fit:cover;object-position:top center;background:#111}
 
 /* ===== 모바일 메뉴 ===== */
@@ -484,22 +487,22 @@ footer{padding:64px 0 40px;font-size:14px;color:var(--sub)}
             <path d="M0,0 L10,5 L0,10 Z" fill="var(--primary)"/>
           </marker>
         </defs>
-        <path class="kr-arrow" style="--d:.1s" d="M32 22 C24 16 18 12 14 8" marker-end="url(#kr-arrowhead)"/>
-        <path class="kr-arrow" style="--d:.4s" d="M50 32 C64 28 76 22 84 15" marker-end="url(#kr-arrowhead)"/>
-        <path class="kr-arrow" style="--d:.7s" d="M42 66 C44 76 45 84 46 90" marker-end="url(#kr-arrowhead)"/>
+        <path class="kr-arrow" style="--d:.1s" d="M32 22 C20 12 8 0 -4 -10" marker-end="url(#kr-arrowhead)"/>
+        <path class="kr-arrow" style="--d:.4s" d="M50 32 C68 24 86 12 104 0" marker-end="url(#kr-arrowhead)"/>
+        <path class="kr-arrow" style="--d:.7s" d="M42 66 C44 82 45 96 46 112" marker-end="url(#kr-arrowhead)"/>
       </svg>
       <div class="kr-dim" aria-hidden="true"></div>
       <a class="kr-chip kr-chip-1" href="#features" style="--d:.5s">
         <img src="assets/camera.png" alt="K-amera 미리보기">
-        <span>📸 K-amera</span>
+        <span>K-amera</span>
       </a>
       <a class="kr-chip kr-chip-2" href="#features" style="--d:.8s">
         <img src="assets/kuration.png" alt="K-uration 미리보기">
-        <span>🗺️ K-uration</span>
+        <span>K-uration</span>
       </a>
       <a class="kr-chip kr-chip-3" href="#features" style="--d:1.1s">
         <img src="assets/community.png" alt="K-ommunity 미리보기">
-        <span>💬 K-ommunity</span>
+        <span>K-ommunity</span>
       </a>
     </div>
   </div>
@@ -573,9 +576,15 @@ footer{padding:64px 0 40px;font-size:14px;color:var(--sub)}
         <div class="kamera-progress"><i></i><i></i><i></i></div>
         <div class="kamera-phone">
           <div class="kamera-phone-screen">
-            <img src="assets/kamera-1-photo.jpg" alt="원본 사진" loading="lazy">
-            <img src="assets/kamera-2-question.jpg" alt="질문 선택 화면" loading="lazy">
-            <img src="assets/kamera-3-result.jpg" alt="결과 확인 화면" loading="lazy">
+            <div class="kamera-slide">
+              <img src="assets/kamera-1-photo.jpg" alt="원본 사진" loading="lazy">
+            </div>
+            <div class="kamera-slide">
+              <img src="assets/kamera-2-question.jpg" alt="질문 선택 화면" loading="lazy">
+            </div>
+            <div class="kamera-slide">
+              <img src="assets/kamera-3-result.jpg" alt="결과 확인 화면" loading="lazy">
+            </div>
           </div>
         </div>
         <!-- 실제 데모 영상이 생기면 kamera-phone-screen 안에 img 대신 video로 교체 가능 -->
@@ -611,7 +620,7 @@ footer{padding:64px 0 40px;font-size:14px;color:var(--sub)}
     <!-- K-ommunity -->
     <div class="feature-block" data-reveal>
       <div>
-        <span class="feature-tag">💬 K-ommunity</span>
+        <span class="feature-tag">K-ommunity</span>
         <h3 data-i18n="features.kommunityH">언어 걱정 없이,<br>진짜 경험자에게 물어보세요</h3>
         <p data-i18n="features.kommunityP">어떤 언어로 질문해도 자동 번역돼서 전달돼요. 실제로 겪어본 사람들의 답을 실시간으로 받아보세요.</p>
         <div class="pill-row">
@@ -753,9 +762,9 @@ footer{padding:64px 0 40px;font-size:14px;color:var(--sub)}
       </div>
       <div>
         <h4 data-i18n="footer.featuresH">기능</h4>
-        <a href="#features" data-i18n="footer.f1">📸 K-amera</a>
-        <a href="#features" data-i18n="footer.f2">🗺️ K-uration</a>
-        <a href="#features" data-i18n="footer.f3">💬 K-ommunity</a>
+        <a href="#features" data-i18n="footer.f1">K-amera</a>
+        <a href="#features" data-i18n="footer.f2">K-uration</a>
+        <a href="#features" data-i18n="footer.f3">K-ommunity</a>
       </div>
       <div>
         <h4 data-i18n="footer.contactH">Contact & Legal</h4>
@@ -823,7 +832,7 @@ const translations = {
     "faq.q6":"제휴나 문의는 어떻게 하나요?","faq.a6":"언론, 제휴, 일반 문의 모두 team@koreainsider.kr로 연락 주세요.",
     "download.title":"당신의 한국 여정,<br>여기서 시작하세요.","download.sub":"iOS와 안드로이드에서 지금 바로 다운로드하세요.",
     "footer.tagline":"Korea Insider — 한국에서 살고 여행하는 데 필요한 가이드.","footer.featuresH":"기능",
-    "footer.f1":"📸 K-amera","footer.f2":"🗺️ K-uration","footer.f3":"💬 K-ommunity",
+    "footer.f1":"K-amera","footer.f2":"K-uration","footer.f3":"K-ommunity",
     "footer.contactH":"Contact & Legal","footer.privacy":"개인정보처리방침","footer.terms":"이용약관",
     "footer.copyright":"© KOIN / TEAM_KOIN. All rights reserved.",
     "sticky.text":"한국 생활, 코인 하나면 끝.","sticky.cta":"다운로드"
@@ -870,7 +879,7 @@ const translations = {
     "faq.q6":"How can I contact or partner with KOIN?","faq.a6":"For press, partnerships, or general enquiries, reach us at team@koreainsider.kr.",
     "download.title":"Your Korea journey<br>starts here.","download.sub":"Download now on iOS and Android.",
     "footer.tagline":"Korea Insider — your essential guide to living & travelling in Korea.","footer.featuresH":"Features",
-    "footer.f1":"📸 K-amera","footer.f2":"🗺️ K-uration","footer.f3":"💬 K-ommunity",
+    "footer.f1":"K-amera","footer.f2":"K-uration","footer.f3":"K-ommunity",
     "footer.contactH":"Contact & Legal","footer.privacy":"Privacy Policy","footer.terms":"Terms of Service",
     "footer.copyright":"© KOIN / TEAM_KOIN. All rights reserved.",
     "sticky.text":"Everything you need in Korea, one app.","sticky.cta":"Download"
@@ -1032,6 +1041,94 @@ stickyBar.querySelector('.close').addEventListener('click', ()=>{
   stickyDismissed = true;
   stickyBar.classList.remove('show');
 });
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://koreainsider.kr/#organization",
+      "name": "KOIN",
+      "alternateName": "Korea Insider",
+      "url": "https://koreainsider.kr",
+      "logo": "https://koreainsider.kr/assets/koin-logo.png",
+      "email": "team@koreainsider.kr"
+    },
+    {
+      "@type": "MobileApplication",
+      "name": "KOIN — Korea Insider",
+      "operatingSystem": "iOS",
+      "applicationCategory": "TravelApplication",
+      "url": "https://koreainsider.kr",
+      "downloadUrl": "https://apps.apple.com/kr/app/koin/id6760605411",
+      "publisher": { "@id": "https://koreainsider.kr/#organization" }
+    },
+    {
+      "@type": "MobileApplication",
+      "name": "KOIN — Korea Insider",
+      "operatingSystem": "Android",
+      "applicationCategory": "TravelApplication",
+      "url": "https://koreainsider.kr",
+      "downloadUrl": "https://play.google.com/store/apps/details?id=kr.koreainsider.koin&hl=ko",
+      "publisher": { "@id": "https://koreainsider.kr/#organization" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "AI 카메라는 정확히 뭘 할 수 있나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "크게 4가지예요. 음식(메뉴 번역, 비건·할랄·알레르기 정보), 서류(근로계약서, 비자 서류), 생활(따릉이, 티머니, 표지판), 그리고 그 외 모든 것을 자동 인식해요. 안전과 직결된 정보는 반드시 별도로 한 번 더 확인해주세요."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "커뮤니티 다국어 번역은 어떻게 작동하나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "글은 자동으로 번역돼요. 본인 언어로 쓰면 다른 사람은 자기 언어로 읽을 수 있어서 따로 번역할 필요가 없어요."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "큐레이션 콘텐츠는 어떻게 개인화되나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "AI가 음식 취향, 여행 스타일, 목적지 같은 선호도를 학습해서 가장 관련 있는 가이드를 보여드려요. 쓸수록 더 정확해져요."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "개인정보는 어떻게 처리되나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "필요한 최소한의 정보만 수집하고, 절대 판매하지 않아요. 한국 개인정보보호법을 엄격히 준수해요."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "어떤 로그인 방식을 지원하나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "카카오, 구글, 이메일 — 편한 방식을 선택하시면 돼요."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "제휴나 문의는 어떻게 하나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "언론, 제휴, 일반 문의 모두 team@koreainsider.kr로 연락 주세요."
+          }
+        }
+      ]
+    }
+  ]
+}
 </script>
 </body>
 </html>
