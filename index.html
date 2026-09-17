@@ -42,7 +42,7 @@
   --maxw:1120px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:88px}
 body{
   font-family:var(--sans);
   color:var(--text);
@@ -138,49 +138,60 @@ nav{
 .qr-box img{width:64px;height:64px;border-radius:8px;border:1px solid var(--border)}
 .qr-box span{font-size:13px;color:var(--sub)}
 
-/* ===== KR-VISUAL: 대한민국 실루엣 + 화살표 커넥터 ===== */
-.kr-visual{position:relative;height:520px}
-.kr-map{position:absolute;left:36%;top:52%;transform:translate(-50%,-50%);height:400px;width:auto;z-index:2;filter:drop-shadow(0 22px 40px rgba(59,130,246,.32))}
+/* ===== KR-VISUAL: 대한민국 실루엣 + 기능 미리보기 플로팅 칩 ===== */
+.kr-visual{position:relative;height:480px}
+.kr-map{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);height:340px;width:auto;z-index:2;filter:drop-shadow(0 22px 40px rgba(59,130,246,.32))}
 .kr-map-shape{fill:var(--primary);stroke:var(--primary-dk);stroke-width:.6;stroke-linejoin:round}
 .kr-map-jeju{fill:var(--tertiary);stroke:var(--primary-dk);stroke-width:.6;stroke-linejoin:round}
 
-.kr-arrows{position:absolute;inset:0;width:100%;height:100%;z-index:1;overflow:visible}
-.kr-arrow{fill:none;stroke:var(--primary);stroke-width:2.5;stroke-linecap:round;opacity:.7;
-  stroke-dasharray:100;stroke-dashoffset:100;animation:kr-draw 1.4s ease forwards;animation-delay:var(--d,0s)}
-@keyframes kr-draw{to{stroke-dashoffset:0}}
-
-.kr-dim{position:absolute;inset:-20px;background:rgba(10,14,26,.4);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);opacity:0;transition:opacity .3s ease;z-index:4;pointer-events:none;border-radius:32px}
-.kr-visual:has(.kr-chip:hover) .kr-dim,
-.kr-visual:has(.kr-chip.is-active) .kr-dim{opacity:1}
-
-.kr-chip{
-  position:absolute;display:flex;align-items:center;gap:10px;
-  z-index:3;opacity:0;animation:kr-pop .5s ease forwards;animation-delay:var(--d,0s);
-  scale:.72;
-  transition:scale .35s cubic-bezier(.34,1.56,.64,1),translate .3s ease;
+/* 지도 위 거점 핀 + 펄스 링 (viewBox 0 0 100 200 좌표계를 그대로 재사용) */
+.kr-pins{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);height:340px;width:170px;z-index:4;pointer-events:none}
+.kr-pin{position:absolute;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;background:#fff;box-shadow:0 0 0 2px var(--primary-dk),0 2px 6px rgba(10,14,26,.35)}
+.kr-pin::after{
+  content:'';position:absolute;inset:-5px;border-radius:50%;border:2px solid var(--primary-dk);
+  opacity:0;animation:kr-ping 2.6s ease-out infinite;
 }
-.kr-chip:hover,.kr-chip:focus-visible,.kr-chip.is-active{scale:1.2;z-index:5}
-.kr-chip img{width:192px;height:auto;object-fit:cover;object-position:top center;border-radius:14px;background:var(--bg-3);box-shadow:0 14px 30px rgba(26,30,42,.22);transition:width .3s ease,height .3s ease,box-shadow .3s ease}
-.kr-chip:hover img,.kr-chip:focus-visible img,.kr-chip.is-active img{box-shadow:0 20px 40px rgba(10,14,26,.32)}
-.kr-chip span{font-size:13px;font-weight:700;color:var(--text);white-space:nowrap}
+.kr-pin-seoul::after{animation-delay:0s}
+.kr-pin-donghae::after{animation-delay:.6s}
+.kr-pin-busan::after{animation-delay:1.2s}
+@keyframes kr-ping{0%{transform:scale(.6);opacity:.8}80%{opacity:0}100%{transform:scale(2.2);opacity:0}}
+
+/* 핀 ↔ 칩 연결선 */
+.kr-lines{position:absolute;inset:0;z-index:3;pointer-events:none;overflow:visible}
+.kr-line{fill:none;stroke:var(--primary-dk);stroke-width:1.4;stroke-dasharray:4 4;opacity:.28;transition:opacity .25s ease,stroke .25s ease}
+.kr-visual:has(.kr-chip-1:hover) .kr-line-1,.kr-visual:has(.kr-chip-1:focus-visible) .kr-line-1,.kr-visual:has(.kr-chip-1.is-active) .kr-line-1,
+.kr-visual:has(.kr-chip-2:hover) .kr-line-2,.kr-visual:has(.kr-chip-2:focus-visible) .kr-line-2,.kr-visual:has(.kr-chip-2.is-active) .kr-line-2,
+.kr-visual:has(.kr-chip-3:hover) .kr-line-3,.kr-visual:has(.kr-chip-3:focus-visible) .kr-line-3,.kr-visual:has(.kr-chip-3.is-active) .kr-line-3{
+  opacity:.9;stroke:var(--primary)
+}
+
+/* 플로팅 뱃지 칩: 작은 썸네일 + 알약 라벨 */
+.kr-chip{
+  position:absolute;display:flex;flex-direction:column;align-items:center;gap:6px;
+  padding:6px;background:#fff;border-radius:18px;
+  box-shadow:0 10px 25px rgba(26,30,42,.14);border:1px solid rgba(226,234,255,.8);
+  z-index:5;opacity:0;animation:kr-pop .5s ease forwards;animation-delay:var(--d,0s);
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s ease,border-color .3s ease;
+}
+.kr-chip:hover,.kr-chip:focus-visible,.kr-chip.is-active{
+  transform:translateY(-8px) scale(1.3);
+  box-shadow:0 20px 35px rgba(59,130,246,.25);border-color:var(--primary);z-index:10;
+}
+.kr-chip img{width:180px;height:225px;object-fit:cover;object-position:top center;border-radius:12px;background:var(--bg-3)}
+.kr-chip span{font-size:12px;font-weight:700;color:var(--text);white-space:nowrap;padding:2px 8px;border-radius:100px;background:var(--tertiary)}
 @keyframes kr-pop{from{opacity:0;translate:0 8px}to{opacity:1;translate:0 0}}
 
-.kr-chip-1{top:-100px;left:-150px;transform-origin:right center}
-.kr-chip-1 span{transform:translateY(-1px)}
-.kr-chip-1:hover,.kr-chip-1.is-active{translate:-6px 0}
-.kr-chip-2{top:-50px;right:-150px;transform-origin:left center}
-.kr-chip-2:hover,.kr-chip-2.is-active{translate:6px 0}
-.kr-chip-3{bottom:-250px;left:44%;transform:translateX(-50%);transform-origin:top center}
-.kr-chip-3:hover,.kr-chip-3.is-active{translate:0 6px}
+.kr-chip-1{top:4%;left:-16%}
+.kr-chip-2{top:10;right:-16%}
+.kr-chip-3{bottom:-30%;left:56%}
 
 @media(max-width:900px){
   .kr-visual{height:auto;display:flex;flex-direction:column;align-items:center;gap:14px;padding:8px 0 4px}
   .kr-map{position:static;transform:none;height:220px;filter:drop-shadow(0 12px 24px rgba(59,130,246,.24))}
-  .kr-arrows{display:none}
-  .kr-dim{display:none}
-  .kr-chip{position:static;transform:none!important;scale:1!important;width:100%;max-width:280px;animation-delay:0s!important}
-  .kr-chip:hover,.kr-chip:active{translate:0 -4px!important}
-  .kr-chip.is-active img{width:96px;height:auto}
+  .kr-pins,.kr-lines{display:none}
+  .kr-chip{position:static;transform:none!important;flex-direction:row;width:100%;max-width:280px;animation-delay:0s!important}
+  .kr-chip:hover,.kr-chip:active{transform:translateY(-4px)!important}
+  .kr-chip img{width:110px;height:140px}
 }
 
 /* ===== PROBLEM → SOLUTION ===== */
@@ -246,28 +257,31 @@ nav{
 }
 .kamera-phone:hover{transform:translateY(-6px)}
 .kamera-phone::before{content:'';position:absolute;top:28px;left:50%;transform:translateX(-50%);width:64px;height:6px;border-radius:100px;background:#1c2030;z-index:2}
-.kamera-phone-screen{position:relative;border-radius:24px;overflow:hidden;aspect-ratio:9/15;background:#111}
+.kamera-phone-screen{position:relative;border-radius:24px;overflow:hidden;aspect-ratio:9/17.5;background:#111}
 .kamera-slide{position:absolute;inset:0;opacity:0;animation:kp-cross 6s linear infinite}
 .kamera-slide:nth-child(1){animation-delay:0s}
 .kamera-slide:nth-child(2){animation-delay:2s}
 .kamera-slide:nth-child(3){animation-delay:4s}
-.kamera-slide img{position:relative;width:100%;height:100%;object-fit:cover;object-position:top center}
+.kamera-slide-bg{position:absolute;inset:-20px;background-size:cover;background-position:center;filter:blur(24px) brightness(.55);transform:scale(1.15)}
+.kamera-slide img{position:relative;width:100%;height:100%;object-fit:contain;object-position:center}
 @keyframes kp-cross{0%{opacity:0}3%{opacity:1}30%{opacity:1}36%{opacity:0}100%{opacity:0}}
 .kamera-caption-row{position:relative;height:22px;margin-bottom:10px}
 .kamera-caption{position:absolute;left:0;right:0;top:0;color:var(--text);font-size:15px;font-weight:700;text-align:center;opacity:0;animation:kp-caption 6s linear infinite}
 @keyframes kp-caption{0%{opacity:1}32%{opacity:1}33%{opacity:0}100%{opacity:0}}
 
-/* K-uration 액자형 배치 + 페이지 넘기기 */
-.kuration-frame{max-width:380px;margin:0 auto;perspective:1400px}
-.kf-page{display:grid;grid-template-columns:1.3fr 1fr;grid-template-rows:1fr 1fr;gap:10px;height:340px;transform-style:preserve-3d}
-.kf-main{grid-row:1/3;width:100%;height:100%;object-fit:cover;object-position:top center;border-radius:var(--radius-sm);box-shadow:0 12px 28px rgba(26,30,42,.16)}
-.kf-side{width:100%;height:100%;object-fit:cover;object-position:top center;border-radius:var(--radius-sm);box-shadow:0 12px 28px rgba(26,30,42,.16)}
-.kf-page img{transition:transform .3s ease}
-.kf-page img:hover{transform:scale(1.03)}
-.kf-page.turn-out{animation:kf-flip-out .28s ease forwards}
-.kf-page.turn-in{animation:kf-flip-in .3s ease}
-@keyframes kf-flip-out{to{transform:rotateY(-80deg);opacity:0}}
-@keyframes kf-flip-in{from{transform:rotateY(80deg);opacity:0}to{transform:rotateY(0deg);opacity:1}}
+/* K-uration: 왼쪽 고정 피드 + 오른쪽 책장 넘기기 카드 2장 */
+.kuration-frame{max-width:380px;margin:0 auto}
+.kf-layout{display:grid;grid-template-columns:1.25fr 1fr;grid-template-rows:1fr;gap:14px;align-items:stretch;height:420px;perspective:1200px}
+.kf-fixed{width:100%;height:100%;min-height:0;min-width:0}
+.kf-fixed img{width:100%;height:100%;object-fit:contain;object-position:top center;border-radius:var(--radius-sm);box-shadow:0 12px 28px rgba(26,30,42,.16)}
+.kf-flipper{display:flex;flex-direction:column;gap:12px;height:100%;min-height:0;min-width:0;transform-style:preserve-3d;transform-origin:left center}
+.kf-card-item{flex:1;min-height:0;overflow:hidden;border-radius:var(--radius-sm);box-shadow:0 10px 24px rgba(26,30,42,.16)}
+.kf-card-item img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;transition:transform .3s ease}
+.kf-card-item img:hover{transform:scale(1.03)}
+.kf-flipper.turn-out{animation:kf-flip-out .32s cubic-bezier(.4,0,.2,1) forwards}
+.kf-flipper.turn-in{animation:kf-flip-in .35s cubic-bezier(0,0,.2,1) forwards}
+@keyframes kf-flip-out{to{transform:rotateY(-85deg);opacity:.1}}
+@keyframes kf-flip-in{from{transform:rotateY(85deg);opacity:.1}to{transform:rotateY(0deg);opacity:1}}
 .ks-nav{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:18px}
 .ks-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--border);background:#fff;font-size:18px;line-height:1;color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s,border-color .15s}
 .ks-btn:hover{background:var(--secondary);border-color:var(--primary)}
@@ -293,11 +307,6 @@ nav{
 .residence-legend{display:flex;flex-wrap:wrap;gap:16px;font-size:13px;color:var(--sub);margin-bottom:56px}
 .residence-legend span{display:flex;align-items:center;gap:6px}
 .residence-legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
-
-.country-strip{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:64px}
-.country-chip{display:flex;align-items:center;gap:8px;padding:8px 16px;border-radius:100px;background:var(--bg-2);border:1px solid var(--border);font-size:14px;transition:background .15s,border-color .15s}
-.country-chip:hover{background:var(--secondary);border-color:var(--primary)}
-.country-chip b{color:var(--primary-dk)}
 
 .reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 @media(max-width:860px){.reviews-grid{grid-template-columns:1fr}}
@@ -481,28 +490,27 @@ footer{padding:64px 0 40px;font-size:14px;color:var(--sub)}
                  M67.89,155.91L64.76,158.9L66.21,159.4L66.26,161.36L67.35,161.18L67.71,159.72L68.35,159.81L68.71,158.22L68.07,158.31L68.3,156Z"/>
         <path class="kr-map-jeju" d="M29.24,187.22L30.97,189.27L39.7,187.19L41.47,184.2L39.38,182.76L32.58,184.2L30.23,186.1Z"/>
       </svg>
-      <svg class="kr-arrows" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-        <defs>
-          <marker id="kr-arrowhead" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-            <path d="M0,0 L10,5 L0,10 Z" fill="var(--primary)"/>
-          </marker>
-        </defs>
-        <path class="kr-arrow" style="--d:.1s" d="M32 22 C20 12 8 0 -4 -10" marker-end="url(#kr-arrowhead)"/>
-        <path class="kr-arrow" style="--d:.4s" d="M50 32 C68 24 86 12 104 0" marker-end="url(#kr-arrowhead)"/>
-        <path class="kr-arrow" style="--d:.7s" d="M42 66 C44 82 45 96 46 112" marker-end="url(#kr-arrowhead)"/>
+      <div class="kr-pins" aria-hidden="true">
+        <span class="kr-pin kr-pin-seoul" style="left:27%;top:50%"></span>
+        <span class="kr-pin kr-pin-donghae" style="left:76%;top:57%"></span>
+        <span class="kr-pin kr-pin-busan" style="left:68%;top:75%"></span>
+      </div>
+      <svg class="kr-lines" aria-hidden="true">
+        <path class="kr-line kr-line-1" data-pin=".kr-pin-seoul" data-chip=".kr-chip-1"/>
+        <path class="kr-line kr-line-2" data-pin=".kr-pin-donghae" data-chip=".kr-chip-2"/>
+        <path class="kr-line kr-line-3" data-pin=".kr-pin-busan" data-chip=".kr-chip-3"/>
       </svg>
-      <div class="kr-dim" aria-hidden="true"></div>
-      <a class="kr-chip kr-chip-1" href="#features" style="--d:.5s">
+      <a class="kr-chip kr-chip-1" href="#feature-kamera" style="--d:.5s">
         <img src="assets/camera.png" alt="K-amera 미리보기">
-        <span>K-amera</span>
+        <span>📸 K-amera</span>
       </a>
-      <a class="kr-chip kr-chip-2" href="#features" style="--d:.8s">
+      <a class="kr-chip kr-chip-2" href="#feature-kuration" style="--d:.8s">
         <img src="assets/kuration.png" alt="K-uration 미리보기">
-        <span>K-uration</span>
+        <span>🗺️ K-uration</span>
       </a>
-      <a class="kr-chip kr-chip-3" href="#features" style="--d:1.1s">
+      <a class="kr-chip kr-chip-3" href="#feature-kommunity" style="--d:1.1s">
         <img src="assets/community.png" alt="K-ommunity 미리보기">
-        <span>K-ommunity</span>
+        <span>💬 K-ommunity</span>
       </a>
     </div>
   </div>
@@ -556,7 +564,7 @@ footer{padding:64px 0 40px;font-size:14px;color:var(--sub)}
     <p class="section-sub" data-i18n="features.sub">억지로 넣은 기능은 없어요. 외국인이 한국에서 실제로 겪는 문제 3가지에서 시작했어요.</p>
 
     <!-- K-amera -->
-    <div class="feature-block" data-reveal>
+    <div class="feature-block" id="feature-kamera" data-reveal>
       <div>
         <span class="feature-tag">📸 K-amera</span>
         <h3 data-i18n="features.kameraH">일단 찍으면,<br>AI가 다 알려줘요</h3>
@@ -577,12 +585,15 @@ footer{padding:64px 0 40px;font-size:14px;color:var(--sub)}
         <div class="kamera-phone">
           <div class="kamera-phone-screen">
             <div class="kamera-slide">
+              <div class="kamera-slide-bg" style="background-image:url(assets/kamera-1-photo.jpg)"></div>
               <img src="assets/kamera-1-photo.jpg" alt="원본 사진" loading="lazy">
             </div>
             <div class="kamera-slide">
+              <div class="kamera-slide-bg" style="background-image:url(assets/kamera-2-question.jpg)"></div>
               <img src="assets/kamera-2-question.jpg" alt="질문 선택 화면" loading="lazy">
             </div>
             <div class="kamera-slide">
+              <div class="kamera-slide-bg" style="background-image:url(assets/kamera-3-result.jpg)"></div>
               <img src="assets/kamera-3-result.jpg" alt="결과 확인 화면" loading="lazy">
             </div>
           </div>
@@ -592,7 +603,7 @@ footer{padding:64px 0 40px;font-size:14px;color:var(--sub)}
     </div>
 
     <!-- K-uration -->
-    <div class="feature-block" data-reveal>
+    <div class="feature-block" id="feature-kuration" data-reveal>
       <div>
         <span class="feature-tag">🗺️ K-uration</span>
         <h3 data-i18n="features.kurationH">취향 저격 코스,<br>AI가 짜드려요</h3>
@@ -604,11 +615,23 @@ footer{padding:64px 0 40px;font-size:14px;color:var(--sub)}
         </div>
       </div>
       <div class="kuration-frame">
-        <div class="kf-page" id="kfPage">
-          <img class="kf-main" id="kfMain" alt="">
-          <img class="kf-side" id="kfSide1" alt="">
-          <img class="kf-side" id="kfSide2" alt="">
+        <div class="kf-layout">
+          <!-- 왼쪽 고정 피드 (회전 안 함) -->
+          <div class="kf-fixed">
+            <img src="assets/kuration.png" alt="K-uration Main Feed">
+          </div>
+
+          <!-- 오른쪽 2장 세트 (책장 넘기기 대상) -->
+          <div class="kf-flipper" id="kfFlipper">
+            <div class="kf-card-item">
+              <img id="kfSide1" alt="큐레이션 상단">
+            </div>
+            <div class="kf-card-item">
+              <img id="kfSide2" alt="큐레이션 하단">
+            </div>
+          </div>
         </div>
+
         <div class="ks-nav">
           <button class="ks-btn ks-prev" aria-label="이전 페이지">‹</button>
           <div class="ks-dots" id="ksDots"></div>
@@ -618,7 +641,7 @@ footer{padding:64px 0 40px;font-size:14px;color:var(--sub)}
     </div>
 
     <!-- K-ommunity -->
-    <div class="feature-block" data-reveal>
+    <div class="feature-block" id="feature-kommunity" data-reveal style="margin-top:127px">
       <div>
         <span class="feature-tag">K-ommunity</span>
         <h3 data-i18n="features.kommunityH">언어 걱정 없이,<br>진짜 경험자에게 물어보세요</h3>
@@ -663,15 +686,6 @@ footer{padding:64px 0 40px;font-size:14px;color:var(--sub)}
       <span><i style="background:var(--tertiary)"></i><span data-i18n="proof.res3">교환학생 13%</span></span>
       <span><i style="background:var(--secondary)"></i><span data-i18n="proof.res4">한국 거주자 13%</span></span>
       <span><i style="background:var(--muted)"></i><span data-i18n="proof.res5">해외 거주자 8%</span></span>
-    </div>
-
-    <div class="country-strip" data-reveal>
-      <span class="country-chip">🇮🇳 <b>인도</b> 750명</span>
-      <span class="country-chip">🇰🇷 <b>한국</b> 364명</span>
-      <span class="country-chip">🇺🇸 <b>미국</b> 207명</span>
-      <span class="country-chip">🇸🇬 <b>싱가포르</b> 129명</span>
-      <span class="country-chip">🇵🇭 <b>필리핀</b> 113명</span>
-      <span class="country-chip" data-i18n="proof.countryEtc">외 24개국</span>
     </div>
 
     <!-- TODO: 앱스토어/구글플레이 공식 평점·리뷰 수 확인되면 아래 주석 해제하고 숫자 채우기
@@ -938,45 +952,86 @@ document.addEventListener('click', (e)=>{
   }
 });
 
-// K-uration 액자형 배치(메인+사이드2장) + 페이지 넘기기. 배열이라 이미지 추가만 하면 확장됨
-const kurationImages = [
-  {src:'assets/kuration.png', alt:'Kuration'},
-  {src:'assets/kuration-2.jpg', alt:'K-Events: September in Korea'},
-  {src:'assets/kuration-3.jpg', alt:'What do real Koreans do for fun?'}
+// 지도 핀 ↔ 플로팅 칩을 잇는 은은한 곡선 점선
+function updateKrLines(){
+  const visual = document.querySelector('.kr-visual');
+  const svg = document.querySelector('.kr-lines');
+  if(!visual || !svg || getComputedStyle(svg).display === 'none') return;
+  const vRect = visual.getBoundingClientRect();
+  svg.querySelectorAll('.kr-line').forEach(line=>{
+    const pin = document.querySelector(line.dataset.pin);
+    const chip = document.querySelector(line.dataset.chip);
+    if(!pin || !chip) return;
+    const pRect = pin.getBoundingClientRect();
+    const cRect = chip.getBoundingClientRect();
+    const x1 = pRect.left + pRect.width/2 - vRect.left;
+    const y1 = pRect.top + pRect.height/2 - vRect.top;
+    const x2 = cRect.left + cRect.width/2 - vRect.left;
+    const y2 = cRect.top + cRect.height/2 - vRect.top;
+    const mx = (x1 + x2)/2 + (y1 - y2)*.18;
+    const my = (y1 + y2)/2 + (x2 - x1)*.18;
+    line.setAttribute('d', `M${x1},${y1} Q${mx},${my} ${x2},${y2}`);
+  });
+}
+window.addEventListener('load', updateKrLines);
+window.addEventListener('resize', updateKrLines);
+
+// K-uration: 왼쪽은 고정 피드, 오른쪽 카드 2장이 세트(page) 단위로 책장 넘기듯 전환. 배열에 세트만 추가하면 확장됨
+const cardPages = [
+  {top:{src:'assets/kuration-2.jpg', alt:'K-Events: September in Korea'}, bottom:{src:'assets/kuration-3.jpg', alt:'What do real Koreans do for fun?'}}
+  ,
+  {
+    top: { src: 'assets/kuration-4.jpg', alt: '서울 야간 명소 베스트 5' },
+    bottom: { src: 'assets/kuration-5.jpg', alt: '외국인을 위한 편의점 꿀조합' }
+  },
+
+  // 3페이지 추가 예시
+  {
+    top: { src: 'assets/kuration-6.jpg', alt: '지하철 환승 꿀팁 가이드' },
+    bottom: { src: 'assets/kuration-7.jpg', alt: '전통 시장 길거리 음식 투어' }
+  }
 ];
-let ksOrder = kurationImages.map((_, i) => i);
-const kfPageEl = document.getElementById('kfPage');
-const kfMainEl = document.getElementById('kfMain');
+let currentIdx = 0;
+const kfFlipperEl = document.getElementById('kfFlipper');
 const kfSide1El = document.getElementById('kfSide1');
 const kfSide2El = document.getElementById('kfSide2');
 const ksDotsEl = document.getElementById('ksDots');
 function renderKsDots(){
-  ksDotsEl.innerHTML = kurationImages.map((_, i) => `<i class="${i === ksOrder[0] ? 'active' : ''}"></i>`).join('');
+  ksDotsEl.innerHTML = cardPages.map((_, i) => `<i class="${i === currentIdx ? 'active' : ''}"></i>`).join('');
 }
-function renderKfPage(){
-  const [mainImg, side1Img, side2Img] = ksOrder.map(i => kurationImages[i]);
-  kfMainEl.src = mainImg.src; kfMainEl.alt = mainImg.alt;
-  kfSide1El.src = side1Img.src; kfSide1El.alt = side1Img.alt;
-  kfSide2El.src = side2Img.src; kfSide2El.alt = side2Img.alt;
+function renderCardPage(){
+  const page = cardPages[currentIdx];
+  kfSide1El.src = page.top.src; kfSide1El.alt = page.top.alt;
+  kfSide2El.src = page.bottom.src; kfSide2El.alt = page.bottom.alt;
   renderKsDots();
 }
-function ksTurn(rotateFn){
-  if(!kfPageEl || kfPageEl.classList.contains('turn-out')) return;
-  kfPageEl.classList.add('turn-out');
-  kfPageEl.addEventListener('animationend', () => {
-    rotateFn();
-    renderKfPage();
-    kfPageEl.classList.remove('turn-out');
-    kfPageEl.classList.add('turn-in');
-    kfPageEl.addEventListener('animationend', () => kfPageEl.classList.remove('turn-in'), {once:true});
-  }, {once:true});
+function onceAnimationEnd(el, fn){
+  // animationend가 씹히는 경우(reduced-motion, 브라우저 예외 등)에도 멈추지 않도록 타임아웃 폴백을 둠
+  let done = false;
+  const finish = () => { if(done) return; done = true; el.removeEventListener('animationend', onEnd); fn(); };
+  const onEnd = () => finish();
+  el.addEventListener('animationend', onEnd, {once:true});
+  setTimeout(finish, 450);
 }
-function ksNext(){ ksTurn(() => ksOrder.push(ksOrder.shift())); }
-function ksPrev(){ ksTurn(() => ksOrder.unshift(ksOrder.pop())); }
-if(kfPageEl){
-  renderKfPage();
-  document.querySelector('.ks-next').addEventListener('click', ksNext);
-  document.querySelector('.ks-prev').addEventListener('click', ksPrev);
+function updateCards(targetIdx){
+  if(!kfFlipperEl || kfFlipperEl.classList.contains('turn-out')) return;
+  kfFlipperEl.classList.add('turn-out');
+  onceAnimationEnd(kfFlipperEl, () => {
+    currentIdx = targetIdx;
+    renderCardPage();
+    kfFlipperEl.classList.remove('turn-out');
+    kfFlipperEl.classList.add('turn-in');
+    onceAnimationEnd(kfFlipperEl, () => kfFlipperEl.classList.remove('turn-in'));
+  });
+}
+function ksNext(){ updateCards((currentIdx + 1) % cardPages.length); }
+function ksPrev(){ updateCards((currentIdx - 1 + cardPages.length) % cardPages.length); }
+if(kfFlipperEl){
+  renderCardPage();
+  let ksAutoTimer = setInterval(ksNext, 4500);
+  const resetKsAuto = () => { clearInterval(ksAutoTimer); ksAutoTimer = setInterval(ksNext, 4500); };
+  document.querySelector('.ks-next').addEventListener('click', () => { ksNext(); resetKsAuto(); });
+  document.querySelector('.ks-prev').addEventListener('click', () => { ksPrev(); resetKsAuto(); });
 }
 
 // 모바일 메뉴
