@@ -4,7 +4,8 @@ function selectTab(tab) {
     const active = item === tab;
     item.setAttribute('aria-selected', String(active));
     item.tabIndex = active ? 0 : -1;
-    document.getElementById(item.getAttribute('aria-controls')).hidden = !active;
+    const panel = document.getElementById(item.getAttribute('aria-controls'));
+    if (panel) panel.hidden = !active;
   });
 }
 tabs.forEach((tab, index) => {
@@ -21,13 +22,24 @@ tabs.forEach((tab, index) => {
 
 const currencyButtons = [...document.querySelectorAll('[data-currency]')];
 const prices = {
-  usd: { regular: 'US $800', sale: 'US $380', discount: '52.5% OFF · SAVE US $420 / MONTH' },
-  eur: { regular: '€700', sale: '€330', discount: '52.9% OFF · SAVE €370 / MONTH' }
+  usd: { symbol: 'US $', regular: 'US $830', sale: 'US $380', total: 830, discount: '54.2% OFF · SAVE US $450 / MONTH' },
+  eur: { symbol: '€',    regular: '€720',    sale: '€330',    total: 720, discount: '54.2% OFF · SAVE €390 / MONTH' }
 };
+function setText(id, text) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = text;
+}
 currencyButtons.forEach(button => button.addEventListener('click', () => {
-  const price = prices[button.dataset.currency];
+  const cur = button.dataset.currency;
+  const price = prices[cur];
+  if (!price) return;
   currencyButtons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
-  document.getElementById('regular-price').textContent = price.regular;
-  document.getElementById('sale-price').textContent = price.sale;
-  document.getElementById('discount-label').textContent = price.discount;
+  setText('regular-price', price.regular);
+  setText('sale-price', price.sale);
+  setText('discount-label', price.discount);
+  setText('total-value', price.symbol + price.total);
+  setText('pay-price', price.sale);
+  document.querySelectorAll('.value-price[data-usd]').forEach(el => {
+    el.textContent = price.symbol + el.dataset[cur];
+  });
 }));
