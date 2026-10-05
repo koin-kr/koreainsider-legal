@@ -76,8 +76,30 @@
     padding: 26px 24px 0;
   }
   .log-head h2 { font-size: 1.05rem; font-weight: 600; }
+  .account { margin: 18px 24px 0; }
+  .google-btn {
+    width: 100%;
+    height: 44px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    font-size: 0.93rem; font-weight: 500;
+  }
+  .google-btn:hover { background: var(--hover); border-color: var(--faint); }
+  .google-btn:disabled { opacity: 0.5; cursor: default; }
+  .google-btn svg { width: 18px; height: 18px; }
+  .account-note { margin-top: 8px; color: var(--faint); font-size: 0.8rem; line-height: 1.5; }
+  .account-in { display: flex; align-items: center; gap: 10px; }
+  .account-in[hidden], .account-out[hidden] { display: none; }
+  .avatar { width: 34px; height: 34px; border-radius: 50%; background: var(--hover); flex: none; object-fit: cover; }
+  .account-who { display: flex; flex-direction: column; min-width: 0; flex: 1; }
+  .account-who strong { font-size: 0.9rem; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .account-who span { font-size: 0.78rem; color: var(--dim); }
+  .logout { font-size: 0.8rem; color: var(--dim); padding: 6px 8px; border-radius: 8px; }
+  .logout:hover { color: var(--fg); background: var(--hover); }
+  .account-error { margin-top: 8px; color: #ff9a92; font-size: 0.8rem; line-height: 1.5; }
   .today {
-    margin: 18px 24px 8px;
+    margin: 14px 24px 8px;
     padding-bottom: 18px;
     border-bottom: 1px solid var(--line);
     display: flex;
@@ -115,8 +137,20 @@
   .log-del:hover { color: var(--fg); background: var(--hover); }
   @media (hover: none) { .log-del { opacity: 1; } }
   .log-empty { color: var(--faint); font-size: 0.9rem; line-height: 1.6; padding: 20px 24px; }
+  .day-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 18px 12px 0;
+  }
+  .day-info { display: flex; flex-direction: column; align-items: center; gap: 3px; text-align: center; }
+  .day-info strong { font-size: 1rem; font-weight: 600; }
+  .day-info span { font-size: 0.75rem; color: var(--faint); }
+  .icon-btn:disabled { opacity: 0.2; cursor: default; background: none; }
+  .log-foot { display: flex; justify-content: space-between; align-items: center; margin: 0 24px 22px; gap: 12px; }
+  .day-today { font-size: 0.85rem; color: var(--dim); padding: 10px 0; margin-left: auto; }
+  .day-today:hover { color: var(--fg); }
   .log-clear {
-    margin: 0 24px 22px;
     padding: 10px 0;
     color: var(--faint);
     font-size: 0.85rem;
@@ -313,10 +347,43 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
       </button>
     </div>
-    <div class="today"><span>오늘 합계</span><strong id="todayTotal">0분</strong></div>
+    <div class="account" id="account" hidden>
+      <div class="account-out" id="accountOut">
+        <button class="google-btn" id="loginBtn">
+          <svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>
+          구글로 로그인
+        </button>
+        <p class="account-note">로그인하면 다른 기기에서도 같은 기록이 보여요.</p>
+      </div>
+      <div class="account-in" id="accountIn" hidden>
+        <img class="avatar" id="avatar" alt="" referrerpolicy="no-referrer">
+        <div class="account-who">
+          <strong id="userName"></strong>
+          <span id="syncState">동기화됨</span>
+        </div>
+        <button class="logout" id="logoutBtn">로그아웃</button>
+      </div>
+      <p class="account-error" id="accountError" hidden></p>
+    </div>
+    <div class="day-nav">
+      <button class="icon-btn" id="dayPrev" aria-label="이전 기록 날짜">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+      </button>
+      <div class="day-info">
+        <strong id="dayTitle"></strong>
+        <span id="daySub"></span>
+      </div>
+      <button class="icon-btn" id="dayNext" aria-label="다음 기록 날짜">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+    </div>
+    <div class="today"><span>합계</span><strong id="todayTotal">0분</strong></div>
     <ol class="log-list" id="logList"></ol>
     <p class="log-empty" id="logEmpty">아직 기록이 없어요.<br>저장을 누르거나 초과된 타이머를 정지하면 여기에 남아요.</p>
-    <button class="log-clear" id="logClear">기록 전체 삭제</button>
+    <div class="log-foot">
+      <button class="log-clear" id="logClear">이 날 기록 삭제</button>
+      <button class="day-today" id="dayToday" hidden>오늘로 돌아가기</button>
+    </div>
   </aside>
 
   <main>
@@ -374,7 +441,8 @@
   const MIN_STEP = 60 * 1000;         // 왼쪽 위/아래 버튼: 1분
   const SEC_STEP = 1000;              // 오른쪽 위/아래 버튼: 1초
   const MAX = 99 * 3600 * 1000;       // 최대 99시간
-  const MAX_LOGS = 300;
+  const MAX_LOCAL_LOGS = 3000;        // 로그인 안 했을 때 브라우저에 보관하는 최대 개수
+  const DAY_START_HOUR = 9;           // 하루의 시작: 오전 9시 ~ 다음날 오전 9시
   const S = 1000, M = 60 * S, H = 60 * M;
   const PRESET_ROWS = [
     [[30 * S, '30초'], [1 * M, '1분'], [3 * M, '3분'], [5 * M, '5분'], [10 * M, '10분'], [20 * M, '20분'], [30 * M, '30분']],
@@ -421,7 +489,8 @@
     mainBtn: $('mainBtn'), resetBtn: $('resetBtn'), saveBtn: $('saveBtn'), presets: $('presets'),
     modeTimer: $('modeTimer'), modeStopwatch: $('modeStopwatch'),
     logList: $('logList'), logEmpty: $('logEmpty'), logClear: $('logClear'),
-    todayTotal: $('todayTotal'), logToggle: $('logToggle'), logClose: $('logClose'),
+    todayTotal: $('todayTotal'), dayPrev: $('dayPrev'), dayNext: $('dayNext'),
+    dayTitle: $('dayTitle'), daySub: $('daySub'), dayToday: $('dayToday'), logToggle: $('logToggle'), logClose: $('logClose'),
     scrim: $('scrim'), fullscreen: $('fullscreen')
   };
 
@@ -444,18 +513,33 @@
     return out.length ? out.join(' ') : '0초';
   }
   const DAYS = ['일', '월', '화', '수', '목', '금', '토'];
-  function dayKey(ts) { const d = new Date(ts); return `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`; }
-  function dayLabel(ts) {
-    const now = new Date();
-    const yest = new Date(now); yest.setDate(now.getDate() - 1);
-    if (dayKey(ts) === dayKey(now)) return '오늘';
-    if (dayKey(ts) === dayKey(yest)) return '어제';
+  // ts가 속한 '하루'의 시작 시각 (오전 9시 기준)
+  function dayStartOf(ts) {
     const d = new Date(ts);
-    const base = `${d.getMonth() + 1}월 ${d.getDate()}일 (${DAYS[d.getDay()]})`;
-    return d.getFullYear() === now.getFullYear() ? base : `${d.getFullYear()}년 ${base}`;
+    const start = new Date(d.getFullYear(), d.getMonth(), d.getDate(), DAY_START_HOUR);
+    if (d < start) start.setDate(start.getDate() - 1);
+    return start.getTime();
   }
-  function timeLabel(ts) {
-    return new Date(ts).toLocaleTimeString('ko-KR', { hour: 'numeric', minute: '2-digit' });
+  function shiftDay(start, n) {
+    const d = new Date(start);
+    d.setDate(d.getDate() + n);
+    return d.getTime();
+  }
+  function dateText(start) {
+    const d = new Date(start);
+    const base = `${d.getMonth() + 1}월 ${d.getDate()}일 (${DAYS[d.getDay()]})`;
+    return d.getFullYear() === new Date().getFullYear() ? base : `${d.getFullYear()}년 ${base}`;
+  }
+  function relText(start) {
+    const today = dayStartOf(Date.now());
+    if (start === today) return '오늘';
+    if (start === shiftDay(today, -1)) return '어제';
+    const diff = Math.round((today - start) / 86400000);
+    return diff > 0 ? `${diff}일 전` : '';
+  }
+  function timeLabel(ts, dayStart) {
+    const t = new Date(ts).toLocaleTimeString('ko-KR', { hour: 'numeric', minute: '2-digit' });
+    return new Date(ts).getDate() !== new Date(dayStart).getDate() ? `다음날 ${t}` : t;
   }
 
   // ===== 소리 =====
@@ -531,16 +615,245 @@
   }
 
   // ===== 기록 =====
-  function addLog(entry) {
-    state.logs.push({ id: Date.now() + Math.random().toString(36).slice(2, 6), endedAt: Date.now(), ...entry });
-    if (state.logs.length > MAX_LOGS) state.logs = state.logs.slice(-MAX_LOGS);
+  // 화면에는 한 번에 '하루'(오전 9시 ~ 다음날 오전 9시)만 보여줌
+  const view = { day: dayStartOf(Date.now()), logs: [], loading: false, unsub: null, prev: null };
+
+  function saveLocal() {
+    if (state.logs.length > MAX_LOCAL_LOGS) state.logs = state.logs.slice(-MAX_LOCAL_LOGS);
     store.set('logs', state.logs);
-    renderLogs();
+  }
+  // 로그인 상태면 Firestore, 아니면 이 브라우저(localStorage)에 저장
+  function addLog(entry) {
+    const log = { id: String(Date.now()) + Math.random().toString(36).slice(2, 6), endedAt: Date.now(), ...entry };
+    const day = dayStartOf(log.endedAt);
+    if (cloud.user) {
+      cloud.fs.setDoc(cloud.logDoc(log.id), log).catch(onCloudError);
+      if (view.day !== day) setViewDay(day);
+      else updateNav();
+      return;
+    }
+    state.logs.push(log);
+    saveLocal();
+    setViewDay(day);
   }
   function removeLog(id) {
+    if (cloud.user) {
+      cloud.fs.deleteDoc(cloud.logDoc(id)).catch(onCloudError);
+      return;
+    }
     state.logs = state.logs.filter((l) => l.id !== id);
-    store.set('logs', state.logs);
-    renderLogs();
+    saveLocal();
+    watchView();
+  }
+  function clearViewDay() {
+    const ids = new Set(view.logs.map((l) => l.id));
+    if (!ids.size) return;
+    if (cloud.user) {
+      const batch = cloud.fs.writeBatch(cloud.db);
+      [...ids].slice(0, 450).forEach((id) => batch.delete(cloud.logDoc(id)));
+      batch.commit().then(updateNav).catch(onCloudError);
+      return;
+    }
+    state.logs = state.logs.filter((l) => !ids.has(l.id));
+    saveLocal();
+    watchView();
+  }
+
+  function setViewDay(day) {
+    view.day = day;
+    watchView();
+  }
+  // 보고 있는 하루의 기록을 불러오고, 로그인 상태면 실시간으로 지켜봄
+  function watchView() {
+    if (view.unsub) { view.unsub(); view.unsub = null; }
+    const start = view.day, end = shiftDay(start, 1);
+    if (cloud.user) {
+      const { fs } = cloud;
+      const q = fs.query(cloud.logsCol(), fs.where('endedAt', '>=', start), fs.where('endedAt', '<', end), fs.orderBy('endedAt', 'desc'));
+      view.logs = [];
+      view.loading = true;
+      renderLogs();
+      view.unsub = fs.onSnapshot(q, { includeMetadataChanges: true }, (snap) => {
+        if (view.day !== start) return;
+        view.loading = false;
+        view.logs = snap.docs.map((d) => ({ ...d.data(), id: d.id }));
+        acc.sync.textContent = snap.metadata.hasPendingWrites ? '저장 중…' : snap.metadata.fromCache ? '오프라인, 연결되면 올라가요' : '동기화됨';
+        renderLogs();
+      }, (e) => { view.loading = false; renderLogs(); onCloudError(e); });
+    } else {
+      view.loading = false;
+      view.logs = state.logs.filter((l) => l.endedAt >= start && l.endedAt < end).sort((a, b) => b.endedAt - a.endedAt);
+      renderLogs();
+    }
+    updateNav();
+  }
+  // 기록이 있는 바로 이전(-1) / 다음(+1) 하루 찾기. 없으면 null
+  async function findAdjacentDay(dir) {
+    const start = view.day, end = shiftDay(start, 1);
+    if (cloud.user) {
+      const { fs } = cloud;
+      const q = dir < 0
+        ? fs.query(cloud.logsCol(), fs.where('endedAt', '<', start), fs.orderBy('endedAt', 'desc'), fs.limit(1))
+        : fs.query(cloud.logsCol(), fs.where('endedAt', '>=', end), fs.orderBy('endedAt', 'asc'), fs.limit(1));
+      const snap = await fs.getDocs(q);
+      return snap.empty ? null : dayStartOf(snap.docs[0].data().endedAt);
+    }
+    const times = state.logs.map((l) => l.endedAt).filter((t) => (dir < 0 ? t < start : t >= end));
+    if (!times.length) return null;
+    return dayStartOf(dir < 0 ? Math.max(...times) : Math.min(...times));
+  }
+  let navToken = 0;
+  async function updateNav() {
+    const token = ++navToken;
+    const today = dayStartOf(Date.now());
+    el.dayNext.disabled = view.day >= today;
+    el.dayToday.hidden = view.day === today;
+    try {
+      const prev = await findAdjacentDay(-1);
+      if (token !== navToken) return;
+      view.prev = prev;
+      el.dayPrev.disabled = prev === null;
+    } catch (e) { onCloudError(e); }
+  }
+  async function goDay(dir) {
+    const today = dayStartOf(Date.now());
+    try {
+      if (dir < 0) {
+        const prev = view.prev !== null ? view.prev : await findAdjacentDay(-1);
+        if (prev !== null) setViewDay(prev);
+      } else {
+        if (view.day >= today) return;
+        let next = await findAdjacentDay(1);
+        if (next === null || next > today) next = today;
+        setViewDay(next);
+      }
+    } catch (e) { onCloudError(e); }
+  }
+
+  // ===== Firebase 동기화 =====
+  const FIREBASE_VERSION = '10.12.2';
+  const cloud = { ready: false, user: null, auth: null, authM: null, fs: null, db: null, logDoc: null, logsCol: null };
+  const acc = {
+    box: $('account'), out: $('accountOut'), inn: $('accountIn'), login: $('loginBtn'), logout: $('logoutBtn'),
+    avatar: $('avatar'), name: $('userName'), sync: $('syncState'), error: $('accountError')
+  };
+
+  function showAccountError(msg) {
+    acc.error.textContent = msg || '';
+    acc.error.hidden = !msg;
+  }
+  function onCloudError(err) {
+    console.error(err);
+    if (err && err.code === 'permission-denied') {
+      showAccountError('저장 권한이 없어요. Firestore 보안 규칙을 확인해 주세요.');
+    } else {
+      showAccountError('동기화 중 문제가 생겼어요. 잠시 후 다시 시도해 주세요.');
+    }
+  }
+  function renderAccount() {
+    acc.box.hidden = !cloud.ready;
+    const u = cloud.user;
+    acc.out.hidden = !!u;
+    acc.inn.hidden = !u;
+    if (u) {
+      acc.name.textContent = u.displayName || u.email || '로그인됨';
+      if (u.photoURL) { acc.avatar.src = u.photoURL; acc.avatar.hidden = false; }
+      else acc.avatar.hidden = true;
+    }
+  }
+
+  async function initCloud() {
+    let cfg;
+    try { ({ firebaseConfig: cfg } = await import('./firebase-config.js')); } catch { return; }
+    if (!cfg || !cfg.apiKey || String(cfg.apiKey).startsWith('YOUR')) return;   // 설정 전이면 로컬 모드
+
+    const base = `https://www.gstatic.com/firebasejs/${FIREBASE_VERSION}/`;
+    let appM, authM, fs;
+    try {
+      [appM, authM, fs] = await Promise.all([
+        import(base + 'firebase-app.js'),
+        import(base + 'firebase-auth.js'),
+        import(base + 'firebase-firestore.js')
+      ]);
+    } catch (e) { console.error(e); return; }
+
+    const app = appM.initializeApp(cfg);
+    let db;
+    try {
+      db = fs.initializeFirestore(app, { localCache: fs.persistentLocalCache({ tabManager: fs.persistentMultipleTabManager() }) });
+    } catch { db = fs.getFirestore(app); }
+
+    Object.assign(cloud, { ready: true, auth: authM.getAuth(app), authM, fs, db });
+    cloud.auth.languageCode = 'ko';
+    authM.getRedirectResult(cloud.auth).catch(() => {});
+    authM.onAuthStateChanged(cloud.auth, onUserChange);
+    renderAccount();
+  }
+
+  async function onUserChange(user) {
+    const { fs, db } = cloud;
+    cloud.user = null;                 // 옮기는 동안은 로컬 기준
+    showAccountError('');
+
+    if (!user) {
+      cloud.logDoc = cloud.logsCol = null;
+      const local = store.get('logs', []);
+      state.logs = Array.isArray(local) ? local : [];
+      renderAccount();
+      watchView();
+      return;
+    }
+
+    const logDoc = (id) => fs.doc(db, 'users', user.uid, 'logs', id);
+    acc.name.textContent = user.displayName || user.email || '로그인됨';
+
+    // 로그인 전 이 브라우저에 쌓인 기록을 계정으로 옮김 (같은 id라 여러 번 올려도 중복 안 됨)
+    const local = store.get('logs', []);
+    if (Array.isArray(local) && local.length) {
+      try {
+        for (let i = 0; i < local.length; i += 450) {
+          const batch = fs.writeBatch(db);
+          local.slice(i, i + 450).forEach((l) => batch.set(logDoc(String(l.id)), { ...l, id: String(l.id) }));
+          await batch.commit();
+        }
+        store.set('logs', []);
+        state.logs = [];
+      } catch (e) { onCloudError(e); }
+    }
+    if (cloud.auth.currentUser !== user) return;   // 그 사이 로그아웃됨
+
+    cloud.user = user;
+    cloud.logDoc = logDoc;
+    cloud.logsCol = () => fs.collection(db, 'users', user.uid, 'logs');
+    renderAccount();
+    watchView();
+  }
+
+  async function login() {
+    if (!cloud.ready) return;
+    const { authM, auth } = cloud;
+    const provider = new authM.GoogleAuthProvider();
+    provider.setCustomParameters({ prompt: 'select_account' });
+    acc.login.disabled = true;
+    showAccountError('');
+    try {
+      await authM.signInWithPopup(auth, provider);
+    } catch (e) {
+      if (e.code === 'auth/popup-blocked' || e.code === 'auth/operation-not-supported-in-this-environment') {
+        await authM.signInWithRedirect(auth, provider).catch((err) => showAccountError('로그인하지 못했어요.'));
+      } else if (e.code === 'auth/unauthorized-domain') {
+        showAccountError(`Firebase 승인된 도메인에 ${location.hostname} 을(를) 추가해 주세요.`);
+      } else if (e.code !== 'auth/popup-closed-by-user' && e.code !== 'auth/cancelled-popup-request') {
+        console.error(e);
+        showAccountError('로그인하지 못했어요. 잠시 후 다시 시도해 주세요.');
+      }
+    } finally {
+      acc.login.disabled = false;
+    }
+  }
+  async function logout() {
+    if (!cloud.ready) return;
+    await cloud.authM.signOut(cloud.auth).catch(() => {});
   }
 
   // ===== 타이머 =====
@@ -761,21 +1074,21 @@
   }
 
   function renderLogs() {
-    const logs = [...state.logs].sort((a, b) => b.endedAt - a.endedAt);
+    const logs = view.logs;
+    const today = dayStartOf(Date.now());
+    el.dayTitle.textContent = dateText(view.day);
+    const rel = relText(view.day);
+    el.daySub.textContent = (rel ? rel + ', ' : '') + '오전 9시 기준';
+    el.daySub.title = '오전 9시부터 다음날 오전 9시까지를 하루로 묶어요';
+
     el.logList.textContent = '';
     el.logEmpty.hidden = logs.length > 0;
+    el.logEmpty.innerHTML = view.loading ? '불러오는 중…'
+      : view.day === today ? '아직 오늘 기록이 없어요.<br>저장을 누르거나 초과된 타이머를 정지하면 여기에 남아요.'
+      : '이 날은 기록이 없어요.';
     el.logClear.hidden = logs.length === 0;
 
-    let lastDay = '';
     for (const log of logs) {
-      const day = dayLabel(log.endedAt);
-      if (day !== lastDay) {
-        const h = document.createElement('li');
-        h.className = 'log-day';
-        h.textContent = day;
-        el.logList.appendChild(h);
-        lastDay = day;
-      }
       const li = document.createElement('li');
       li.className = 'log-item';
 
@@ -803,7 +1116,7 @@
         tag.textContent = '스톱워치';
       }
       const time = document.createElement('span');
-      time.textContent = timeLabel(log.endedAt);
+      time.textContent = timeLabel(log.endedAt, view.day);
       meta.append(tag, time);
 
       const del = document.createElement('button');
@@ -816,10 +1129,8 @@
       el.logList.appendChild(li);
     }
 
-    const todayMs = state.logs
-      .filter((l) => dayKey(l.endedAt) === dayKey(Date.now()))
-      .reduce((sum, l) => sum + (l.actual || 0), 0);
-    el.todayTotal.textContent = todayMs >= 60000 ? durText(Math.floor(todayMs / 60000) * 60000) : durText(todayMs);
+    const totalMs = logs.reduce((sum, l) => sum + (l.actual || 0), 0);
+    el.todayTotal.textContent = totalMs >= 60000 ? durText(Math.floor(totalMs / 60000) * 60000) : durText(totalMs);
   }
 
   // ===== 루프 =====
@@ -837,12 +1148,16 @@
   }
   setInterval(tick, 50);
 
-  // 날짜가 바뀌면 '오늘/어제' 표시를 갱신
-  let currentDay = dayKey(Date.now());
+  // 오전 9시가 지나 '오늘'이 바뀌면 화면도 새 하루로
+  let currentToday = dayStartOf(Date.now());
   setInterval(() => {
-    const d = dayKey(Date.now());
-    if (d !== currentDay) { currentDay = d; renderLogs(); }
-  }, 60000);
+    const t = dayStartOf(Date.now());
+    if (t === currentToday) return;
+    const wasToday = view.day === currentToday;
+    currentToday = t;
+    if (wasToday) setViewDay(t);
+    else { renderLogs(); updateNav(); }
+  }, 30000);
 
   // ===== 이벤트 =====
   for (const row of PRESET_ROWS) {
@@ -895,12 +1210,15 @@
   el.title.addEventListener('keydown', (e) => { if (e.key === 'Enter') el.title.blur(); });
 
   el.logClear.addEventListener('click', () => {
-    if (confirm('기록을 모두 삭제할까요? 되돌릴 수 없어요.')) {
-      state.logs = [];
-      store.set('logs', state.logs);
-      renderLogs();
-    }
+    const msg = `${dateText(view.day)} 기록 ${view.logs.length}개를 삭제할까요?` +
+      (cloud.user ? ' 다른 기기에서도 사라지고, 되돌릴 수 없어요.' : ' 되돌릴 수 없어요.');
+    if (confirm(msg)) clearViewDay();
   });
+  el.dayPrev.addEventListener('click', () => goDay(-1));
+  el.dayNext.addEventListener('click', () => goDay(1));
+  el.dayToday.addEventListener('click', () => setViewDay(dayStartOf(Date.now())));
+  acc.login.addEventListener('click', login);
+  acc.logout.addEventListener('click', logout);
 
   const openLog = () => {
     document.body.classList.add('log-open');
@@ -949,7 +1267,8 @@
   });
 
   render();
-  renderLogs();
+  watchView();
+  initCloud();
 })();
 </script>
 </body>
