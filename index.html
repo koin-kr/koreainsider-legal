@@ -1,1189 +1,3106 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KOIN — Korea Insider</title>
-<meta name="description" content="여행 앱, 번역 앱, 예약 앱, 커뮤니티 앱... 다 깔지 마세요. 한국에서 필요한 건 코인 하나면 끝.">
-<meta property="og:title" content="KOIN — Korea Insider">
-<meta property="og:description" content="한국 방문 또는 거주 외국인을 위한 한국 생활 올인원 플랫폼.">
-<meta property="og:image" content="https://koreainsider.kr/assets/og-image.png">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://koreainsider.kr">
-<meta property="og:locale" content="ko_KR">
-<meta property="og:locale:alternate" content="en_US">
-<meta property="og:locale:alternate" content="zh_CN">
-<meta property="og:locale:alternate" content="ja_JP">
-<meta property="og:locale:alternate" content="vi_VN">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fonts-archive/GapyeongHanseokbong/subsets/GapyeongHanseokbong-dynamic-subset.css" type="text/css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/static/pretendard.css" crossorigin>
-<style>
-/* ===== Design tokens (기존 브랜드 유지) ===== */
-:root{
-  --primary:#3B82F6;
-  --primary-dk:#2563EB;
-  --secondary:#DBEAFE;
-  --tertiary:#ECF5C0;
-  --bg:#FFFFFF;
-  --bg-2:#F8FAFF;
-  --bg-3:#EEF4FF;
-  --text:#1A1E2A;
-  --sub:#4B5580;
-  --muted:#9AA3B5;
-  --border:#E2EAFF;
-  --radius:16px;
-  --radius-sm:10px;
-  --serif:'Gapyeong Hanseokbong','Noto Serif KR',serif;
-  --sans:'Pretendard','Apple SD Gothic Neo',sans-serif;
-  --maxw:1120px;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;scroll-padding-top:88px}
-body{
-  font-family:var(--sans);
-  color:var(--text);
-  background:var(--bg);
-  line-height:1.55;
-  -webkit-font-smoothing:antialiased;
-}
-img{max-width:100%;display:block}
-a{color:inherit;text-decoration:none}
-.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
-h1,h2,h3{font-family:var(--serif);font-weight:700;line-height:1.2;letter-spacing:-0.01em}
-section{padding:96px 0}
-@media(max-width:768px){section{padding:64px 0}}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KOIN — Korea Insider</title>
+    <meta
+      name="description"
+      content="여행 앱, 번역 앱, 예약 앱, 커뮤니티 앱... 다 깔지 마세요. 한국에서 필요한 건 Koin 하나면 끝."
+    />
+    <meta property="og:title" content="KOIN — Korea Insider" />
+    <meta
+      property="og:description"
+      content="한국 방문 또는 거주 외국인을 위한 한국 생활 올인원 플랫폼."
+    />
+    <meta
+      property="og:image"
+      content="https://koreainsider.kr/assets/og-image.png"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://koreainsider.kr" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta property="og:locale:alternate" content="zh_CN" />
+    <meta property="og:locale:alternate" content="ja_JP" />
+    <meta property="og:locale:alternate" content="vi_VN" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/fonts-archive/GapyeongHanseokbong/subsets/GapyeongHanseokbong-dynamic-subset.css"
+      type="text/css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/static/pretendard.css"
+      crossorigin
+    />
+    <style>
+      /* ===== Design tokens (기존 브랜드 유지) ===== */
+      :root {
+        --primary: #3b82f6;
+        --primary-dk: #2563eb;
+        --secondary: #ecf5c0;
+        --tertiary: #dbeafe;
+        --bg: #ffffff;
+        --bg-2: #f8faff;
+        --bg-3: #eef4ff;
+        --text: #1a1e2a;
+        --sub: #4b5580;
+        --muted: #9aa3b5;
+        --border: #e2eaff;
+        --radius: 16px;
+        --radius-sm: 10px;
+        --serif: "Gapyeong Hanseokbong", "Noto Serif KR", serif;
+        --sans: "Pretendard", "Apple SD Gothic Neo", sans-serif;
+        --maxw: 1120px;
+        --nav-h: 70px;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: var(--nav-h);
+      }
+      body {
+        font-family: var(--sans);
+        color: var(--text);
+        background: var(--bg);
+        line-height: 1.55;
+        -webkit-font-smoothing: antialiased;
+      }
+      html:lang(ko) body {
+        word-break: keep-all;
+        overflow-wrap: break-word;
+      }
+      img {
+        max-width: 100%;
+        display: block;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      .wrap {
+        max-width: var(--maxw);
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: var(--serif);
+        font-weight: 700;
+        line-height: 1.4;
+        letter-spacing: -0.04em;
+        text-wrap: balance;
+      }
 
-.eyebrow{
-  font-family:var(--sans);
-  font-size:14px;
-  font-weight:600;
-  color:var(--primary);
-  margin-bottom:12px;
-}
-.section-title{font-size:clamp(2rem,3.5vw,2.7rem);margin-bottom:16px}
-.section-sub{font-size:17px;color:var(--sub);max-width:560px;margin-bottom:48px}
+      #problem {
+        position: relative;
+        min-height: 100svh;
+        padding-top: 16px;
+      }
+      @media (max-width: 768px) {
+        #problem {
+          padding-top: 40px;
+        }
+      }
 
-.btn{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:14px 28px;border-radius:100px;
-  font-weight:600;font-size:15px;
-  border:none;cursor:pointer;
-  transition:transform .15s ease, box-shadow .15s ease;
-}
-.btn:hover{transform:translateY(-2px)}
-.btn-primary{background:var(--primary);color:#fff;box-shadow:0 8px 20px rgba(59,130,246,.28)}
-.btn-primary:hover{background:var(--primary-dk)}
-.btn-ghost{background:var(--tertiary);color:var(--text)}
-.btn-ghost:hover{filter:brightness(.94)}
-.store-badge{
-  display:flex;align-items:center;gap:10px;
-  padding:10px 18px;border-radius:12px;
-  background:var(--text);color:#fff;
-  font-size:13px;
-}
-.store-badge small{display:block;font-size:10px;color:#B8C0D8;font-weight:400}
-.store-badge strong{font-size:15px;font-weight:600}
+      section {
+        padding: 96px 0;
+      }
+      @media (max-width: 768px) {
+        section {
+          padding: 64px 0;
+        }
+      }
 
-/* ===== 언어 선택 오버레이 (최초 방문 1회) ===== */
-#lang-selector{
-  position:fixed;inset:0;background:var(--text);
-  color:#fff;z-index:200;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:32px;
-}
-#lang-selector.hidden{display:none}
-#lang-selector .brandmark{font-family:var(--serif);font-size:28px;letter-spacing:.02em}
-.lang-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;max-width:480px}
-.lang-opt{
-  display:flex;align-items:center;gap:10px;
-  padding:14px 20px;border-radius:100px;
-  background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.15);
-  cursor:pointer;font-size:15px;font-weight:500;
-  transition:background .15s;
-}
-.lang-opt:hover{background:rgba(255,255,255,.18)}
-.lang-opt img{width:22px;height:16px;border-radius:2px;object-fit:cover}
+      .eyebrow {
+        font-family: var(--sans);
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--primary-dk);
+        margin-left: 2px;
+        margin-bottom: 12px;
+      }
+      .section-title {
+        font-size: clamp(2rem, 3.5vw, 2.7rem);
+        margin-top: 72px;
+        margin-bottom: 24px;
+      }
+      .section-sub {
+        font-size: 17px;
+        color: var(--sub);
+        max-width: 560px;
+        margin-bottom: 144px;
+      }
 
-/* ===== NAV ===== */
-nav{
-  position:sticky;top:0;z-index:100;
-  background:rgba(255,255,255,.9);backdrop-filter:blur(10px);
-  border-bottom:1px solid var(--border);
-}
-.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;max-width:var(--maxw);margin:0 auto}
-.logo{display:flex;align-items:center;gap:8px;font-family:var(--serif);font-size:20px;font-weight:700}
-.logo img{width:28px;height:28px}
-.nav-links{display:flex;gap:28px;font-size:14px;font-weight:500;color:var(--sub)}
-.nav-right{display:flex;align-items:center;gap:16px}
-.lang-switch{display:flex;gap:6px}
-.lang-switch button{background:none;border:none;font-size:17px;cursor:pointer;opacity:.5;padding:2px}
-.lang-switch button.active{opacity:1}
-.nav-cta{padding:10px 20px;border-radius:100px;background:var(--primary);color:#fff;font-size:14px;font-weight:600}
-.hamburger{display:none;background:none;border:none;font-size:22px;cursor:pointer}
-@media(max-width:860px){.nav-links{display:none}.hamburger{display:block}}
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 14px 28px;
+        border-radius: 100px;
+        font-weight: 600;
+        font-size: 15px;
+        border: none;
+        cursor: pointer;
+        transition:
+          transform 0.15s ease,
+          box-shadow 0.15s ease;
+      }
+      .btn:hover {
+        transform: translateY(-2px);
+      }
+      .btn-primary {
+        background: var(--primary);
+        color: #fff;
+        box-shadow: 0 8px 20px rgba(59, 130, 246, 0.28);
+      }
+      .btn-primary:hover {
+        background: var(--primary);
+      }
+      .btn-ghost {
+        background: var(--primary);
+        color: #fff;
+      }
+      .btn-ghost:hover {
+        filter: brightness(0.94);
+      }
+      .store-badge {
+        display: flex;
+        align-items: center;
+      }
+      .store-badge img {
+        height: 40px;
+        width: auto;
+      }
 
-/* ===== HERO ===== */
-.hero{padding:72px 0 40px;background:linear-gradient(180deg,var(--tertiary) 0%,var(--bg) 65%)}
-.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
-@media(max-width:900px){.hero-grid{grid-template-columns:1fr}}
-.hero-title{font-size:clamp(2.6rem,5vw,4.2rem);margin-bottom:20px}
-.hero-sub{font-size:18px;color:var(--sub);margin-bottom:32px;max-width:480px}
-.hero-cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:28px}
-.hero-store-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
-.qr-box{display:flex;align-items:center;gap:10px;margin-top:20px}
-.qr-box img{width:64px;height:64px;border-radius:8px;border:1px solid var(--border)}
-.qr-box span{font-size:13px;color:var(--sub)}
+      /* ===== 언어 선택 오버레이 (최초 방문 1회) ===== */
+      #lang-selector {
+        position: fixed;
+        inset: 0;
+        background: var(--text);
+        color: #fff;
+        z-index: 200;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 32px;
+      }
+      #lang-selector.hidden {
+        display: none;
+      }
+      #lang-selector .brandmark {
+        font-family: var(--serif);
+        font-size: 28px;
+        letter-spacing: 0.02em;
+      }
+      .lang-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 14px;
+        max-width: 480px;
+      }
+      .lang-opt {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 20px;
+        border-radius: 100px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: 500;
+        transition: background 0.15s;
+      }
+      .lang-opt:hover {
+        background: rgba(255, 255, 255, 0.18);
+      }
+      .lang-opt img {
+        width: 22px;
+        height: 16px;
+        border-radius: 2px;
+        object-fit: cover;
+      }
 
-/* ===== KR-VISUAL: 대한민국 실루엣 + 기능 미리보기 플로팅 칩 ===== */
-.kr-visual{position:relative;height:480px}
-.kr-map{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);height:340px;width:auto;z-index:2;filter:drop-shadow(0 22px 40px rgba(59,130,246,.32))}
-.kr-map-shape{fill:var(--primary);stroke:var(--primary-dk);stroke-width:.6;stroke-linejoin:round}
-.kr-map-jeju{fill:var(--tertiary);stroke:var(--primary-dk);stroke-width:.6;stroke-linejoin:round}
+      /* ===== NAV ===== */
+      nav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 24px;
+        max-width: var(--maxw);
+        margin: 0 auto;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-family: var(--serif);
+        color: var(--primary);
+        font-size: 20px;
+        letter-spacing: -0.04em;
+        font-weight: 700;
+      }
+      .logo img {
+        width: 28px;
+        height: 28px;
+      }
+      .nav-links {
+        display: flex;
+        gap: 28px;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--sub);
+      }
+      .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .lang-switch {
+        display: flex;
+        gap: 6px;
+      }
+      .lang-switch button {
+        background: none;
+        border: none;
+        font-size: 17px;
+        cursor: pointer;
+        opacity: 0.5;
+        padding: 2px;
+      }
+      .lang-switch button.active {
+        opacity: 1;
+      }
+      .nav-cta {
+        padding: 10px 20px;
+        border-radius: 100px;
+        background: var(--primary-dk);
+        color: #fff;
+        font-family: var(--sans);
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .hamburger {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 22px;
+        cursor: pointer;
+      }
+      @media (max-width: 860px) {
+        .nav-links {
+          display: none;
+        }
+        .hamburger {
+          display: block;
+        }
+      }
 
-/* 지도 위 거점 핀 + 펄스 링 (viewBox 0 0 100 200 좌표계를 그대로 재사용) */
-.kr-pins{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);height:340px;width:170px;z-index:4;pointer-events:none}
-.kr-pin{position:absolute;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;background:#fff;box-shadow:0 0 0 2px var(--primary-dk),0 2px 6px rgba(10,14,26,.35)}
-.kr-pin::after{
-  content:'';position:absolute;inset:-5px;border-radius:50%;border:2px solid var(--primary-dk);
-  opacity:0;animation:kr-ping 2.6s ease-out infinite;
-}
-.kr-pin-seoul::after{animation-delay:0s}
-.kr-pin-donghae::after{animation-delay:.6s}
-.kr-pin-busan::after{animation-delay:1.2s}
-@keyframes kr-ping{0%{transform:scale(.6);opacity:.8}80%{opacity:0}100%{transform:scale(2.2);opacity:0}}
+      /* ===== HERO ===== */
+      .hero {
+        position: relative;
+        min-height: calc(100svh - var(--nav-h));
+        padding: 56px 0;
+        overflow-x: clip;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background: linear-gradient(180deg, var(--tertiary) 0%, var(--bg) 65%);
+      }
+      .hero-grid {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 48px;
+        align-items: center;
+      }
+      @media (max-width: 900px) {
+        .hero-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .hero-title {
+        font-size: clamp(2.6rem, 5vw, 4.2rem);
+        margin-bottom: 40px;
+      }
+      .hero-sub {
+        font-size: 18px;
+        color: var(--sub);
+        margin-bottom: 64px;
+        margin-left: 4px;
+        max-width: 480px;
+      }
+      .hero-cta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-bottom: 48px;
+      }
+      .hero-store-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+        align-items: center;
+      }
+      .qr-box {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 48px;
+      }
+      .qr-box img {
+        width: 64px;
+        height: 64px;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+      }
+      .qr-box span {
+        font-size: 13px;
+        color: var(--sub);
+      }
 
-/* 핀 ↔ 칩 연결선 */
-.kr-lines{position:absolute;inset:0;z-index:3;pointer-events:none;overflow:visible}
-.kr-line{fill:none;stroke:var(--primary-dk);stroke-width:1.4;stroke-dasharray:4 4;opacity:.28;transition:opacity .25s ease,stroke .25s ease}
-.kr-visual:has(.kr-chip-1:hover) .kr-line-1,.kr-visual:has(.kr-chip-1:focus-visible) .kr-line-1,.kr-visual:has(.kr-chip-1.is-active) .kr-line-1,
-.kr-visual:has(.kr-chip-2:hover) .kr-line-2,.kr-visual:has(.kr-chip-2:focus-visible) .kr-line-2,.kr-visual:has(.kr-chip-2.is-active) .kr-line-2,
-.kr-visual:has(.kr-chip-3:hover) .kr-line-3,.kr-visual:has(.kr-chip-3:focus-visible) .kr-line-3,.kr-visual:has(.kr-chip-3.is-active) .kr-line-3{
-  opacity:.9;stroke:var(--primary)
-}
+      /* ===== KR-VISUAL: 대한민국 실루엣 + 기능 미리보기 플로팅 칩 ===== */
+      .kr-visual {
+        position: relative;
+        height: 400px;
+        left: -48px;
+        transition:
+          transform 1.5s cubic-bezier(0.22, 1, 0.36, 1),
+          opacity 1s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .kr-visual {
+          transition: none;
+        }
+      }
+      .kr-map {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        height: 340px;
+        width: auto;
+        z-index: 2;
+        filter: drop-shadow(0 22px 40px rgba(59, 130, 246, 0.32));
+      }
+      .kr-map-shape {
+        fill: var(--primary);
+        stroke: var(--primary-dk);
+        stroke-width: 0.6;
+        stroke-linejoin: round;
+      }
+      .kr-map-jeju {
+        fill: var(--primary);
+        stroke: var(--primary-dk);
+        stroke-width: 0.6;
+        stroke-linejoin: round;
+      }
 
-/* 플로팅 뱃지 칩: 작은 썸네일 + 알약 라벨 */
-.kr-chip{
-  position:absolute;display:flex;flex-direction:column;align-items:center;gap:6px;
-  padding:6px;background:#fff;border-radius:18px;
-  box-shadow:0 10px 25px rgba(26,30,42,.14);border:1px solid rgba(226,234,255,.8);
-  z-index:5;opacity:0;animation:kr-pop .5s ease forwards;animation-delay:var(--d,0s);
-  transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s ease,border-color .3s ease;
-}
-.kr-chip:hover,.kr-chip:focus-visible,.kr-chip.is-active{
-  transform:translateY(-8px) scale(1.3);
-  box-shadow:0 20px 35px rgba(59,130,246,.25);border-color:var(--primary);z-index:10;
-}
-.kr-chip img{width:180px;height:225px;object-fit:cover;object-position:top center;border-radius:12px;background:var(--bg-3)}
-.kr-chip span{font-size:12px;font-weight:700;color:var(--text);white-space:nowrap;padding:2px 8px;border-radius:100px;background:var(--tertiary)}
-@keyframes kr-pop{from{opacity:0;translate:0 8px}to{opacity:1;translate:0 0}}
+      /* 지도 위 거점 핀 + 펄스 링 (viewBox 0 0 100 200 좌표계를 그대로 재사용) */
+      .kr-pins {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        height: 340px;
+        width: 170px;
+        z-index: 4;
+        pointer-events: none;
+      }
+      .kr-pin {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        margin: -5px 0 0 -5px;
+        border-radius: 50%;
+        background: #fff;
+        box-shadow:
+          0 0 0 2px var(--primary-dk),
+          0 2px 6px rgba(10, 14, 26, 0.35);
+      }
+      .kr-pin::after {
+        content: "";
+        position: absolute;
+        inset: -5px;
+        border-radius: 50%;
+        border: 2px solid var(--primary-dk);
+        opacity: 0;
+        animation: kr-ping 2.6s ease-out infinite;
+      }
+      .kr-pin-seoul::after {
+        animation-delay: 0s;
+      }
+      .kr-pin-donghae::after {
+        animation-delay: 0.6s;
+      }
+      .kr-pin-busan::after {
+        animation-delay: 1.2s;
+      }
+      @keyframes kr-ping {
+        0% {
+          transform: scale(0.6);
+          opacity: 0.8;
+        }
+        80% {
+          opacity: 0;
+        }
+        100% {
+          transform: scale(2.2);
+          opacity: 0;
+        }
+      }
 
-.kr-chip-1{top:4%;left:-16%}
-.kr-chip-2{top:10;right:-16%}
-.kr-chip-3{bottom:-30%;left:56%}
+      /* 핀 ↔ 칩 연결선 */
+      .kr-lines {
+        position: absolute;
+        inset: 0;
+        z-index: 3;
+        pointer-events: none;
+        overflow: visible;
+      }
+      .kr-line {
+        fill: none;
+        stroke: var(--primary-dk);
+        stroke-width: 1.4;
+        stroke-dasharray: 4 4;
+        opacity: 0.28;
+        transition:
+          opacity 0.25s ease,
+          stroke 0.25s ease;
+      }
+      .kr-visual:has(.kr-chip-1:hover) .kr-line-1,
+      .kr-visual:has(.kr-chip-1:focus-visible) .kr-line-1,
+      .kr-visual:has(.kr-chip-1.is-active) .kr-line-1,
+      .kr-visual:has(.kr-chip-2:hover) .kr-line-2,
+      .kr-visual:has(.kr-chip-2:focus-visible) .kr-line-2,
+      .kr-visual:has(.kr-chip-2.is-active) .kr-line-2,
+      .kr-visual:has(.kr-chip-3:hover) .kr-line-3,
+      .kr-visual:has(.kr-chip-3:focus-visible) .kr-line-3,
+      .kr-visual:has(.kr-chip-3.is-active) .kr-line-3 {
+        opacity: 0.9;
+        stroke: var(--primary);
+      }
 
-@media(max-width:900px){
-  .kr-visual{height:auto;display:flex;flex-direction:column;align-items:center;gap:14px;padding:8px 0 4px}
-  .kr-map{position:static;transform:none;height:220px;filter:drop-shadow(0 12px 24px rgba(59,130,246,.24))}
-  .kr-pins,.kr-lines{display:none}
-  .kr-chip{position:static;transform:none!important;flex-direction:row;width:100%;max-width:280px;animation-delay:0s!important}
-  .kr-chip:hover,.kr-chip:active{transform:translateY(-4px)!important}
-  .kr-chip img{width:110px;height:140px}
-}
+      /* 플로팅 뱃지 칩: 작은 썸네일 + 알약 라벨 */
+      .kr-chip {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        padding: 8px;
+        background: #fff;
+        border-radius: 18px;
+        box-shadow: 0 10px 25px rgba(26, 30, 42, 0.14);
+        border: 1px solid rgba(226, 234, 255, 0.8);
+        z-index: 5;
+        opacity: 0;
+        animation: kr-pop 0.5s ease forwards;
+        animation-delay: var(--d, 0s);
+        transition:
+          transform 0.3s cubic-bezier(0.34, 1.46, 0.64, 1),
+          box-shadow 0.3s ease,
+          border-color 0.3s ease;
+      }
+      .kr-chip:hover,
+      .kr-chip:focus-visible,
+      .kr-chip.is-active {
+        transform: translateY(-8px) scale(1.1);
+        box-shadow: 0 20px 35px rgba(59, 130, 246, 0.25);
+        border-color: var(--primary);
+        z-index: 10;
+      }
+      .kr-chip img {
+        width: 180px;
+        height: 225px;
+        object-fit: cover;
+        object-position: top center;
+        border-radius: 12px;
+        background: var(--bg-3);
+      }
+      .kr-chip span {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text);
+        white-space: nowrap;
+        padding: 2px 8px;
+        border-radius: 100px;
+        background: var(--secondary);
+      }
+      @keyframes kr-pop {
+        from {
+          opacity: 0;
+          translate: 0 8px;
+        }
+        to {
+          opacity: 1;
+          translate: 0 0;
+        }
+      }
 
-/* ===== PROBLEM → SOLUTION ===== */
-.compare{display:grid;grid-template-columns:1fr auto 1fr;gap:32px;align-items:center;margin-bottom:56px}
-@media(max-width:760px){.compare{grid-template-columns:1fr}}
-.compare-arrow{font-size:28px;color:var(--primary);text-align:center}
-@media(max-width:760px){.compare-arrow{transform:rotate(90deg)}}
-.compare-card{padding:32px;border:1.5px solid var(--border)}
-.compare-before{background:var(--bg-2);border-radius:12px}
-.compare-after{background:var(--bg-3);border-color:var(--primary);border-radius:24px;box-shadow:0 12px 32px rgba(59,130,246,.14)}
-.compare-card h3{font-family:var(--sans);font-size:15px;font-weight:700;color:var(--sub);margin-bottom:20px}
-.compare-after h3{color:var(--primary-dk)}
-.app-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);font-size:15px}
-.app-row:last-child{border-bottom:none}
-.app-row .ico{width:34px;height:34px;border-radius:10px;background:#fff;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--sub)}
-.app-row .x{margin-left:auto;color:#D64545}
-.compare-after .app-row{border-bottom:none;padding:16px 0;font-size:16px;font-weight:600}
-.compare-after .ico{overflow:hidden}
-.compare-after .check{margin-left:auto;color:var(--primary-dk)}
+      .kr-chip-1 {
+        top: 4%;
+        left: -16%;
+      }
+      .kr-chip-2 {
+        top: -20%;
+        right: -16%;
+      }
+      .kr-chip-3 {
+        bottom: -45%;
+        left: 56%;
+      }
 
-.reasons-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-@media(max-width:760px){.reasons-strip{grid-template-columns:1fr}}
-.reason{padding:20px 24px;border-radius:0 var(--radius-sm) var(--radius-sm) 0;background:var(--bg-2);border-left:4px solid var(--primary)}
-.reason .r-ico{color:var(--primary);margin-bottom:10px}
-.reason .r-ico .icon-lg{width:26px;height:26px}
-.reason h4{font-size:15px;font-weight:700;margin-bottom:6px}
-.reason p{font-size:14px;color:var(--sub)}
+      @media (max-width: 900px) {
+        /* 모바일: 칩은 숨기고 지도만 우측 배경으로 */
+        .hero {
+          overflow: hidden;
+        }
+        .hero-grid > :first-child {
+          position: relative;
+          z-index: 1;
+        }
+        .kr-visual {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: auto;
+          right: -24px;
+          width: 260px;
+          height: auto;
+          opacity: 0.25;
+          transform: scale(3);
+          pointer-events: none;
+        }
+        .kr-chip,
+        .kr-lines {
+          display: none;
+        }
+      }
 
-/* ===== FEATURES ===== */
-.feature-block{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;margin-bottom:112px}
-.feature-block:nth-child(even){direction:rtl}
-.feature-block:nth-child(even) > *{direction:ltr}
-@media(max-width:860px){.feature-block{grid-template-columns:1fr;margin-bottom:72px}.feature-block:nth-child(even){direction:ltr}}
-.feature-tag{display:inline-block;font-size:13px;font-weight:700;color:var(--text);background:var(--tertiary);padding:5px 12px;border-radius:100px;margin-bottom:14px}
-.feature-block h3{font-size:clamp(1.6rem,3vw,2.1rem);margin-bottom:14px}
-.feature-block p{font-size:16px;color:var(--sub);margin-bottom:20px;max-width:440px}
-.pill-row{display:flex;flex-wrap:wrap;gap:8px}
-.pill{font-size:13px;padding:6px 14px;border-radius:100px;background:var(--tertiary);color:var(--text)}
+      /* ===== PROBLEM → SOLUTION ===== */
+      .compare {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        gap: 32px;
+        align-items: center;
+        margin-bottom: 56px;
+      }
+      @media (max-width: 760px) {
+        .compare {
+          grid-template-columns: 1fr;
+        }
+      }
+      .compare-arrow {
+        font-size: 28px;
+        color: var(--primary);
+        text-align: center;
+      }
+      @media (max-width: 760px) {
+        .compare-arrow {
+          transform: rotate(90deg);
+        }
+      }
+      .compare-card {
+        padding: 32px;
+        border: 1.5px solid var(--border);
+      }
+      .compare-before {
+        background: var(--bg-2);
+        border-radius: 12px;
+      }
+      .compare-after {
+        background: var(--bg-3);
+        border-color: var(--primary);
+        border-radius: 24px;
+        box-shadow: 0 12px 32px rgba(59, 130, 246, 0.14);
+      }
+      .compare-card h3 {
+        font-family: var(--sans);
+        font-size: 20px;
+        letter-spacing: 0;
+        font-weight: 600;
+        color: var(--sub);
+        margin-bottom: 20px;
+      }
+      .compare-after h3 {
+        color: var(--primary-dk);
+      }
+      .app-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 0;
+        border-bottom: 1px solid var(--border);
+        font-size: 15px;
+      }
+      .app-row:last-child {
+        border-bottom: none;
+      }
+      .app-row .ico {
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        background: #fff;
+        border: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--sub);
+      }
+      .app-row .x {
+        margin-left: auto;
+        color: #d64545;
+      }
+      .compare-after .app-row {
+        border-bottom: none;
+        padding: 16px 0;
+        font-size: 16px;
+        font-weight: 600;
+      }
+      .compare-after .ico {
+        overflow: hidden;
+      }
+      .compare-after .check {
+        margin-left: auto;
+        color: var(--primary-dk);
+      }
 
-/* K-amera visual */
-.kamera-visual{position:relative;background:var(--text);border-radius:24px;padding:24px;max-width:320px;margin:0 auto;overflow:hidden;transition:transform .3s ease}
-.kamera-visual:hover{transform:translateY(-6px)}
-.kamera-visual img,.kamera-visual video{border-radius:14px;width:100%}
-.scan-line{position:absolute;left:24px;right:24px;height:2px;background:var(--tertiary);box-shadow:0 0 12px var(--tertiary);animation:scan 2.6s ease-in-out infinite}
-@keyframes scan{0%{top:24px;opacity:0}15%{opacity:1}50%{top:calc(100% - 24px)}85%{opacity:1}100%{top:24px;opacity:0}}
-.kamera-tag{position:absolute;background:#fff;color:var(--text);font-size:12px;font-weight:600;padding:6px 10px;border-radius:8px;box-shadow:0 6px 16px rgba(0,0,0,.2)}
-.kamera-tag.t1{top:38%;left:36px}
-.kamera-tag.t2{bottom:22%;right:36px}
+      .reasons-strip {
+        display: grid;
+        margin-top: 128px;
+        margin-bottom: 128px;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+      @media (max-width: 760px) {
+        .reasons-strip {
+          grid-template-columns: 1fr;
+        }
+      }
+      .reason {
+        padding: 20px 24px;
+        border-radius: var(--radius-sm);
+        background: color-mix(in srgb, var(--secondary) 20%, transparent);
+        border: 1px solid var(--secondary);
+      }
+      .reason .r-ico {
+        color: color-mix(in srgb, var(--secondary) 60%, #000);
+        margin-bottom: 10px;
+      }
+      .reason .r-ico .icon-lg {
+        width: 26px;
+        height: 26px;
+      }
+      .reason h4 {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 6px;
+      }
+      .reason p {
+        font-size: 16px;
+        color: var(--sub);
+      }
 
-/* K-amera 스토리형 단일 폰 프레임 + crossfade */
-.kamera-phone-wrap{width:100%;max-width:300px;margin:0 auto}
-.kamera-progress{display:flex;gap:5px;margin-bottom:14px}
-.kamera-progress i{flex:1;height:3px;border-radius:100px;background:rgba(255,255,255,.25);overflow:hidden;position:relative;font-style:normal}
-.kamera-progress i::after{content:'';position:absolute;inset:0;background:var(--tertiary);transform:scaleX(0);transform-origin:left;animation:kp-fill 6s linear infinite}
-.kamera-progress i:nth-child(1)::after{animation-delay:0s}
-.kamera-progress i:nth-child(2)::after{animation-delay:2s}
-.kamera-progress i:nth-child(3)::after{animation-delay:4s}
-@keyframes kp-fill{0%{transform:scaleX(0)}16.6%{transform:scaleX(1)}100%{transform:scaleX(1)}}
-.kamera-phone{
-  width:100%;position:relative;background:#0c0e14;border-radius:36px;padding:14px;
-  border:2px solid #2a2f3d;box-shadow:0 30px 60px rgba(0,0,0,.45),inset 0 0 0 1px rgba(255,255,255,.04);
-  box-sizing:border-box;transition:transform .3s ease;
-}
-.kamera-phone:hover{transform:translateY(-6px)}
-.kamera-phone::before{content:'';position:absolute;top:28px;left:50%;transform:translateX(-50%);width:64px;height:6px;border-radius:100px;background:#1c2030;z-index:2}
-.kamera-phone-screen{position:relative;border-radius:24px;overflow:hidden;aspect-ratio:9/17.5;background:#111}
-.kamera-slide{position:absolute;inset:0;opacity:0;animation:kp-cross 6s linear infinite}
-.kamera-slide:nth-child(1){animation-delay:0s}
-.kamera-slide:nth-child(2){animation-delay:2s}
-.kamera-slide:nth-child(3){animation-delay:4s}
-.kamera-slide-bg{position:absolute;inset:-20px;background-size:cover;background-position:center;filter:blur(24px) brightness(.55);transform:scale(1.15)}
-.kamera-slide img{position:relative;width:100%;height:100%;object-fit:contain;object-position:center}
-@keyframes kp-cross{0%{opacity:0}3%{opacity:1}30%{opacity:1}36%{opacity:0}100%{opacity:0}}
-.kamera-caption-row{position:relative;height:22px;margin-bottom:10px}
-.kamera-caption{position:absolute;left:0;right:0;top:0;color:var(--text);font-size:15px;font-weight:700;text-align:center;opacity:0;animation:kp-caption 6s linear infinite}
-@keyframes kp-caption{0%{opacity:1}32%{opacity:1}33%{opacity:0}100%{opacity:0}}
+      /* ===== FEATURES ===== */
+      .feature-block {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 164px;
+        align-items: center;
+        margin-top: 64px;
+        margin-bottom: 112px;
+        /* 앵커 이동 시 여백: 64px + reveal 이동분 16px */
+        scroll-margin-top: 80px;
+      }
+      .feature-block:nth-child(even) {
+        direction: rtl;
+      }
+      .feature-block:nth-child(even) > * {
+        direction: ltr;
+      }
+      @media (max-width: 860px) {
+        .feature-block {
+          grid-template-columns: 1fr;
+          margin-bottom: 72px;
+        }
+        .feature-block:nth-child(even) {
+          direction: ltr;
+        }
+      }
+      .feature-tag {
+        display: inline-block;
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--text);
+        background: var(--tertiary);
+        padding: 5px 12px;
+        border-radius: 100px;
+        margin-bottom: 32px;
+      }
+      .feature-block h3 {
+        font-size: clamp(1.6rem, 3vw, 2.1rem);
+        margin-bottom: 24px;
+      }
+      .feature-block p {
+        font-size: 16px;
+        color: var(--sub);
+        margin-bottom: 32px;
+        max-width: 440px;
+      }
+      .pill-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .pill {
+        font-size: 13px;
+        padding: 6px 14px;
+        border-radius: 100px;
+        background: var(--secondary);
+        color: var(--text);
+      }
 
-/* K-uration: 왼쪽 고정 피드 + 오른쪽 책장 넘기기 카드 2장 */
-.kuration-frame{max-width:380px;margin:0 auto}
-.kf-layout{display:grid;grid-template-columns:1.25fr 1fr;grid-template-rows:1fr;gap:14px;align-items:stretch;height:420px;perspective:1200px}
-.kf-fixed{width:100%;height:100%;min-height:0;min-width:0}
-.kf-fixed img{width:100%;height:100%;object-fit:contain;object-position:top center;border-radius:var(--radius-sm);box-shadow:0 12px 28px rgba(26,30,42,.16)}
-.kf-flipper{display:flex;flex-direction:column;gap:12px;height:100%;min-height:0;min-width:0;transform-style:preserve-3d;transform-origin:left center}
-.kf-card-item{flex:1;min-height:0;overflow:hidden;border-radius:var(--radius-sm);box-shadow:0 10px 24px rgba(26,30,42,.16)}
-.kf-card-item img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;transition:transform .3s ease}
-.kf-card-item img:hover{transform:scale(1.03)}
-.kf-flipper.turn-out{animation:kf-flip-out .32s cubic-bezier(.4,0,.2,1) forwards}
-.kf-flipper.turn-in{animation:kf-flip-in .35s cubic-bezier(0,0,.2,1) forwards}
-@keyframes kf-flip-out{to{transform:rotateY(-85deg);opacity:.1}}
-@keyframes kf-flip-in{from{transform:rotateY(85deg);opacity:.1}to{transform:rotateY(0deg);opacity:1}}
-.ks-nav{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:18px}
-.ks-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--border);background:#fff;font-size:18px;line-height:1;color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s,border-color .15s}
-.ks-btn:hover{background:var(--secondary);border-color:var(--primary)}
-.ks-dots{display:flex;gap:6px}
-.ks-dots i{width:6px;height:6px;border-radius:50%;background:var(--border);transition:background .2s,transform .2s}
-.ks-dots i.active{background:var(--primary);transform:scale(1.3)}
+      /* K-amera visual */
+      .kamera-visual {
+        position: relative;
+        background: var(--text);
+        border-radius: 24px;
+        padding: 24px;
+        max-width: 320px;
+        margin: 0 auto;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+      }
+      .kamera-visual:hover {
+        transform: translateY(-6px);
+      }
+      .kamera-visual img,
+      .kamera-visual video {
+        border-radius: 14px;
+        width: 100%;
+      }
+      .scan-line {
+        position: absolute;
+        left: 24px;
+        right: 24px;
+        height: 2px;
+        background: var(--tertiary);
+        box-shadow: 0 0 12px var(--tertiary);
+        animation: scan 2.6s ease-in-out infinite;
+      }
+      @keyframes scan {
+        0% {
+          top: 24px;
+          opacity: 0;
+        }
+        15% {
+          opacity: 1;
+        }
+        50% {
+          top: calc(100% - 24px);
+        }
+        85% {
+          opacity: 1;
+        }
+        100% {
+          top: 24px;
+          opacity: 0;
+        }
+      }
+      .kamera-tag {
+        position: absolute;
+        background: #fff;
+        color: var(--text);
+        font-size: 12px;
+        font-weight: 600;
+        padding: 6px 10px;
+        border-radius: 8px;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+      }
+      .kamera-tag.t1 {
+        top: 38%;
+        left: 36px;
+      }
+      .kamera-tag.t2 {
+        bottom: 22%;
+        right: 36px;
+      }
 
-/* K-ommunity chat */
-.chat-box{background:var(--bg-2);border-radius:var(--radius);padding:24px;max-width:380px;margin:0 auto}
-.bubble{max-width:80%;padding:12px 16px;border-radius:16px;font-size:14px;margin-bottom:10px;line-height:1.4}
-.bubble.them{background:#fff;border:1px solid var(--border);border-bottom-left-radius:4px}
-.bubble.me{background:var(--primary);color:#fff;margin-left:auto;border-bottom-right-radius:4px}
-.bubble .lang-tag{display:block;font-size:11px;opacity:.7;margin-top:4px}
+      /* K-amera 스토리형 단일 폰 프레임 + crossfade */
+      .kamera-phone-wrap {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+      }
+      .kamera-progress {
+        display: flex;
+        gap: 5px;
+        margin-bottom: 14px;
+      }
+      .kamera-progress i {
+        flex: 1;
+        height: 3px;
+        border-radius: 100px;
+        background: rgba(255, 255, 255, 0.25);
+        overflow: hidden;
+        position: relative;
+        font-style: normal;
+      }
+      .kamera-progress i::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: var(--tertiary);
+        transform: scaleX(0);
+        transform-origin: left;
+        animation: kp-fill 6s linear infinite;
+      }
+      .kamera-progress i:nth-child(1)::after {
+        animation-delay: 0s;
+      }
+      .kamera-progress i:nth-child(2)::after {
+        animation-delay: 2s;
+      }
+      .kamera-progress i:nth-child(3)::after {
+        animation-delay: 4s;
+      }
+      @keyframes kp-fill {
+        0% {
+          transform: scaleX(0);
+        }
+        16.6% {
+          transform: scaleX(1);
+        }
+        100% {
+          transform: scaleX(1);
+        }
+      }
+      .kamera-phone {
+        width: 100%;
+        position: relative;
+        background: #1e2027;
+        border-radius: 36px;
+        padding: 10px;
+        border: 1px solid #2a2f3d;
+        box-shadow:
+          0 10px 60px rgba(0, 0, 0, 0.2),
+          inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+        box-sizing: border-box;
+        transition: transform 0.3s ease;
+      }
+      .kamera-phone:hover {
+        transform: translateY(-6px);
+      }
+      .kamera-phone::before {
+        content: "";
+        position: absolute;
+        top: 28px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 64px;
+        height: 6px;
+        border-radius: 100px;
+        background: #1c2030;
+        z-index: 2;
+      }
+      .kamera-phone-screen {
+        position: relative;
+        border-radius: 26px;
+        overflow: hidden;
+        aspect-ratio: 393/852;
+        background: #111;
+      }
+      .kamera-slide {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        animation: kp-cross 6s linear infinite;
+      }
+      .kamera-slide:nth-child(1) {
+        animation-delay: 0s;
+      }
+      .kamera-slide:nth-child(2) {
+        animation-delay: 2s;
+      }
+      .kamera-slide:nth-child(3) {
+        animation-delay: 4s;
+      }
+      .kamera-slide-bg {
+        position: absolute;
+        inset: -20px;
+        background-size: cover;
+        background-position: center;
+        filter: blur(24px) brightness(0.55);
+        transform: scale(1.15);
+      }
+      .kamera-slide img {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+      }
+      @keyframes kp-cross {
+        0% {
+          opacity: 0;
+        }
+        3% {
+          opacity: 1;
+        }
+        30% {
+          opacity: 1;
+        }
+        36% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+      .kamera-caption-row {
+        position: relative;
+        height: 22px;
+        margin-bottom: 10px;
+      }
+      .kamera-caption {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        color: var(--sub);
+        font-size: 16px;
+        font-weight: 600;
+        text-align: center;
+        opacity: 0;
+        animation: kp-caption 6s linear infinite;
+      }
+      @keyframes kp-caption {
+        0% {
+          opacity: 1;
+        }
+        32% {
+          opacity: 1;
+        }
+        33% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
 
-/* ===== SOCIAL PROOF ===== */
-.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-bottom:56px;text-align:center}
-@media(max-width:760px){.stats-row{grid-template-columns:repeat(2,1fr)}}
-.stat b{display:block;font-family:var(--serif);font-size:clamp(2rem,4vw,2.6rem);color:var(--primary-dk)}
-.stat span{font-size:14px;color:var(--sub)}
+      /* K-uration: 왼쪽 고정 피드 + 오른쪽 책장 넘기기 카드 2장 */
+      .kuration-frame {
+        max-width: 560px;
+        margin: 0 auto;
+      }
+      .kf-layout {
+        display: grid;
+        grid-template-columns: 1.8fr 1fr;
+        grid-template-rows: 1fr;
+        gap: 14px;
+        align-items: stretch;
+        height: 420px;
+        perspective: 1200px;
+      }
+      .kf-fixed {
+        width: 100%;
+        height: 100%;
+        background-color: #fafafa;
+        min-height: 0;
+        min-width: 0;
+      }
+      .kf-fixed img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+        border-radius: var(--radius-sm);
+        box-shadow: 0 12px 28px rgba(26, 30, 42, 0.16);
+      }
+      .kf-flipper {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        height: 100%;
+        min-height: 0;
+        min-width: 0;
+        transform-style: preserve-3d;
+        transform-origin: left center;
+      }
+      .kf-card-item {
+        flex: 1;
+        min-height: 0;
+        overflow: hidden;
+        border-radius: var(--radius-sm);
+        box-shadow: 0 10px 24px rgba(26, 30, 42, 0.16);
+      }
+      .kf-card-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top center;
+        display: block;
+        transition: transform 0.3s ease;
+      }
+      .kf-card-item img:hover {
+        transform: scale(1.03);
+      }
+      .kf-flipper.turn-out {
+        animation: kf-flip-out 0.32s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      }
+      .kf-flipper.turn-in {
+        animation: kf-flip-in 0.35s cubic-bezier(0, 0, 0.2, 1) forwards;
+      }
+      @keyframes kf-flip-out {
+        to {
+          transform: rotateY(-85deg);
+          opacity: 0.1;
+        }
+      }
+      @keyframes kf-flip-in {
+        from {
+          transform: rotateY(85deg);
+          opacity: 0.1;
+        }
+        to {
+          transform: rotateY(0deg);
+          opacity: 1;
+        }
+      }
+      .ks-nav {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 18px;
+        margin-top: 18px;
+      }
+      .ks-btn {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        border: 1px solid var(--border);
+        background: #fff;
+        font-size: 18px;
+        line-height: 1;
+        color: var(--text);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition:
+          background 0.15s,
+          border-color 0.15s;
+      }
+      .ks-btn:hover {
+        background: var(--tertiary);
+        border-color: var(--primary);
+      }
+      .ks-dots {
+        display: flex;
+        gap: 6px;
+      }
+      .ks-dots i {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--border);
+        transition:
+          background 0.2s,
+          transform 0.2s;
+      }
+      .ks-dots i.active {
+        background: var(--primary);
+        transform: scale(1.3);
+      }
 
-.residence-bar{display:flex;height:14px;border-radius:100px;overflow:hidden;margin-bottom:16px;background:var(--bg-3)}
-.residence-bar>div{transition:width 1.1s cubic-bezier(.2,.8,.2,1)}
-.residence-legend{display:flex;flex-wrap:wrap;gap:16px;font-size:13px;color:var(--sub);margin-bottom:56px}
-.residence-legend span{display:flex;align-items:center;gap:6px}
-.residence-legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
+      /* K-ommunity chat */
+      .chat-box {
+        background: var(--bg-2);
+        border-radius: var(--radius);
+        padding: 24px;
+        max-width: 380px;
+        margin: 0 auto;
+      }
+      .bubble {
+        max-width: 80%;
+        padding: 12px 16px;
+        border-radius: 16px;
+        font-size: 14px;
+        margin-bottom: 10px;
+        line-height: 1.4;
+      }
+      .bubble.them {
+        background: #fff;
+        border: 1px solid var(--border);
+        border-bottom-left-radius: 4px;
+      }
+      .bubble.me {
+        background: var(--primary);
+        color: #fff;
+        margin-left: auto;
+        border-bottom-right-radius: 4px;
+      }
+      .bubble .lang-tag {
+        display: block;
+        font-size: 11px;
+        opacity: 0.7;
+        margin-top: 4px;
+      }
 
-.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-@media(max-width:860px){.reviews-grid{grid-template-columns:1fr}}
-.review-card{background:var(--bg-2);border-radius:20px;padding:24px;box-shadow:0 2px 10px rgba(26,30,42,.05);transition:transform .2s ease,box-shadow .2s ease}
-.review-card:hover{transform:translateY(-4px);box-shadow:0 16px 32px rgba(26,30,42,.1)}
-.rating-badge{display:inline-flex;align-items:center;gap:10px;padding:10px 18px;border-radius:100px;background:var(--bg-2);border:1px solid var(--border);font-size:14px;margin-bottom:20px}
-.rating-badge b{font-family:var(--serif);font-size:17px;color:var(--primary-dk)}
-.review-stars{color:#F5A623;font-size:15px;margin-bottom:10px}
-.review-card p{font-size:14px;color:var(--text);margin-bottom:16px}
-.review-meta{display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
+      /* ===== SOCIAL PROOF ===== */
+      #proof {
+        min-height: calc(100svh - var(--nav-h));
+        display: flex;
+        flex-direction: column;
+      }
+      #proof > .wrap {
+        width: 100%;
+      }
+      .stats-row {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+        margin-bottom: 56px;
+        text-align: center;
+      }
+      @media (max-width: 760px) {
+        .stats-row {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      .stat b {
+        display: block;
+        font-family: var(--serif);
+        font-size: clamp(2rem, 4vw, 2.6rem);
+        color: var(--primary-dk);
+      }
+      .stat span {
+        font-size: 14px;
+        color: var(--sub);
+      }
 
-/* ===== FAQ ===== */
-.faq-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:56px}
-@media(max-width:860px){.faq-grid{grid-template-columns:1fr}}
-.faq-item{border-bottom:1px solid var(--border)}
-.faq-q{display:flex;justify-content:space-between;align-items:center;padding:18px 0;cursor:pointer;font-weight:600;font-size:15px}
-.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;font-size:14px;color:var(--sub)}
-.faq-a p{padding-bottom:18px}
-.faq-item.open .faq-q .chevron{transform:rotate(180deg)}
-.chevron{width:26px;height:26px;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:var(--tertiary);color:var(--text);transition:transform .2s}
+      .residence-bar {
+        display: flex;
+        height: 14px;
+        border-radius: 100px;
+        overflow: hidden;
+        margin-bottom: 16px;
+        background: var(--bg-3);
+      }
+      .residence-bar > div {
+        transition: width 1.1s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+      .residence-legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        font-size: 13px;
+        color: var(--sub);
+        margin-bottom: 56px;
+      }
+      .residence-legend span {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .residence-legend i {
+        width: 10px;
+        height: 10px;
+        border-radius: 3px;
+        display: inline-block;
+      }
 
-/* ===== DOWNLOAD CTA ===== */
-.download-cta{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dk) 100%);color:#fff;border-radius:28px;padding:64px 40px;text-align:center;margin:0 24px;position:relative;overflow:hidden}
-@media(min-width:1120px){.download-cta{margin:0 auto;max-width:var(--maxw)}}
-.download-cta::before{content:'';position:absolute;top:-70px;right:-70px;width:240px;height:240px;border-radius:50%;background:var(--tertiary);opacity:.16}
-.download-cta::after{content:'';position:absolute;bottom:-80px;left:-40px;width:180px;height:180px;border-radius:50%;background:var(--tertiary);opacity:.1}
-.download-cta h2{color:#fff;position:relative}
-.download-cta p{color:rgba(255,255,255,.85);margin-bottom:28px;position:relative}
-.download-cta .hero-store-row{justify-content:center;position:relative}
+      .reviews-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+      @media (max-width: 860px) {
+        .reviews-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .review-card {
+        background: var(--bg-2);
+        border-radius: 20px;
+        padding: 24px;
+        box-shadow: 0 2px 10px rgba(26, 30, 42, 0.05);
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+      .review-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 32px rgba(26, 30, 42, 0.1);
+      }
+      .rating-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 18px;
+        border-radius: 100px;
+        background: var(--bg-2);
+        border: 1px solid var(--border);
+        font-size: 14px;
+        margin-bottom: 20px;
+      }
+      .rating-badge b {
+        font-family: var(--serif);
+        font-size: 17px;
+        color: var(--primary-dk);
+      }
+      .review-stars {
+        color: #f5a623;
+        font-size: 15px;
+        margin-bottom: 10px;
+      }
+      .review-card p {
+        font-size: 14px;
+        color: var(--text);
+        margin-bottom: 16px;
+      }
+      .review-meta {
+        display: flex;
+        justify-content: space-between;
+        font-size: 13px;
+        color: var(--muted);
+      }
 
-/* ===== FOOTER ===== */
-footer{padding:64px 0 40px;font-size:14px;color:var(--sub)}
-.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:32px;margin-bottom:32px}
-@media(max-width:700px){.footer-grid{grid-template-columns:1fr}}
-.footer-grid h4{font-size:13px;color:var(--text);margin-bottom:12px}
-.footer-grid a{display:block;padding:4px 0}
-.footer-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:1px solid var(--border);padding-top:20px;font-size:13px}
+      /* ===== FAQ ===== */
+      .faq-grid {
+        display: grid;
+        grid-template-columns: 0.8fr 1.2fr;
+        gap: 56px;
+      }
+      @media (max-width: 860px) {
+        .faq-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .faq-item {
+        border-bottom: 1px solid var(--border);
+      }
+      .faq-q {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 0;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 15px;
+      }
+      .faq-a {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        font-size: 14px;
+        color: var(--sub);
+      }
+      .faq-a p {
+        padding-bottom: 18px;
+      }
+      .faq-item.open .faq-q .chevron {
+        transform: rotate(180deg);
+      }
+      .chevron {
+        width: 26px;
+        height: 26px;
+        flex-shrink: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: var(--tertiary);
+        color: var(--text);
+        transition: transform 0.2s;
+      }
 
-/* ===== STICKY MOBILE DOWNLOAD BAR ===== */
-#sticky-bar{
-  position:fixed;left:0;right:0;bottom:-100px;z-index:90;
-  background:#fff;border-top:1px solid var(--border);
-  box-shadow:0 -8px 24px rgba(0,0,0,.08);
-  padding:12px 20px;display:flex;align-items:center;gap:12px;
-  transition:bottom .25s ease;
-}
-#sticky-bar.show{bottom:0}
-#sticky-bar span{flex:1;font-size:13px;font-weight:600}
-#sticky-bar button.close{background:none;border:none;font-size:16px;color:var(--muted);padding:4px}
-@media(min-width:761px){#sticky-bar{display:none}}
+      /* ===== DOWNLOAD CTA ===== */
+      .download-cta {
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--primary-dk) 100%
+        );
+        color: #fff;
+        border-radius: 28px;
+        padding: 64px 40px;
+        text-align: center;
+        margin: 0 24px;
+        position: relative;
+        overflow: hidden;
+      }
+      @media (min-width: 1120px) {
+        .download-cta {
+          margin: 0 auto;
+          max-width: var(--maxw);
+        }
+      }
+      .download-cta::before {
+        content: "";
+        position: absolute;
+        top: -70px;
+        right: -70px;
+        width: 240px;
+        height: 240px;
+        border-radius: 50%;
+        background: var(--tertiary);
+        opacity: 0.16;
+      }
+      .download-cta::after {
+        content: "";
+        position: absolute;
+        bottom: -80px;
+        left: -40px;
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        background: var(--tertiary);
+        opacity: 0.1;
+      }
+      .download-cta h2 {
+        color: #fff;
+        position: relative;
+        margin-bottom: 16px;
+      }
+      .download-cta p {
+        color: rgba(255, 255, 255, 0.85);
+        margin-bottom: 28px;
+        position: relative;
+      }
+      .download-cta .hero-store-row {
+        justify-content: center;
+        position: relative;
+      }
 
-[data-reveal]{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
-[data-reveal].in{opacity:1;transform:none}
+      /* ===== FOOTER ===== */
+      footer {
+        padding: 64px 0 40px;
+        font-size: 14px;
+        color: var(--sub);
+      }
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr 1fr;
+        gap: 32px;
+        margin-bottom: 32px;
+      }
+      @media (max-width: 700px) {
+        .footer-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .footer-grid h4 {
+        font-size: 13px;
+        color: var(--text);
+        margin-bottom: 12px;
+      }
+      .footer-grid a {
+        display: block;
+        padding: 4px 0;
+      }
+      .footer-bottom {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 8px;
+        border-top: 1px solid var(--border);
+        padding-top: 20px;
+        font-size: 13px;
+      }
 
-/* ===== 아이콘 공통 ===== */
-.icon{width:18px;height:18px;flex-shrink:0}
-.icon-lg{width:22px;height:22px}
+      /* ===== STICKY MOBILE DOWNLOAD BAR ===== */
+      #sticky-bar {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: -100px;
+        z-index: 90;
+        background: #fff;
+        border-top: 1px solid var(--border);
+        box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.08);
+        padding: 12px 20px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        transition: bottom 0.25s ease;
+      }
+      #sticky-bar.show {
+        bottom: 0;
+      }
+      #sticky-bar span {
+        flex: 1;
+        font-size: 13px;
+        font-weight: 600;
+      }
+      #sticky-bar button.close {
+        background: none;
+        border: none;
+        font-size: 16px;
+        color: var(--muted);
+        padding: 4px;
+      }
+      @media (min-width: 761px) {
+        #sticky-bar {
+          display: none;
+        }
+      }
 
-/* ===== 사진/스크린샷 컨테이너 정리 (비율 고정으로 왜곡 방지) ===== */
-.kamera-visual img,.kamera-visual video{width:100%;aspect-ratio:9/16;object-fit:cover;object-position:top center;background:#111}
+      [data-reveal] {
+        opacity: 0;
+        transform: translateY(16px);
+        transition:
+          opacity 0.5s ease,
+          transform 0.5s ease;
+      }
+      [data-reveal].in {
+        opacity: 1;
+        transform: none;
+      }
 
-/* ===== 모바일 메뉴 ===== */
-.hamburger{display:none;background:none;border:none;cursor:pointer;color:var(--text)}
-@media(max-width:860px){.nav-links{display:none}.hamburger{display:flex}}
-#mobile-menu{
-  position:fixed;inset:0;z-index:150;background:#fff;
-  display:flex;flex-direction:column;padding:20px 24px;
-  transform:translateY(-100%);transition:transform .3s ease;
-}
-#mobile-menu.open{transform:translateY(0)}
-.mm-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:40px}
-.mm-top button{background:none;border:none;color:var(--text);cursor:pointer}
-#mobile-menu a{font-family:var(--serif);font-size:26px;padding:14px 0;border-bottom:1px solid var(--border)}
-.mm-langs{display:flex;gap:10px;margin-top:28px}
-.mm-langs button{border:1px solid var(--border);background:none;border-radius:100px;padding:8px 14px;font-size:15px}
-.mm-langs button.active{background:var(--secondary);border-color:var(--primary)}
-#mobile-menu .nav-cta{margin-top:auto;text-align:center;padding:16px;font-size:16px}
-</style>
-</head>
-<body>
+      /* ===== 아이콘 공통 ===== */
+      .icon {
+        width: 18px;
+        height: 18px;
+        flex-shrink: 0;
+      }
+      .icon-lg {
+        width: 22px;
+        height: 22px;
+      }
 
-<!-- 아이콘 스프라이트 (이모지 대체용, 커스텀 스트로크 아이콘) -->
-<svg style="display:none">
-  <symbol id="i-map" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3 3 6v15l6-3 6 3 6-3V3l-6 3-6-3Z"/><path d="M9 3v15M15 6v15"/></symbol>
-  <symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.8 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.8-3.8-9S9.5 5.6 12 3Z"/></symbol>
-  <symbol id="i-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></symbol>
-  <symbol id="i-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H8l-4 4Z"/></symbol>
-  <symbol id="i-camera" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v12H4Z"/><circle cx="12" cy="14" r="3.3"/></symbol>
-  <symbol id="i-bolt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></symbol>
-  <symbol id="i-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M18 6l-2.5 2.5M8.5 15.5 6 18"/></symbol>
-  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9.5 18 20 6"/></symbol>
-  <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5l14 14M19 5 5 19"/></symbol>
-  <symbol id="i-apple" viewBox="0 0 24 24" fill="currentColor"><path d="M16.3 1.2c.1 1.1-.3 2.1-1 2.9-.7.8-1.8 1.4-2.9 1.3-.1-1.1.4-2.2 1-2.9.8-.8 2-1.4 2.9-1.3Zm3.4 16.1c-.5 1.1-.7 1.6-1.4 2.6-1 1.4-2.3 3.1-4 3.1-1.5 0-1.9-1-3.9-1s-2.5 1-4 1c-1.7 0-2.9-1.6-3.9-3-2.7-3.9-3-8.4-1.3-10.8 1.2-1.7 3.1-2.7 4.9-2.7 1.6 0 2.6 1.1 4 1.1 1.3 0 2.1-1.1 4-1.1 1.5 0 3.1.8 4.2 2.2-3.7 2-3.1 7.2 1.4 8.6Z"/></symbol>
-  <symbol id="i-play" viewBox="0 0 24 24" fill="currentColor"><path d="M5 3.5v17l14-8.5Z"/></symbol>
-  <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
-  <symbol id="i-star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.1 6.6L12 17.6l-5.8 3 1.1-6.6-4.8-4.6 6.6-.9Z"/></symbol>
-  <symbol id="i-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></symbol>
-</svg>
+      /* ===== 사진/스크린샷 컨테이너 정리 (비율 고정으로 왜곡 방지) ===== */
+      .kamera-visual img,
+      .kamera-visual video {
+        width: 100%;
+        aspect-ratio: 9/16;
+        object-fit: cover;
+        object-position: top center;
+        background: #111;
+      }
 
-<!-- 언어 선택: 최초 방문 1회만 (localStorage 기준) -->
-<div id="lang-selector" class="hidden">
-  <div class="brandmark">KOIN — Korea Insider</div>
-  <div class="lang-grid">
-    <div class="lang-opt" data-lang="ko"><img src="https://flagcdn.com/w40/kr.png" alt="">한국어</div>
-    <div class="lang-opt" data-lang="en"><img src="https://flagcdn.com/w40/us.png" alt="">English</div>
-    <div class="lang-opt" data-lang="zh"><img src="https://flagcdn.com/w40/cn.png" alt="">中文</div>
-    <div class="lang-opt" data-lang="ja"><img src="https://flagcdn.com/w40/jp.png" alt="">日本語</div>
-    <div class="lang-opt" data-lang="vi"><img src="https://flagcdn.com/w40/vn.png" alt="">Tiếng Việt</div>
-  </div>
-</div>
+      /* ===== 모바일 메뉴 ===== */
+      .hamburger {
+        display: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: var(--text);
+      }
+      @media (max-width: 860px) {
+        .nav-links {
+          display: none;
+        }
+        .hamburger {
+          display: flex;
+        }
+      }
+      #mobile-menu {
+        position: fixed;
+        inset: 0;
+        z-index: 150;
+        background: #fff;
+        display: flex;
+        flex-direction: column;
+        padding: 20px 24px;
+        transform: translateY(-100%);
+        transition: transform 0.3s ease;
+      }
+      #mobile-menu.open {
+        transform: translateY(0);
+      }
+      .mm-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 40px;
+      }
+      .mm-top button {
+        background: none;
+        border: none;
+        color: var(--text);
+        cursor: pointer;
+      }
+      #mobile-menu a {
+        font-family: var(--serif);
+        font-size: 24px;
+        padding: 12px 0;
+      }
+      #mobile-menu .nav-cta {
+        font-family: var(--sans);
+      }
+      .mm-langs {
+        display: flex;
+        gap: 10px;
+        margin-top: 28px;
+      }
+      .mm-langs button {
+        border: 1px solid var(--border);
+        background: none;
+        border-radius: 100px;
+        padding: 8px 14px;
+        font-size: 15px;
+      }
+      .mm-langs button.active {
+        background: var(--tertiary);
+        border-color: var(--primary);
+      }
+      #mobile-menu .nav-cta {
+        margin-top: auto;
+        text-align: center;
+        padding: 16px;
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 아이콘 스프라이트 (이모지 대체용, 커스텀 스트로크 아이콘) -->
+    <svg style="display: none">
+      <symbol
+        id="i-map"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M9 3 3 6v15l6-3 6 3 6-3V3l-6 3-6-3Z" />
+        <path d="M9 3v15M15 6v15" />
+      </symbol>
+      <symbol
+        id="i-globe"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <circle cx="12" cy="12" r="9" />
+        <path
+          d="M3 12h18M12 3c2.5 2.6 3.8 5.8 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.8-3.8-9S9.5 5.6 12 3Z"
+        />
+      </symbol>
+      <symbol
+        id="i-doc"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M7 3h7l4 4v14H7z" />
+        <path d="M14 3v4h4M9 12h6M9 16h6" />
+      </symbol>
+      <symbol
+        id="i-chat"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M4 5h16v11H8l-4 4Z" />
+      </symbol>
+      <symbol
+        id="i-camera"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M4 8h3l2-3h6l2 3h3v12H4Z" />
+        <circle cx="12" cy="14" r="3.3" />
+      </symbol>
+      <symbol
+        id="i-bolt"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" />
+      </symbol>
+      <symbol
+        id="i-spark"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path
+          d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M18 6l-2.5 2.5M8.5 15.5 6 18"
+        />
+      </symbol>
+      <symbol
+        id="i-check"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M4 12.5 9.5 18 20 6" />
+      </symbol>
+      <symbol
+        id="i-x"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M5 5l14 14M19 5 5 19" />
+      </symbol>
+      <symbol id="i-apple" viewBox="0 0 24 24" fill="currentColor">
+        <path
+          d="M16.3 1.2c.1 1.1-.3 2.1-1 2.9-.7.8-1.8 1.4-2.9 1.3-.1-1.1.4-2.2 1-2.9.8-.8 2-1.4 2.9-1.3Zm3.4 16.1c-.5 1.1-.7 1.6-1.4 2.6-1 1.4-2.3 3.1-4 3.1-1.5 0-1.9-1-3.9-1s-2.5 1-4 1c-1.7 0-2.9-1.6-3.9-3-2.7-3.9-3-8.4-1.3-10.8 1.2-1.7 3.1-2.7 4.9-2.7 1.6 0 2.6 1.1 4 1.1 1.3 0 2.1-1.1 4-1.1 1.5 0 3.1.8 4.2 2.2-3.7 2-3.1 7.2 1.4 8.6Z"
+        />
+      </symbol>
+      <symbol id="i-play" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M5 3.5v17l14-8.5Z" />
+      </symbol>
+      <symbol
+        id="i-menu"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+      >
+        <path d="M4 7h16M4 12h16M4 17h16" />
+      </symbol>
+      <symbol id="i-star" viewBox="0 0 24 24" fill="currentColor">
+        <path
+          d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.1 6.6L12 17.6l-5.8 3 1.1-6.6-4.8-4.6 6.6-.9Z"
+        />
+      </symbol>
+      <symbol
+        id="i-chevron"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M6 9l6 6 6-6" />
+      </symbol>
+    </svg>
 
-<nav>
-  <div class="nav-inner">
-    <a class="logo" href="#"><img src="assets/koin-logo.png" alt="KOIN">Koin</a>
-    <div class="nav-links">
-      <a href="#problem" data-i18n="nav.problem">why KOIN</a>
+    <!-- 언어 선택: 최초 방문 1회만 (localStorage 기준) -->
+    <div id="lang-selector" class="hidden">
+      <div class="brandmark">KOIN — Korea Insider</div>
+      <div class="lang-grid">
+        <div class="lang-opt" data-lang="ko">
+          <img src="https://flagcdn.com/w40/kr.png" alt="" />한국어
+        </div>
+        <div class="lang-opt" data-lang="en">
+          <img src="https://flagcdn.com/w40/us.png" alt="" />English
+        </div>
+        <div class="lang-opt" data-lang="zh">
+          <img src="https://flagcdn.com/w40/cn.png" alt="" />中文
+        </div>
+        <div class="lang-opt" data-lang="ja">
+          <img src="https://flagcdn.com/w40/jp.png" alt="" />日本語
+        </div>
+        <div class="lang-opt" data-lang="vi">
+          <img src="https://flagcdn.com/w40/vn.png" alt="" />Tiếng Việt
+        </div>
+      </div>
+    </div>
+
+    <nav>
+      <div class="nav-inner">
+        <a class="logo" href="#"
+          ><img src="assets/koin-logo.png" alt="KOIN" />Koin</a
+        >
+        <div class="nav-links">
+          <a href="#problem" data-i18n="nav.problem">Why KOIN</a>
+          <a href="#features" data-i18n="nav.features">기능</a>
+          <a href="#proof" data-i18n="nav.proof">이용 현황</a>
+          <a href="#faq" data-i18n="nav.faq">FAQ</a>
+        </div>
+        <div class="nav-right">
+          <div class="lang-switch">
+            <button data-lang="ko" class="active">🇰🇷</button>
+            <button data-lang="en">🇺🇸</button>
+            <button data-lang="zh">🇨🇳</button>
+            <button data-lang="ja">🇯🇵</button>
+            <button data-lang="vi">🇻🇳</button>
+          </div>
+          <a class="nav-cta" href="#download" data-i18n="nav.cta">다운로드</a>
+          <button class="hamburger" id="menu-open" aria-label="menu">
+            <svg class="icon-lg"><use href="#i-menu" /></svg>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <div id="mobile-menu">
+      <div class="mm-top">
+        <a class="logo" href="#"
+          ><img src="assets/koin-logo.png" alt="KOIN" />Koin</a
+        >
+        <button id="menu-close" aria-label="close">
+          <svg class="icon-lg"><use href="#i-x" /></svg>
+        </button>
+      </div>
+      <a href="#problem" data-i18n="nav.problem">Why KOIN</a>
       <a href="#features" data-i18n="nav.features">기능</a>
       <a href="#proof" data-i18n="nav.proof">이용 현황</a>
       <a href="#faq" data-i18n="nav.faq">FAQ</a>
-    </div>
-    <div class="nav-right">
-      <div class="lang-switch">
-        <button data-lang="ko" class="active">🇰🇷</button>
-        <button data-lang="en">🇺🇸</button>
-        <button data-lang="zh">🇨🇳</button>
-        <button data-lang="ja">🇯🇵</button>
-        <button data-lang="vi">🇻🇳</button>
+      <div class="mm-langs">
+        <button data-lang="ko" class="active">🇰🇷 KO</button>
+        <button data-lang="en">🇺🇸 EN</button>
+        <button data-lang="zh">🇨🇳 中</button>
+        <button data-lang="ja">🇯🇵 日</button>
+        <button data-lang="vi">🇻🇳 VI</button>
       </div>
       <a class="nav-cta" href="#download" data-i18n="nav.cta">다운로드</a>
-      <button class="hamburger" id="menu-open" aria-label="menu"><svg class="icon-lg"><use href="#i-menu"/></svg></button>
     </div>
-  </div>
-</nav>
 
-<div id="mobile-menu">
-  <div class="mm-top">
-    <a class="logo" href="#"><img src="assets/koin-logo.png" alt="KOIN">Koin</a>
-    <button id="menu-close" aria-label="close"><svg class="icon-lg"><use href="#i-x"/></svg></button>
-  </div>
-  <a href="#problem" data-i18n="nav.problem">why KOIN</a>
-  <a href="#features" data-i18n="nav.features">기능</a>
-  <a href="#proof" data-i18n="nav.proof">이용 현황</a>
-  <a href="#faq" data-i18n="nav.faq">FAQ</a>
-  <div class="mm-langs">
-    <button data-lang="ko" class="active">🇰🇷 KO</button>
-    <button data-lang="en">🇺🇸 EN</button>
-    <button data-lang="zh">🇨🇳 中</button>
-    <button data-lang="ja">🇯🇵 日</button>
-    <button data-lang="vi">🇻🇳 VI</button>
-  </div>
-  <a class="nav-cta" href="#download" data-i18n="nav.cta">다운로드</a>
-</div>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="wrap hero-grid">
-    <div>
-      <div class="eyebrow">Korea Insider</div>
-      <h1 class="hero-title" data-i18n="hero.title">당신 손 안의,<br>진짜 한국.</h1>
-      <p class="hero-sub" data-i18n="hero.sub">AI 큐레이션, 다국어 커뮤니티, 실시간 AI 카메라까지. 한국 생활에 필요한 모든 것을 앱 하나로.</p>
-      <div class="hero-cta-row">
-        <a class="btn btn-ghost" href="#problem" data-i18n="hero.ctaPrimary">왜 필요한지 보기 →</a>
-      </div>
-      <div class="hero-store-row">
-        <a class="store-badge" href="https://apps.apple.com/kr/app/koin/id6760605411" target="_blank" rel="noopener">
-          <svg class="icon-lg"><use href="#i-apple"/></svg><span><small>Download on the</small><strong>App Store</strong></span>
-        </a>
-        <a class="store-badge" href="https://play.google.com/store/apps/details?id=kr.koreainsider.koin&hl=ko" target="_blank" rel="noopener">
-          <svg class="icon-lg"><use href="#i-play"/></svg><span><small>GET IT ON</small><strong>Google Play</strong></span>
-        </a>
-      </div>
-      <div class="qr-box">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=128x128&data=https://www.koreainsider.kr/%23download" alt="QR code">
-        <span data-i18n="hero.qr">스캔해서<br>바로 다운로드</span>
-      </div>
-    </div>
-    <div class="kr-visual">
-      <svg class="kr-map" viewBox="0 0 100 200" aria-hidden="true">
-        <path class="kr-map-shape" d="M85.74,10.73L83.65,20.72L81.11,22.26L78.66,20.9L75.66,23.9L74.3,26.26L71.21,28.89L61.94,28.35L58.4,29.62L59.58,34.25L62.12,36.25L58.94,40.52L44.23,37.61L41.42,32.71L35.79,35.88L34.24,41.33L28.97,45.88L27.34,49.14L22.8,49.78L21.34,51.69L12.26,55.78L2,63.58L2.36,67.76L5.36,68.58L6.18,72.12L7.72,71.58L7.99,69.4L16.44,74.03L18.71,73.21L16.89,75.48L18.62,76.94L14.08,87.11L22.07,89.92L21.62,90.83L13.99,90.29L7.27,99.28L16.08,100.1L12.35,103.28L14.81,104.09L15.9,103.09L16.26,104.73L18.8,103.19L19.89,104.18L17.17,106.45L17.26,107.36L22.71,104.09L19.98,100.91L23.71,101L25.79,104.55L27.7,104.82L28.88,106.45L29.34,104.73L32.97,103.73L35.89,105.73L36.83,105.46L37.65,104.14L37.47,102.5L38.83,102.41L40.05,101.1L40.24,100.1L41.69,99.05L41.55,98.19L44.41,96.05L48.14,95.51L49.86,96.28L50.82,95.74L54.04,95.56L54.95,96.19L55.86,95.69L58.22,96.05L59.49,95.65L62.08,92.83L62.22,90.79L62.91,90.41L61.58,88.02L53.41,81.21L47.77,79.93L48.14,76.21L49.86,75.39L50.59,72.12L49.23,70.4L55.04,66.95L57.58,64.04L60.49,64.77L67.48,61.77L66.58,60.22L74.3,56.41L75.84,52.78L83.47,49.33L84.47,40.33L82.2,37.16L90.73,25.8L94.73,23.17L97.55,24.08L98,23.17L95.27,17.45L93.46,17.63L91.19,14.72L91.91,12.45L85.74,10.73Z
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">Korea Insider</div>
+          <h1 class="hero-title" data-i18n="hero.title">
+            당신 손 안의,<br />진짜 한국.
+          </h1>
+          <p class="hero-sub" data-i18n="hero.sub">
+            AI 큐레이션, 다국어 커뮤니티, 실시간 AI 카메라까지.<br />한국 생활에
+            필요한 모든 것을 앱 하나로.
+          </p>
+          <div class="hero-cta-row">
+            <a class="btn btn-ghost" href="#problem" data-i18n="hero.ctaPrimary"
+              >자세히 알아보기 →</a
+            >
+          </div>
+          <div class="hero-store-row">
+            <a
+              class="store-badge"
+              href="https://apps.apple.com/kr/app/koin/id6760605411"
+              target="_blank"
+              rel="noopener"
+            >
+              <img
+                src="assets/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg"
+                alt="Download on the App Store"
+              />
+            </a>
+            <a
+              class="store-badge"
+              href="https://play.google.com/store/apps/details?id=kr.koreainsider.koin&hl=ko"
+              target="_blank"
+              rel="noopener"
+            >
+              <img
+                src="assets/GetItOnGooglePlay_Badge_Web_color_English.svg"
+                alt="Get it on Google Play"
+              />
+            </a>
+          </div>
+          <div class="qr-box">
+            <img
+              src="https://api.qrserver.com/v1/create-qr-code/?size=128x128&data=https://www.koreainsider.kr/%23download"
+              alt="QR code"
+            />
+            <span data-i18n="hero.qr">스캔해서<br />바로 다운로드</span>
+          </div>
+        </div>
+        <div class="kr-visual">
+          <svg class="kr-map" viewBox="0 0 100 200" aria-hidden="true">
+            <path
+              class="kr-map-shape"
+              d="M85.74,10.73L83.65,20.72L81.11,22.26L78.66,20.9L75.66,23.9L74.3,26.26L71.21,28.89L61.94,28.35L58.4,29.62L59.58,34.25L62.12,36.25L58.94,40.52L44.23,37.61L41.42,32.71L35.79,35.88L34.24,41.33L28.97,45.88L27.34,49.14L22.8,49.78L21.34,51.69L12.26,55.78L2,63.58L2.36,67.76L5.36,68.58L6.18,72.12L7.72,71.58L7.99,69.4L16.44,74.03L18.71,73.21L16.89,75.48L18.62,76.94L14.08,87.11L22.07,89.92L21.62,90.83L13.99,90.29L7.27,99.28L16.08,100.1L12.35,103.28L14.81,104.09L15.9,103.09L16.26,104.73L18.8,103.19L19.89,104.18L17.17,106.45L17.26,107.36L22.71,104.09L19.98,100.91L23.71,101L25.79,104.55L27.7,104.82L28.88,106.45L29.34,104.73L32.97,103.73L35.89,105.73L36.83,105.46L37.65,104.14L37.47,102.5L38.83,102.41L40.05,101.1L40.24,100.1L41.69,99.05L41.55,98.19L44.41,96.05L48.14,95.51L49.86,96.28L50.82,95.74L54.04,95.56L54.95,96.19L55.86,95.69L58.22,96.05L59.49,95.65L62.08,92.83L62.22,90.79L62.91,90.41L61.58,88.02L53.41,81.21L47.77,79.93L48.14,76.21L49.86,75.39L50.59,72.12L49.23,70.4L55.04,66.95L57.58,64.04L60.49,64.77L67.48,61.77L66.58,60.22L74.3,56.41L75.84,52.78L83.47,49.33L84.47,40.33L82.2,37.16L90.73,25.8L94.73,23.17L97.55,24.08L98,23.17L95.27,17.45L93.46,17.63L91.19,14.72L91.91,12.45L85.74,10.73Z
                  M62.91,90.41L62.22,90.79L62.08,92.83L59.49,95.65L58.22,96.05L55.86,95.69L54.95,96.19L54.04,95.56L50.82,95.74L49.86,96.28L48.14,95.51L44.41,96.05L41.55,98.19L41.69,99.05L40.24,100.1L40.05,101.1L38.83,102.41L37.47,102.5L37.65,104.14L36.83,105.46L35.89,105.73L36.15,105.91L35.51,108.45L37.51,109.81L36.88,111.36L39.42,114.08L39.78,115.36L38.69,118.62L40.78,121.17L39.87,124.62L38.42,120.71L34.97,120.17L32.61,119.8L32.43,123.07L30.16,121.8L28.88,124.44L31.61,127.25L34.6,124.98L35.69,135.43L37.06,137.52L40.24,136.88L40.05,138.15L37.24,139.97L37.33,142.24L34.51,144.69L34.79,145.51L37.69,145.24L37.51,147.23L34.6,147.32L32.33,152.05L34.24,154.77L32.79,159.5L36.15,159.13L36.24,160.4L31.43,161.22L32.06,163.95L35.6,164.67L34.51,167.85L35.69,168.76L39.24,164.58L40.42,166.4L46.23,160.68L47.41,162.49L44.78,164.4L47.41,166.31L50.05,163.22L47.86,159.5L49.95,158.77L51.41,160.77L51.23,162.67L52.13,163.13L54.04,159.13L51.77,159.77L51.04,157.77L57.95,155.77L58.13,157.41L63.76,158.67L64.72,154.31L66.84,155.08L66.26,152.44L68.38,154.37L71.72,154.37L72.04,155.46L73.48,154.32L79.11,147.32L81.38,136.7L78.38,138.15L78.75,118.72L62.91,90.41Z
-                 M67.89,155.91L64.76,158.9L66.21,159.4L66.26,161.36L67.35,161.18L67.71,159.72L68.35,159.81L68.71,158.22L68.07,158.31L68.3,156Z"/>
-        <path class="kr-map-jeju" d="M29.24,187.22L30.97,189.27L39.7,187.19L41.47,184.2L39.38,182.76L32.58,184.2L30.23,186.1Z"/>
-      </svg>
-      <div class="kr-pins" aria-hidden="true">
-        <span class="kr-pin kr-pin-seoul" style="left:27%;top:50%"></span>
-        <span class="kr-pin kr-pin-donghae" style="left:76%;top:57%"></span>
-        <span class="kr-pin kr-pin-busan" style="left:68%;top:75%"></span>
-      </div>
-      <svg class="kr-lines" aria-hidden="true">
-        <path class="kr-line kr-line-1" data-pin=".kr-pin-seoul" data-chip=".kr-chip-1"/>
-        <path class="kr-line kr-line-2" data-pin=".kr-pin-donghae" data-chip=".kr-chip-2"/>
-        <path class="kr-line kr-line-3" data-pin=".kr-pin-busan" data-chip=".kr-chip-3"/>
-      </svg>
-      <a class="kr-chip kr-chip-1" href="#feature-kamera" style="--d:.5s">
-        <img src="assets/camera.png" alt="K-amera 미리보기">
-        <span>📸 K-amera</span>
-      </a>
-      <a class="kr-chip kr-chip-2" href="#feature-kuration" style="--d:.8s">
-        <img src="assets/kuration.png" alt="K-uration 미리보기">
-        <span>🗺️ K-uration</span>
-      </a>
-      <a class="kr-chip kr-chip-3" href="#feature-kommunity" style="--d:1.1s">
-        <img src="assets/community.png" alt="K-ommunity 미리보기">
-        <span>💬 K-ommunity</span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- PROBLEM → SOLUTION -->
-<section id="problem">
-  <div class="wrap">
-    <h2 class="section-title" data-i18n="problem.title">지도, 번역, 예약, 커뮤니티...<br>앱 5개 깔지 마세요.</h2>
-    <p class="section-sub" data-i18n="problem.sub">한국 여행·생활에 필요한 정보는 원래 이렇게 흩어져 있었어요. 코인 하나면 끝납니다.</p>
-
-    <div class="compare" data-reveal>
-      <div class="compare-card compare-before">
-        <h3 data-i18n="problem.beforeLabel">지금까지는</h3>
-        <div class="app-row"><span class="ico"><svg class="icon"><use href="#i-map"/></svg></span><span data-i18n="problem.app1">지도 앱으로 맛집 검색</span><span class="x"><svg class="icon"><use href="#i-x"/></svg></span></div>
-        <div class="app-row"><span class="ico"><svg class="icon"><use href="#i-globe"/></svg></span><span data-i18n="problem.app2">번역 앱으로 메뉴판 촬영</span><span class="x"><svg class="icon"><use href="#i-x"/></svg></span></div>
-        <div class="app-row"><span class="ico"><svg class="icon"><use href="#i-doc"/></svg></span><span data-i18n="problem.app3">블로그·SNS 뒤져서 정보 수집</span><span class="x"><svg class="icon"><use href="#i-x"/></svg></span></div>
-        <div class="app-row"><span class="ico"><svg class="icon"><use href="#i-chat"/></svg></span><span data-i18n="problem.app4">카톡·페이스북 그룹서 질문</span><span class="x"><svg class="icon"><use href="#i-x"/></svg></span></div>
-      </div>
-      <div class="compare-arrow">→</div>
-      <div class="compare-card compare-after">
-        <h3 data-i18n="problem.afterLabel">이제는</h3>
-        <div class="app-row"><span class="ico" style="background:#fff"><img src="assets/koin-logo.png" alt="" style="width:20px;height:20px;object-fit:contain"></span><span data-i18n="problem.appAfter">코인 하나로 전부 해결</span><span class="check"><svg class="icon"><use href="#i-check"/></svg></span></div>
-      </div>
-    </div>
-
-    <div class="reasons-strip">
-      <div class="reason" data-reveal>
-        <div class="r-ico"><svg class="icon-lg"><use href="#i-globe"/></svg></div>
-        <h4 data-i18n="problem.r1h">다국어 자동 번역</h4>
-        <p data-i18n="problem.r1p">어떤 언어로 써도 상대는 자기 언어로 읽어요.</p>
-      </div>
-      <div class="reason" data-reveal>
-        <div class="r-ico"><svg class="icon-lg"><use href="#i-bolt"/></svg></div>
-        <h4 data-i18n="problem.r2h">실시간으로 바로 해결</h4>
-        <p data-i18n="problem.r2p">구글링도, 기다림도 없이. 카메라만 들면 끝.</p>
-      </div>
-      <div class="reason" data-reveal>
-        <div class="r-ico"><svg class="icon-lg"><use href="#i-spark"/></svg></div>
-        <h4 data-i18n="problem.r3h">나에게 맞춘 추천</h4>
-        <p data-i18n="problem.r3p">쓸수록 내 취향을 더 잘 아는 AI 큐레이션.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FEATURES -->
-<section id="features" style="background:var(--bg-2)">
-  <div class="wrap">
-    <h2 class="section-title" data-i18n="features.title">기능 하나하나가,<br>진짜 필요해서 만든 것들.</h2>
-    <p class="section-sub" data-i18n="features.sub">억지로 넣은 기능은 없어요. 외국인이 한국에서 실제로 겪는 문제 3가지에서 시작했어요.</p>
-
-    <!-- K-amera -->
-    <div class="feature-block" id="feature-kamera" data-reveal>
-      <div>
-        <span class="feature-tag">📸 K-amera</span>
-        <h3 data-i18n="features.kameraH">일단 찍으면,<br>AI가 다 알려줘요</h3>
-        <p data-i18n="features.kameraP">메뉴판이든 표지판이든 계약서든, 카메라를 갖다 대는 순간 번역과 설명이 함께 떠요. 뭔지 몰라 당황할 일이 없어요.</p>
-        <div class="pill-row">
-          <span class="pill" data-i18n="features.kameraPill1">메뉴 번역</span>
-          <span class="pill" data-i18n="features.kameraPill2">서류·계약서</span>
-          <span class="pill" data-i18n="features.kameraPill3">생활 표지판</span>
+                 M67.89,155.91L64.76,158.9L66.21,159.4L66.26,161.36L67.35,161.18L67.71,159.72L68.35,159.81L68.71,158.22L68.07,158.31L68.3,156Z"
+            />
+            <path
+              class="kr-map-jeju"
+              d="M29.24,187.22L30.97,189.27L39.7,187.19L41.47,184.2L39.38,182.76L32.58,184.2L30.23,186.1Z"
+            />
+          </svg>
+          <div class="kr-pins" aria-hidden="true">
+            <span
+              class="kr-pin kr-pin-seoul"
+              style="left: 27%; top: 50%"
+            ></span>
+            <span
+              class="kr-pin kr-pin-donghae"
+              style="left: 76%; top: 57%"
+            ></span>
+            <span
+              class="kr-pin kr-pin-busan"
+              style="left: 68%; top: 75%"
+            ></span>
+          </div>
+          <svg class="kr-lines" aria-hidden="true">
+            <path
+              class="kr-line kr-line-1"
+              data-pin=".kr-pin-seoul"
+              data-chip=".kr-chip-1"
+            />
+            <path
+              class="kr-line kr-line-2"
+              data-pin=".kr-pin-donghae"
+              data-chip=".kr-chip-2"
+            />
+            <path
+              class="kr-line kr-line-3"
+              data-pin=".kr-pin-busan"
+              data-chip=".kr-chip-3"
+            />
+          </svg>
+          <a class="kr-chip kr-chip-1" href="#feature-kamera" style="--d: 0.5s">
+            <img src="assets/camera.png" alt="K-amera 미리보기" />
+            <span>📸 K-amera</span>
+          </a>
+          <a
+            class="kr-chip kr-chip-2"
+            href="#feature-kuration"
+            style="--d: 0.8s"
+          >
+            <img src="assets/kuration.png" alt="K-uration 미리보기" />
+            <span>🗺️ K-uration</span>
+          </a>
+          <a
+            class="kr-chip kr-chip-3"
+            href="#feature-kommunity"
+            style="--d: 1.1s"
+          >
+            <img src="assets/community.png" alt="K-ommunity 미리보기" />
+            <span>💬 K-ommunity</span>
+          </a>
         </div>
       </div>
-      <div class="kamera-phone-wrap">
-        <div class="kamera-caption-row">
-          <span class="kamera-caption" style="animation-delay:0s" data-i18n="features.kameraStep1">찍기만 하면</span>
-          <span class="kamera-caption" style="animation-delay:2s" data-i18n="features.kameraStep2">궁금한 걸 골라요</span>
-          <span class="kamera-caption" style="animation-delay:4s" data-i18n="features.kameraStep3">바로 답이 와요</span>
-        </div>
-        <div class="kamera-progress"><i></i><i></i><i></i></div>
-        <div class="kamera-phone">
-          <div class="kamera-phone-screen">
-            <div class="kamera-slide">
-              <div class="kamera-slide-bg" style="background-image:url(assets/kamera-1-photo.jpg)"></div>
-              <img src="assets/kamera-1-photo.jpg" alt="원본 사진" loading="lazy">
+    </section>
+
+    <!-- PROBLEM → SOLUTION -->
+    <section id="problem">
+      <div class="wrap">
+        <h2 class="section-title" data-i18n="problem.title">
+          지도, 번역, 예약, 커뮤니티...<br />앱 5개 깔지 마세요.
+        </h2>
+        <p class="section-sub" data-i18n="problem.sub">
+          한국 여행·생활에 필요한 정보는 원래 이렇게 흩어져 있었어요. Koin
+          하나면 끝납니다.
+        </p>
+
+        <div class="compare" data-reveal>
+          <div class="compare-card compare-before">
+            <h3 data-i18n="problem.beforeLabel">지금까지는</h3>
+            <div class="app-row">
+              <span class="ico"
+                ><svg class="icon"><use href="#i-map" /></svg></span
+              ><span data-i18n="problem.app1">지도 앱으로 맛집 검색</span
+              ><span class="x"
+                ><svg class="icon"><use href="#i-x" /></svg
+              ></span>
             </div>
-            <div class="kamera-slide">
-              <div class="kamera-slide-bg" style="background-image:url(assets/kamera-2-question.jpg)"></div>
-              <img src="assets/kamera-2-question.jpg" alt="질문 선택 화면" loading="lazy">
+            <div class="app-row">
+              <span class="ico"
+                ><svg class="icon"><use href="#i-globe" /></svg></span
+              ><span data-i18n="problem.app2">번역 앱으로 메뉴판 촬영</span
+              ><span class="x"
+                ><svg class="icon"><use href="#i-x" /></svg
+              ></span>
             </div>
-            <div class="kamera-slide">
-              <div class="kamera-slide-bg" style="background-image:url(assets/kamera-3-result.jpg)"></div>
-              <img src="assets/kamera-3-result.jpg" alt="결과 확인 화면" loading="lazy">
+            <div class="app-row">
+              <span class="ico"
+                ><svg class="icon"><use href="#i-doc" /></svg></span
+              ><span data-i18n="problem.app3">블로그·SNS 뒤져서 정보 수집</span
+              ><span class="x"
+                ><svg class="icon"><use href="#i-x" /></svg
+              ></span>
+            </div>
+            <div class="app-row">
+              <span class="ico"
+                ><svg class="icon"><use href="#i-chat" /></svg></span
+              ><span data-i18n="problem.app4">카톡·페이스북 그룹서 질문</span
+              ><span class="x"
+                ><svg class="icon"><use href="#i-x" /></svg
+              ></span>
             </div>
           </div>
-        </div>
-        <!-- 실제 데모 영상이 생기면 kamera-phone-screen 안에 img 대신 video로 교체 가능 -->
-      </div>
-    </div>
-
-    <!-- K-uration -->
-    <div class="feature-block" id="feature-kuration" data-reveal>
-      <div>
-        <span class="feature-tag">🗺️ K-uration</span>
-        <h3 data-i18n="features.kurationH">취향 저격 코스,<br>AI가 짜드려요</h3>
-        <p data-i18n="features.kurationP">흩어진 블로그 대신, 관심사와 일정에 맞춘 카드뉴스형 가이드. 쓸수록 내 취향을 더 잘 아는 큐레이션이에요.</p>
-        <div class="pill-row">
-          <span class="pill" data-i18n="features.kurationPill1">개인 맞춤 추천</span>
-          <span class="pill" data-i18n="features.kurationPill2">카드뉴스 형식</span>
-          <span class="pill" data-i18n="features.kurationPill3">맛집·명소·팁</span>
-        </div>
-      </div>
-      <div class="kuration-frame">
-        <div class="kf-layout">
-          <!-- 왼쪽 고정 피드 (회전 안 함) -->
-          <div class="kf-fixed">
-            <img src="assets/kuration.png" alt="K-uration Main Feed">
-          </div>
-
-          <!-- 오른쪽 2장 세트 (책장 넘기기 대상) -->
-          <div class="kf-flipper" id="kfFlipper">
-            <div class="kf-card-item">
-              <img id="kfSide1" alt="큐레이션 상단">
-            </div>
-            <div class="kf-card-item">
-              <img id="kfSide2" alt="큐레이션 하단">
+          <div class="compare-arrow">→</div>
+          <div class="compare-card compare-after">
+            <h3 data-i18n="problem.afterLabel">이제는</h3>
+            <div class="app-row">
+              <span class="ico" style="background: #fff"
+                ><img
+                  src="assets/koin-logo.png"
+                  alt=""
+                  style="
+                    width: 20px;
+                    height: 20px;
+                    object-fit: contain;
+                  " /></span
+              ><span data-i18n="problem.appAfter">Koin 하나로 전부 해결</span
+              ><span class="check"
+                ><svg class="icon"><use href="#i-check" /></svg
+              ></span>
             </div>
           </div>
         </div>
 
-        <div class="ks-nav">
-          <button class="ks-btn ks-prev" aria-label="이전 페이지">‹</button>
-          <div class="ks-dots" id="ksDots"></div>
-          <button class="ks-btn ks-next" aria-label="다음 페이지">›</button>
+        <div class="reasons-strip">
+          <div class="reason" data-reveal>
+            <div class="r-ico">
+              <svg class="icon-lg"><use href="#i-globe" /></svg>
+            </div>
+            <h4 data-i18n="problem.r1h">다국어 자동 번역</h4>
+            <p data-i18n="problem.r1p">
+              어떤 언어로 써도 상대는 자기 언어로 읽어요.
+            </p>
+          </div>
+          <div class="reason" data-reveal>
+            <div class="r-ico">
+              <svg class="icon-lg"><use href="#i-bolt" /></svg>
+            </div>
+            <h4 data-i18n="problem.r2h">실시간으로 바로 해결</h4>
+            <p data-i18n="problem.r2p">
+              구글링도, 기다림도 없이. 카메라만 들면 끝.
+            </p>
+          </div>
+          <div class="reason" data-reveal>
+            <div class="r-ico">
+              <svg class="icon-lg"><use href="#i-spark" /></svg>
+            </div>
+            <h4 data-i18n="problem.r3h">나에게 맞춘 추천</h4>
+            <p data-i18n="problem.r3p">
+              쓸수록 내 취향을 더 잘 아는 AI 큐레이션.
+            </p>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- K-ommunity -->
-    <div class="feature-block" id="feature-kommunity" data-reveal style="margin-top:127px">
-      <div>
-        <span class="feature-tag">K-ommunity</span>
-        <h3 data-i18n="features.kommunityH">언어 걱정 없이,<br>진짜 경험자에게 물어보세요</h3>
-        <p data-i18n="features.kommunityP">어떤 언어로 질문해도 자동 번역돼서 전달돼요. 실제로 겪어본 사람들의 답을 실시간으로 받아보세요.</p>
-        <div class="pill-row">
-          <span class="pill" data-i18n="features.kommunityPill1">자동 번역</span>
-          <span class="pill" data-i18n="features.kommunityPill2">실시간 Q&A</span>
-          <span class="pill" data-i18n="features.kommunityPill3">외국인 네트워크</span>
+    <!-- FEATURES -->
+    <section id="features" style="background: var(--bg-2)">
+      <div class="wrap">
+        <h2 class="section-title" data-i18n="features.title">
+          기능 하나하나가,<br />진짜 필요해서 만든 것들.
+        </h2>
+        <p class="section-sub" data-i18n="features.sub">
+          억지로 넣은 기능은 없어요. 외국인이 한국에서 실제로 겪는 문제
+          3가지에서 시작했어요.
+        </p>
+
+        <!-- K-amera -->
+        <div class="feature-block" id="feature-kamera" data-reveal>
+          <div>
+            <span class="feature-tag">📸 K-amera</span>
+            <h3 data-i18n="features.kameraH">
+              일단 찍으면,<br />AI가 다 알려줘요
+            </h3>
+            <p data-i18n="features.kameraP">
+              메뉴판이든 표지판이든 계약서든, 카메라를 갖다 대는 순간 번역과
+              설명이 함께 떠요. 몇 초만에 한국을 파악할 수 있어요.
+            </p>
+            <div class="pill-row">
+              <span class="pill" data-i18n="features.kameraPill1"
+                >메뉴 번역</span
+              >
+              <span class="pill" data-i18n="features.kameraPill2"
+                >서류·계약서</span
+              >
+              <span class="pill" data-i18n="features.kameraPill3"
+                >생활 표지판</span
+              >
+            </div>
+          </div>
+          <div class="kamera-phone-wrap">
+            <div class="kamera-caption-row">
+              <span
+                class="kamera-caption"
+                style="animation-delay: 0s"
+                data-i18n="features.kameraStep1"
+                >궁금한 걸 찍고</span
+              >
+              <span
+                class="kamera-caption"
+                style="animation-delay: 2s"
+                data-i18n="features.kameraStep2"
+                >질문을 골라요</span
+              >
+              <span
+                class="kamera-caption"
+                style="animation-delay: 4s"
+                data-i18n="features.kameraStep3"
+                >바로 답이 와요</span
+              >
+            </div>
+            <div class="kamera-progress"><i></i><i></i><i></i></div>
+            <div class="kamera-phone">
+              <div class="kamera-phone-screen">
+                <div class="kamera-slide">
+                  <div
+                    class="kamera-slide-bg"
+                    style="background-image: url(assets/kamera-1-photo.jpg)"
+                  ></div>
+                  <img
+                    src="assets/kamera-1-photo.jpg"
+                    alt="원본 사진"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="kamera-slide">
+                  <div
+                    class="kamera-slide-bg"
+                    style="background-image: url(assets/kamera-2-question.jpg)"
+                  ></div>
+                  <img
+                    src="assets/kamera-2-question.jpg"
+                    alt="질문 선택 화면"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="kamera-slide">
+                  <div
+                    class="kamera-slide-bg"
+                    style="background-image: url(assets/kamera-3-result.jpg)"
+                  ></div>
+                  <img
+                    src="assets/kamera-3-result.jpg"
+                    alt="결과 확인 화면"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+            </div>
+            <!-- 실제 데모 영상이 생기면 kamera-phone-screen 안에 img 대신 video로 교체 가능 -->
+          </div>
+        </div>
+
+        <!-- K-uration -->
+        <div class="feature-block" id="feature-kuration" data-reveal>
+          <div>
+            <span class="feature-tag">🗺️ K-uration</span>
+            <h3 data-i18n="features.kurationH">
+              로컬의 정보를,<br />AI가 내 취향대로
+            </h3>
+            <p data-i18n="features.kurationP">
+              흩어진 블로그 대신, 현지인만 아는 정보를 AI가 내 관심사에 맞춰
+              카드뉴스로 골라줘요.<br />쓸수록 내 취향을 더 잘 알아요.
+            </p>
+            <div class="pill-row">
+              <span class="pill" data-i18n="features.kurationPill1"
+                >개인 맞춤 추천</span
+              >
+              <span class="pill" data-i18n="features.kurationPill2"
+                >카드뉴스 형식</span
+              >
+              <span class="pill" data-i18n="features.kurationPill3"
+                >맛집·명소·팁</span
+              >
+            </div>
+          </div>
+          <div class="kuration-frame">
+            <div class="kf-layout">
+              <!-- 왼쪽 고정 피드 (회전 안 함) -->
+              <div class="kf-fixed">
+                <img src="assets/kuration.png" alt="K-uration Main Feed" />
+              </div>
+
+              <!-- 오른쪽 2장 세트 (책장 넘기기 대상) -->
+              <div class="kf-flipper" id="kfFlipper">
+                <div class="kf-card-item">
+                  <img id="kfSide1" alt="큐레이션 상단" />
+                </div>
+                <div class="kf-card-item">
+                  <img id="kfSide2" alt="큐레이션 하단" />
+                </div>
+              </div>
+            </div>
+
+            <div class="ks-nav">
+              <button class="ks-btn ks-prev" aria-label="이전 페이지">‹</button>
+              <div class="ks-dots" id="ksDots"></div>
+              <button class="ks-btn ks-next" aria-label="다음 페이지">›</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- K-ommunity -->
+        <div
+          class="feature-block"
+          id="feature-kommunity"
+          data-reveal
+          style="margin-top: 127px"
+        >
+          <div>
+            <span class="feature-tag">💬 K-ommunity</span>
+            <h3 data-i18n="features.kommunityH">
+              언어 걱정 없이,<br />진짜 경험자에게 물어보세요
+            </h3>
+            <p data-i18n="features.kommunityP">
+              어떤 언어로 질문해도 자동 번역돼서 전달돼요. 실제로 겪어본
+              사람들의 답을 실시간으로 받아보세요.
+            </p>
+            <div class="pill-row">
+              <span class="pill" data-i18n="features.kommunityPill1"
+                >자동 번역</span
+              >
+              <span class="pill" data-i18n="features.kommunityPill2"
+                >실시간 Q&A</span
+              >
+              <span class="pill" data-i18n="features.kommunityPill3"
+                >외국인 네트워크</span
+              >
+            </div>
+          </div>
+          <div class="chat-box">
+            <div class="bubble them" data-i18n="features.chat1">
+              ¿Dónde puedo comprar una T-money card?<span class="lang-tag"
+                >스페인어 → 자동 번역됨</span
+              >
+            </div>
+            <div class="bubble me" data-i18n="features.chat2">
+              편의점이나 지하철역에서 바로 살 수 있어요!<span class="lang-tag"
+                >한국어로 답장 → 상대 언어로 자동 번역</span
+              >
+            </div>
+          </div>
         </div>
       </div>
-      <div class="chat-box">
-        <div class="bubble them" data-i18n="features.chat1">¿Dónde puedo comprar una T-money card?<span class="lang-tag">스페인어 → 자동 번역됨</span></div>
-        <div class="bubble me" data-i18n="features.chat2">편의점이나 지하철역에서 바로 살 수 있어요!<span class="lang-tag">한국어로 답장 → 상대 언어로 자동 번역</span></div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- SOCIAL PROOF -->
-<section id="proof">
-  <div class="wrap">
-    <h2 class="section-title" data-i18n="proof.title">이미 3,500명 넘게<br>코인과 함께하고 있어요.</h2>
-    <p class="section-sub" data-i18n="proof.sub">여행객부터 유학생, 교환학생, 한국 거주자까지 — 국적과 체류 형태를 가리지 않아요.</p>
+    <!-- SOCIAL PROOF -->
+    <section id="proof">
+      <div class="wrap">
+        <h2 class="section-title" data-i18n="proof.title">
+          이미 5,000명 넘게<br />Koin과 함께하고 있어요.
+        </h2>
+        <p class="section-sub" data-i18n="proof.sub">
+          여행객부터 유학생, 교환학생, 한국 거주자까지 — 국적과 체류 형태를
+          가리지 않아요.
+        </p>
 
-    <div class="stats-row" data-reveal>
-      <div class="stat"><b data-count="3507" data-suffix="+">0</b><span data-i18n="proof.stat1">누적 이용자</span></div>
-      <div class="stat"><b data-count="29">0</b><span data-i18n="proof.stat2">가입자 국적 수</span></div>
-      <div class="stat"><b data-count="47" data-suffix="%">0</b><span data-i18n="proof.stat3">여행객 비중</span></div>
-      <div class="stat"><b data-count="32" data-suffix="%">0</b><span data-i18n="proof.stat4">유학생·교환학생 비중</span></div>
-    </div>
+        <div class="stats-row" data-reveal>
+          <div class="stat">
+            <b data-count="5914" data-suffix="+">0</b
+            ><span data-i18n="proof.stat1">누적 이용자</span>
+          </div>
+          <div class="stat">
+            <b data-count="29">0</b
+            ><span data-i18n="proof.stat2">가입자 국적 수</span>
+          </div>
+          <div class="stat">
+            <b data-count="47" data-suffix="%">0</b
+            ><span data-i18n="proof.stat3">여행객 비중</span>
+          </div>
+          <div class="stat">
+            <b data-count="32" data-suffix="%">0</b
+            ><span data-i18n="proof.stat4">유학생·교환학생 비중</span>
+          </div>
+        </div>
 
-    <div class="residence-bar" data-reveal>
-      <div data-w="47.4" style="width:0;background:var(--primary)"></div>
-      <div data-w="19.5" style="width:0;background:var(--primary-dk)"></div>
-      <div data-w="12.5" style="width:0;background:var(--tertiary)"></div>
-      <div data-w="12.8" style="width:0;background:var(--secondary)"></div>
-      <div data-w="7.7" style="width:0;background:var(--muted)"></div>
-    </div>
-    <div class="residence-legend">
-      <span><i style="background:var(--primary)"></i><span data-i18n="proof.res1">여행객 47%</span></span>
-      <span><i style="background:var(--primary-dk)"></i><span data-i18n="proof.res2">유학생 20%</span></span>
-      <span><i style="background:var(--tertiary)"></i><span data-i18n="proof.res3">교환학생 13%</span></span>
-      <span><i style="background:var(--secondary)"></i><span data-i18n="proof.res4">한국 거주자 13%</span></span>
-      <span><i style="background:var(--muted)"></i><span data-i18n="proof.res5">해외 거주자 8%</span></span>
-    </div>
+        <div class="residence-bar" data-reveal>
+          <div data-w="47.4" style="width: 0; background: var(--primary)"></div>
+          <div
+            data-w="19.5"
+            style="width: 0; background: var(--primary-dk)"
+          ></div>
+          <div
+            data-w="12.5"
+            style="width: 0; background: var(--tertiary)"
+          ></div>
+          <div
+            data-w="12.8"
+            style="width: 0; background: var(--secondary)"
+          ></div>
+          <div data-w="7.7" style="width: 0; background: var(--muted)"></div>
+        </div>
+        <div class="residence-legend">
+          <span
+            ><i style="background: var(--primary)"></i
+            ><span data-i18n="proof.res1">여행객 47%</span></span
+          >
+          <span
+            ><i style="background: var(--primary-dk)"></i
+            ><span data-i18n="proof.res2">유학생 20%</span></span
+          >
+          <span
+            ><i style="background: var(--tertiary)"></i
+            ><span data-i18n="proof.res3">교환학생 13%</span></span
+          >
+          <span
+            ><i style="background: var(--secondary)"></i
+            ><span data-i18n="proof.res4">한국 거주자 13%</span></span
+          >
+          <span
+            ><i style="background: var(--muted)"></i
+            ><span data-i18n="proof.res5">해외 거주자 8%</span></span
+          >
+        </div>
 
-    <!-- TODO: 앱스토어/구글플레이 공식 평점·리뷰 수 확인되면 아래 주석 해제하고 숫자 채우기
+        <!-- TODO: 앱스토어/구글플레이 공식 평점·리뷰 수 확인되면 아래 주석 해제하고 숫자 채우기
     <div class="rating-badge">
       <svg class="icon-lg" style="color:#F5A623"><use href="#i-star"/></svg>
       <span><b>4.x</b> App Store · 리뷰 000개</span>
     </div>
     -->
-    <div class="reviews-grid" data-reveal>
-      <div class="review-card">
-        <div class="review-stars">★★★★★</div>
-        <p data-i18n="proof.review1">"카메라 기능이 정말 게임체인저예요. 간판이나 메뉴판 사진만 찍으면 내 언어에 맞춰 번역과 설명이 나와요. 다른 나라 사람들과 소통하는 데도 큰 도움이 됐어요. 큐레이션 기능도 제 취향에 딱 맞는 곳을 추천해줘서 강력 추천!"</p>
-        <div class="review-meta"><span>SeoulExplorer</span><span>App Store · 4월 30일</span></div>
+        <div class="reviews-grid" data-reveal>
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p data-i18n="proof.review1">
+              "카메라 기능이 정말 게임체인저예요. 간판이나 메뉴판 사진만 찍으면
+              내 언어에 맞춰 번역과 설명이 나와요. 다른 나라 사람들과 소통하는
+              데도 큰 도움이 됐어요. 큐레이션 기능도 제 취향에 딱 맞는 곳을
+              추천해줘서 강력 추천!"
+            </p>
+            <div class="review-meta">
+              <span>SeoulExplorer</span><span>App Store · 4월 30일</span>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p data-i18n="proof.review2">
+              "한국에 여행 오거나 거주하는 외국인 친구들에게 꼭 추천하고 싶어요.
+              카드뉴스 형식의 큐레이션 콘텐츠, 전 세계 사람들과 소통할 수 있는
+              커뮤니티 기능까지 잘 짜여 있어요. AI 카메라로 한국
+              음식·표지판·일상 사물을 쉽게 이해할 수 있다는 게 특히 유용해요."
+            </p>
+            <div class="review-meta">
+              <span>onesuponatime</span><span>App Store · 5월 5일</span>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p data-i18n="proof.review3">
+              "한국을 방문하는 사람이라면 누구에게나 강력 추천해요. 가장 인상
+              깊었던 건 실시간 카메라 번역과 재료 설명 기능이에요. 메뉴만
+              번역하는 게 아니라 재료가 뭔지, 어떤 반찬이 함께 나오는지도
+              알려줘서 매 끼니가 공부하듯 즐거웠어요."
+            </p>
+            <div class="review-meta">
+              <span>Minboll</span><span>App Store · 5월 4일</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="review-card">
-        <div class="review-stars">★★★★★</div>
-        <p data-i18n="proof.review2">"한국에 여행 오거나 거주하는 외국인 친구들에게 꼭 추천하고 싶어요. 카드뉴스 형식의 큐레이션 콘텐츠, 전 세계 사람들과 소통할 수 있는 커뮤니티 기능까지 잘 짜여 있어요. AI 카메라로 한국 음식·표지판·일상 사물을 쉽게 이해할 수 있다는 게 특히 유용해요."</p>
-        <div class="review-meta"><span>onesuponatime</span><span>App Store · 5월 5일</span></div>
-      </div>
-      <div class="review-card">
-        <div class="review-stars">★★★★★</div>
-        <p data-i18n="proof.review3">"한국을 방문하는 사람이라면 누구에게나 강력 추천해요. 가장 인상 깊었던 건 실시간 카메라 번역과 재료 설명 기능이에요. 메뉴만 번역하는 게 아니라 재료가 뭔지, 어떤 반찬이 함께 나오는지도 알려줘서 매 끼니가 공부하듯 즐거웠어요."</p>
-        <div class="review-meta"><span>Minboll</span><span>App Store · 5월 4일</span></div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- FAQ -->
-<section id="faq" style="background:var(--bg-2)">
-  <div class="wrap faq-grid">
-    <div>
-      <h2 class="section-title" style="margin-bottom:16px" data-i18n="faq.title">궁금한 점이<br>있으신가요?</h2>
-      <p style="color:var(--sub);margin-bottom:16px" data-i18n="faq.sub">더 궁금한 점이 있다면 언제든 문의해주세요.</p>
-      <a href="mailto:team@koreainsider.kr" style="color:var(--primary);font-weight:600">team@koreainsider.kr →</a>
-    </div>
-    <div>
-      <div class="faq-item">
-        <div class="faq-q"><span data-i18n="faq.q1">AI 카메라는 정확히 뭘 할 수 있나요?</span><span class="chevron"><svg class="icon"><use href="#i-chevron"/></svg></span></div>
-        <div class="faq-a"><p data-i18n="faq.a1">크게 4가지예요. 음식(메뉴 번역, 비건·할랄·알레르기 정보), 서류(근로계약서, 비자 서류), 생활(따릉이, 티머니, 표지판), 그리고 그 외 모든 것을 자동 인식해요. 안전과 직결된 정보는 반드시 별도로 한 번 더 확인해주세요.</p></div>
+    <!-- FAQ -->
+    <section id="faq" style="background: var(--bg-2)">
+      <div class="wrap faq-grid">
+        <div>
+          <h2
+            class="section-title"
+            style="margin-bottom: 16px"
+            data-i18n="faq.title"
+          >
+            궁금한 점이<br />있으신가요?
+          </h2>
+          <p style="color: var(--sub); margin-bottom: 16px" data-i18n="faq.sub">
+            더 궁금한 점이 있다면 언제든 문의해주세요.
+          </p>
+          <a
+            href="mailto:team@koreainsider.kr"
+            style="color: var(--primary); font-weight: 600"
+            >team@koreainsider.kr →</a
+          >
+        </div>
+        <div>
+          <div class="faq-item">
+            <div class="faq-q">
+              <span data-i18n="faq.q1">AI 카메라는 정확히 뭘 할 수 있나요?</span
+              ><span class="chevron"
+                ><svg class="icon"><use href="#i-chevron" /></svg
+              ></span>
+            </div>
+            <div class="faq-a">
+              <p data-i18n="faq.a1">
+                크게 4가지예요. 음식(메뉴 번역, 비건·할랄·알레르기 정보),
+                서류(근로계약서, 비자 서류), 생활(따릉이, 티머니, 표지판),
+                그리고 그 외 모든 것을 자동 인식해요. 안전과 직결된 정보는
+                반드시 별도로 한 번 더 확인해주세요.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">
+              <span data-i18n="faq.q2"
+                >커뮤니티 다국어 번역은 어떻게 작동하나요?</span
+              ><span class="chevron"
+                ><svg class="icon"><use href="#i-chevron" /></svg
+              ></span>
+            </div>
+            <div class="faq-a">
+              <p data-i18n="faq.a2">
+                글은 자동으로 번역돼요. 본인 언어로 쓰면 다른 사람은 자기 언어로
+                읽을 수 있어서 따로 번역할 필요가 없어요.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">
+              <span data-i18n="faq.q3"
+                >큐레이션 콘텐츠는 어떻게 개인화되나요?</span
+              ><span class="chevron"
+                ><svg class="icon"><use href="#i-chevron" /></svg
+              ></span>
+            </div>
+            <div class="faq-a">
+              <p data-i18n="faq.a3">
+                AI가 음식 취향, 여행 스타일, 목적지 같은 선호도를 학습해서 가장
+                관련 있는 가이드를 보여드려요.<br />쓸수록 더 정확해져요.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">
+              <span data-i18n="faq.q4">개인정보는 어떻게 처리되나요?</span
+              ><span class="chevron"
+                ><svg class="icon"><use href="#i-chevron" /></svg
+              ></span>
+            </div>
+            <div class="faq-a">
+              <p data-i18n="faq.a4">
+                필요한 최소한의 정보만 수집하고, 절대 판매하지 않아요. 한국
+                개인정보보호법을 엄격히 준수해요.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">
+              <span data-i18n="faq.q5">어떤 로그인 방식을 지원하나요?</span
+              ><span class="chevron"
+                ><svg class="icon"><use href="#i-chevron" /></svg
+              ></span>
+            </div>
+            <div class="faq-a">
+              <p data-i18n="faq.a5">
+                카카오, 구글, 이메일 — 편한 방식을 선택하시면 돼요.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">
+              <span data-i18n="faq.q6">제휴나 문의는 어떻게 하나요?</span
+              ><span class="chevron"
+                ><svg class="icon"><use href="#i-chevron" /></svg
+              ></span>
+            </div>
+            <div class="faq-a">
+              <p data-i18n="faq.a6">
+                언론, 제휴, 일반 문의 모두 team@koreainsider.kr로 연락 주세요.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="faq-item">
-        <div class="faq-q"><span data-i18n="faq.q2">커뮤니티 다국어 번역은 어떻게 작동하나요?</span><span class="chevron"><svg class="icon"><use href="#i-chevron"/></svg></span></div>
-        <div class="faq-a"><p data-i18n="faq.a2">글은 자동으로 번역돼요. 본인 언어로 쓰면 다른 사람은 자기 언어로 읽을 수 있어서 따로 번역할 필요가 없어요.</p></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q"><span data-i18n="faq.q3">큐레이션 콘텐츠는 어떻게 개인화되나요?</span><span class="chevron"><svg class="icon"><use href="#i-chevron"/></svg></span></div>
-        <div class="faq-a"><p data-i18n="faq.a3">AI가 음식 취향, 여행 스타일, 목적지 같은 선호도를 학습해서 가장 관련 있는 가이드를 보여드려요. 쓸수록 더 정확해져요.</p></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q"><span data-i18n="faq.q4">개인정보는 어떻게 처리되나요?</span><span class="chevron"><svg class="icon"><use href="#i-chevron"/></svg></span></div>
-        <div class="faq-a"><p data-i18n="faq.a4">필요한 최소한의 정보만 수집하고, 절대 판매하지 않아요. 한국 개인정보보호법을 엄격히 준수해요.</p></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q"><span data-i18n="faq.q5">어떤 로그인 방식을 지원하나요?</span><span class="chevron"><svg class="icon"><use href="#i-chevron"/></svg></span></div>
-        <div class="faq-a"><p data-i18n="faq.a5">카카오, 구글, 이메일 — 편한 방식을 선택하시면 돼요.</p></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q"><span data-i18n="faq.q6">제휴나 문의는 어떻게 하나요?</span><span class="chevron"><svg class="icon"><use href="#i-chevron"/></svg></span></div>
-        <div class="faq-a"><p data-i18n="faq.a6">언론, 제휴, 일반 문의 모두 team@koreainsider.kr로 연락 주세요.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- DOWNLOAD CTA -->
-<section id="download">
-  <div class="download-cta">
-    <h2 data-i18n="download.title">당신의 한국 여정,<br>여기서 시작하세요.</h2>
-    <p data-i18n="download.sub">iOS와 안드로이드에서 지금 바로 다운로드하세요.</p>
-    <div class="hero-store-row">
-      <a class="store-badge" href="https://apps.apple.com/kr/app/koin/id6760605411" target="_blank" rel="noopener">
-        <svg class="icon-lg"><use href="#i-apple"/></svg><span><small>Download on the</small><strong>App Store</strong></span>
-      </a>
-      <a class="store-badge" href="https://play.google.com/store/apps/details?id=kr.koreainsider.koin&hl=ko" target="_blank" rel="noopener">
-        <svg class="icon-lg"><use href="#i-play"/></svg><span><small>GET IT ON</small><strong>Google Play</strong></span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="wrap">
-    <div class="footer-grid">
-      <div>
-        <a class="logo" href="#"><img src="assets/koin-logo.png" alt="KOIN">Koin</a>
-        <p style="margin-top:12px;max-width:280px" data-i18n="footer.tagline">Korea Insider — 한국에서 살고 여행하는 데 필요한 가이드.</p>
+    <!-- DOWNLOAD CTA -->
+    <section id="download">
+      <div class="download-cta">
+        <h2 data-i18n="download.title">
+          당신의 한국 여정,<br />여기서 시작하세요.
+        </h2>
+        <p data-i18n="download.sub">
+          iOS와 안드로이드에서 지금 바로 다운로드하세요.
+        </p>
+        <div class="hero-store-row">
+          <a
+            class="store-badge"
+            href="https://apps.apple.com/kr/app/koin/id6760605411"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="assets/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg"
+              alt="Download on the App Store"
+            />
+          </a>
+          <a
+            class="store-badge"
+            href="https://play.google.com/store/apps/details?id=kr.koreainsider.koin&hl=ko"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="assets/GetItOnGooglePlay_Badge_Web_color_English.svg"
+              alt="Get it on Google Play"
+            />
+          </a>
+        </div>
       </div>
-      <div>
-        <h4 data-i18n="footer.featuresH">기능</h4>
-        <a href="#features" data-i18n="footer.f1">K-amera</a>
-        <a href="#features" data-i18n="footer.f2">K-uration</a>
-        <a href="#features" data-i18n="footer.f3">K-ommunity</a>
-      </div>
-      <div>
-        <h4 data-i18n="footer.contactH">Contact & Legal</h4>
-        <a href="mailto:team@koreainsider.kr">team@koreainsider.kr</a>
-        <a href="/privacy/" data-i18n="footer.privacy">개인정보처리방침</a>
-        <a href="/terms/" data-i18n="footer.terms">이용약관</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span data-i18n="footer.copyright">© KOIN / TEAM_KOIN. All rights reserved.</span>
-    </div>
-  </div>
-</footer>
+    </section>
 
-<div id="sticky-bar">
-  <span data-i18n="sticky.text">한국 생활, 코인 하나면 끝.</span>
-  <a class="btn btn-primary" style="padding:8px 16px;font-size:13px" href="#download" data-i18n="sticky.cta">다운로드</a>
-  <button class="close" aria-label="close"><svg class="icon"><use href="#i-x"/></svg></button>
-</div>
+    <footer>
+      <div class="wrap">
+        <div class="footer-grid">
+          <div>
+            <a class="logo" href="#"
+              ><img src="assets/koin-logo.png" alt="KOIN" />Koin</a
+            >
+            <p
+              style="margin-top: 12px; max-width: 280px"
+              data-i18n="footer.tagline"
+            >
+              Korea Insider — 한국에서 살고 여행하는 데 필요한 가이드.
+            </p>
+          </div>
+          <div>
+            <h4 data-i18n="footer.featuresH">기능</h4>
+            <a href="#features" data-i18n="footer.f1">K-amera</a>
+            <a href="#features" data-i18n="footer.f2">K-uration</a>
+            <a href="#features" data-i18n="footer.f3">K-ommunity</a>
+          </div>
+          <div>
+            <h4 data-i18n="footer.contactH">Contact & Legal</h4>
+            <a href="mailto:team@koreainsider.kr">team@koreainsider.kr</a>
+            <a href="/privacy/" data-i18n="footer.privacy">개인정보처리방침</a>
+            <a href="/terms/" data-i18n="footer.terms">이용약관</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span data-i18n="footer.copyright"
+            >© KOIN / TEAM_KOIN. All rights reserved.</span
+          >
+        </div>
+      </div>
+    </footer>
 
-<script>
-/* ================= i18n =================
+    <div id="sticky-bar">
+      <span data-i18n="sticky.text">한국 생활, Koin 하나면 끝.</span>
+      <a
+        class="btn btn-primary"
+        style="padding: 8px 16px; font-size: 13px"
+        href="#download"
+        data-i18n="sticky.cta"
+        >다운로드</a
+      >
+      <button class="close" aria-label="close">
+        <svg class="icon"><use href="#i-x" /></svg>
+      </button>
+    </div>
+
+    <script>
+      /* ================= i18n =================
    ko/en은 전체 번역 완료. zh/ja/vi는 아직 번역 전이라 en으로 대체됩니다.
    실제 배포 전에 zh/ja/vi 텍스트를 채워 넣어야 합니다. (아래 주석 TODO 참고) */
-const translations = {
-  ko: {
-    "nav.problem":"why KOIN","nav.features":"기능","nav.proof":"이용 현황","nav.faq":"FAQ","nav.cta":"다운로드",
-    "hero.title":"당신 손 안의,<br>진짜 한국.","hero.sub":"AI 큐레이션, 다국어 커뮤니티, 실시간 AI 카메라까지. 한국 생활에 필요한 모든 것을 앱 하나로.",
-    "hero.ctaPrimary":"왜 필요한지 보기 →","hero.qr":"스캔해서<br>바로 다운로드",
-    "problem.title":"지도, 번역, 예약, 커뮤니티...<br>앱 5개 깔지 마세요.",
-    "problem.sub":"한국 여행·생활에 필요한 정보는 원래 이렇게 흩어져 있었어요. 코인 하나면 끝납니다.",
-    "problem.beforeLabel":"지금까지는","problem.app1":"지도 앱으로 맛집 검색","problem.app2":"번역 앱으로 메뉴판 촬영",
-    "problem.app3":"블로그·SNS 뒤져서 정보 수집","problem.app4":"카톡·페이스북 그룹서 질문",
-    "problem.afterLabel":"이제는","problem.appAfter":"코인 하나로 전부 해결",
-    "problem.r1h":"다국어 자동 번역","problem.r1p":"어떤 언어로 써도 상대는 자기 언어로 읽어요.",
-    "problem.r2h":"실시간으로 바로 해결","problem.r2p":"구글링도, 기다림도 없이. 카메라만 들면 끝.",
-    "problem.r3h":"나에게 맞춘 추천","problem.r3p":"쓸수록 내 취향을 더 잘 아는 AI 큐레이션.",
-    "features.title":"기능 하나하나가,<br>진짜 필요해서 만든 것들.",
-    "features.sub":"억지로 넣은 기능은 없어요. 외국인이 한국에서 실제로 겪는 문제 3가지에서 시작했어요.",
-    "features.kameraH":"일단 찍으면,<br>AI가 다 알려줘요","features.kameraP":"메뉴판이든 표지판이든 계약서든, 카메라를 갖다 대는 순간 번역과 설명이 함께 떠요. 뭔지 몰라 당황할 일이 없어요.",
-    "features.kameraPill1":"메뉴 번역","features.kameraPill2":"서류·계약서","features.kameraPill3":"생활 표지판",
-    "features.kameraTag1":"된장찌개 · Fermented soybean stew","features.kameraTag2":"알레르기: 대두 함유",
-    "features.kameraStep1":"찍기만 하면","features.kameraStep2":"궁금한 걸 골라요","features.kameraStep3":"바로 답이 와요",
-    "features.kurationH":"취향 저격 코스,<br>AI가 짜드려요","features.kurationP":"흩어진 블로그 대신, 관심사와 일정에 맞춘 카드뉴스형 가이드. 쓸수록 내 취향을 더 잘 아는 큐레이션이에요.",
-    "features.kurationPill1":"개인 맞춤 추천","features.kurationPill2":"카드뉴스 형식","features.kurationPill3":"맛집·명소·팁",
-    "features.gTile1":"📍 오늘 갈 만한 곳","features.gTile2":"🍜 내 취향 맛집",
-    "features.kommunityH":"언어 걱정 없이,<br>진짜 경험자에게 물어보세요","features.kommunityP":"어떤 언어로 질문해도 자동 번역돼서 전달돼요. 실제로 겪어본 사람들의 답을 실시간으로 받아보세요.",
-    "features.kommunityPill1":"자동 번역","features.kommunityPill2":"실시간 Q&A","features.kommunityPill3":"외국인 네트워크",
-    "features.chat1":"¿Dónde puedo comprar una T-money card?<span class=\"lang-tag\">스페인어 → 자동 번역됨</span>",
-    "features.chat2":"편의점이나 지하철역에서 바로 살 수 있어요!<span class=\"lang-tag\">한국어로 답장 → 상대 언어로 자동 번역</span>",
-    "proof.title":"이미 3,500명 넘게<br>코인과 함께하고 있어요.",
-    "proof.sub":"여행객부터 유학생, 교환학생, 한국 거주자까지 — 국적과 체류 형태를 가리지 않아요.",
-    "proof.stat1":"누적 이용자","proof.stat2":"가입자 국적 수","proof.stat3":"여행객 비중","proof.stat4":"유학생·교환학생 비중",
-    "proof.res1":"여행객 47%","proof.res2":"유학생 20%","proof.res3":"교환학생 13%","proof.res4":"한국 거주자 13%","proof.res5":"해외 거주자 8%",
-    "proof.countryEtc":"외 24개국",
-    "proof.review1":"\"카메라 기능이 정말 게임체인저예요. 간판이나 메뉴판 사진만 찍으면 내 언어에 맞춰 번역과 설명이 나와요. 다른 나라 사람들과 소통하는 데도 큰 도움이 됐어요. 큐레이션 기능도 제 취향에 딱 맞는 곳을 추천해줘서 강력 추천!\"",
-    "proof.review2":"\"한국에 여행 오거나 거주하는 외국인 친구들에게 꼭 추천하고 싶어요. 카드뉴스 형식의 큐레이션 콘텐츠, 전 세계 사람들과 소통할 수 있는 커뮤니티 기능까지 잘 짜여 있어요. AI 카메라로 한국 음식·표지판·일상 사물을 쉽게 이해할 수 있다는 게 특히 유용해요.\"",
-    "proof.review3":"\"한국을 방문하는 사람이라면 누구에게나 강력 추천해요. 가장 인상 깊었던 건 실시간 카메라 번역과 재료 설명 기능이에요. 메뉴만 번역하는 게 아니라 재료가 뭔지, 어떤 반찬이 함께 나오는지도 알려줘서 매 끼니가 공부하듯 즐거웠어요.\"",
-    "faq.title":"궁금한 점이<br>있으신가요?","faq.sub":"더 궁금한 점이 있다면 언제든 문의해주세요.",
-    "faq.q1":"AI 카메라는 정확히 뭘 할 수 있나요?","faq.a1":"크게 4가지예요. 음식(메뉴 번역, 비건·할랄·알레르기 정보), 서류(근로계약서, 비자 서류), 생활(따릉이, 티머니, 표지판), 그리고 그 외 모든 것을 자동 인식해요. 안전과 직결된 정보는 반드시 별도로 한 번 더 확인해주세요.",
-    "faq.q2":"커뮤니티 다국어 번역은 어떻게 작동하나요?","faq.a2":"글은 자동으로 번역돼요. 본인 언어로 쓰면 다른 사람은 자기 언어로 읽을 수 있어서 따로 번역할 필요가 없어요.",
-    "faq.q3":"큐레이션 콘텐츠는 어떻게 개인화되나요?","faq.a3":"AI가 음식 취향, 여행 스타일, 목적지 같은 선호도를 학습해서 가장 관련 있는 가이드를 보여드려요. 쓸수록 더 정확해져요.",
-    "faq.q4":"개인정보는 어떻게 처리되나요?","faq.a4":"필요한 최소한의 정보만 수집하고, 절대 판매하지 않아요. 한국 개인정보보호법을 엄격히 준수해요.",
-    "faq.q5":"어떤 로그인 방식을 지원하나요?","faq.a5":"카카오, 구글, 이메일 — 편한 방식을 선택하시면 돼요.",
-    "faq.q6":"제휴나 문의는 어떻게 하나요?","faq.a6":"언론, 제휴, 일반 문의 모두 team@koreainsider.kr로 연락 주세요.",
-    "download.title":"당신의 한국 여정,<br>여기서 시작하세요.","download.sub":"iOS와 안드로이드에서 지금 바로 다운로드하세요.",
-    "footer.tagline":"Korea Insider — 한국에서 살고 여행하는 데 필요한 가이드.","footer.featuresH":"기능",
-    "footer.f1":"K-amera","footer.f2":"K-uration","footer.f3":"K-ommunity",
-    "footer.contactH":"Contact & Legal","footer.privacy":"개인정보처리방침","footer.terms":"이용약관",
-    "footer.copyright":"© KOIN / TEAM_KOIN. All rights reserved.",
-    "sticky.text":"한국 생활, 코인 하나면 끝.","sticky.cta":"다운로드"
-  },
-  en: {
-    "nav.problem":"why KOIN","nav.features":"Features","nav.proof":"Community","nav.faq":"FAQ","nav.cta":"Download",
-    "hero.title":"Korea,<br>in your hands.","hero.sub":"AI curation, a multilingual community, and real-time AI camera — everything you need in Korea, in one app.",
-    "hero.ctaPrimary":"See why you need it →","hero.qr":"Scan to<br>download instantly",
-    "problem.title":"Maps, translation, reservations,<br>community... stop downloading 5 apps.",
-    "problem.sub":"Everything you need for Korea used to be scattered across apps. KOIN is all you need.",
-    "problem.beforeLabel":"Before","problem.app1":"Map app to find restaurants","problem.app2":"Translation app for the menu",
-    "problem.app3":"Digging through blogs & SNS","problem.app4":"Asking in KakaoTalk/Facebook groups",
-    "problem.afterLabel":"Now","problem.appAfter":"KOIN handles it all",
-    "problem.r1h":"Multilingual, automatically","problem.r1p":"Write in any language — everyone reads in theirs.",
-    "problem.r2h":"Solved in real time","problem.r2p":"No Googling, no waiting. Just point your camera.",
-    "problem.r3h":"Personalised for you","problem.r3p":"AI curation that gets smarter the more you use it.",
-    "features.title":"Every feature exists<br>because we actually needed it.",
-    "features.sub":"Nothing here is filler. We started from 3 real problems foreigners face in Korea.",
-    "features.kameraH":"Point, shoot,<br>AI explains everything","features.kameraP":"Menus, signs, contracts — point your camera and get instant translation and explanation. Never be confused again.",
-    "features.kameraPill1":"Menu translation","features.kameraPill2":"Documents & contracts","features.kameraPill3":"Everyday signs",
-    "features.kameraTag1":"Doenjang Jjigae · Fermented soybean stew","features.kameraTag2":"Allergen: contains soy",
-    "features.kameraStep1":"Just snap a photo","features.kameraStep2":"Pick what you're curious about","features.kameraStep3":"Get your answer instantly",
-    "features.kurationH":"A course tailored to you,<br>planned by AI","features.kurationP":"No more scattered blogs — card-news style guides matched to your interests and itinerary. It gets sharper the more you use it.",
-    "features.kurationPill1":"Personalised picks","features.kurationPill2":"Card-news format","features.kurationPill3":"Food · Places · Tips",
-    "features.gTile1":"📍 Worth visiting today","features.gTile2":"🍜 Matched to your taste",
-    "features.kommunityH":"Ask real people,<br>no language barrier","features.kommunityP":"Ask in any language — it's automatically translated. Get real answers from people who've actually been there.",
-    "features.kommunityPill1":"Auto-translation","features.kommunityPill2":"Live Q&A","features.kommunityPill3":"Foreigner network",
-    "features.chat1":"¿Dónde puedo comprar una T-money card?<span class=\"lang-tag\">Spanish → auto-translated</span>",
-    "features.chat2":"You can grab one at any convenience store or subway station!<span class=\"lang-tag\">Replied in Korean → auto-translated for them</span>",
-    "proof.title":"Over 3,500 people<br>are already using KOIN.",
-    "proof.sub":"From travellers to exchange students, international students, and residents — everyone's welcome.",
-    "proof.stat1":"Total users","proof.stat2":"Nationalities","proof.stat3":"Share of travellers","proof.stat4":"Share of students",
-    "proof.res1":"Travellers 47%","proof.res2":"Int'l students 20%","proof.res3":"Exchange students 13%","proof.res4":"Residents in Korea 13%","proof.res5":"Overseas residents 8%",
-    "proof.countryEtc":"+24 more countries",
-    "proof.review1":"\"The camera feature is a total game-changer — you just snap a picture of a sign or menu, and it provides translations and explanations tailored to your language. The curation feature is amazing too, recommending places that perfectly matched my preferences. Highly recommended!\"",
-    "proof.review2":"\"I'd love to recommend this to foreign friends travelling to or living in Korea. It's well-structured with card-news style curated content and a community feature to talk to people from all over the world. Understanding Korean food, signs, and daily objects via the AI camera is especially useful.\"",
-    "proof.review3":"\"I can't recommend this enough for anyone visiting Korea. The most impressive feature is the real-time camera translation and ingredient breakdown — it explains what the ingredients are and what side dishes come with the meal. Every meal became an educational, stress-free experience.\"",
-    "faq.title":"Common<br>questions.","faq.sub":"Still have questions? We'd love to hear from you.",
-    "faq.q1":"What can the AI Camera actually do?","faq.a1":"Four categories: Food (menu translation, vegan/halal/allergy info), Documents (labour contracts, visa forms), Life (bikes, T-money, signs), and anything else auto-detected. Always verify safety-critical info independently.",
-    "faq.q2":"How does multilingual translation work in the community?","faq.a2":"Posts are automatically translated — write in your language, others read in theirs. No manual translation needed.",
-    "faq.q3":"How is Kuration content personalised?","faq.a3":"Our AI learns your preferences — food interests, travel style, destination — and surfaces the most relevant guides. It gets better the more you use it.",
-    "faq.q4":"How is my personal data handled?","faq.a4":"Privacy-first by design. We collect only what's necessary, never sell your data, and comply strictly with Korean privacy regulations.",
-    "faq.q5":"Which login methods are supported?","faq.a5":"Kakao, Google, or Email — whichever is most convenient for you.",
-    "faq.q6":"How can I contact or partner with KOIN?","faq.a6":"For press, partnerships, or general enquiries, reach us at team@koreainsider.kr.",
-    "download.title":"Your Korea journey<br>starts here.","download.sub":"Download now on iOS and Android.",
-    "footer.tagline":"Korea Insider — your essential guide to living & travelling in Korea.","footer.featuresH":"Features",
-    "footer.f1":"K-amera","footer.f2":"K-uration","footer.f3":"K-ommunity",
-    "footer.contactH":"Contact & Legal","footer.privacy":"Privacy Policy","footer.terms":"Terms of Service",
-    "footer.copyright":"© KOIN / TEAM_KOIN. All rights reserved.",
-    "sticky.text":"Everything you need in Korea, one app.","sticky.cta":"Download"
-  }
-};
-// TODO: zh/ja/vi 실제 번역 필요. 배포 전 채워넣을 것 — 현재는 영어로 폴백.
-translations.zh = translations.en;
-translations.ja = translations.en;
-translations.vi = translations.en;
-
-function applyLang(lang){
-  const dict = translations[lang] || translations.en;
-  document.querySelectorAll('[data-i18n]').forEach(el=>{
-    const key = el.getAttribute('data-i18n');
-    if(dict[key]) el.innerHTML = dict[key];
-  });
-  document.documentElement.lang = lang;
-  document.querySelectorAll('.lang-switch button, .mm-langs button').forEach(b=>{
-    b.classList.toggle('active', b.dataset.lang===lang);
-  });
-  localStorage.setItem('koin_lang', lang);
-}
-
-// 언어 선택 오버레이: 최초 방문 1회만
-const savedLang = localStorage.getItem('koin_lang');
-if(!savedLang){
-  document.getElementById('lang-selector').classList.remove('hidden');
-} else {
-  applyLang(savedLang);
-}
-document.querySelectorAll('.lang-opt').forEach(opt=>{
-  opt.addEventListener('click', ()=>{
-    applyLang(opt.dataset.lang);
-    document.getElementById('lang-selector').classList.add('hidden');
-  });
-});
-document.querySelectorAll('.lang-switch button, .mm-langs button').forEach(btn=>{
-  btn.addEventListener('click', ()=>applyLang(btn.dataset.lang));
-});
-
-// 지도 위 기능 칩 스포트라이트: 터치 기기는 첫 탭에 확대만, 다시 탭하면 이동
-const hasHover = window.matchMedia('(hover: hover)').matches;
-document.querySelectorAll('.kr-chip').forEach(chip=>{
-  chip.addEventListener('click', (e)=>{
-    if(hasHover) return;
-    if(!chip.classList.contains('is-active')){
-      e.preventDefault();
-      document.querySelectorAll('.kr-chip.is-active').forEach(c=>c.classList.remove('is-active'));
-      chip.classList.add('is-active');
-    }
-  });
-});
-document.addEventListener('click', (e)=>{
-  if(!e.target.closest('.kr-chip')){
-    document.querySelectorAll('.kr-chip.is-active').forEach(c=>c.classList.remove('is-active'));
-  }
-});
-
-// 지도 핀 ↔ 플로팅 칩을 잇는 은은한 곡선 점선
-function updateKrLines(){
-  const visual = document.querySelector('.kr-visual');
-  const svg = document.querySelector('.kr-lines');
-  if(!visual || !svg || getComputedStyle(svg).display === 'none') return;
-  const vRect = visual.getBoundingClientRect();
-  svg.querySelectorAll('.kr-line').forEach(line=>{
-    const pin = document.querySelector(line.dataset.pin);
-    const chip = document.querySelector(line.dataset.chip);
-    if(!pin || !chip) return;
-    const pRect = pin.getBoundingClientRect();
-    const cRect = chip.getBoundingClientRect();
-    const x1 = pRect.left + pRect.width/2 - vRect.left;
-    const y1 = pRect.top + pRect.height/2 - vRect.top;
-    const x2 = cRect.left + cRect.width/2 - vRect.left;
-    const y2 = cRect.top + cRect.height/2 - vRect.top;
-    const mx = (x1 + x2)/2 + (y1 - y2)*.18;
-    const my = (y1 + y2)/2 + (x2 - x1)*.18;
-    line.setAttribute('d', `M${x1},${y1} Q${mx},${my} ${x2},${y2}`);
-  });
-}
-window.addEventListener('load', updateKrLines);
-window.addEventListener('resize', updateKrLines);
-
-// K-uration: 왼쪽은 고정 피드, 오른쪽 카드 2장이 세트(page) 단위로 책장 넘기듯 전환. 배열에 세트만 추가하면 확장됨
-const cardPages = [
-  {top:{src:'assets/kuration-2.jpg', alt:'K-Events: September in Korea'}, bottom:{src:'assets/kuration-3.jpg', alt:'What do real Koreans do for fun?'}}
-  ,
-  {
-    top: { src: 'assets/kuration-4.jpg', alt: '서울 야간 명소 베스트 5' },
-    bottom: { src: 'assets/kuration-5.jpg', alt: '외국인을 위한 편의점 꿀조합' }
-  },
-
-  // 3페이지 추가 예시
-  {
-    top: { src: 'assets/kuration-6.jpg', alt: '지하철 환승 꿀팁 가이드' },
-    bottom: { src: 'assets/kuration-7.jpg', alt: '전통 시장 길거리 음식 투어' }
-  }
-];
-let currentIdx = 0;
-const kfFlipperEl = document.getElementById('kfFlipper');
-const kfSide1El = document.getElementById('kfSide1');
-const kfSide2El = document.getElementById('kfSide2');
-const ksDotsEl = document.getElementById('ksDots');
-function renderKsDots(){
-  ksDotsEl.innerHTML = cardPages.map((_, i) => `<i class="${i === currentIdx ? 'active' : ''}"></i>`).join('');
-}
-function renderCardPage(){
-  const page = cardPages[currentIdx];
-  kfSide1El.src = page.top.src; kfSide1El.alt = page.top.alt;
-  kfSide2El.src = page.bottom.src; kfSide2El.alt = page.bottom.alt;
-  renderKsDots();
-}
-function onceAnimationEnd(el, fn){
-  // animationend가 씹히는 경우(reduced-motion, 브라우저 예외 등)에도 멈추지 않도록 타임아웃 폴백을 둠
-  let done = false;
-  const finish = () => { if(done) return; done = true; el.removeEventListener('animationend', onEnd); fn(); };
-  const onEnd = () => finish();
-  el.addEventListener('animationend', onEnd, {once:true});
-  setTimeout(finish, 450);
-}
-function updateCards(targetIdx){
-  if(!kfFlipperEl || kfFlipperEl.classList.contains('turn-out')) return;
-  kfFlipperEl.classList.add('turn-out');
-  onceAnimationEnd(kfFlipperEl, () => {
-    currentIdx = targetIdx;
-    renderCardPage();
-    kfFlipperEl.classList.remove('turn-out');
-    kfFlipperEl.classList.add('turn-in');
-    onceAnimationEnd(kfFlipperEl, () => kfFlipperEl.classList.remove('turn-in'));
-  });
-}
-function ksNext(){ updateCards((currentIdx + 1) % cardPages.length); }
-function ksPrev(){ updateCards((currentIdx - 1 + cardPages.length) % cardPages.length); }
-if(kfFlipperEl){
-  renderCardPage();
-  let ksAutoTimer = setInterval(ksNext, 4500);
-  const resetKsAuto = () => { clearInterval(ksAutoTimer); ksAutoTimer = setInterval(ksNext, 4500); };
-  document.querySelector('.ks-next').addEventListener('click', () => { ksNext(); resetKsAuto(); });
-  document.querySelector('.ks-prev').addEventListener('click', () => { ksPrev(); resetKsAuto(); });
-}
-
-// 모바일 메뉴
-const mobileMenu = document.getElementById('mobile-menu');
-document.getElementById('menu-open').addEventListener('click', ()=>mobileMenu.classList.add('open'));
-document.getElementById('menu-close').addEventListener('click', ()=>mobileMenu.classList.remove('open'));
-mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>mobileMenu.classList.remove('open')));
-
-// FAQ 아코디언 (긴 답변도 안 잘리도록 scrollHeight 기준으로 동작)
-document.querySelectorAll('.faq-item').forEach(item=>{
-  const answer = item.querySelector('.faq-a');
-  item.querySelector('.faq-q').addEventListener('click', ()=>{
-    const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item.open').forEach(i=>{
-      i.classList.remove('open');
-      i.querySelector('.faq-a').style.maxHeight = '';
-    });
-    if(!isOpen){
-      item.classList.add('open');
-      answer.style.maxHeight = answer.scrollHeight + 'px';
-    }
-  });
-});
-
-// 스크롤 reveal + 숫자 카운트업 + 비율 바 애니메이션 (한 번만 실행)
-function animateCount(el){
-  const target = parseInt(el.dataset.count, 10);
-  const suffix = el.dataset.suffix || '';
-  const dur = 1100;
-  const start = performance.now();
-  function tick(now){
-    const p = Math.min((now - start) / dur, 1);
-    const eased = 1 - Math.pow(1 - p, 3);
-    el.textContent = Math.round(target * eased).toLocaleString() + suffix;
-    if(p < 1) requestAnimationFrame(tick);
-  }
-  requestAnimationFrame(tick);
-}
-const io = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{
-    if(!e.isIntersecting) return;
-    e.target.classList.add('in');
-    e.target.querySelectorAll('[data-count]').forEach(animateCount);
-    if(e.target.classList.contains('residence-bar')){
-      e.target.querySelectorAll('[data-w]').forEach(bar=>{ bar.style.width = bar.dataset.w + '%'; });
-    }
-    io.unobserve(e.target);
-  });
-},{threshold:.25});
-document.querySelectorAll('[data-reveal]').forEach(el=>io.observe(el));
-
-// 스티키 모바일 다운로드 바 (히어로 지난 후 노출, 닫기 가능)
-const stickyBar = document.getElementById('sticky-bar');
-const hero = document.querySelector('.hero');
-let stickyDismissed = false;
-window.addEventListener('scroll', ()=>{
-  if(stickyDismissed) return;
-  const past = window.scrollY > hero.offsetHeight;
-  stickyBar.classList.toggle('show', past);
-});
-stickyBar.querySelector('.close').addEventListener('click', ()=>{
-  stickyDismissed = true;
-  stickyBar.classList.remove('show');
-});
-</script>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Organization",
-      "@id": "https://koreainsider.kr/#organization",
-      "name": "KOIN",
-      "alternateName": "Korea Insider",
-      "url": "https://koreainsider.kr",
-      "logo": "https://koreainsider.kr/assets/koin-logo.png",
-      "email": "team@koreainsider.kr"
-    },
-    {
-      "@type": "MobileApplication",
-      "name": "KOIN — Korea Insider",
-      "operatingSystem": "iOS",
-      "applicationCategory": "TravelApplication",
-      "url": "https://koreainsider.kr",
-      "downloadUrl": "https://apps.apple.com/kr/app/koin/id6760605411",
-      "publisher": { "@id": "https://koreainsider.kr/#organization" }
-    },
-    {
-      "@type": "MobileApplication",
-      "name": "KOIN — Korea Insider",
-      "operatingSystem": "Android",
-      "applicationCategory": "TravelApplication",
-      "url": "https://koreainsider.kr",
-      "downloadUrl": "https://play.google.com/store/apps/details?id=kr.koreainsider.koin&hl=ko",
-      "publisher": { "@id": "https://koreainsider.kr/#organization" }
-    },
-    {
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "AI 카메라는 정확히 뭘 할 수 있나요?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "크게 4가지예요. 음식(메뉴 번역, 비건·할랄·알레르기 정보), 서류(근로계약서, 비자 서류), 생활(따릉이, 티머니, 표지판), 그리고 그 외 모든 것을 자동 인식해요. 안전과 직결된 정보는 반드시 별도로 한 번 더 확인해주세요."
-          }
+      const translations = {
+        ko: {
+          "nav.problem": "Why KOIN",
+          "nav.features": "기능",
+          "nav.proof": "이용 현황",
+          "nav.faq": "FAQ",
+          "nav.cta": "다운로드",
+          "hero.title": "당신 손 안의,<br>진짜 한국.",
+          "hero.sub":
+            "AI 큐레이션, 다국어 커뮤니티, 실시간 AI 카메라까지.<br>한국 생활에 필요한 모든 것을 앱 하나로.",
+          "hero.ctaPrimary": "자세히 알아보기 →",
+          "hero.qr": "스캔해서<br>바로 다운로드",
+          "problem.title":
+            "지도, 번역, 예약, 커뮤니티...<br>앱 5개 깔지 마세요.",
+          "problem.sub":
+            "한국 여행·생활에 필요한 정보는 원래 이렇게 흩어져 있었어요. <br>Koin 하나면 끝납니다.",
+          "problem.beforeLabel": "지금까지는",
+          "problem.app1": "지도 앱으로 맛집 검색",
+          "problem.app2": "번역 앱으로 메뉴판 촬영",
+          "problem.app3": "블로그·SNS 뒤져서 정보 수집",
+          "problem.app4": "카톡·페이스북 그룹서 질문",
+          "problem.afterLabel": "이제는",
+          "problem.appAfter": "Koin 하나로 전부 해결",
+          "problem.r1h": "다국어 자동 번역",
+          "problem.r1p": "어떤 언어로 써도 상대는 자기 언어로 읽어요.",
+          "problem.r2h": "실시간으로 바로 해결",
+          "problem.r2p": "구글링도, 기다림도 없이. 카메라만 들면 끝.",
+          "problem.r3h": "나에게 맞춘 추천",
+          "problem.r3p": "쓸수록 내 취향을 더 잘 아는 AI 큐레이션.",
+          "features.title": "기능 하나하나가,<br>진짜 필요해서 만든 것들.",
+          "features.sub":
+            "억지로 넣은 기능은 없어요.<br/>외국인이 한국에서 실제로 겪는 문제 3가지에서 시작했어요.",
+          "features.kameraH": "일단 찍으면,<br/>AI가 다 알려줘요",
+          "features.kameraP":
+            "메뉴판이든 표지판이든 계약서든,<br/>카메라를 갖다 대는 순간 번역과 설명이 함께 떠요.<br/>몇 초만에 한국을 파악할 수 있어요.",
+          "features.kameraPill1": "메뉴 번역",
+          "features.kameraPill2": "서류·계약서",
+          "features.kameraPill3": "생활 표지판",
+          "features.kameraTag1": "된장찌개 · Fermented soybean stew",
+          "features.kameraTag2": "알레르기: 대두 함유",
+          "features.kameraStep1": "궁금한 걸 찍고",
+          "features.kameraStep2": "질문을 골라요",
+          "features.kameraStep3": "바로 답이 와요",
+          "features.kurationH": "로컬의 정보를,<br>AI가 내 취향대로",
+          "features.kurationP":
+            "흩어진 블로그 대신, 현지인만 아는 정보를 AI가 내 관심사에 맞춰 카드뉴스로 골라줘요.<br>쓸수록 내 취향을 더 잘 알아요.",
+          "features.kurationPill1": "개인 맞춤 추천",
+          "features.kurationPill2": "카드뉴스 형식",
+          "features.kurationPill3": "맛집·명소·팁",
+          "features.gTile1": "📍 오늘 갈 만한 곳",
+          "features.gTile2": "🍜 내 취향 맛집",
+          "features.kommunityH":
+            "언어 걱정 없이,<br>진짜 경험자에게 물어보세요",
+          "features.kommunityP":
+            "어떤 언어로 질문해도 자동 번역돼서 전달돼요. <br>실제로 겪어본 사람들의 답을 실시간으로 받아보세요.",
+          "features.kommunityPill1": "자동 번역",
+          "features.kommunityPill2": "실시간 Q&A",
+          "features.kommunityPill3": "외국인 네트워크",
+          "features.chat1":
+            '¿Dónde puedo comprar una T-money card?<span class="lang-tag">스페인어 → 자동 번역됨</span>',
+          "features.chat2":
+            '편의점이나 지하철역에서 바로 살 수 있어요!<span class="lang-tag">한국어로 답장 → 상대 언어로 자동 번역</span>',
+          "proof.title": "이미 5,900명 넘게<br>Koin과 함께하고 있어요.",
+          "proof.sub":
+            "여행객부터 유학생, 교환학생, 한국 거주자까지 — 국적과 체류 형태를 가리지 않아요.",
+          "proof.stat1": "누적 이용자",
+          "proof.stat2": "가입자 국적 수",
+          "proof.stat3": "여행객 비중",
+          "proof.stat4": "유학생·교환학생 비중",
+          "proof.res1": "여행객 47%",
+          "proof.res2": "유학생 20%",
+          "proof.res3": "교환학생 13%",
+          "proof.res4": "한국 거주자 13%",
+          "proof.res5": "해외 거주자 8%",
+          "proof.countryEtc": "외 24개국",
+          "proof.review1":
+            '"카메라 기능이 정말 게임체인저예요. 간판이나 메뉴판 사진만 찍으면 내 언어에 맞춰 번역과 설명이 나와요. 다른 나라 사람들과 소통하는 데도 큰 도움이 됐어요. 큐레이션 기능도 제 취향에 딱 맞는 곳을 추천해줘서 강력 추천!"',
+          "proof.review2":
+            '"한국에 여행 오거나 거주하는 외국인 친구들에게 꼭 추천하고 싶어요. 카드뉴스 형식의 큐레이션 콘텐츠, 전 세계 사람들과 소통할 수 있는 커뮤니티 기능까지 잘 짜여 있어요. AI 카메라로 한국 음식·표지판·일상 사물을 쉽게 이해할 수 있다는 게 특히 유용해요."',
+          "proof.review3":
+            '"한국을 방문하는 사람이라면 누구에게나 강력 추천해요. 가장 인상 깊었던 건 실시간 카메라 번역과 재료 설명 기능이에요. 메뉴만 번역하는 게 아니라 재료가 뭔지, 어떤 반찬이 함께 나오는지도 알려줘서 매 끼니가 공부하듯 즐거웠어요."',
+          "faq.title": "궁금한 점이<br>있으신가요?",
+          "faq.sub": "더 궁금한 점이 있다면 언제든 문의해주세요.",
+          "faq.q1": "AI 카메라는 정확히 뭘 할 수 있나요?",
+          "faq.a1":
+            "크게 4가지예요. 음식(메뉴 번역, 비건·할랄·알레르기 정보), 서류(근로계약서, 비자 서류), 생활(따릉이, 티머니, 표지판), 그리고 그 외 모든 것을 자동 인식해요. 안전과 직결된 정보는 반드시 별도로 한 번 더 확인해주세요.",
+          "faq.q2": "커뮤니티 다국어 번역은 어떻게 작동하나요?",
+          "faq.a2":
+            "글은 자동으로 번역돼요. 본인 언어로 쓰면 다른 사람은 자기 언어로 읽을 수 있어서 따로 번역할 필요가 없어요.",
+          "faq.q3": "큐레이션 콘텐츠는 어떻게 개인화되나요?",
+          "faq.a3":
+            "AI가 음식 취향, 여행 스타일, 목적지 같은 선호도를 학습해서 가장 관련 있는 가이드를 보여드려요. 쓸수록 더 정확해져요.",
+          "faq.q4": "개인정보는 어떻게 처리되나요?",
+          "faq.a4":
+            "필요한 최소한의 정보만 수집하고, 절대 판매하지 않아요. 한국 개인정보보호법을 엄격히 준수해요.",
+          "faq.q5": "어떤 로그인 방식을 지원하나요?",
+          "faq.a5": "카카오, 구글, 이메일 — 편한 방식을 선택하시면 돼요.",
+          "faq.q6": "제휴나 문의는 어떻게 하나요?",
+          "faq.a6":
+            "언론, 제휴, 일반 문의 모두 team@koreainsider.kr로 연락 주세요.",
+          "download.title": "당신의 한국 여정,<br>여기서 시작하세요.",
+          "download.sub": "iOS와 안드로이드에서 지금 바로 다운로드하세요.",
+          "footer.tagline":
+            "Korea Insider — 한국에서 살고 여행하는 데 필요한 가이드.",
+          "footer.featuresH": "기능",
+          "footer.f1": "K-amera",
+          "footer.f2": "K-uration",
+          "footer.f3": "K-ommunity",
+          "footer.contactH": "Contact & Legal",
+          "footer.privacy": "개인정보처리방침",
+          "footer.terms": "이용약관",
+          "footer.copyright": "© KOIN / TEAM_KOIN. All rights reserved.",
+          "sticky.text": "한국 생활, Koin 하나면 끝.",
+          "sticky.cta": "다운로드",
         },
-        {
-          "@type": "Question",
-          "name": "커뮤니티 다국어 번역은 어떻게 작동하나요?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "글은 자동으로 번역돼요. 본인 언어로 쓰면 다른 사람은 자기 언어로 읽을 수 있어서 따로 번역할 필요가 없어요."
-          }
+        en: {
+          "nav.problem": "Why KOIN",
+          "nav.features": "Features",
+          "nav.proof": "Community",
+          "nav.faq": "FAQ",
+          "nav.cta": "Download",
+          "hero.title": "Korea,<br>in your hands.",
+          "hero.sub":
+            "AI curation, a multilingual community, and real-time AI camera — everything you need in Korea, in one app.",
+          "hero.ctaPrimary": "See why you need it →",
+          "hero.qr": "Scan to<br>download instantly",
+          "problem.title":
+            "Maps, translation, reservations,<br>community... stop downloading 5 apps.",
+          "problem.sub":
+            "Everything you need for Korea used to be scattered across apps. KOIN is all you need.",
+          "problem.beforeLabel": "Before",
+          "problem.app1": "Map app to find restaurants",
+          "problem.app2": "Translation app for the menu",
+          "problem.app3": "Digging through blogs & SNS",
+          "problem.app4": "Asking in KakaoTalk/Facebook groups",
+          "problem.afterLabel": "Now",
+          "problem.appAfter": "KOIN handles it all",
+          "problem.r1h": "Multilingual, automatically",
+          "problem.r1p": "Write in any language — everyone reads in theirs.",
+          "problem.r2h": "Solved in real time",
+          "problem.r2p": "No Googling, no waiting. Just point your camera.",
+          "problem.r3h": "Personalised for you",
+          "problem.r3p": "AI curation that gets smarter the more you use it.",
+          "features.title":
+            "Every feature exists<br>because we actually needed it.",
+          "features.sub":
+            "Nothing here is just for show.<br/>We started from 3 real problems foreigners face in Korea.",
+          "features.kameraH": "Point, shoot,<br>AI explains everything",
+          "features.kameraP":
+            "Menus, signs, even contracts —<br/>the moment you point your camera, a translation and explanation pop up together.<br/>Make sense of Korea in seconds.",
+          "features.kameraPill1": "Menu translation",
+          "features.kameraPill2": "Documents & contracts",
+          "features.kameraPill3": "Everyday signs",
+          "features.kameraTag1": "Doenjang Jjigae · Fermented soybean stew",
+          "features.kameraTag2": "Allergen: contains soy",
+          "features.kameraStep1": "Just snap a photo",
+          "features.kameraStep2": "Pick what you're curious about",
+          "features.kameraStep3": "Get your answer instantly",
+          "features.kurationH": "Picked by AI,<br>known only to locals",
+          "features.kurationP":
+            "Instead of scattered blogs, AI picks local-only tips that match your interests, as card-news guides.<br>The more you use it, the better it knows your taste.",
+          "features.kurationPill1": "Personalised picks",
+          "features.kurationPill2": "Card-news format",
+          "features.kurationPill3": "Food · Places · Tips",
+          "features.gTile1": "📍 Worth visiting today",
+          "features.gTile2": "🍜 Matched to your taste",
+          "features.kommunityH": "Ask real people,<br>no language barrier",
+          "features.kommunityP":
+            "Ask in any language — it's automatically translated. Get real answers from people who've actually been there.",
+          "features.kommunityPill1": "Auto-translation",
+          "features.kommunityPill2": "Live Q&A",
+          "features.kommunityPill3": "Foreigner network",
+          "features.chat1":
+            '¿Dónde puedo comprar una T-money card?<span class="lang-tag">Spanish → auto-translated</span>',
+          "features.chat2":
+            'You can grab one at any convenience store or subway station!<span class="lang-tag">Replied in Korean → auto-translated for them</span>',
+          "proof.title": "Over 5,900 people<br>are already using KOIN.",
+          "proof.sub":
+            "From travellers to exchange students, international students, and residents — everyone's welcome.",
+          "proof.stat1": "Total users",
+          "proof.stat2": "Nationalities",
+          "proof.stat3": "Share of travellers",
+          "proof.stat4": "Share of students",
+          "proof.res1": "Travellers 47%",
+          "proof.res2": "Int'l students 20%",
+          "proof.res3": "Exchange students 13%",
+          "proof.res4": "Residents in Korea 13%",
+          "proof.res5": "Overseas residents 8%",
+          "proof.countryEtc": "+24 more countries",
+          "proof.review1":
+            '"The camera feature is a total game-changer — you just snap a picture of a sign or menu, and it provides translations and explanations tailored to your language. The curation feature is amazing too, recommending places that perfectly matched my preferences. Highly recommended!"',
+          "proof.review2":
+            "\"I'd love to recommend this to foreign friends travelling to or living in Korea. It's well-structured with card-news style curated content and a community feature to talk to people from all over the world. Understanding Korean food, signs, and daily objects via the AI camera is especially useful.\"",
+          "proof.review3":
+            '"I can\'t recommend this enough for anyone visiting Korea. The most impressive feature is the real-time camera translation and ingredient breakdown — it explains what the ingredients are and what side dishes come with the meal. Every meal became an educational, stress-free experience."',
+          "faq.title": "Common<br>questions.",
+          "faq.sub": "Still have questions? We'd love to hear from you.",
+          "faq.q1": "What can the AI Camera actually do?",
+          "faq.a1":
+            "Four categories: Food (menu translation, vegan/halal/allergy info), Documents (labour contracts, visa forms), Life (bikes, T-money, signs), and anything else auto-detected. Always verify safety-critical info independently.",
+          "faq.q2": "How does multilingual translation work in the community?",
+          "faq.a2":
+            "Posts are automatically translated — write in your language, others read in theirs. No manual translation needed.",
+          "faq.q3": "How is Kuration content personalised?",
+          "faq.a3":
+            "Our AI learns your preferences — food interests, travel style, destination — and surfaces the most relevant guides. It gets better the more you use it.",
+          "faq.q4": "How is my personal data handled?",
+          "faq.a4":
+            "Privacy-first by design. We collect only what's necessary, never sell your data, and comply strictly with Korean privacy regulations.",
+          "faq.q5": "Which login methods are supported?",
+          "faq.a5":
+            "Kakao, Google, or Email — whichever is most convenient for you.",
+          "faq.q6": "How can I contact or partner with KOIN?",
+          "faq.a6":
+            "For press, partnerships, or general enquiries, reach us at team@koreainsider.kr.",
+          "download.title": "Your Korea journey<br>starts here.",
+          "download.sub": "Download now on iOS and Android.",
+          "footer.tagline":
+            "Korea Insider — your essential guide to living & travelling in Korea.",
+          "footer.featuresH": "Features",
+          "footer.f1": "K-amera",
+          "footer.f2": "K-uration",
+          "footer.f3": "K-ommunity",
+          "footer.contactH": "Contact & Legal",
+          "footer.privacy": "Privacy Policy",
+          "footer.terms": "Terms of Service",
+          "footer.copyright": "© KOIN / TEAM_KOIN. All rights reserved.",
+          "sticky.text": "Everything you need in Korea, one app.",
+          "sticky.cta": "Download",
         },
-        {
-          "@type": "Question",
-          "name": "큐레이션 콘텐츠는 어떻게 개인화되나요?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "AI가 음식 취향, 여행 스타일, 목적지 같은 선호도를 학습해서 가장 관련 있는 가이드를 보여드려요. 쓸수록 더 정확해져요."
+      };
+      // TODO: zh/ja/vi 실제 번역 필요. 배포 전 채워넣을 것 — 현재는 영어로 폴백.
+      translations.zh = translations.en;
+      translations.ja = translations.en;
+      translations.vi = translations.en;
+
+      function applyLang(lang) {
+        const dict = translations[lang] || translations.en;
+        document.querySelectorAll("[data-i18n]").forEach((el) => {
+          const key = el.getAttribute("data-i18n");
+          if (dict[key]) el.innerHTML = dict[key];
+        });
+        document.documentElement.lang = lang;
+        document
+          .querySelectorAll(".lang-switch button, .mm-langs button")
+          .forEach((b) => {
+            b.classList.toggle("active", b.dataset.lang === lang);
+          });
+        localStorage.setItem("koin_lang", lang);
+      }
+
+      // 언어 선택 오버레이: 최초 방문 1회만
+      const savedLang = localStorage.getItem("koin_lang");
+      if (!savedLang) {
+        document.getElementById("lang-selector").classList.remove("hidden");
+      } else {
+        applyLang(savedLang);
+      }
+      document.querySelectorAll(".lang-opt").forEach((opt) => {
+        opt.addEventListener("click", () => {
+          applyLang(opt.dataset.lang);
+          document.getElementById("lang-selector").classList.add("hidden");
+        });
+      });
+      document
+        .querySelectorAll(".lang-switch button, .mm-langs button")
+        .forEach((btn) => {
+          btn.addEventListener("click", () => applyLang(btn.dataset.lang));
+        });
+
+      // 지도 위 기능 칩 스포트라이트: 터치 기기는 첫 탭에 확대만, 다시 탭하면 이동
+      const hasHover = window.matchMedia("(hover: hover)").matches;
+      document.querySelectorAll(".kr-chip").forEach((chip) => {
+        chip.addEventListener("click", (e) => {
+          if (hasHover) return;
+          if (!chip.classList.contains("is-active")) {
+            e.preventDefault();
+            document
+              .querySelectorAll(".kr-chip.is-active")
+              .forEach((c) => c.classList.remove("is-active"));
+            chip.classList.add("is-active");
           }
-        },
-        {
-          "@type": "Question",
-          "name": "개인정보는 어떻게 처리되나요?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "필요한 최소한의 정보만 수집하고, 절대 판매하지 않아요. 한국 개인정보보호법을 엄격히 준수해요."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "어떤 로그인 방식을 지원하나요?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "카카오, 구글, 이메일 — 편한 방식을 선택하시면 돼요."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "제휴나 문의는 어떻게 하나요?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "언론, 제휴, 일반 문의 모두 team@koreainsider.kr로 연락 주세요."
-          }
+        });
+      });
+      document.addEventListener("click", (e) => {
+        if (!e.target.closest(".kr-chip")) {
+          document
+            .querySelectorAll(".kr-chip.is-active")
+            .forEach((c) => c.classList.remove("is-active"));
         }
-      ]
-    }
-  ]
-}
-</script>
-</body>
+      });
+
+      // 지도 핀 ↔ 플로팅 칩을 잇는 은은한 곡선 점선
+      function updateKrLines() {
+        const visual = document.querySelector(".kr-visual");
+        const svg = document.querySelector(".kr-lines");
+        if (!visual || !svg || getComputedStyle(svg).display === "none") return;
+        const vRect = visual.getBoundingClientRect();
+        // scale transition 중에도 .kr-visual 내부 좌표로 환산
+        const s = vRect.width / visual.offsetWidth || 1;
+        svg.querySelectorAll(".kr-line").forEach((line) => {
+          const pin = document.querySelector(line.dataset.pin);
+          const chip = document.querySelector(line.dataset.chip);
+          if (!pin || !chip) return;
+          const pRect = pin.getBoundingClientRect();
+          const cRect = chip.getBoundingClientRect();
+          const x1 = (pRect.left + pRect.width / 2 - vRect.left) / s;
+          const y1 = (pRect.top + pRect.height / 2 - vRect.top) / s;
+          const x2 = (cRect.left + cRect.width / 2 - vRect.left) / s;
+          const y2 = (cRect.top + cRect.height / 2 - vRect.top) / s;
+          const mx = (x1 + x2) / 2 + (y1 - y2) * 0.18;
+          const my = (y1 + y2) / 2 + (x2 - x1) * 0.18;
+          line.setAttribute("d", `M${x1},${y1} Q${mx},${my} ${x2},${y2}`);
+        });
+      }
+      window.addEventListener("load", updateKrLines);
+      window.addEventListener("resize", updateKrLines);
+
+      // K-uration: 왼쪽은 고정 피드, 오른쪽 카드 2장이 세트(page) 단위로 책장 넘기듯 전환. 배열에 세트만 추가하면 확장됨
+      const cardPages = [
+        {
+          top: {
+            src: "assets/kuration-2.jpg",
+            alt: "K-Events: September in Korea",
+          },
+          bottom: {
+            src: "assets/kuration-3.jpg",
+            alt: "What do real Koreans do for fun?",
+          },
+        },
+        {
+          top: { src: "assets/kuration-4.jpg", alt: "서울 야간 명소 베스트 5" },
+          bottom: {
+            src: "assets/kuration-5.jpg",
+            alt: "외국인을 위한 편의점 꿀조합",
+          },
+        },
+
+        // 3페이지 추가 예시
+        {
+          top: { src: "assets/kuration-6.jpg", alt: "지하철 환승 꿀팁 가이드" },
+          bottom: {
+            src: "assets/kuration-7.jpg",
+            alt: "전통 시장 길거리 음식 투어",
+          },
+        },
+      ];
+      let currentIdx = 0;
+      const kfFlipperEl = document.getElementById("kfFlipper");
+      const kfSide1El = document.getElementById("kfSide1");
+      const kfSide2El = document.getElementById("kfSide2");
+      const ksDotsEl = document.getElementById("ksDots");
+      function renderKsDots() {
+        ksDotsEl.innerHTML = cardPages
+          .map((_, i) => `<i class="${i === currentIdx ? "active" : ""}"></i>`)
+          .join("");
+      }
+      function renderCardPage() {
+        const page = cardPages[currentIdx];
+        kfSide1El.src = page.top.src;
+        kfSide1El.alt = page.top.alt;
+        kfSide2El.src = page.bottom.src;
+        kfSide2El.alt = page.bottom.alt;
+        renderKsDots();
+      }
+      function onceAnimationEnd(el, fn) {
+        // animationend가 씹히는 경우(reduced-motion, 브라우저 예외 등)에도 멈추지 않도록 타임아웃 폴백을 둠
+        let done = false;
+        const finish = () => {
+          if (done) return;
+          done = true;
+          el.removeEventListener("animationend", onEnd);
+          fn();
+        };
+        const onEnd = () => finish();
+        el.addEventListener("animationend", onEnd, { once: true });
+        setTimeout(finish, 450);
+      }
+      function updateCards(targetIdx) {
+        if (!kfFlipperEl || kfFlipperEl.classList.contains("turn-out")) return;
+        kfFlipperEl.classList.add("turn-out");
+        onceAnimationEnd(kfFlipperEl, () => {
+          currentIdx = targetIdx;
+          renderCardPage();
+          kfFlipperEl.classList.remove("turn-out");
+          kfFlipperEl.classList.add("turn-in");
+          onceAnimationEnd(kfFlipperEl, () =>
+            kfFlipperEl.classList.remove("turn-in"),
+          );
+        });
+      }
+      function ksNext() {
+        updateCards((currentIdx + 1) % cardPages.length);
+      }
+      function ksPrev() {
+        updateCards((currentIdx - 1 + cardPages.length) % cardPages.length);
+      }
+      if (kfFlipperEl) {
+        renderCardPage();
+        let ksAutoTimer = setInterval(ksNext, 4500);
+        const resetKsAuto = () => {
+          clearInterval(ksAutoTimer);
+          ksAutoTimer = setInterval(ksNext, 4500);
+        };
+        document.querySelector(".ks-next").addEventListener("click", () => {
+          ksNext();
+          resetKsAuto();
+        });
+        document.querySelector(".ks-prev").addEventListener("click", () => {
+          ksPrev();
+          resetKsAuto();
+        });
+      }
+
+      // 모바일 메뉴
+      const mobileMenu = document.getElementById("mobile-menu");
+      document
+        .getElementById("menu-open")
+        .addEventListener("click", () => mobileMenu.classList.add("open"));
+      document
+        .getElementById("menu-close")
+        .addEventListener("click", () => mobileMenu.classList.remove("open"));
+      mobileMenu
+        .querySelectorAll("a")
+        .forEach((a) =>
+          a.addEventListener("click", () =>
+            mobileMenu.classList.remove("open"),
+          ),
+        );
+
+      // FAQ 아코디언 (긴 답변도 안 잘리도록 scrollHeight 기준으로 동작)
+      document.querySelectorAll(".faq-item").forEach((item) => {
+        const answer = item.querySelector(".faq-a");
+        item.querySelector(".faq-q").addEventListener("click", () => {
+          const isOpen = item.classList.contains("open");
+          document.querySelectorAll(".faq-item.open").forEach((i) => {
+            i.classList.remove("open");
+            i.querySelector(".faq-a").style.maxHeight = "";
+          });
+          if (!isOpen) {
+            item.classList.add("open");
+            answer.style.maxHeight = answer.scrollHeight + "px";
+          }
+        });
+      });
+
+      // 스크롤 reveal + 숫자 카운트업 + 비율 바 애니메이션 (한 번만 실행)
+      function animateCount(el) {
+        const target = parseInt(el.dataset.count, 10);
+        const suffix = el.dataset.suffix || "";
+        const dur = 1100;
+        const start = performance.now();
+        function tick(now) {
+          const p = Math.min((now - start) / dur, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.round(target * eased).toLocaleString() + suffix;
+          if (p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      }
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (!e.isIntersecting) return;
+            e.target.classList.add("in");
+            e.target.querySelectorAll("[data-count]").forEach(animateCount);
+            if (e.target.classList.contains("residence-bar")) {
+              e.target.querySelectorAll("[data-w]").forEach((bar) => {
+                bar.style.width = bar.dataset.w + "%";
+              });
+            }
+            io.unobserve(e.target);
+          });
+        },
+        { threshold: 0.25 },
+      );
+      document
+        .querySelectorAll("[data-reveal]")
+        .forEach((el) => io.observe(el));
+
+      // 스티키 모바일 다운로드 바 (히어로 지난 후 노출, 닫기 가능)
+      const stickyBar = document.getElementById("sticky-bar");
+      const hero = document.querySelector(".hero");
+      let stickyDismissed = false;
+      window.addEventListener("scroll", () => {
+        if (stickyDismissed) return;
+        const past = window.scrollY > hero.offsetHeight;
+        stickyBar.classList.toggle("show", past);
+      });
+      stickyBar.querySelector(".close").addEventListener("click", () => {
+        stickyDismissed = true;
+        stickyBar.classList.remove("show");
+      });
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://koreainsider.kr/#organization",
+            "name": "KOIN",
+            "alternateName": "Korea Insider",
+            "url": "https://koreainsider.kr",
+            "logo": "https://koreainsider.kr/assets/koin-logo.png",
+            "email": "team@koreainsider.kr"
+          },
+          {
+            "@type": "MobileApplication",
+            "name": "KOIN — Korea Insider",
+            "operatingSystem": "iOS",
+            "applicationCategory": "TravelApplication",
+            "url": "https://koreainsider.kr",
+            "downloadUrl": "https://apps.apple.com/kr/app/koin/id6760605411",
+            "publisher": { "@id": "https://koreainsider.kr/#organization" }
+          },
+          {
+            "@type": "MobileApplication",
+            "name": "KOIN — Korea Insider",
+            "operatingSystem": "Android",
+            "applicationCategory": "TravelApplication",
+            "url": "https://koreainsider.kr",
+            "downloadUrl": "https://play.google.com/store/apps/details?id=kr.koreainsider.koin&hl=ko",
+            "publisher": { "@id": "https://koreainsider.kr/#organization" }
+          },
+          {
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "AI 카메라는 정확히 뭘 할 수 있나요?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "크게 4가지예요. 음식(메뉴 번역, 비건·할랄·알레르기 정보), 서류(근로계약서, 비자 서류), 생활(따릉이, 티머니, 표지판), 그리고 그 외 모든 것을 자동 인식해요. 안전과 직결된 정보는 반드시 별도로 한 번 더 확인해주세요."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "커뮤니티 다국어 번역은 어떻게 작동하나요?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "글은 자동으로 번역돼요. 본인 언어로 쓰면 다른 사람은 자기 언어로 읽을 수 있어서 따로 번역할 필요가 없어요."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "큐레이션 콘텐츠는 어떻게 개인화되나요?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "AI가 음식 취향, 여행 스타일, 목적지 같은 선호도를 학습해서 가장 관련 있는 가이드를 보여드려요. 쓸수록 더 정확해져요."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "개인정보는 어떻게 처리되나요?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "필요한 최소한의 정보만 수집하고, 절대 판매하지 않아요. 한국 개인정보보호법을 엄격히 준수해요."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "어떤 로그인 방식을 지원하나요?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "카카오, 구글, 이메일 — 편한 방식을 선택하시면 돼요."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "제휴나 문의는 어떻게 하나요?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "언론, 제휴, 일반 문의 모두 team@koreainsider.kr로 연락 주세요."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+  </body>
 </html>
