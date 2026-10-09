@@ -125,6 +125,20 @@ canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .boat{position:absolute;left:50%;bottom:0;z-index:3;display:flex;flex-direction:column;align-items:center;pointer-events:none;transform:translateX(-50%)}
 .box{min-width:16rem;max-width:80vw;background:rgba(255,255,255,.95);color:#1B2D3A;border-radius:16px;padding:.35rem 1.1rem;font-family:var(--round);font-size:1.9rem;line-height:1.25;text-align:center;box-shadow:0 10px 24px rgba(10,30,50,.28);border:3px solid transparent}
 .box.wrong{border-color:var(--bad);color:var(--bad)}
+.box.ok{border-color:var(--good);color:var(--good)}
+.cardnav{display:flex;justify-content:space-between;align-items:center;width:100%;gap:.5rem}
+.cardnav .btn{padding:.35rem .8rem;font-size:.85rem}
+.row.three .btn{padding:.7rem .3rem;white-space:nowrap}
+.btn:disabled{opacity:.4;cursor:default}
+.star{margin-top:.2rem;border:1px solid var(--line);background:var(--chip);border-radius:999px;padding:.35rem .9rem;font-size:.85rem;font-weight:700}
+.star[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent)}
+.savedbar{width:100%;font-size:.82rem;color:var(--muted);display:flex;justify-content:center;gap:.5rem;align-items:center;flex-wrap:wrap}
+.cardmsg{margin:.2rem 0 0;font-size:.85rem;font-weight:700;padding:.3rem .8rem;border-radius:999px;animation:fadeout 2.4s forwards}
+.cardmsg.ok{color:var(--good);background:rgba(30,154,106,.12)}
+.cardmsg.re{color:#B7791F;background:var(--accent-soft)}
+@keyframes fadeout{0%,70%{opacity:1}100%{opacity:0}}
+.againtag{margin:0;font-size:.8rem;font-weight:700;color:#B7791F}
+.linkbtn{border:0;background:none;padding:0;color:inherit;text-decoration:underline;font-weight:700}
 .box .ph{opacity:.4;font-size:1.15rem}
 .caret{display:inline-block;width:3px;height:1.4rem;background:currentColor;vertical-align:-.15rem;margin-left:2px;animation:blink 1s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
@@ -250,9 +264,16 @@ h2.ptitle{font-family:var(--round);font-weight:400;font-size:1.7rem;margin:.8rem
       <span id="gLabel">Checking sign-in…</span>
     </button>
     <div class="or">or</div>
-    <button class="btn wide" id="guestGo">Try without an account</button>
+    <button class="btn wide" id="adminGo">Admin</button>
+    <div class="hidden" id="adminForm">
+      <label for="aid">ID</label>
+      <input id="aid" autocomplete="username" autocapitalize="off" spellcheck="false" maxlength="20">
+      <label for="apw">Password</label>
+      <input id="apw" type="password" autocomplete="current-password" maxlength="64">
+      <button class="go" id="adminLogin" style="font-size:1.2rem">Log in</button>
+    </div>
     <p class="err" id="authErr" role="alert"></p>
-    <p class="fine" id="authNote">Sign in with Google to keep your progress on every device. Without an account, progress stays in this browser only.</p>
+    <p class="fine" id="authNote">Sign in with Google to keep your progress on every device.</p>
   </div>
 </div>
 
@@ -1110,9 +1131,9 @@ let CLOUD=null,U=null,screen='login',saveTimer=null,cloudBooted=false;
 
 function makeUser(key,name,uid){
   const d=store.get('hr_u_'+key,{});
-  return{key,name,uid,known:new Set(d.known||[]),best:d.best||{},level:d.level!=null?d.level:0,ts:d.ts||0};
+  return{key,name,uid,known:new Set(d.known||[]),later:new Set(d.later||[]),best:d.best||{},level:d.level!=null?d.level:0,ts:d.ts||0};
 }
-const userData=()=>({known:[...U.known],best:U.best,level:U.level,ts:U.ts});
+const userData=()=>({known:[...U.known],later:[...U.later],best:U.best,level:U.level,ts:U.ts});
 function saveU(){
   if(!U)return;U.ts=Date.now();store.set('hr_u_'+U.key,userData());
   if(U.uid&&CLOUD){clearTimeout(saveTimer);saveTimer=setTimeout(pushCloud,1500);}
@@ -1120,7 +1141,7 @@ function saveU(){
 async function pushCloud(){
   clearTimeout(saveTimer);saveTimer=null;
   if(!U||!U.uid||!CLOUD)return;const u=U;
-  try{await CLOUD.save(u.uid,{known:[...u.known],best:u.best,level:u.level,ts:u.ts});setSync('Progress saved to your Google account.');}
+  try{await CLOUD.save(u.uid,{known:[...u.known],later:[...u.later],best:u.best,level:u.level,ts:u.ts});setSync('Progress saved to your Google account.');}
   catch(e){console.warn(e);setSync('Could not sync right now. Progress is kept on this device.');}
 }
 const setSync=t=>{$('syncSt').textContent=t;};
@@ -1129,13 +1150,24 @@ const bestOf=(lv,kind)=>U.best[lv+':'+kind]||(kind==='rain'?U.best[lv]:0)||0;
 function setAuthUI(state){
   const g=$('gLogin');
   if(state==='loading'){g.disabled=true;$('gLabel').textContent='Checking sign-in…';return;}
-  if(state==='local'){g.classList.add('hidden');$('authNote').textContent='Google sign-in is not set up on this site yet. Your progress will stay in this browser.';return;}
+  if(state==='local'){g.disabled=false;$('gLabel').textContent='Continue with Google';return;}
   g.classList.remove('hidden');g.disabled=false;
   $('gLabel').textContent=IN_APP?'Open in browser to sign in':'Continue with Google';
 }
+/* Admin: fixed ID/password, checked against a hash (the password itself is not in this file).
+   Progress for admin is kept in this browser only. */
+const ADMIN={id:'koin',h:'1156e5ca98ac1c8757e84745ce14538c63707f90803ab37d3538c8cfe1fbbad5'};
+async function sha256hex(t){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('');}
+async function adminLogin(){
+  const id=$('aid').value.trim().toLowerCase(),pw=$('apw').value;$('authErr').textContent='';
+  if(!id||!pw){$('authErr').textContent='Enter the ID and password.';return;}
+  let h='';try{h=await sha256hex(id+':'+pw);}catch(e){$('authErr').textContent='Login needs a secure (https) page.';return;}
+  if(id!==ADMIN.id||h!==ADMIN.h){$('authErr').textContent='Wrong ID or password.';return;}
+  $('apw').value='';initAudio();enterGuest();
+}
 function enterGuest(){
-  U=makeUser('guest','Guest',null);store.set('hr_session','guest');goHome();
-  setSync(CLOUD?'Playing as a guest. Sign in with Google to keep progress on every device.':'Progress is saved in this browser.');
+  U=makeUser('admin','Admin',null);store.set('hr_session','admin');goHome();
+  setSync('Admin mode. Progress is saved in this browser only.');
 }
 async function enterGoogle(user){
   const key='g_'+user.uid,fresh=!store.get('hr_u_'+key,null);
@@ -1146,11 +1178,11 @@ async function enterGoogle(user){
   if(!U||U.uid!==user.uid)return;
   if(cloud){
     for(const k in cloud.best||{})U.best[k]=Math.max(U.best[k]||0,cloud.best[k]||0);
-    if((cloud.ts||0)>U.ts){U.known=new Set(cloud.known||[]);if(cloud.level!=null)U.level=cloud.level;U.ts=cloud.ts;}
+    if((cloud.ts||0)>U.ts){U.known=new Set(cloud.known||[]);U.later=new Set(cloud.later||[]);if(cloud.level!=null)U.level=cloud.level;U.ts=cloud.ts;}
   }else if(fresh){
     /* first sign-in: carry over what was played as a guest in this browser */
-    const g=store.get('hr_u_guest',null);
-    if(g){(g.known||[]).forEach(k=>U.known.add(k));for(const k in g.best||{})U.best[k]=Math.max(U.best[k]||0,g.best[k]);if(g.level!=null)U.level=g.level;}
+    const g=null;
+    if(g){(g.known||[]).forEach(k=>U.known.add(k));(g.later||[]).forEach(k=>U.later.add(k));for(const k in g.best||{})U.best[k]=Math.max(U.best[k]||0,g.best[k]);if(g.level!=null)U.level=g.level;}
   }
   if(!U.ts)U.ts=Date.now();
   store.set('hr_u_'+key,userData());
@@ -1161,14 +1193,14 @@ function onAuthUser(user){
   setAuthUI('ready');
   if(user){if(U&&U.uid===user.uid)return;enterGoogle(user);return;}
   if(U&&U.uid){U=null;stopGame();showScreen('login');return;}
-  if(!U){if(store.get('hr_session',null)==='guest')enterGuest();else showScreen('login');}
+  if(!U){if(store.get('hr_session',null)==='admin')enterGuest();else showScreen('login');}
 }
 function bootCloud(){
   if(cloudBooted)return;cloudBooted=true;
   CLOUD=window.KICloud&&window.KICloud.ready?window.KICloud:null;
   if(CLOUD){CLOUD.onUser(onAuthUser);return;}
   setAuthUI('local');
-  if(!U){if(store.get('hr_session',null))enterGuest();else showScreen('login');}
+  if(!U){if(store.get('hr_session',null)==='admin')enterGuest();else showScreen('login');}
 }
 window.addEventListener('kicloud',bootCloud);
 setTimeout(bootCloud,8000);
@@ -1189,7 +1221,7 @@ function openExternal(){
 async function googleGo(){
   $('authErr').textContent='';
   if(IN_APP){openExternal();return;}
-  if(!CLOUD)return;
+  if(!CLOUD){$('authErr').textContent=location.protocol==='file:'?'Google sign-in only works on the website, not when the file is opened directly.':'Google sign-in could not load. Check firebase-config.js next to index.html, then refresh.';return;}
   initAudio();$('gLogin').disabled=true;
   try{await CLOUD.signIn();}catch(e){console.warn(e);const m=authMsg(e);if(m)$('authErr').textContent=m;}
   $('gLogin').disabled=false;
@@ -1252,7 +1284,7 @@ function showScreen(n){
   if(n==='game'){resize();startLoop();}
 }
 function goHome(){
-  stopGame();$('who').textContent=U.name;$('logout').textContent=U.uid?'Log out':'Sign in';
+  stopGame();$('who').textContent=U.name;$('logout').textContent='Log out';
   renderHome();showScreen('home');
 }
 function renderHome(){
@@ -1296,7 +1328,8 @@ function openPick(kind){
   const list=kind==='learn'?(U.level===0?LEARN0:LEARN):(U.level===0?GAMES0:GAMES);
   $('picks').innerHTML=list.map(a=>{
     const b=kind==='play'?bestOf(U.level,a.id):0;
-    return `<button class="pick" data-id="${a.id}"><span class="ic">${a.icon}</span><span><b>${a.name}</b><span class="d">${a.desc}</span></span>${b?`<span class="best">Best<br>${b.toLocaleString()}</span>`:''}</button>`;
+    const nL=a.id==='cards'&&kind==='learn'?laterCount():0;
+    return `<button class="pick" data-id="${a.id}"><span class="ic">${a.icon}</span><span><b>${a.name}</b><span class="d">${a.desc}${nL?` · ★ ${nL} saved`:''}</span></span>${b?`<span class="best">Best<br>${b.toLocaleString()}</span>`:''}</button>`;
   }).join('');
   showScreen('pick');
 }
@@ -1321,32 +1354,70 @@ function chartInit(){
 }
 
 /* --- flashcards: English -> Korean (level 0: letter -> sound) --- */
-let LR={deck:[],cur:null,shown:false};
-function cardsInit(){
-  const pool=wordsOf(U.level).filter(w=>!U.known.has(w.ko));
-  LR.deck=U.level===0?pool:shuffle(pool);LR.cur=LR.deck[0]||null;LR.shown=false;renderCards();
+/* LR.list: every card in this session, in order. LR.pos: current card. LR.front: furthest card reached.
+   Previous walks back through the list, including cards already learned in earlier visits. */
+let LR={list:[],pos:0,front:0,cur:null,shown:false,saved:false};
+function cardsInit(saved){
+  const all=wordsOf(U.level),list=saved?all.filter(w=>U.later.has(w.ko)):(U.level===0?all:shuffle(all.slice()));
+  let pos=saved?0:list.findIndex(w=>!U.known.has(w.ko));if(pos<0)pos=list.length;
+  LR={list,pos,front:pos,cur:list[pos]||null,shown:false,saved:!!saved};renderCards();
 }
+const laterCount=()=>wordsOf(U.level).filter(w=>U.later.has(w.ko)).length;
 function renderCards(){
-  const ws=wordsOf(U.level),k=ws.filter(w=>U.known.has(w.ko)).length,b=$('lBody');
-  setInfo(`${U.level===0?'Letter cards':'Flashcards'} · ${k} / ${ws.length} learned`,k/ws.length*100);
-  if(!LR.cur){b.innerHTML=`<div class="done">🎉</div><p class="big">You learned every ${U.level===0?'letter':'word'} in this level.</p><div class="row"><button class="btn y" data-act="games">Play a game</button><button class="btn" data-act="reset">Start over</button></div>`;return;}
-  const w=LR.cur,btns=`<div class="row"><button class="btn" id="lAgain">Again <kbd>←</kbd></button><button class="btn y" id="lGot">Got it <kbd>→</kbd></button></div>`;
-  if(w.lv===0){
-    const isC=/onsonant/.test(w.grp);
-    b.innerHTML=!LR.shown
-      ?`<p class="hint">${w.grp}</p><div class="ko-word letter">${w.ko}</div><p class="hint">What sound does this letter make?</p><button class="btn y wide" id="lShow">Show <kbd>Space</kbd></button>`
-      :`<div class="ko-word letter">${w.ko}</div><div class="en-word">${esc(w.sound)}</div><button class="hear" data-say="${esc(sp(w))}">🔊 ${esc(sp(w))}</button>${w.note?`<p class="hint">${esc(w.note)}</p>`:''}<p class="hint">${isC?`Name: ${w.name} · `:''}Example: <b>${w.ex}</b> (${esc(w.exEn)})</p>${btns}`;
+  const ws=wordsOf(U.level),k=ws.filter(w=>U.known.has(w.ko)).length,b=$('lBody'),nL=laterCount(),unit=U.level===0?'letter':'word';
+  if(LR.saved)setInfo(`Saved for later · ${Math.min(LR.pos+1,LR.list.length)} / ${LR.list.length}`,LR.list.length?Math.min(LR.pos,LR.list.length)/LR.list.length*100:100);
+  else setInfo(`${U.level===0?'Letter cards':'Flashcards'} · ${k} / ${ws.length} learned`,k/ws.length*100);
+  const savedBar=LR.saved
+    ?`<div class="savedbar">Reviewing saved cards · <button class="linkbtn" data-act="allcards">Back to all cards</button></div>`
+    :(nL?`<div class="savedbar">★ ${nL} saved for later · <button class="linkbtn" data-act="saved">Review them</button></div>`:'');
+  const prev=`<button class="btn" id="lPrev" ${LR.pos>0?'':'disabled'}>Previous <kbd>←</kbd></button>`;
+  if(!LR.cur){
+    b.innerHTML=LR.saved
+      ?`<div class="done">👍</div><p class="big">${nL?`That's all your saved cards. ${nL} still saved.`:'No saved cards left.'}</p><div class="row">${prev}<button class="btn y" data-act="allcards">All cards</button></div>`
+      :k<ws.length
+        ?`<div class="done">📚</div><p class="big">End of the cards. ${k} / ${ws.length} learned.</p><p class="hint">Cards you skipped with Next are still waiting.</p>${savedBar}<div class="row">${prev}<button class="btn y" data-act="again">Go through the rest</button></div>`
+        :`<div class="done">🎉</div><p class="big">You learned every ${unit} in this level.</p>${savedBar}<div class="row">${prev}<button class="btn y" data-act="games">Play a game</button></div><div class="row"><button class="btn" data-act="reset">Start over</button></div>`;
     return;
   }
-  b.innerHTML=!LR.shown
-    ?`<div class="en-word">${esc(w.en[0])}</div><p class="hint">How do you say this in Korean?</p><button class="btn y wide" id="lShow">Show Korean <kbd>Space</kbd></button>`
-    :`<div class="en-word small">${esc(w.en[0])}</div><div class="ko-word">${w.ko}</div><button class="hear" data-say="${esc(sp(w))}">🔊 Hear it</button>${w.en.length>1?`<p class="hint">Also: ${esc(w.en.slice(1).join(' · '))}</p>`:''}${btns}`;
+  const w=LR.cur,on=U.later.has(w.ko);
+  const star=`<button class="star" id="lLater" aria-pressed="${on}">${on?'★ Saved':'☆ Save for later'} <kbd>S</kbd></button>`;
+  const next=`<button class="btn" id="lNext">Next <kbd>→</kbd></button>`;
+  const btns=`<div class="row three">${prev}${next}<button class="btn y" id="lGot">Got it <kbd>Enter</kbd></button></div>${star}`;
+  const showRow=label=>`<button class="btn y wide" id="lShow" style="margin-top:.4rem">${label} <kbd>Space</kbd></button><div class="row three" style="margin-top:.5rem">${prev}${next}</div>${star}`;
+  let body;
+  if(w.lv===0){
+    const isC=/onsonant/.test(w.grp);
+    body=!LR.shown
+      ?`<p class="hint">${w.grp}</p><div class="ko-word letter">${w.ko}</div><p class="hint">What sound does this letter make?</p>${showRow('Show')}`
+      :`<div class="ko-word letter">${w.ko}</div><div class="en-word">${esc(w.sound)}</div><button class="hear" data-say="${esc(sp(w))}">🔊 ${esc(sp(w))}</button>${w.note?`<p class="hint">${esc(w.note)}</p>`:''}<p class="hint">${isC?`Name: ${w.name} · `:''}Example: <b>${w.ex}</b> (${esc(w.exEn)})</p>${btns}`;
+  }else{
+    body=!LR.shown
+      ?`<div class="en-word">${esc(w.en[0])}</div><p class="hint">How do you say this in Korean?</p>${showRow('Show Korean')}`
+      :`<div class="en-word small">${esc(w.en[0])}</div><div class="ko-word">${w.ko}</div><button class="hear" data-say="${esc(sp(w))}">🔊 Hear it</button>${w.en.length>1?`<p class="hint">Also: ${esc(w.en.slice(1).join(' · '))}</p>`:''}${btns}`;
+  }
+  b.innerHTML=body+savedBar;
 }
 function lShow(){if(!LR.cur||LR.shown)return;LR.shown=true;renderCards();say(sp(LR.cur));}
-function lAnswer(yes){
-  if(!LR.cur||!LR.shown)return;const c=LR.deck.shift();
-  if(yes){U.known.add(c.ko);saveU();}else LR.deck.splice(Math.min(LR.deck.length,3+Math.floor(Math.random()*3)),0,c);
-  LR.cur=LR.deck[0]||null;LR.shown=false;renderCards();
+function lGo(pos,shown){LR.pos=pos;LR.cur=LR.list[pos]||null;LR.shown=shown;renderCards();}
+/* Got it = learned. Next = move on without marking it learned. */
+function lAnswer(){
+  if(!LR.cur||!LR.shown)return;const c=LR.cur;
+  if(!U.known.has(c.ko))U.known.add(c.ko);
+  if(LR.saved)U.later.delete(c.ko);
+  saveU();lForward();
+}
+function lNext(){if(LR.cur)lForward();}
+function lForward(){
+  /* walking forward over cards you came back to: go one by one; past that, skip cards already learned */
+  if(LR.pos<LR.front)return lGo(LR.pos+1,LR.pos+1<LR.front);
+  let n=LR.pos+1;if(!LR.saved)while(n<LR.list.length&&U.known.has(LR.list[n].ko))n++;
+  LR.front=n;lGo(n,false);
+}
+function lPrev(){if(LR.pos<=0)return;lGo(LR.pos-1,true);}
+function lLater(){
+  if(!LR.cur)return;const k=LR.cur.ko;
+  if(U.later.has(k))U.later.delete(k);else U.later.add(k);
+  saveU();renderCards();
 }
 
 /* --- quiz / listening / blocks --- */
@@ -1465,9 +1536,10 @@ function matchTap(id){
 function learnKey(e){
   const t=LA.type;
   if(t==='cards'){
-    if(e.code==='Space'||e.code==='Enter'){e.preventDefault();if(!LR.shown)lShow();else lAnswer(true);}
-    else if(e.code==='ArrowRight'){e.preventDefault();lAnswer(true);}
-    else if(e.code==='ArrowLeft'){e.preventDefault();lAnswer(false);}
+    if(e.code==='Space'||e.code==='Enter'){e.preventDefault();if(!LR.shown)lShow();else lAnswer();}
+    else if(e.code==='ArrowRight'){e.preventDefault();lNext();}
+    else if(e.code==='ArrowLeft'||e.code==='Backspace'){e.preventDefault();lPrev();}
+    else if(e.code==='KeyS'){e.preventDefault();lLater();}
   }else if(t==='quiz'||t==='listen'||t==='blocks'){
     const m=/^(Digit|Numpad)([1-4])$/.exec(e.code);
     if(m){e.preventDefault();qzPick(+m[2]-1);}
@@ -1482,8 +1554,10 @@ $('lBody').addEventListener('click',e=>{
   const s=e.target.closest('[data-say]');
   if(s){sayForce(s.dataset.say);if(s.classList.contains('ch')){s.classList.add('on');setTimeout(()=>s.classList.remove('on'),400);}return;}
   if(e.target.closest('#lShow'))return lShow();
-  if(e.target.closest('#lGot'))return lAnswer(true);
-  if(e.target.closest('#lAgain'))return lAnswer(false);
+  if(e.target.closest('#lGot'))return lAnswer();
+  if(e.target.closest('#lNext'))return lNext();
+  if(e.target.closest('#lPrev'))return lPrev();
+  if(e.target.closest('#lLater'))return lLater();
   if(e.target.closest('#qNext'))return qzNext();
   if(e.target.closest('#tpSkip'))return typePress('Enter');
   const o=e.target.closest('[data-opt]');if(o)return qzPick(+o.dataset.opt);
@@ -1492,7 +1566,8 @@ $('lBody').addEventListener('click',e=>{
   if(a){
     if(a.dataset.act==='menu')return openPick('learn');
     if(a.dataset.act==='again')return learnStart(LA.type);
-    if(a.dataset.act==='cards')return learnStart('cards');
+    if(a.dataset.act==='cards'||a.dataset.act==='allcards')return learnStart('cards');
+    if(a.dataset.act==='saved'){learnStart('cards');return cardsInit(true);}
     if(a.dataset.act==='games')return openPick('play');
     if(a.dataset.act==='reset'){wordsOf(U.level).forEach(w=>U.known.delete(w.ko));saveU();return learnStart('cards');}
   }
@@ -1660,10 +1735,11 @@ function evalBuf(){
   return{cands,target:cands[0],hit:full[0]};
 }
 function refresh(){
-  if(!G)return;const box=$('box');
+  if(!G)return;const box=$('box'),fl=!G.buf&&G.done&&performance.now()<G.doneUntil;
+  box.classList.toggle('ok',!!fl);
   if(G.kind==='sprint'){
     const c=G.cur,ok=!G.buf||c.acc.some(a=>a.startsWith(G.buf));
-    box.innerHTML=G.buf?`${esc(G.buf)}<span class="caret"></span>`:(c.hinted?`<span class="ph">${esc(label(c.w))}</span>`:`<span class="ph">${phText()}</span><span class="caret"></span>`);
+    box.innerHTML=fl?esc(G.done):G.buf?`${esc(G.buf)}<span class="caret"></span>`:(c.hinted?`<span class="ph">${esc(label(c.w))}</span>`:`<span class="ph">${phText()}</span><span class="caret"></span>`);
     box.classList.toggle('wrong',!ok);return;
   }
   const r=evalBuf();G.tgt=r.target||null;
@@ -1673,7 +1749,7 @@ function refresh(){
     if(d.hinted)h=(h?h+' · ':'')+esc(label(d.w));
     d.el.querySelector('.under').innerHTML=h;
   });
-  box.innerHTML=G.buf?`${esc(G.buf)}<span class="caret"></span>`:`<span class="ph">${phText()}</span><span class="caret"></span>`;
+  box.innerHTML=fl?esc(G.done):G.buf?`${esc(G.buf)}<span class="caret"></span>`:`<span class="ph">${phText()}</span><span class="caret"></span>`;
   box.classList.toggle('wrong',!!G.buf&&!r.cands.length);
 }
 function key(code){
@@ -1682,7 +1758,7 @@ function key(code){
   if(code==='Enter'){G.buf='';refresh();return;}
   if(code==='Backspace'){G.buf=G.buf.slice(0,-1);refresh();return;}
   const m=/^Key([A-Z])$/.exec(code);if(!m)return;
-  G.buf+=m[1].toLowerCase();const r=evalBuf();
+  G.done='';G.buf+=m[1].toLowerCase();const r=evalBuf();
   if(r.hit)pop(r.hit);else refresh();
 }
 function fireAt(d){
@@ -1692,8 +1768,10 @@ function fireAt(d){
   const b=$('barrel');b.classList.remove('fire');void b.offsetWidth;b.classList.add('fire');tone(900,.12,'square',.05,.4);
   bullets.push({x0:TU.x+Math.cos(ang)*62,y0:TU.y+Math.sin(ang)*62,d,t:0,dur:.16,cb:()=>{burst(tx,ty,'#FFC83D',12);burst(tx,ty,'#ffffff',8);d.el.remove();}});
 }
+/* show the finished answer in the box for a moment before clearing it */
+function flashDone(t){G.done=t;G.doneUntil=performance.now()+450;const g=G;setTimeout(()=>{if(G===g&&g.done===t&&!g.buf){g.done='';refresh();}},460);}
 function pop(d){
-  G.buf='';G.combo++;G.maxCombo=Math.max(G.maxCombo,G.combo);G.popped++;
+  flashDone(G.buf);G.buf='';G.combo++;G.maxCombo=Math.max(G.maxCombo,G.combo);G.popped++;
   const pts=Math.round((10+d.len*3)*(1+G.lv*.2)*(1+Math.min(G.combo,20)*.05));G.score+=pts;
   const cx=d.x+d.wd/2;popSnd(G.combo);setTimeout(()=>say(sp(d.w)),60);floatText(cx-20,d.y-10,'+'+pts);
   G.drops=G.drops.filter(x=>x!==d);
@@ -1720,11 +1798,11 @@ function sprintKey(code){
   if(code==='Enter'){G.buf='';refresh();return;}
   if(code==='Backspace'){G.buf=G.buf.slice(0,-1);refresh();return;}
   const m=/^Key([A-Z])$/.exec(code);if(!m)return;
-  G.buf+=m[1].toLowerCase();
+  G.done='';G.buf+=m[1].toLowerCase();
   if(c.acc.includes(G.buf))sprintPop();else refresh();
 }
 function sprintPop(){
-  const c=G.cur,len=Math.min(...c.acc.map(a=>a.length));
+  flashDone(G.buf);const c=G.cur,len=Math.min(...c.acc.map(a=>a.length));
   G.combo++;G.maxCombo=Math.max(G.maxCombo,G.combo);G.popped++;
   let pts=Math.round((10+len*3)*(1+G.lv*.2)*(1+Math.min(G.combo,20)*.05));if(c.hinted)pts=Math.round(pts*.3);G.score+=pts;
   G.timeLeft=Math.min(60,G.timeLeft+Math.max(1.2,2.6-(G.stage-1)*.2));
@@ -1759,7 +1837,9 @@ function setPause(p){if(!G||!G.running)return;G.paused=p;$('pauseOv').classList.
 
 /* ================= events ================= */
 $('gLogin').addEventListener('click',googleGo);
-$('guestGo').addEventListener('click',()=>{initAudio();enterGuest();});
+$('adminGo').addEventListener('click',()=>{$('adminGo').classList.add('hidden');$('adminForm').classList.remove('hidden');$('aid').focus();});
+$('adminLogin').addEventListener('click',adminLogin);
+['aid','apw'].forEach(i=>$(i).addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();adminLogin();}}));
 $('logout').addEventListener('click',logout);
 $('lvls').addEventListener('click',e=>{const b=e.target.closest('[data-lv]');if(!b)return;U.level=+b.dataset.lv;saveU();renderHome();});
 $('goLearn').addEventListener('click',()=>openPick('learn'));
@@ -1795,7 +1875,7 @@ window.addEventListener('resize',()=>{if(screen==='game')resize();});
 (function(){
   if(IN_APP)$('inappNote').classList.remove('hidden');
   setAuthUI('loading');
-  if(store.get('hr_session',null)==='guest')enterGuest();
+  if(store.get('hr_session',null)==='admin')enterGuest();
   else showScreen('login');
 })();
 </script>
